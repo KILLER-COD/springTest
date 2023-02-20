@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="new">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/AddressDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/impl/JdbcAddressDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/model/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/GoodsDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/model/Goods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersGoodsDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersGoodsDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/Orders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersGoods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/ProductDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/impl/JdbcProductDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/model/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsInfoDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsInfoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/Shops.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopsInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/goods/Spring-Goods.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/orders/Spring-Orders.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/orders/Spring-OrdersGoods.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/product/Spring-Product.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shops/Spring-Shops.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shops/Spring-ShopsInfo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/common/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/common/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/customer/dao/CustomerDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/customer/dao/impl/JdbcCustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/customer/model/Customer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Spring-Module.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Spring-Module.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/customer/Spring-Customer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/address/Spring-Address.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/database/Spring-Datasource.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/database/Spring-Datasource.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2Lmb25ndCgzgl7KgeFMkdloIcwC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/gamer/IdeaProjects/springTest/src/main/resources/shops",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.5257426",
+    "settings.editor.selected.configurable": "preferences.keymap"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\shops" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\product" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\goods" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\java\com\mkyong/goods" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\address" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\java\org\example\tutorialspoint " />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mkyong.shops.dao.impl" />
+      <recent name="com.mkyong.product.dao.impl" />
+      <recent name="com.mkyong.orders.dao.impl" />
+      <recent name="com.mkyong.customer.dao.impl" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mkyong.common.App" />
+      <module name="SpringExample" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mkyong.common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.MainApp" />
+      <module name="springTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.tutorialspoint.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.SpringMain" />
+      <module name="springTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.tutorialspoint.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+        <item itemvalue="Docker.docker-compose.yml.db: Compose Deployment" />
+        <item itemvalue="Application.MainApp" />
+        <item itemvalue="Application.SpringMain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="" />
+      <created>1676478996908</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676478996908</updated>
+    </task>
+    <task id="LOCAL-00001" summary="new">
+      <created>1676498535140</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676498535140</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="new" />
+    <option name="LAST_COMMIT_MESSAGE" value="new" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

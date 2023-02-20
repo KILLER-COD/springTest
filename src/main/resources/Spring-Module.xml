@@ -4,6 +4,12 @@
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <import resource="database/Spring-Datasource.xml" />
-    <import resource="customer/Spring-Customer.xml" />
+    <import resource="address/Spring-Address.xml" />
+    <import resource="goods/Spring-Goods.xml" />
+    <import resource="orders/Spring-Orders.xml" />
+    <import resource="orders/Spring-OrdersGoods.xml" />
+    <import resource="product/Spring-Product.xml" />
+    <import resource="shops/Spring-Shops.xml" />
+    <import resource="shops/Spring-ShopsInfo.xml" />
 
 </beans>

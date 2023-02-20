@@ -1,14 +1,12 @@
-package com.mkyong.customer.dao.impl;
+package com.mkyong.product.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.mkyong.goods.dao.GoodsDAO;
+import com.mkyong.goods.model.Goods;
+
 import javax.sql.DataSource;
-import com.mkyong.customer.dao.CustomerDAO;
-import com.mkyong.customer.model.Customer;
+import java.sql.*;
 
-public class JdbcCustomerDAO implements CustomerDAO
+public class JdbcProductDAO implements GoodsDAO
 {
     private DataSource dataSource;
 
@@ -16,16 +14,19 @@ public class JdbcCustomerDAO implements CustomerDAO
         this.dataSource = dataSource;
     }
 
-    public void insert(Customer customer){
+    public void insert(Goods goods){
 
-        String sql = "INSERT INTO customer (NAME, AGE) VALUES ( ?, ?)";
+        String sql = "INSERT INTO goods (goods_name, goods_type,goods_price,create_date,modify_date) VALUES ( ?, ?,?,?,?)";
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, customer.getName());
-            ps.setInt(2, customer.getAge());
+            ps.setString(1, goods.getGoods_name());
+            ps.setString(2, goods.getGoods_type());
+            ps.setDouble(3, goods.getGoods_price());
+            ps.setDate(4, (Date) goods.getCreate_date());
+            ps.setDate(5, (Date) goods.getModify_date());
             ps.executeUpdate();
             ps.close();
 
@@ -41,28 +42,32 @@ public class JdbcCustomerDAO implements CustomerDAO
         }
     }
 
-    public Customer findByCustomerId(int custId){
+    public Goods findByGoodsId(int goods_id){
 
-        String sql = "SELECT * FROM customer WHERE CUST_ID = ?";
+        String sql = "SELECT * FROM goods WHERE id = ?";
 
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, custId);
-            Customer customer = null;
+            ps.setInt(1, goods_id);
+            Goods goods = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                customer = new Customer(
-                        rs.getInt("CUST_ID"),
-                        rs.getString("NAME"),
-                        rs.getInt("Age")
+                goods = new Goods(
+                        rs.getInt("id"),
+                        rs.getString("Goods_name"),
+                        rs.getString("Goods_type"),
+                        rs.getDouble("Goods_price"),
+                        rs.getDate("Create_Date"),
+                        rs.getDate("Modify_Date"),
+                        rs.getDate("Delete_Date")
                 );
             }
             rs.close();
             ps.close();
-            return customer;
+            return goods;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
