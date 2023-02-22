@@ -1,15 +1,12 @@
 package com.mkyong.shops.dao.impl;
 
-import com.mkyong.customer.dao.CustomerDAO;
-import com.mkyong.customer.model.Customer;
+import com.mkyong.shops.dao.ShopsDAO;
+import com.mkyong.shops.model.Shops;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class JdbcShopsDAO implements CustomerDAO
+public class JdbcShopsDAO implements ShopsDAO
 {
     private DataSource dataSource;
 
@@ -17,16 +14,19 @@ public class JdbcShopsDAO implements CustomerDAO
         this.dataSource = dataSource;
     }
 
-    public void insert(Customer customer){
+    public void insert(Shops shops){
 
-        String sql = "INSERT INTO customer (NAME, AGE) VALUES ( ?, ?)";
+        String sql = "INSERT INTO shops (shops_name,shops, AGE) VALUES ( ?,?,?,? ?)";
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, customer.getName());
-            ps.setInt(2, customer.getAge());
+            ps.setString(1, shops.getShop_name());
+            ps.setInt(2, shops.getShop_address_id());
+            ps.setInt(3, shops.getShop_info_id());
+            ps.setDate(4, (Date) shops.getCreate_date());
+            ps.setDate(5, (Date) shops.getModify_date());
             ps.executeUpdate();
             ps.close();
 
@@ -42,28 +42,32 @@ public class JdbcShopsDAO implements CustomerDAO
         }
     }
 
-    public Customer findByCustomerId(int custId){
+    public Shops findByShopsId(int shops_id){
 
-        String sql = "SELECT * FROM customer WHERE CUST_ID = ?";
+        String sql = "SELECT * FROM shops WHERE id = ?";
 
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, custId);
-            Customer customer = null;
+            ps.setInt(1, shops_id);
+            Shops shops = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                customer = new Customer(
-                        rs.getInt("CUST_ID"),
-                        rs.getString("NAME"),
-                        rs.getInt("Age")
+                shops = new Shops(
+                        rs.getInt("Shops_id"),
+                        rs.getString("Shop_name"),
+                        rs.getInt("Shop_address_id"),
+                        rs.getInt("Shop_info_id"),
+                        rs.getDate("Create_Date"),
+                        rs.getDate("Modify_Date"),
+                        rs.getDate("Delete_Date")
                 );
             }
             rs.close();
             ps.close();
-            return customer;
+            return shops;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

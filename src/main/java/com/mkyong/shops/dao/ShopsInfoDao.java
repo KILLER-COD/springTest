@@ -4,5 +4,5 @@ import com.mkyong.shops.model.ShopsInfo;
 
 public interface ShopsInfoDao {
     public void insert(ShopsInfo shopsInfo);
-    public void findByShopsInfoId(int shops_info_id);
+    public ShopsInfo findByShopsInfoId(int shops_info_id);
 }

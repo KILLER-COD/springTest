@@ -4,5 +4,5 @@ import com.mkyong.product.model.Product;
 
 public interface ProductDAO {
     public void  insert(Product product);
-    public void findByProductId(int product_id);
+    public Product findByProductId(int product_id);
 }

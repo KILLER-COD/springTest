@@ -2,11 +2,13 @@ package com.mkyong.product.dao.impl;
 
 import com.mkyong.goods.dao.GoodsDAO;
 import com.mkyong.goods.model.Goods;
+import com.mkyong.product.dao.ProductDAO;
+import com.mkyong.product.model.Product;
 
 import javax.sql.DataSource;
 import java.sql.*;
 
-public class JdbcProductDAO implements GoodsDAO
+public class JdbcProductDAO implements ProductDAO
 {
     private DataSource dataSource;
 
@@ -14,19 +16,18 @@ public class JdbcProductDAO implements GoodsDAO
         this.dataSource = dataSource;
     }
 
-    public void insert(Goods goods){
+    public void insert(Product product){
 
-        String sql = "INSERT INTO goods (goods_name, goods_type,goods_price,create_date,modify_date) VALUES ( ?, ?,?,?,?)";
+        String sql = "INSERT INTO product (product_name,product_type,create_date,modify_date) VALUES ( ?,?,?,?)";
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, goods.getGoods_name());
-            ps.setString(2, goods.getGoods_type());
-            ps.setDouble(3, goods.getGoods_price());
-            ps.setDate(4, (Date) goods.getCreate_date());
-            ps.setDate(5, (Date) goods.getModify_date());
+            ps.setString(1,product.getProduct_name());
+            ps.setString(2,product.getProduct_type());
+            ps.setDate(3, (Date) product.getCreate_date());
+            ps.setDate(4, (Date) product.getModify_date());
             ps.executeUpdate();
             ps.close();
 
@@ -42,24 +43,23 @@ public class JdbcProductDAO implements GoodsDAO
         }
     }
 
-    public Goods findByGoodsId(int goods_id){
+    public Product findByProductId(int product_id){
 
-        String sql = "SELECT * FROM goods WHERE id = ?";
+        String sql = "SELECT * FROM product WHERE id = ?";
 
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, goods_id);
-            Goods goods = null;
+            ps.setInt(1, product_id);
+            Product product = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                goods = new Goods(
+                product = new Product(
                         rs.getInt("id"),
-                        rs.getString("Goods_name"),
-                        rs.getString("Goods_type"),
-                        rs.getDouble("Goods_price"),
+                        rs.getString("product_name"),
+                        rs.getString("product_type"),
                         rs.getDate("Create_Date"),
                         rs.getDate("Modify_Date"),
                         rs.getDate("Delete_Date")
@@ -67,7 +67,7 @@ public class JdbcProductDAO implements GoodsDAO
             }
             rs.close();
             ps.close();
-            return goods;
+            return product;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

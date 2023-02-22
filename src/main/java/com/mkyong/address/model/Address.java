@@ -6,24 +6,24 @@ public class Address {
     private int id;
     private String address;
     private String city;
-    private Date create_date;
-    private Date modify_date;
-    private Date delete_date;
+    private Date createDate;
+    private Date modifyDate;
+    private Date deleteDate;
 
-    public Address(int id, String address, String city, Date create_date, Date modify_date, Date delete_date) {
+    public Address(int id, String address, String city, Date createDate, Date modifyDate, Date deleteDate) {
         this.id = id;
         this.address = address;
         this.city = city;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
-        this.delete_date = delete_date;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleteDate = deleteDate;
     }
-    public Address( String address, String city, Date create_date, Date modify_date, Date delete_date) {
+    public Address( String address, String city, Date createDate, Date modifyDate, Date deleteDate) {
         this.address = address;
         this.city = city;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
-        this.delete_date = delete_date;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleteDate = deleteDate;
     }
     public Address(){
 
@@ -53,28 +53,28 @@ public class Address {
         this.city = city;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getModify_date() {
-        return modify_date;
+    public Date getModifyDate() {
+        return modifyDate;
     }
 
-    public void setModify_date(Date modify_date) {
-        this.modify_date = modify_date;
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
     }
 
-    public Date getDelete_date() {
-        return delete_date;
+    public Date getDeleteDate() {
+        return deleteDate;
     }
 
-    public void setDelete_date(Date delete_date) {
-        this.delete_date = delete_date;
+    public void setDeleteDate(Date deleteDate) {
+        this.deleteDate = deleteDate;
     }
 
     @Override
@@ -83,9 +83,9 @@ public class Address {
                 "id=" + id +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
-                ", create_date=" + create_date +
-                ", modify_date=" + modify_date +
-                ", delete_date=" + delete_date +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", deleteDate=" + deleteDate +
                 '}';
     }
 

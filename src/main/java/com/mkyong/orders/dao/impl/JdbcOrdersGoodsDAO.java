@@ -2,11 +2,13 @@ package com.mkyong.orders.dao.impl;
 
 import com.mkyong.goods.dao.GoodsDAO;
 import com.mkyong.goods.model.Goods;
+import com.mkyong.orders.dao.OrdersGoodsDAO;
+import com.mkyong.orders.model.OrdersGoods;
 
 import javax.sql.DataSource;
 import java.sql.*;
 
-public class JdbcOrdersGoodsDAO implements GoodsDAO
+public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO
 {
     private DataSource dataSource;
 
@@ -14,19 +16,19 @@ public class JdbcOrdersGoodsDAO implements GoodsDAO
         this.dataSource = dataSource;
     }
 
-    public void insert(Goods goods){
+    public void insert(OrdersGoods ordersGoods){
 
-        String sql = "INSERT INTO goods (goods_name, goods_type,goods_price,create_date,modify_date) VALUES ( ?, ?,?,?,?)";
+        String sql = "INSERT INTO goods (orders_id,goods_id,goods_count,create_date,modify_date) VALUES ( ?, ?,?,?,?)";
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, goods.getGoods_name());
-            ps.setString(2, goods.getGoods_type());
-            ps.setDouble(3, goods.getGoods_price());
-            ps.setDate(4, (Date) goods.getCreate_date());
-            ps.setDate(5, (Date) goods.getModify_date());
+            ps.setInt(1, ordersGoods.getOrders_id());
+            ps.setInt(2, ordersGoods.getGoods_id());
+            ps.setDouble(3, ordersGoods.getGoods_count());
+            ps.setDate(4, (Date) ordersGoods.getCreate_date());
+            ps.setDate(5, (Date) ordersGoods.getModify_date());
             ps.executeUpdate();
             ps.close();
 
@@ -42,24 +44,24 @@ public class JdbcOrdersGoodsDAO implements GoodsDAO
         }
     }
 
-    public Goods findByGoodsId(int goods_id){
+    public OrdersGoods findByOrdersGoodsId(int orders_goods_id){
 
-        String sql = "SELECT * FROM goods WHERE id = ?";
+        String sql = "SELECT * FROM orders_goods WHERE id = ?";
 
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, goods_id);
-            Goods goods = null;
+            ps.setInt(1, orders_goods_id);
+            OrdersGoods ordersGoods = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                goods = new Goods(
+                ordersGoods = new OrdersGoods(
                         rs.getInt("id"),
-                        rs.getString("Goods_name"),
-                        rs.getString("Goods_type"),
-                        rs.getDouble("Goods_price"),
+                        rs.getInt("Orders_id"),
+                        rs.getInt("Goods_id"),
+                        rs.getDouble("Goods_count"),
                         rs.getDate("Create_Date"),
                         rs.getDate("Modify_Date"),
                         rs.getDate("Delete_Date")
@@ -67,7 +69,7 @@ public class JdbcOrdersGoodsDAO implements GoodsDAO
             }
             rs.close();
             ps.close();
-            return goods;
+            return ordersGoods;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
