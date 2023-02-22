@@ -4,43 +4,43 @@ import java.util.Date;
 
 public class Shops {
     private int id;
-    private String shop_name;
-    private int shop_address_id;
-    private int shop_info_id;
-    private Date create_date;
-    private Date modify_date;
-    private Date delete_date;
+    private String shopName;
+    private int shopAddressId;
+    private int shopInfoId;
+    private Date createDate;
+    private Date modifyDate;
+    private Date deleteDate;
 
 
     public Shops(){
 
     }
 
-    public Shops(String shop_name, int shop_address_id, int shop_info_id, Date create_date, Date modify_date) {
-        this.shop_name = shop_name;
-        this.shop_address_id = shop_address_id;
-        this.shop_info_id = shop_info_id;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
+    public Shops(String shopName, int shopAddressId, int shopInfoId, Date createDate, Date modifyDate) {
+        this.shopName = shopName;
+        this.shopAddressId = shopAddressId;
+        this.shopInfoId = shopInfoId;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
     }
 
-    public Shops(String shop_name, int shop_address_id, int shop_info_id, Date create_date, Date modify_date, Date delete_date) {
-        this.shop_name = shop_name;
-        this.shop_address_id = shop_address_id;
-        this.shop_info_id = shop_info_id;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
-        this.delete_date = delete_date;
+    public Shops(String shopName, int shopAddressId, int shopInfoId, Date createDate, Date modifyDate, Date deleteDate) {
+        this.shopName = shopName;
+        this.shopAddressId = shopAddressId;
+        this.shopInfoId = shopInfoId;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleteDate = deleteDate;
     }
 
-    public Shops(int id, String shop_name, int shop_address_id, int shop_info_id, Date create_date, Date modify_date, Date delete_date) {
+    public Shops(int id, String shopName, int shopAddressId, int shopInfoId, Date createDate, Date modifyDate, Date deleteDate) {
         this.id = id;
-        this.shop_name = shop_name;
-        this.shop_address_id = shop_address_id;
-        this.shop_info_id = shop_info_id;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
-        this.delete_date = delete_date;
+        this.shopName = shopName;
+        this.shopAddressId = shopAddressId;
+        this.shopInfoId = shopInfoId;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleteDate = deleteDate;
     }
 
     public int getId() {
@@ -51,51 +51,51 @@ public class Shops {
         this.id = id;
     }
 
-    public String getShop_name() {
-        return shop_name;
+    public String getShopName() {
+        return shopName;
     }
 
-    public void setShop_name(String shop_name) {
-        this.shop_name = shop_name;
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 
-    public int getShop_address_id() {
-        return shop_address_id;
+    public int getShopAddressId() {
+        return shopAddressId;
     }
 
-    public void setShop_address_id(int shop_address_id) {
-        this.shop_address_id = shop_address_id;
+    public void setShopAddressId(int shopAddressId) {
+        this.shopAddressId = shopAddressId;
     }
 
-    public int getShop_info_id() {
-        return shop_info_id;
+    public int getShopInfoId() {
+        return shopInfoId;
     }
 
-    public void setShop_info_id(int shop_info_id) {
-        this.shop_info_id = shop_info_id;
+    public void setShopInfoId(int shopInfoId) {
+        this.shopInfoId = shopInfoId;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getModify_date() {
-        return modify_date;
+    public Date getModifyDate() {
+        return modifyDate;
     }
 
-    public void setModify_date(Date modify_date) {
-        this.modify_date = modify_date;
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
     }
 
-    public Date getDelete_date() {
-        return delete_date;
+    public Date getDeleteDate() {
+        return deleteDate;
     }
 
-    public void setDelete_date(Date delete_date) {
-        this.delete_date = delete_date;
+    public void setDeleteDate(Date deleteDate) {
+        this.deleteDate = deleteDate;
     }
 }

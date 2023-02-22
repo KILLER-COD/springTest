@@ -4,25 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="new add all">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/model/AddressCountByCity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" afterDir="false" />
+    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="address all ok">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/AddressDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/AddressDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/impl/JdbcAddressDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/impl/JdbcAddressDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/model/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/model/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/common/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/common/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersGoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersGoodsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersGoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersGoodsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/Orders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersGoods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersGoods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/ProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/impl/JdbcProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/impl/JdbcProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/model/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsInfoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsInfoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsInfoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsInfoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/Shops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/Shops.java" afterDir="false" />
@@ -180,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676920190862</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="address all ok">
+      <created>1677072353958</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677072353958</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -213,7 +211,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="new" />
     <MESSAGE value="new add all" />
-    <option name="LAST_COMMIT_MESSAGE" value="new add all" />
+    <MESSAGE value="address all ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="address all ok" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
