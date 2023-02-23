@@ -1,34 +1,34 @@
 package com.mkyong.orders.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Orders {
 
     private int id;
-    private int shop_id;
-    private Date create_date;
-    private Date modify_date;
-    private Date delete_date;
+    private int shopId;
+    private Date createDate;
+    private Date modifyDate;
+    private Date deleteDate;
 
-    public Orders(int id, int shop_id, Date create_date, Date modify_date, Date delete_date) {
+    public Orders(int id, int shopId, Date createDate, Date modifyDate, Date deleteDate) {
         this.id = id;
-        this.shop_id = shop_id;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
-        this.delete_date = delete_date;
+        this.shopId = shopId;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleteDate = deleteDate;
     }
 
-    public Orders( int shop_id, Date create_date, Date modify_date, Date delete_date) {
-        this.shop_id = shop_id;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
-        this.delete_date = delete_date;
+    public Orders( int shopId, Date createDate, Date modifyDate, Date deleteDate) {
+        this.shopId = shopId;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleteDate = deleteDate;
     }
 
-    public Orders( int shop_id, Date create_date, Date modify_date) {
-        this.shop_id = shop_id;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
+    public Orders( int shopId, Date createDate, Date modifyDate) {
+        this.shopId = shopId;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
     }
 
     public Orders(){
@@ -43,46 +43,46 @@ public class Orders {
         this.id = id;
     }
 
-    public int getShop_id() {
-        return shop_id;
+    public int getShopId() {
+        return shopId;
     }
 
-    public void setShop_id(int shop_id) {
-        this.shop_id = shop_id;
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getModify_date() {
-        return modify_date;
+    public Date getModifyDate() {
+        return modifyDate;
     }
 
-    public void setModify_date(Date modify_date) {
-        this.modify_date = modify_date;
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
     }
 
-    public Date getDelete_date() {
-        return delete_date;
+    public Date getDeleteDate() {
+        return deleteDate;
     }
 
-    public void setDelete_date(Date delete_date) {
-        this.delete_date = delete_date;
+    public void setDeleteDate(Date deleteDate) {
+        this.deleteDate = deleteDate;
     }
 
     @Override
     public String toString() {
         return "Orders{" +
                 "id=" + id +
-                ", shop_id=" + shop_id +
-                ", create_date=" + create_date +
-                ", modify_date=" + modify_date +
-                ", delete_date=" + delete_date +
+                ", shopId=" + shopId +
+                ", create_date=" + createDate +
+                ", modify_date=" + modifyDate +
+                ", deleteDate=" + deleteDate +
                 '}';
     }
 }

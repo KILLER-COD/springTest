@@ -4,6 +4,7 @@ import com.mkyong.address.dao.AddressDAO;
 import com.mkyong.address.model.Address;
 import com.mkyong.address.model.AddressCountByCity;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,13 +39,9 @@ public class AddressService {
         }
     }
 
-    public void addNewAddress(AddressDAO addressDAO) throws InterruptedException {
+    public int addNewAddress(AddressDAO addressDAO,Connection conn) throws InterruptedException {
         Thread.sleep(500);
-        System.out.println("Set count add Address in shop");
-        int addCount = scanner.nextInt();
 
-        for (int i = 0; i < addCount; i++) {
-            System.out.println("Count add - " + i);
             System.out.println("Set shop Address");
             String address_name  = scanner1.nextLine();
             System.out.println("Set Name City where in shop");
@@ -56,9 +53,7 @@ public class AddressService {
             address0.setCreateDate(new Date(System.currentTimeMillis()));
             address0.setModifyDate(new Date(System.currentTimeMillis()));
 
-            addressDAO.insert(address0);
-        }
-
+        return addressDAO.insert(address0,conn);
     }
     public void countShopCity(AddressDAO addressDAO) throws InterruptedException {
         Thread.sleep(500);
@@ -82,7 +77,7 @@ public class AddressService {
         }
     }
 
-    public void changeAddress(AddressDAO addressDAO) throws SQLException, InterruptedException {
+    public void changeAddress(AddressDAO addressDAO, Connection conn) throws SQLException, InterruptedException {
         Thread.sleep(500);
         System.out.println("Set Address  ID ");
         int getId = scanner2.nextInt();
@@ -102,14 +97,14 @@ public class AddressService {
             case 1:
                 System.out.println("---------------- \n Set new shop Address ");
                 addressName  = scanner1.nextLine();
-                addressDAO.update(addressName,addressCity,getId);
+                addressDAO.update(addressName,addressCity,getId,conn);
                 scanner1.close();
                 break;
 
             case 2:
                 System.out.println("---------------- \n Set new Name City where in shop");
                 addressCity  = scanner1.nextLine();
-                addressDAO.update(addressName,addressCity,getId);
+                addressDAO.update(addressName,addressCity,getId,conn);
                 scanner1.close();
                 break;
 
@@ -118,7 +113,7 @@ public class AddressService {
                 addressName  = scanner1.nextLine();
                 System.out.println("Set new Name City where in shop");
                 addressCity  = scanner1.nextLine();
-                addressDAO.update(addressName,addressCity,getId);
+                addressDAO.update(addressName,addressCity,getId,conn);
                 scanner1.close();
 
         }

@@ -1,6 +1,6 @@
 package com.mkyong.shops.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ShopsInfo {
     private int id;

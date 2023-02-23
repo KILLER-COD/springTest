@@ -5,36 +5,38 @@ import java.util.Date;
 public class Goods {
 
     private int id;
-    private String goods_name;
-    private String goods_type;
-    private double goods_price;
-    private int product_id;
-    private Date create_date;
-    private Date modify_date;
-    private Date delete_date;
+    private String goodsName;
+    private String goodsType;
+    private double goodsPrice;
+    private int productId;
+    private Date createDate;
+    private Date modifyDate;
+    private Date deleteDate;
 
 
-    public Goods(int id, String goods_name, String goods_type, double goods_price, int product_id, Date create_date, Date modify_date, Date delete_date) {
+    public Goods(int id, String goodsName, String goodsType, double goodsPrice, int productId, Date createDate, Date modifyDate, Date deleteDate) {
         this.id = id;
-        this.goods_name = goods_name;
-        this.goods_type = goods_type;
-        this.goods_price = goods_price;
-        this.product_id = product_id;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
-        this.delete_date = delete_date;
+        this.goodsName = goodsName;
+        this.goodsType = goodsType;
+        this.goodsPrice = goodsPrice;
+        this.productId = productId;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleteDate = deleteDate;
     }
 
-    public Goods(String goods_name, String goods_type, double goods_price, int product_id, Date create_date, Date modify_date) {
-        this.goods_name = goods_name;
-        this.goods_type = goods_type;
-        this.goods_price = goods_price;
-        this.product_id = product_id;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
+    public Goods(String goodsName, String goodsType, double goodsPrice, int productId, Date createDate, Date modifyDate) {
+        this.goodsName = goodsName;
+        this.goodsType = goodsType;
+        this.goodsPrice = goodsPrice;
+        this.productId = productId;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
     }
 
-    public Goods(int id, String goodsName, String goodsType, double goodsPrice, java.sql.Date createDate, java.sql.Date modifyDate, java.sql.Date deleteDate){}
+    public Goods() {
+
+    }
 
     public int getId() {
         return id;
@@ -44,59 +46,59 @@ public class Goods {
         this.id = id;
     }
 
-    public String getGoods_name() {
-        return goods_name;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setGoods_name(String goods_name) {
-        this.goods_name = goods_name;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public String getGoods_type() {
-        return goods_type;
+    public String getGoodsType() {
+        return goodsType;
     }
 
-    public void setGoods_type(String goods_type) {
-        this.goods_type = goods_type;
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
     }
 
-    public double getGoods_price() {
-        return goods_price;
+    public double getGoodsPrice() {
+        return goodsPrice;
     }
 
-    public void setGoods_price(double goods_price) {
-        this.goods_price = goods_price;
+    public void setGoodsPrice(double goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getModify_date() {
-        return modify_date;
+    public Date getModifyDate() {
+        return modifyDate;
     }
 
-    public void setModify_date(Date modify_date) {
-        this.modify_date = modify_date;
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
     }
 
-    public Date getDelete_date() {
-        return delete_date;
+    public Date getDeleteDate() {
+        return deleteDate;
     }
 
-    public void setDelete_date(Date delete_date) {
-        this.delete_date = delete_date;
+    public void setDeleteDate(Date deleteDate) {
+        this.deleteDate = deleteDate;
     }
 }

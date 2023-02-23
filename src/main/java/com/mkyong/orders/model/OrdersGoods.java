@@ -1,42 +1,42 @@
 package com.mkyong.orders.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class OrdersGoods {
 
     private int id;
-    private int orders_id;
-    private int goods_id;
-    private double goods_count;
-    private Date create_date;
-    private Date modify_date;
-    private Date delete_date;
+    private int ordersId;
+    private int goodsId;
+    private double goodsCount;
+    private Date createDate;
+    private Date modifyDate;
+    private Date deleteDate;
 
-    public OrdersGoods(int id, int orders_id, int goods_id, double goods_count, Date create_date, Date modify_date, Date delete_date) {
+    public OrdersGoods(int id, int ordersId, int goodsId, double goodsCount, Date createDate, Date modifyDate, Date deleteDate) {
         this.id = id;
-        this.orders_id = orders_id;
-        this.goods_id = goods_id;
-        this.goods_count = goods_count;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
-        this.delete_date = delete_date;
+        this.ordersId = ordersId;
+        this.goodsId = goodsId;
+        this.goodsCount = goodsCount;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleteDate = deleteDate;
     }
 
-    public OrdersGoods(int orders_id, int goods_id, double goods_count, Date create_date, Date modify_date, Date delete_date) {
-        this.orders_id = orders_id;
-        this.goods_id = goods_id;
-        this.goods_count = goods_count;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
-        this.delete_date = delete_date;
+    public OrdersGoods(int ordersId, int goodsId, double goodsCount, Date createDate, Date modifyDate, Date deleteDate) {
+        this.ordersId = ordersId;
+        this.goodsId = goodsId;
+        this.goodsCount = goodsCount;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleteDate = deleteDate;
     }
 
-    public OrdersGoods(int orders_id, int goods_id, double goods_count, Date create_date, Date modify_date) {
-        this.orders_id = orders_id;
-        this.goods_id = goods_id;
-        this.goods_count = goods_count;
-        this.create_date = create_date;
-        this.modify_date = modify_date;
+    public OrdersGoods(int ordersId, int goodsId, double goodsCount, Date createDate, Date modifyDate) {
+        this.ordersId = ordersId;
+        this.goodsId = goodsId;
+        this.goodsCount = goodsCount;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
     }
 
     public OrdersGoods(){
@@ -51,52 +51,52 @@ public class OrdersGoods {
         this.id = id;
     }
 
-    public int getOrders_id() {
-        return orders_id;
+    public int getOrdersId() {
+        return ordersId;
     }
 
-    public void setOrders_id(int orders_id) {
-        this.orders_id = orders_id;
+    public void setOrdersId(int ordersId) {
+        this.ordersId = ordersId;
     }
 
-    public int getGoods_id() {
-        return goods_id;
+    public int getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoods_id(int goods_id) {
-        this.goods_id = goods_id;
+    public void setGoodsId(int goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public double getGoods_count() {
-        return goods_count;
+    public double getGoodsCount() {
+        return goodsCount;
     }
 
-    public void setGoods_count(double goods_count) {
-        this.goods_count = goods_count;
+    public void setGoodsCount(double goodsCount) {
+        this.goodsCount = goodsCount;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getModify_date() {
-        return modify_date;
+    public Date getModifyDate() {
+        return modifyDate;
     }
 
-    public void setModify_date(Date modify_date) {
-        this.modify_date = modify_date;
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
     }
 
-    public Date getDelete_date() {
-        return delete_date;
+    public Date getDeleteDate() {
+        return deleteDate;
     }
 
-    public void setDelete_date(Date delete_date) {
-        this.delete_date = delete_date;
+    public void setDeleteDate(Date deleteDate) {
+        this.deleteDate = deleteDate;
     }
 
 

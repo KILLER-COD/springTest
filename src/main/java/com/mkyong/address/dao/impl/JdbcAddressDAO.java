@@ -116,30 +116,43 @@ public class JdbcAddressDAO implements AddressDAO
 
     }
 
-    public void insert(Address address){
+    public int insert(Address address,Connection conn){
 
         String sql = "INSERT INTO address (address, city,create_date,modify_date) VALUES ( ?, ?,?,?)";
-        Connection conn = null;
+       if (conn == null) {
+           try {
+               conn = dataSource.getConnection();
+           } catch (SQLException e) {
+               throw new RuntimeException(e);
+           }
+       }
 
         try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, address.getAddress());
             ps.setString(2, address.getCity());
             ps.setDate(3, (Date) address.getCreateDate());
             ps.setDate(4, (Date) address.getModifyDate());
             ps.executeUpdate();
-            ps.close();
+            ResultSet generatedKeys  = ps.getGeneratedKeys();
+            int insertId;
+            if (generatedKeys.next()) {
+                insertId = generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Creating user failed, no ID obtained.");
+            }
 
+            ps.close();
+            return  insertId;
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
         } finally {
-            closeConnection(conn);
+//            closeConnection(conn);
         }
     }
 
-    public void update(String addressName, String cityName,int addressId) throws SQLException {
+    public void update(String addressName, String cityName,int addressId,Connection conn) throws SQLException {
 
         Address address =  findByAddressId(addressId);
 
@@ -151,17 +164,37 @@ public class JdbcAddressDAO implements AddressDAO
             address.setAddress(addressName);
             address.setCity(cityName);
         }
-        update(address,addressId);
+        update(address,addressId,conn);
     }
 
-    public void update(Address address, int addressId) throws SQLException {
+//    public void update(Address address, int addressId) throws SQLException {
+//
+//        String sql;
+//        Connection conn;
+//        PreparedStatement ps;
+//
+//        sql = "UPDATE address SET address = ? ,city = ? ,modify_date = ? WHERE id = ?";
+//        conn = dataSource.getConnection();
+//        ps = conn.prepareStatement(sql);
+//        ps.setString(1, address.getAddress());
+//        ps.setString(2,address.getCity());
+//        ps.setDate(3, new Date(System.currentTimeMillis()));
+//        ps.setInt(4, addressId);
+//        ps.executeUpdate();
+//        ps.close();
+//
+//        closeConnection(conn);
+//
+//    }
+
+    public void update(Address address, int addressId, Connection conn) throws SQLException {
 
         String sql;
-        Connection conn;
         PreparedStatement ps;
-
+        if (conn == null) {
+            conn = dataSource.getConnection();
+        }
         sql = "UPDATE address SET address = ? ,city = ? ,modify_date = ? WHERE id = ?";
-        conn = dataSource.getConnection();
         ps = conn.prepareStatement(sql);
         ps.setString(1, address.getAddress());
         ps.setString(2,address.getCity());
@@ -170,15 +203,7 @@ public class JdbcAddressDAO implements AddressDAO
         ps.executeUpdate();
         ps.close();
 
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-
-            } finally {
-                closeConnection(conn);
-            }
-        }
+        closeConnection(conn);
 
     }
 

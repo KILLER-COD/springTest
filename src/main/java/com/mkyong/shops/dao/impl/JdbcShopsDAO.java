@@ -1,6 +1,5 @@
 package com.mkyong.shops.dao.impl;
 
-import com.mkyong.address.model.Address;
 import com.mkyong.shops.dao.ShopsDAO;
 import com.mkyong.shops.model.Shops;
 
@@ -16,31 +15,32 @@ public class JdbcShopsDAO implements ShopsDAO
         this.dataSource = dataSource;
     }
 
-    public void insert(Shops shops){
+    public int insert(Shops shops,Connection conn){
 
-        String sql = "INSERT INTO shops (shops_name,shops, AGE) VALUES ( ?,?,?,? ?)";
-        Connection conn = null;
+        String sql = "INSERT INTO shops (shop_name, shop_address_id ,shop_info_id ,create_date ,modify_date) VALUES ( ?,?,?,?,?)";
+        if (conn == null){
+            try {
+                conn = dataSource.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         try {
-            conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, shops.getShopName());
             ps.setInt(2, shops.getShopAddressId());
             ps.setInt(3, shops.getShopInfoId());
-            ps.setDate(4, (Date) shops.getCreateDate());
-            ps.setDate(5, (Date) shops.getModifyDate());
-            ps.executeUpdate();
+            ps.setDate(4, shops.getCreateDate());
+            ps.setDate(5, shops.getModifyDate());
+            int shopsAdd = ps.executeUpdate();
             ps.close();
-
+            return shopsAdd ;
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {}
-            }
+//            closeConnection(conn);
         }
     }
 
@@ -73,11 +73,7 @@ public class JdbcShopsDAO implements ShopsDAO
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {}
-            }
+            closeConnection(conn);
         }
     }
 
@@ -96,11 +92,7 @@ public class JdbcShopsDAO implements ShopsDAO
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {}
-            }
+            closeConnection(conn);
         }
 
 
@@ -120,16 +112,12 @@ public class JdbcShopsDAO implements ShopsDAO
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {}
-            }
+            closeConnection(conn);
         }
 
     }
 
-    public void update(String shopsName, int shopsAddressId,int shopsInfoId,int shopsId) throws SQLException {
+    public void update(String shopsName, int shopsAddressId,int shopsInfoId,int shopsId,Connection conn) throws SQLException {
 
         Shops shops =  findByShopsId(shopsId);
 
@@ -144,17 +132,18 @@ public class JdbcShopsDAO implements ShopsDAO
             shops.setShopAddressId(shopsAddressId);
             shops.setShopInfoId(shopsInfoId);
         }
-        update(shops,shopsId);
+        update(shops,shopsId,conn);
     }
 
-    public void update(Shops shops, int shopsId) throws SQLException {
+
+    public void update(Shops shops, int shopsId,Connection conn) throws SQLException {
 
         String sql;
-        Connection conn;
         PreparedStatement ps;
-
+        if (conn == null ){
+            conn = dataSource.getConnection();
+        }
         sql = "UPDATE shops SET shop_name = ? ,shop_address_id = ? ,shop_info_id = ? ,modify_date = ? WHERE id = ?";
-        conn = dataSource.getConnection();
         ps = conn.prepareStatement(sql);
         ps.setString(1, shops.getShopName());
         ps.setInt(2,shops.getShopAddressId());
@@ -164,13 +153,7 @@ public class JdbcShopsDAO implements ShopsDAO
         ps.executeUpdate();
         ps.close();
 
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-
-            }
-        }
+        closeConnection(conn);
 
     }
 
@@ -186,9 +169,9 @@ public class JdbcShopsDAO implements ShopsDAO
             while (rs.next()) {
                 shops = new Shops(
                         rs.getInt("id"),
-                        rs.getString("shop_owner"),
-                        rs.getInt("hvhh"),
-                        rs.getInt("address_ps"),
+                        rs.getString("shop_name"),
+                        rs.getInt("shop_address_id"),
+                        rs.getInt("shop_info_id"),
                         rs.getDate("Create_Date"),
                         rs.getDate("Modify_Date"),
                         rs.getDate("Delete_Date")
@@ -200,6 +183,8 @@ public class JdbcShopsDAO implements ShopsDAO
             return shopList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            closeConnection(conn);
         }
     }
 
@@ -229,6 +214,16 @@ public class JdbcShopsDAO implements ShopsDAO
             return shopList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            closeConnection(conn);
+        }
+    }
+
+    public void closeConnection(Connection conn){
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {}
         }
     }
 

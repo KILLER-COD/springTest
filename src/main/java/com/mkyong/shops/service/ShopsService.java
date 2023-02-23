@@ -6,9 +6,10 @@ import com.mkyong.address.model.AddressCountByCity;
 import com.mkyong.shops.dao.ShopsDAO;
 import com.mkyong.shops.model.Shops;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Scanner;
 
 
@@ -28,7 +29,7 @@ public class ShopsService {
         return shopsDAO.getAllDeletedShops();
     }
 
-    public void deleteAddress(ShopsDAO shopsDAO,int shopsId) throws SQLException, InterruptedException {
+    public void deleteShops(ShopsDAO shopsDAO,int shopsId) throws SQLException, InterruptedException {
         Thread.sleep(500);
         System.out.println("Set Delete Shop type | 1 - hard | 2 - Soft");
         int deleteType = scanner.nextInt();
@@ -38,39 +39,29 @@ public class ShopsService {
             shopsDAO.deleteSoft(shopsId);
         } else {
             System.out.println("Error : Set correct Number ");
-            deleteAddress(shopsDAO,shopsId);
+            deleteShops(shopsDAO,shopsId);
         }
     }
 
-    public void addNewShops(ShopsDAO shopsDAO) throws InterruptedException {
+    public int addNewShops(ShopsDAO shopsDAO,Connection conn,int addressIdShop,int shopsInfoId) throws InterruptedException {
         Thread.sleep(500);
-        System.out.println("Set count add Address in shop");
-        int addCount = scanner.nextInt();
         String shopName;
-        int shopAddressId;
-        int shopInfoId;
 
-        for (int i = 0; i < addCount; i++) {
-            System.out.println("Count add - " + i + "\n Set shop Name");
-            shopName  = scanner1.nextLine();
-            System.out.println("Set Shop Address Id where is it");
-            shopAddressId  = scanner1.nextInt();
-            System.out.println("Set Shop Info Id");
-            shopInfoId  = scanner1.nextInt();
+        System.out.println("Set shop Name");
+        shopName  = scanner1.nextLine();
 
             Shops shops = new Shops();
             shops.setShopName(shopName);
-            shops.setShopAddressId(shopAddressId);
-            shops.setShopInfoId(shopInfoId);
+            shops.setShopAddressId(addressIdShop);
+            shops.setShopInfoId(shopsInfoId);
             shops.setCreateDate(new Date(System.currentTimeMillis()));
             shops.setModifyDate(new Date(System.currentTimeMillis()));
 
-            shopsDAO.insert(shops);
-        }
+       return shopsDAO.insert(shops,conn);
 
     }
 
-    public void changeShops(ShopsDAO shopsDAO) throws SQLException, InterruptedException {
+    public void changeShops(ShopsDAO shopsDAO, Connection conn) throws SQLException, InterruptedException {
         Thread.sleep(500);
         System.out.println("Set Address  ID ");
         int shopId = scanner2.nextInt();
@@ -91,21 +82,21 @@ public class ShopsService {
             case 1:
                 System.out.println("---------------- \n Set new shop Address ");
                 shopName  = scanner1.nextLine();
-                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId);
+                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId,conn);
                 scanner1.close();
                 break;
 
             case 2:
                 System.out.println("---------------- \n Set new Name City where in shop");
                 shopAddressId  = scanner1.nextInt();
-                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId);
+                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId,conn);
                 scanner1.close();
                 break;
 
             case 3:
                 System.out.println("---------------- \n Set new Name City where in shop");
                 shopInfoId  = scanner1.nextInt();
-                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId);
+                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId,conn);
                 scanner1.close();
                 break;
 
@@ -116,7 +107,7 @@ public class ShopsService {
                 shopAddressId  = scanner1.nextInt();
                 System.out.println("Set new Shop info id ");
                 shopInfoId  = scanner1.nextInt();
-                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId);
+                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId,conn);
                 scanner1.close();
 
         }

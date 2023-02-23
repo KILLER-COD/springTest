@@ -4,14 +4,16 @@ import com.mkyong.address.model.Address;
 import com.mkyong.address.model.AddressCountByCity;
 import com.mkyong.shops.model.Shops;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ShopsDAO {
-    void insert(Shops shops);
+    int insert(Shops shops,Connection conn);
     Shops findByShopsId(int shopsId);
-    void update(Shops shops,int shopsId) throws SQLException;
-    void update(String shopsName,int shopsAddressId , int shopsInfoId,int shopsId) throws SQLException;
+  //  void update(Shops shops,int shopsId) throws SQLException;
+    void update(Shops shops, int shopsId, Connection conn) throws SQLException;
+    void update(String shopsName,int shopsAddressId , int shopsInfoId,int shopsId,Connection conn) throws SQLException;
     void deleteHard(int shopsId) throws SQLException;
     void deleteSoft(int shopsId) throws SQLException;
     ArrayList<Shops> getAllShops() throws SQLException;
