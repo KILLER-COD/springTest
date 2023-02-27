@@ -1,48 +1,54 @@
 package com.mkyong.orders.dao.impl;
 
-import com.mkyong.goods.dao.GoodsDAO;
-import com.mkyong.goods.model.Goods;
 import com.mkyong.orders.dao.OrdersGoodsDAO;
-import com.mkyong.orders.model.Orders;
 import com.mkyong.orders.model.OrdersGoods;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO
-{
+@Component
+public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO {
+    @Autowired
     private DataSource dataSource;
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    public void insert(OrdersGoods ordersGoods){
+    public int insert(OrdersGoods ordersGoods, Connection conn) {
 
         String sql = "INSERT INTO orders_goods (orders_id,goods_id,goods_count,create_date,modify_date) VALUES ( ?, ?,?,?,?)";
-        Connection conn = null;
+        if (conn == null) {
+            try {
+                conn = dataSource.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, ordersGoods.getOrdersId());
             ps.setInt(2, ordersGoods.getGoodsId());
             ps.setDouble(3, ordersGoods.getGoodsCount());
-            ps.setDate(4,  ordersGoods.getCreateDate());
-            ps.setDate(5,  ordersGoods.getModifyDate());
+            ps.setDate(4, ordersGoods.getCreateDate());
+            ps.setDate(5, ordersGoods.getModifyDate());
             ps.executeUpdate();
+            int ordersGoodsId = -1;
+            ResultSet getGenarateKey = ps.getGeneratedKeys();
+            if (getGenarateKey.next()) {
+                ordersGoodsId = getGenarateKey.getInt(1);
+            }
             ps.close();
-
+            return ordersGoodsId;
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
         } finally {
-            closeConnection(conn);
+//            closeConnection(conn);
         }
     }
 
-    public OrdersGoods findByOrdersGoodsId(int orders_goods_id){
+    public OrdersGoods findByOrdersGoodsId(int orders_goods_id) {
 
         String sql = "SELECT * FROM orders_goods WHERE id = ?";
 
@@ -75,14 +81,14 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO
         }
     }
 
-    public void deleteSoft(int ordersId){
+    public void deleteSoft(int ordersId) {
         String sql = "UPDATE orders_goods SET delete_date = ? WHERE id = ?";
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDate(1,new Date(System.currentTimeMillis()));
+            ps.setDate(1, new Date(System.currentTimeMillis()));
             ps.setInt(2, ordersId);
             ps.executeUpdate();
             ps.close();
@@ -96,7 +102,7 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO
 
     }
 
-    public void deleteHard(int ordersId){
+    public void deleteHard(int ordersId) {
         String sql = "DELETE FROM orders_goods WHERE id = ?";
         Connection conn = null;
 
@@ -115,7 +121,7 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO
 
     }
 
-    public ArrayList<OrdersGoods> getAllOrdersGoods(){
+    public ArrayList<OrdersGoods> getAllOrdersGoods() {
         String sql = "SELECT * FROM orders_goods WHERE delete_date IS NULL";
         Connection conn = null;
         try {
@@ -146,7 +152,7 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO
         }
     }
 
-    public ArrayList<OrdersGoods> getAllDeletedOrdersGoods(){
+    public ArrayList<OrdersGoods> getAllDeletedOrdersGoods() {
         String sql = "SELECT * FROM orders_goods WHERE delete_date IS NOT NULL";
         Connection conn = null;
         try {
@@ -177,22 +183,22 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO
         }
     }
 
-    public void update(int ordersId,int goodsId,double goodsCount,int ordersGoodsId) throws SQLException {
+    public void update(int ordersId, int goodsId, double goodsCount, int ordersGoodsId) throws SQLException {
 
-        OrdersGoods ordersGoods =  findByOrdersGoodsId(ordersGoodsId);
+        OrdersGoods ordersGoods = findByOrdersGoodsId(ordersGoodsId);
 
-        if (ordersId > -1 && goodsId == -1 && goodsCount == -1 ){
+        if (ordersId > -1 && goodsId == -1 && goodsCount == -1) {
             ordersGoods.setOrdersId(ordersId);
-        } else if (ordersId == -1 && goodsId > -1 && goodsCount == -1  ) {
+        } else if (ordersId == -1 && goodsId > -1 && goodsCount == -1) {
             ordersGoods.setGoodsId(goodsId);
-        } else if (ordersId == -1 && goodsId == -1 && goodsCount > -1  ) {
+        } else if (ordersId == -1 && goodsId == -1 && goodsCount > -1) {
             ordersGoods.setGoodsCount(goodsCount);
         } else {
-           ordersGoods.setOrdersId(ordersId);
-           ordersGoods.setGoodsId(goodsId);
-           ordersGoods.setGoodsCount(goodsCount);
+            ordersGoods.setOrdersId(ordersId);
+            ordersGoods.setGoodsId(goodsId);
+            ordersGoods.setGoodsCount(goodsCount);
         }
-        update(ordersGoods,ordersGoodsId);
+        update(ordersGoods, ordersGoodsId);
     }
 
     public void update(OrdersGoods ordersGoods, int ordersGoodsId) throws SQLException {
@@ -205,8 +211,8 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO
         conn = dataSource.getConnection();
         ps = conn.prepareStatement(sql);
         ps.setInt(1, ordersGoods.getOrdersId());
-        ps.setInt(2,ordersGoods.getGoodsId());
-        ps.setDouble(3,ordersGoods.getGoodsCount());
+        ps.setInt(2, ordersGoods.getGoodsId());
+        ps.setDouble(3, ordersGoods.getGoodsCount());
         ps.setDate(4, new Date(System.currentTimeMillis()));
         ps.setInt(5, ordersGoodsId);
         ps.executeUpdate();
@@ -216,11 +222,12 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO
 
     }
 
-    public void closeConnection(Connection conn){
+    public void closeConnection(Connection conn) {
         if (conn != null) {
             try {
                 conn.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) {
+            }
         }
     }
 }

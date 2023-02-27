@@ -2,28 +2,31 @@ package com.mkyong.goods.dao.impl;
 
 import com.mkyong.goods.dao.GoodsDAO;
 import com.mkyong.goods.model.Goods;
-import com.mkyong.shops.model.ShopsInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class JdbcGoodsDAO implements GoodsDAO
-{
+@Component
+public class JdbcGoodsDAO implements GoodsDAO {
+    @Autowired
     private DataSource dataSource;
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    public int insert(Goods goods, Connection conn) {
 
-    public void insert(Goods goods){
-
-        String sql = "INSERT INTO goods (goods_name, goods_type,goods_price, product_id ,create_date,modify_date) VALUES ( ?, ?,?,?,?)";
-        Connection conn = null;
+        String sql = "INSERT INTO goods (goods_name, goods_type,goods_price, product_id ,create_date,modify_date) VALUES ( ?, ?,?,?,?,?)";
+        if (conn == null) {
+            try {
+                conn = dataSource.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, goods.getGoodsName());
             ps.setString(2, goods.getGoodsType());
             ps.setDouble(3, goods.getGoodsPrice());
@@ -31,17 +34,22 @@ public class JdbcGoodsDAO implements GoodsDAO
             ps.setDate(5, (Date) goods.getCreateDate());
             ps.setDate(6, (Date) goods.getModifyDate());
             ps.executeUpdate();
+            int goodsId = -1;
+            ResultSet getGeneratorKey = ps.getGeneratedKeys();
+            if (getGeneratorKey.next()) {
+                goodsId = getGeneratorKey.getInt(1);
+            }
             ps.close();
-
+            return goodsId;
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
         } finally {
-            closeConnection(conn);
+//            closeConnection(conn);
         }
     }
 
-    public Goods findByGoodsId(int goods_id){
+    public Goods findByGoodsId(int goods_id) {
 
         String sql = "SELECT * FROM goods WHERE id = ?";
 
@@ -75,14 +83,14 @@ public class JdbcGoodsDAO implements GoodsDAO
         }
     }
 
-    public void deleteSoft(int goodsId){
+    public void deleteSoft(int goodsId) {
         String sql = "UPDATE goods SET delete_date = ? WHERE id = ?";
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDate(1,new Date(System.currentTimeMillis()));
+            ps.setDate(1, new Date(System.currentTimeMillis()));
             ps.setInt(2, goodsId);
             ps.executeUpdate();
             ps.close();
@@ -96,7 +104,7 @@ public class JdbcGoodsDAO implements GoodsDAO
 
     }
 
-    public void deleteHard(int goodsId){
+    public void deleteHard(int goodsId) {
         String sql = "DELETE FROM goods WHERE id = ?";
         Connection conn = null;
 
@@ -115,7 +123,7 @@ public class JdbcGoodsDAO implements GoodsDAO
 
     }
 
-    public ArrayList<Goods> getAllGoods(){
+    public ArrayList<Goods> getAllGoods() {
         String sql = "SELECT * FROM goods WHERE delete_date IS NULL";
         Connection conn = null;
         try {
@@ -147,7 +155,7 @@ public class JdbcGoodsDAO implements GoodsDAO
         }
     }
 
-    public ArrayList<Goods> getAllDeletedGoods(){
+    public ArrayList<Goods> getAllDeletedGoods() {
         String sql = "SELECT * FROM goods WHERE delete_date IS NOT NULL";
         Connection conn = null;
         try {
@@ -179,25 +187,23 @@ public class JdbcGoodsDAO implements GoodsDAO
         }
     }
 
-    public void update(String goodsName, String goodsType,double goodsPrice ,int productId,int goodsId) throws SQLException {
+    public void update(String goodsName, String goodsType, double goodsPrice, int productId, int goodsId) throws SQLException {
 
-        Goods goods =  findByGoodsId(goodsId);
+        Goods goods = findByGoodsId(goodsId);
 
-        if (goodsName != null && goodsType == null && goodsPrice == -1 &&  productId == -1){
+        if (goodsName != null) {
             goods.setGoodsName(goodsName);
-        } else if (goodsName == null && goodsType !=null && goodsPrice == -1 && productId == -1) {
+        }
+        if (goodsType != null) {
             goods.setGoodsType(goodsType);
-        } else if (goodsName == null && goodsType == null && goodsPrice > -1 && productId == -1) {
+        }
+        if (goodsPrice > -1) {
             goods.setGoodsPrice(goodsPrice);
-        } else if (goodsName == null && goodsType == null && goodsPrice == -1 && productId > -1) {
-            goods.setProductId(productId);
-        } else {
-            goods.setGoodsName(goodsName);
-            goods.setGoodsType(goodsType);
-            goods.setGoodsPrice(goodsPrice);
+        }
+        if (productId > -1) {
             goods.setProductId(productId);
         }
-        update(goods,goodsId);
+        update(goods, goodsId);
     }
 
     public void update(Goods goods, int shopsInfoId) throws SQLException {
@@ -210,9 +216,9 @@ public class JdbcGoodsDAO implements GoodsDAO
         conn = dataSource.getConnection();
         ps = conn.prepareStatement(sql);
         ps.setString(1, goods.getGoodsName());
-        ps.setString(2,goods.getGoodsType());
-        ps.setDouble(3,goods.getGoodsPrice());
-        ps.setInt(4,goods.getProductId());
+        ps.setString(2, goods.getGoodsType());
+        ps.setDouble(3, goods.getGoodsPrice());
+        ps.setInt(4, goods.getProductId());
         ps.setDate(5, new Date(System.currentTimeMillis()));
         ps.setInt(6, shopsInfoId);
         ps.executeUpdate();
@@ -222,11 +228,19 @@ public class JdbcGoodsDAO implements GoodsDAO
 
     }
 
-    public void closeConnection(Connection conn){
+    public int plus(int n1, int n2) {
+        if (n1 > 100) {
+            return 10;
+        }
+        return n1 + n2;
+    }
+
+    public void closeConnection(Connection conn) {
         if (conn != null) {
             try {
                 conn.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) {
+            }
         }
     }
 }

@@ -98,4 +98,17 @@ public class Shops {
     public void setDeleteDate(Date deleteDate) {
         this.deleteDate = deleteDate;
     }
+
+    @Override
+    public String toString() {
+        return "Shops{" +
+                "id=" + id +
+                ", shopName='" + shopName + '\'' +
+                ", shopAddressId=" + shopAddressId +
+                ", shopInfoId=" + shopInfoId +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", deleteDate=" + deleteDate +
+                '}';
+    }
 }

@@ -3,11 +3,12 @@ package com.mkyong.orders.dao;
 import com.mkyong.goods.model.Goods;
 import com.mkyong.orders.model.Orders;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface OrdersDAO {
-    void insert(Orders orders);
+    int insert(Orders orders, Connection conn);
     Orders findByOrdersId(int ordersId);
     void update(Orders orders, int ordersId) throws SQLException;
     void update(int shopId, int goodsId) throws SQLException;

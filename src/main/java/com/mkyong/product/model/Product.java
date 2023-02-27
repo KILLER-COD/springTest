@@ -86,6 +86,16 @@ public class Product {
         this.deleteDate = deleteDate;
     }
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", productType='" + productType + '\'' +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", deleteDate=" + deleteDate +
+                '}';
+    }
 }
 

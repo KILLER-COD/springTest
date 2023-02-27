@@ -3,13 +3,16 @@ package com.mkyong.shops.dao.impl;
 import com.mkyong.shops.dao.ShopsInfoDAO;
 import com.mkyong.shops.model.Shops;
 import com.mkyong.shops.model.ShopsInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-
+@Component
 public class JdbcShopsInfoDAO implements ShopsInfoDAO
 {
+    @Autowired
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {

@@ -4,42 +4,52 @@ import com.mkyong.goods.dao.GoodsDAO;
 import com.mkyong.goods.model.Goods;
 import com.mkyong.orders.dao.OrdersDAO;
 import com.mkyong.orders.model.Orders;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-
+@Component
 public class JdbcOrdersDAO implements OrdersDAO
 {
+    @Autowired
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    public void insert(Orders orders){
+    public int insert(Orders orders,Connection conn){
 
         String sql = "INSERT INTO orders (shop_id, create_date,modify_date) VALUES ( ?, ?, ?)";
-        Connection conn = null;
+        if (conn == null){
+            try {
+                conn = dataSource.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, orders.getShopId());
             ps.setDate(2, orders.getCreateDate());
             ps.setDate(3, orders.getModifyDate());
             ps.executeUpdate();
-            ps.close();
 
+            ResultSet getGenerationKey = ps.getGeneratedKeys();
+            int ordersId = -1;
+            if (getGenerationKey.next()){
+                ordersId = getGenerationKey.getInt(1);
+            }
+            ps.close();
+            return ordersId;
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {}
-            }
+//            closeConnection(conn);
         }
     }
 
@@ -70,11 +80,7 @@ public class JdbcOrdersDAO implements OrdersDAO
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {}
-            }
+            //            closeConnection(conn);
         }
     }
 

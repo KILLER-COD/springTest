@@ -1,32 +1,39 @@
 package com.mkyong.orders.service;
 
+import com.mkyong.goods.dao.GoodsDAO;
+import com.mkyong.goods.model.Goods;
+import com.mkyong.goods.service.GoodsService;
 import com.mkyong.orders.dao.OrdersDAO;
 import com.mkyong.orders.dao.OrdersGoodsDAO;
 import com.mkyong.orders.model.Orders;
 import com.mkyong.orders.model.OrdersGoods;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+@Component
 public class OrdersGoodsService {
     Scanner scanner = new Scanner(System.in);
     Scanner scanner1 = new Scanner(System.in);
     Scanner scanner2 = new Scanner(System.in);
+    @Autowired
+    private OrdersGoodsDAO ordersGoodsDAO;
+    @Autowired
+    private GoodsService goodsService;
 
-    public ArrayList<OrdersGoods> getAllOrdersGoods(OrdersGoodsDAO ordersGoodsDAO) throws SQLException, InterruptedException {
-        Thread.sleep(500);
+    public ArrayList<OrdersGoods> getAllOrdersGoods() throws SQLException {
         return ordersGoodsDAO.getAllOrdersGoods();
     }
 
-    public ArrayList<OrdersGoods> getAllDeletedOrdersGoods(OrdersGoodsDAO ordersGoodsDAO) throws SQLException, InterruptedException {
-        Thread.sleep(500);
+    public ArrayList<OrdersGoods> getAllDeletedOrdersGoods() throws SQLException {
         return ordersGoodsDAO.getAllDeletedOrdersGoods();
     }
 
-    public void deleteOrdersGoods(OrdersGoodsDAO ordersGoodsDAO,int ordersGoodsId) throws SQLException, InterruptedException {
-        Thread.sleep(500);
+    public void deleteOrdersGoods(int ordersGoodsId) throws SQLException {
         System.out.println("Set Delete Orders Goods | 1 - hard | 2 - Soft");
         int deleteType = scanner.nextInt();
         if (deleteType == 1){
@@ -35,42 +42,48 @@ public class OrdersGoodsService {
             ordersGoodsDAO.deleteSoft(ordersGoodsId);
         } else {
             System.out.println("Error : Set correct Number ");
-            deleteOrdersGoods(ordersGoodsDAO,ordersGoodsId);
+            deleteOrdersGoods(ordersGoodsId);
         }
     }
 
-    public void addNewOrdersGoods(OrdersGoodsDAO ordersGoodsDAO) throws InterruptedException {
-        Thread.sleep(500);
-        int ordersId;
+    public ArrayList<Integer> addNewOrdersGoods(int ordersId,Connection conn) throws InterruptedException {
         int goodsId;
         double goodsCount;
+        OrdersGoods ordersGoods;
 
-            System.out.println("Set Orders Id");
-            ordersId  = scanner1.nextInt();
+        goodsService.goodsPrint();
+        ArrayList<Integer> ordersGoodsList = new ArrayList<>();
+        while (true) {
             System.out.println("Set Goods Id ");
             goodsId = scanner1.nextInt();
             System.out.println("Set  Goods count ");
             goodsCount = scanner1.nextDouble();
 
-            OrdersGoods ordersGoods = new OrdersGoods();
+            ordersGoods = new OrdersGoods();
             ordersGoods.setOrdersId(ordersId);
             ordersGoods.setGoodsId(goodsId);
             ordersGoods.setGoodsCount(goodsCount);
             ordersGoods.setCreateDate(new Date(System.currentTimeMillis()));
             ordersGoods.setModifyDate(new Date(System.currentTimeMillis()));
 
-            ordersGoodsDAO.insert(ordersGoods);
+            ordersGoodsList.add(ordersGoodsDAO.insert(ordersGoods,conn));
+            System.out.println("Add new Goods in Order | 1 - yes | 2 - No");
+            int addNewGoods = scanner1.nextInt();
+            if (addNewGoods == 2 ) {
+                break;
+            }
+        }
+            return ordersGoodsList;
 
     }
 
-    public void changeOrdersGoods(OrdersGoodsDAO ordersGoodsDAO) throws SQLException, InterruptedException {
+    public void changeOrdersGoods() throws SQLException {
 
         ArrayList<OrdersGoods> ordersGoodsList =  ordersGoodsDAO.getAllOrdersGoods();
         for (OrdersGoods ordersGoods : ordersGoodsList ) {
             System.out.println(ordersGoods);
         }
 
-        Thread.sleep(500);
         System.out.println("---------------- \n Set Orders Goods  ID ");
         int ordersGoodsId = scanner2.nextInt();
 

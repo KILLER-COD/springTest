@@ -97,4 +97,17 @@ public class ShopsInfo {
     public void setDeleteDate(Date deleteDate) {
         this.deleteDate = deleteDate;
     }
+
+    @Override
+    public String toString() {
+        return "ShopsInfo{" +
+                "id=" + id +
+                ", shopOwner='" + shopOwner + '\'' +
+                ", hvhh=" + hvhh +
+                ", addressId=" + addressId +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", deleteDate=" + deleteDate +
+                '}';
+    }
 }

@@ -5,6 +5,8 @@ import com.mkyong.address.model.Address;
 import com.mkyong.address.model.AddressCountByCity;
 import com.mkyong.shops.dao.ShopsDAO;
 import com.mkyong.shops.model.Shops;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,25 +14,24 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.Scanner;
 
-
+@Component
 public class ShopsService {
 
     Scanner scanner = new Scanner(System.in);
     Scanner scanner1 = new Scanner(System.in);
     Scanner scanner2 = new Scanner(System.in);
+    @Autowired
+    private ShopsDAO shopsDAO;
 
-    public ArrayList<Shops> getAllShops(ShopsDAO shopsDAO) throws SQLException, InterruptedException {
-        Thread.sleep(500);
+    public ArrayList<Shops> getAllShops() throws SQLException {
         return shopsDAO.getAllShops();
     }
 
-    public ArrayList<Shops> getAllDeletedShops(ShopsDAO shopsDAO) throws SQLException, InterruptedException {
-        Thread.sleep(500);
+    public ArrayList<Shops> getAllDeletedShops() throws SQLException {
         return shopsDAO.getAllDeletedShops();
     }
 
-    public void deleteShops(ShopsDAO shopsDAO,int shopsId) throws SQLException, InterruptedException {
-        Thread.sleep(500);
+    public void deleteShops(int shopsId) throws SQLException {
         System.out.println("Set Delete Shop type | 1 - hard | 2 - Soft");
         int deleteType = scanner.nextInt();
         if (deleteType == 1){
@@ -39,12 +40,11 @@ public class ShopsService {
             shopsDAO.deleteSoft(shopsId);
         } else {
             System.out.println("Error : Set correct Number ");
-            deleteShops(shopsDAO,shopsId);
+            deleteShops(shopsId);
         }
     }
 
-    public int addNewShops(ShopsDAO shopsDAO,Connection conn,int addressIdShop,int shopsInfoId) throws InterruptedException {
-        Thread.sleep(500);
+    public int addNewShops(Connection conn,int addressIdShop,int shopsInfoId){
         String shopName;
 
         System.out.println("Set shop Name");
@@ -61,8 +61,7 @@ public class ShopsService {
 
     }
 
-    public void changeShops(ShopsDAO shopsDAO, Connection conn) throws SQLException, InterruptedException {
-        Thread.sleep(500);
+    public void changeShops(Connection conn) throws SQLException {
         System.out.println("Set Address  ID ");
         int shopId = scanner2.nextInt();
 
@@ -113,6 +112,16 @@ public class ShopsService {
         }
         scanner2.close();
 
+    }
+
+    public void shopsPrint(){
+        try {
+            for (Shops shops : getAllShops()) {
+                System.out.println(shops.toString());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

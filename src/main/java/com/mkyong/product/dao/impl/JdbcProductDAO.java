@@ -2,38 +2,50 @@ package com.mkyong.product.dao.impl;
 
 import com.mkyong.product.dao.ProductDAO;
 import com.mkyong.product.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-
+@Component
 public class JdbcProductDAO implements ProductDAO
 {
+    @Autowired
     private DataSource dataSource;
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    public void insert(Product product){
+    public int insert(Product product,Connection conn){
 
         String sql = "INSERT INTO product (product_name,product_type,create_date,modify_date) VALUES ( ?,?,?,?)";
-        Connection conn = null;
+        if(conn == null) {
+            try {
+                conn = dataSource.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+
+            PreparedStatement ps = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1,product.getProductName());
             ps.setString(2,product.getProductType());
             ps.setDate(3,  product.getCreateDate());
             ps.setDate(4,  product.getModifyDate());
             ps.executeUpdate();
+            int productId = -1;
+            ResultSet getGenerateKey = ps.getGeneratedKeys();
+            if (getGenerateKey.next()){
+                productId = getGenerateKey.getInt(1);
+            }
             ps.close();
-
+            System.out.println(productId);
+            return productId;
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
         } finally {
-            closeConnection(conn);
+//            closeConnection(conn);
         }
     }
 

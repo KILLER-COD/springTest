@@ -2,12 +2,13 @@ package com.mkyong.product.dao;
 
 import com.mkyong.product.model.Product;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ProductDAO {
-    public void  insert(Product product);
-    public Product findByProductId(int product_id);
+    int  insert(Product product, Connection conn);
+    Product findByProductId(int product_id);
 
     void update(Product product, int productId) throws SQLException;
     void update(String productName,String productType,int productId) throws SQLException;

@@ -3,22 +3,20 @@ package com.mkyong.address.dao.impl;
 import com.mkyong.address.dao.AddressDAO;
 import com.mkyong.address.model.Address;
 import com.mkyong.address.model.AddressCountByCity;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-
+@Component
 public class JdbcAddressDAO implements AddressDAO
 {
+    @Autowired
     private DataSource dataSource;
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    public ArrayList<AddressCountByCity> findCountCity(){
-        String sql = "SELECT COUNT(id) cnt, city FROM address WHERE delete_date IS NULL GROUP BY city;";
+   public ArrayList<AddressCountByCity> findCountCity(){
+        String sql = "SELECT COUNT(id) count, city FROM address WHERE delete_date IS NULL GROUP BY city;";
         Connection conn =null;
         ArrayList<AddressCountByCity> addressCountByCityList = new ArrayList<>();
         AddressCountByCity addressCountByCity;
@@ -29,7 +27,7 @@ public class JdbcAddressDAO implements AddressDAO
 
             while (rs.next()) {
                  addressCountByCity = new AddressCountByCity(
-                         rs.getInt("cnt"),
+                         rs.getInt("count"),
                          rs.getString("city")
                  );
                  addressCountByCityList.add(addressCountByCity);
@@ -156,36 +154,18 @@ public class JdbcAddressDAO implements AddressDAO
 
         Address address =  findByAddressId(addressId);
 
-        if (addressName != null && cityName == null){
+        if (addressName != null){
             address.setAddress(addressName);
-        } else if (cityName != null && addressName == null) {
-            address.setCity(cityName);
-        } else {
-            address.setAddress(addressName);
+        }
+
+        if (cityName != null) {
             address.setCity(cityName);
         }
+
         update(address,addressId,conn);
     }
 
-//    public void update(Address address, int addressId) throws SQLException {
-//
-//        String sql;
-//        Connection conn;
-//        PreparedStatement ps;
-//
-//        sql = "UPDATE address SET address = ? ,city = ? ,modify_date = ? WHERE id = ?";
-//        conn = dataSource.getConnection();
-//        ps = conn.prepareStatement(sql);
-//        ps.setString(1, address.getAddress());
-//        ps.setString(2,address.getCity());
-//        ps.setDate(3, new Date(System.currentTimeMillis()));
-//        ps.setInt(4, addressId);
-//        ps.executeUpdate();
-//        ps.close();
-//
-//        closeConnection(conn);
-//
-//    }
+
 
     public void update(Address address, int addressId, Connection conn) throws SQLException {
 
