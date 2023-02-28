@@ -1,7 +1,10 @@
 package com.mkyong.methods;
 
+import com.mkyong.address.service.AddressService;
 import com.mkyong.goods.service.GoodsService;
+import com.mkyong.orders.service.OrdersService;
 import com.mkyong.product.service.ProductService;
+import com.mkyong.shops.service.ShopsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,15 +20,36 @@ public class ChangeNewTransactionMethod {
     private GoodsService goodsService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private OrdersService ordersService;
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private ShopsService shopsService;
     public void changeGoodsMethod() throws SQLException {
         Connection conn = dataSource.getConnection();
-        goodsService.changeGoods();
-
+        conn.setAutoCommit(false);
+            goodsService.changeGoods(conn);
+        conn.commit();
+        conn.close();
     }
 
-    public void changeProduct() throws SQLException {
-        Connection conn = dataSource.getConnection();
+    public void changeProductMethod() throws SQLException {
         productService.changeProduct();
+    }
+
+    public void changeAddressMethod() throws SQLException {
+        addressService.changeAddress(null);
+    }
+
+    public void changeOrdersMethod() throws SQLException {
+        ordersService.changeOrders();
+    }
+
+    public void changeShopsMethod() throws SQLException {
+        Connection conn = dataSource.getConnection();
+        shopsService.changeShops(conn);
+        conn.close();
     }
 
 

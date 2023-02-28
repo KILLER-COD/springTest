@@ -46,7 +46,7 @@ public class ProductService {
         String productType;
 
             System.out.println("Set Product Name");
-            productName  = scanner1.nextLine();
+            productName  = scanner1.next();
             System.out.println("Set Product Type ");
             productType  = scanner1.nextLine();
 
@@ -61,46 +61,31 @@ public class ProductService {
 
     public void changeProduct() throws SQLException {
         productsPrint();
+        System.out.println("----------------  Set Product  ID ");
+        int productId = scanner2.nextInt();
 
-        System.out.println("---------------- \n Set Product  ID ");
-        int shopInfoId = scanner2.nextInt();
-
-        Product product = productDAO.findByProductId(shopInfoId);
+        Product product = productDAO.findByProductId(productId);
         System.out.println(product.toString());
 
-        System.out.println("---------------- \n What do you change  \n 1- Change Product name -- 2- Change Product Type -- 3- Change all  ");
+        String productName;
+        String productType;
 
-        int change_num = scanner2.nextInt();
-        Scanner scanner1 = new Scanner(System.in);
-        String productName = null;
-        String productType = null;
-
-        switch (change_num) {
-
-            case 1:
-                System.out.println("---------------- \n Set new Product Name");
-                productName = scanner1.nextLine();
-                productDAO.update(productName, productType, shopInfoId);
-                scanner1.close();
-                break;
-
-            case 2:
-                System.out.println("---------------- \n Set new product Type");
-                productType = scanner1.nextLine();
-                productDAO.update(productName,productType, shopInfoId);
-                scanner1.close();
-                break;
-
-            default:
-                System.out.println("---------------- \n Change All \n Set new Product Name ");
-                productName = scanner1.nextLine();
-                System.out.println("Set new product Type ");
-                productType = scanner1.nextLine();
-                productDAO.update(productName, productType, shopInfoId);
-                scanner1.close();
-
+        System.out.println("Set Product Name");
+        productName  = scanner1.nextLine();
+        while (productName.equals("")){
+            System.out.println("Set Product Name");
+            productName  = scanner1.nextLine();
         }
-        scanner2.close();
+        System.out.println("Set Product Type ");
+        productType  = scanner1.nextLine();
+        while (productType.equals("")){
+            System.out.println("Set Product Name");
+            productType  = scanner1.nextLine();
+        }
+
+        product.setProductName(productName);
+        product.setProductType(productType);
+        productDAO.update(product,productId);
     }
 
     public void productsPrint(){

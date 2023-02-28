@@ -150,31 +150,31 @@ public class JdbcAddressDAO implements AddressDAO
         }
     }
 
-    public void update(String addressName, String cityName,int addressId,Connection conn) throws SQLException {
-
-        Address address =  findByAddressId(addressId);
-
-        if (addressName != null){
-            address.setAddress(addressName);
-        }
-
-        if (cityName != null) {
-            address.setCity(cityName);
-        }
-
-        update(address,addressId,conn);
-    }
+//    public void update(String addressName, String cityName,int addressId,Connection conn) throws SQLException {
+//
+//        Address address =  findByAddressId(addressId);
+//
+//        if (addressName != null){
+//            address.setAddress(addressName);
+//        }
+//
+//        if (cityName != null) {
+//            address.setCity(cityName);
+//        }
+//
+//        update(address,addressId,conn);
+//    }
 
 
 
     public void update(Address address, int addressId, Connection conn) throws SQLException {
 
-        String sql;
+        String sql = "UPDATE address SET address = ? ,city = ? ,modify_date = ? WHERE id = ?";
         PreparedStatement ps;
         if (conn == null) {
             conn = dataSource.getConnection();
         }
-        sql = "UPDATE address SET address = ? ,city = ? ,modify_date = ? WHERE id = ?";
+
         ps = conn.prepareStatement(sql);
         ps.setString(1, address.getAddress());
         ps.setString(2,address.getCity());

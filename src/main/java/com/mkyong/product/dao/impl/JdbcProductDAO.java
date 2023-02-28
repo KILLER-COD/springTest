@@ -121,20 +121,20 @@ public class JdbcProductDAO implements ProductDAO
 
     }
 
-    public void update(String productName, String productType,int productId) throws SQLException {
-
-        Product product =  findByProductId(productId);
-
-        if (productName != null && productType == null){
-            product.setProductName(productName);
-        } else if (productName == null && productType != null) {
-            product.setProductType(productType);
-        } else  {
-           product.setProductName(productName);
-           product.setProductType(productType);
-        }
-        update(product,productId);
-    }
+//    public void update(String productName, String productType,int productId) throws SQLException {
+//
+//        Product product =  findByProductId(productId);
+//
+//        if (productName != null && productType == null){
+//            product.setProductName(productName);
+//        } else if (productName == null && productType != null) {
+//            product.setProductType(productType);
+//        } else  {
+//           product.setProductName(productName);
+//           product.setProductType(productType);
+//        }
+//        update(product,productId);
+//    }
 
     public void update(Product product, int productId) throws SQLException {
 

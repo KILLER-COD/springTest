@@ -13,7 +13,7 @@ public interface ShopsDAO {
     Shops findByShopsId(int shopsId);
   //  void update(Shops shops,int shopsId) throws SQLException;
     void update(Shops shops, int shopsId, Connection conn) throws SQLException;
-    void update(String shopsName,int shopsAddressId , int shopsInfoId,int shopsId,Connection conn) throws SQLException;
+//    void update(String shopsName,int shopsAddressId , int shopsInfoId,int shopsId,Connection conn) throws SQLException;
     void deleteHard(int shopsId) throws SQLException;
     void deleteSoft(int shopsId) throws SQLException;
     ArrayList<Shops> getAllShops() throws SQLException;

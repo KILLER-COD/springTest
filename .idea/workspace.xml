@@ -4,47 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="Add Shops DB&#10;Add Address DB&#10;Add Shops Info DB &#10;Transaction">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/common/DataConnect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/AddNewTransactionMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/ChangeNewTransactionMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/info.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/mkyong/goods/dao/impl/JdbcGoodsDAOTest.java" afterDir="false" />
+    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="Transaction Change Methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/AddressDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/AddressDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/impl/JdbcAddressDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/impl/JdbcAddressDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/common/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/common/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/GoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/GoodsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/impl/JdbcGoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/impl/JdbcGoodsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/model/Goods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/model/Goods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/service/GoodsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/ChangeNewTransactionMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/ChangeNewTransactionMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersGoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersGoodsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersGoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersGoodsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersGoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersGoodsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/ProductDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/impl/JdbcProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/impl/JdbcProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/model/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsInfoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsInfoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/Shops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/Shops.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopsInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopsInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Spring-Module.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/address/Spring-Address.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/database/Spring-Datasource.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/goods/Spring-Goods.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/orders/Spring-Orders.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/orders/Spring-OrdersGoods.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/product/Spring-Product.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shops/Spring-Shops.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shops/Spring-ShopsInfo.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +108,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mkyong.Main" />
+      <module name="SpringExample" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mkyong.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="JdbcGoodsDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SpringExample" />
       <extension name="coverage">
@@ -183,26 +174,13 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="db" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.JdbcGoodsDAOTest" />
         <item itemvalue="JUnit.JdbcGoodsDAOTest.deleteSoftWhenNumersAreBig" />
         <item itemvalue="JUnit.JdbcGoodsDAOTest.deleteSoft" />
-        <item itemvalue="Docker.docker-compose.yml.db: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -250,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677189573482</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Transaction Change Methods">
+      <created>1677533464959</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1677533464959</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -286,7 +271,8 @@
     <MESSAGE value="address all ok" />
     <MESSAGE value="shops - shopsInfo -Ok" />
     <MESSAGE value="Add Shops DB&#10;Add Address DB&#10;Add Shops Info DB &#10;Transaction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Shops DB&#10;Add Address DB&#10;Add Shops Info DB &#10;Transaction" />
+    <MESSAGE value="Transaction Change Methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Transaction Change Methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -312,11 +298,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersGoodsDAO.java</url>
           <line>8</line>
           <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/impl/JdbcProductDAO.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

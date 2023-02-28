@@ -182,24 +182,20 @@ public class JdbcOrdersDAO implements OrdersDAO
         }
     }
 
-    public void update(int shopId,int ordersId) throws SQLException {
-
-        Orders orders =  findByOrdersId(ordersId);
-
-        if (shopId > -1 ){
-            orders.setShopId(shopId);
-        }
-        update(orders,ordersId);
-    }
+//    public void update(int shopId,int ordersId) throws SQLException {
+//        Orders orders =  findByOrdersId(ordersId);
+//        if (shopId > -1 ){
+//            orders.setShopId(shopId);
+//        }
+//        update(orders,ordersId);
+//    }
 
     public void update(Orders orders, int ordersId) throws SQLException {
 
-        String sql;
-        Connection conn;
+        String sql = "UPDATE orders SET shop_id = ? ,modify_date = ? WHERE id = ?";
+        Connection conn = dataSource.getConnection();;
         PreparedStatement ps;
 
-        sql = "UPDATE orders SET shop_id = ? ,modify_date = ? WHERE id = ?";
-        conn = dataSource.getConnection();
         ps = conn.prepareStatement(sql);
         ps.setInt(1, orders.getShopId());
         ps.setInt(1, orders.getShopId());
@@ -208,14 +204,15 @@ public class JdbcOrdersDAO implements OrdersDAO
         ps.close();
 
         closeConnection(conn);
-
     }
 
     public void closeConnection(Connection conn){
         if (conn != null) {
             try {
                 conn.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) {
+                System.out.println("Don't close db connection");
+            }
         }
     }
 }

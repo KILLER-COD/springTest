@@ -11,7 +11,7 @@ public interface OrdersDAO {
     int insert(Orders orders, Connection conn);
     Orders findByOrdersId(int ordersId);
     void update(Orders orders, int ordersId) throws SQLException;
-    void update(int shopId, int goodsId) throws SQLException;
+//    void update(int shopId, int goodsId) throws SQLException;
     void deleteHard(int ordersId) throws SQLException;
     void deleteSoft(int ordersId) throws SQLException;
     ArrayList<Orders> getAllOrders() throws SQLException;

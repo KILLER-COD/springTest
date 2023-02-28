@@ -187,7 +187,7 @@ public class JdbcGoodsDAO implements GoodsDAO {
         }
     }
 
-    public void update(String goodsName, String goodsType, double goodsPrice, int productId, int goodsId) throws SQLException {
+    public void update(String goodsName, String goodsType, double goodsPrice, int productId, int goodsId,Connection conn) throws SQLException {
 
         Goods goods = findByGoodsId(goodsId);
 
@@ -203,28 +203,33 @@ public class JdbcGoodsDAO implements GoodsDAO {
         if (productId > -1) {
             goods.setProductId(productId);
         }
-        update(goods, goodsId);
+        update(goods, goodsId,conn);
     }
 
-    public void update(Goods goods, int shopsInfoId) throws SQLException {
+    public void update(Goods goods, int goodsId,Connection conn) throws SQLException {
 
-        String sql;
-        Connection conn;
+        String sql = "UPDATE goods SET goods_name = ? ,goods_type = ? ,goods_price = ? ,product_id = ?,modify_date = ? WHERE id = ?";
         PreparedStatement ps;
 
-        sql = "UPDATE goods SET goods_name = ? ,goods_type = ? ,goods_price = ? ,product_id = ?,modify_date = ? WHERE id = ?";
-        conn = dataSource.getConnection();
+        if (conn == null) {
+            try {
+                conn = dataSource.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         ps = conn.prepareStatement(sql);
         ps.setString(1, goods.getGoodsName());
         ps.setString(2, goods.getGoodsType());
         ps.setDouble(3, goods.getGoodsPrice());
         ps.setInt(4, goods.getProductId());
         ps.setDate(5, new Date(System.currentTimeMillis()));
-        ps.setInt(6, shopsInfoId);
+        ps.setInt(6, goodsId);
         ps.executeUpdate();
         ps.close();
 
-        closeConnection(conn);
+//        closeConnection(conn);
 
     }
 

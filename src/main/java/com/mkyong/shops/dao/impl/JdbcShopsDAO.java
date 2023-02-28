@@ -121,23 +121,23 @@ public class JdbcShopsDAO implements ShopsDAO
 
     }
 
-    public void update(String shopsName, int shopsAddressId,int shopsInfoId,int shopsId,Connection conn) throws SQLException {
-
-        Shops shops =  findByShopsId(shopsId);
-
-        if (shopsName != null && shopsAddressId == -1 && shopsInfoId == -1){
-            shops.setShopName(shopsName);
-        } else if (shopsName == null && shopsAddressId >-1 && shopsInfoId == -1) {
-            shops.setShopAddressId(shopsAddressId);
-        } else if (shopsName != null && shopsAddressId == -1 && shopsInfoId > -1) {
-            shops.setShopInfoId(shopsInfoId);
-        } else {
-            shops.setShopName(shopsName);
-            shops.setShopAddressId(shopsAddressId);
-            shops.setShopInfoId(shopsInfoId);
-        }
-        update(shops,shopsId,conn);
-    }
+//    public void update(String shopsName, int shopsAddressId,int shopsInfoId,int shopsId,Connection conn) throws SQLException {
+//
+//        Shops shops =  findByShopsId(shopsId);
+//
+//        if (shopsName != null && shopsAddressId == -1 && shopsInfoId == -1){
+//            shops.setShopName(shopsName);
+//        } else if (shopsName == null && shopsAddressId >-1 && shopsInfoId == -1) {
+//            shops.setShopAddressId(shopsAddressId);
+//        } else if (shopsName != null && shopsAddressId == -1 && shopsInfoId > -1) {
+//            shops.setShopInfoId(shopsInfoId);
+//        } else {
+//            shops.setShopName(shopsName);
+//            shops.setShopAddressId(shopsAddressId);
+//            shops.setShopInfoId(shopsInfoId);
+//        }
+//        update(shops,shopsId,conn);
+//    }
 
 
     public void update(Shops shops, int shopsId,Connection conn) throws SQLException {

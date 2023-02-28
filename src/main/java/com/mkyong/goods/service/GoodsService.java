@@ -2,8 +2,6 @@ package com.mkyong.goods.service;
 
 import com.mkyong.goods.dao.GoodsDAO;
 import com.mkyong.goods.model.Goods;
-import com.mkyong.product.dao.ProductDAO;
-import com.mkyong.product.model.Product;
 import com.mkyong.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -50,23 +48,23 @@ public class GoodsService {
         String goodsType;
         double goodsPrice;
         int productId = -1;
-        Scanner scanner1 = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Set Goods Name");
-        goodsName = scanner1.nextLine();
+        goodsName = scanner.nextLine();
         System.out.println("Set Goods Type ");
-        goodsType = scanner1.nextLine();
+        goodsType = scanner.nextLine();
         System.out.println("Set Goods Price ");
-        goodsPrice = scanner1.nextDouble();
+        goodsPrice = scanner.nextDouble();
         System.out.println("Set Product Id (1) or Create new Product (2)");
-        choseProductAddType = scanner1.nextInt();
+        choseProductAddType = scanner.nextInt();
         boolean existById = false;
         if (choseProductAddType == 1) {
             while (!existById) {
 
                 productService.productsPrint();
                 System.out.println("Set Product Id");
-                productId = scanner1.nextInt();
+                productId = scanner.nextInt();
                 existById = productService.existsById(productId);
 
             }
@@ -84,78 +82,80 @@ public class GoodsService {
         goods.setProductId(productId);
         goods.setCreateDate(new Date(System.currentTimeMillis()));
         goods.setModifyDate(new Date(System.currentTimeMillis()));
-
+        System.out.println(goods.toString());
         int goodsId = goodsDAO.insert(goods, conn);
         while (goodsId < 0) {
             goodsId = addNewGoods(conn);
         }
+        scanner.close();
         return goodsId;
 
 
     }
 
-    public void changeGoods() throws SQLException {
-        String goodsName = null;
+    public void changeGoods(Connection conn) throws SQLException {
+        String goodsName;
         String goodsType ;
         double goodsPrice;
         int productId = -1;
         int goodsId;
-        Scanner scanner1 = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         goodsPrint();
-        System.out.println("---------------- \n Set Goods  ID ");
-        goodsId = scanner1.nextInt();
+        System.out.println("----------------  Set Goods  ID ");
+        goodsId = scanner.nextInt();
 
         while (!existsById(goodsId)){
-            System.out.println(" ---------------- \nIncorrect id,  \n ---------------- \n Set Goods  ID ");
-            goodsId = scanner1.nextInt();
+            System.out.println(" ---------------- Incorrect id,   ---------------- Set Goods  ID ");
+            goodsId = scanner.nextInt();
         }
 
         Goods goods = goodsDAO.findByGoodsId(goodsId);
         System.out.println(goods.toString());
 
         System.out.println("----------------   Change Goods name ="+ goods.getGoodsName());
-        goodsName = scanner1.next();
+        goodsName = scanner.nextLine();
         while (goodsName.equals("") ){
-            System.out.println("\""+ goodsName +"\" Set Correct Name  \n----------------  \n Change Goods name ="+ goods.getGoodsName());
-            goodsName = scanner1.next();
+            System.out.println("\""+ goodsName +"\" Set Correct Name ");
+            System.out.println( "--------------- Change Goods name ="+ goods.getGoodsName());
+            goodsName = scanner.nextLine();
         }
 
-        System.out.println("---------------- \n Change Goods Type = " + goods.getGoodsType());
-        goodsType = scanner1.next();
-        while (goodsType.equals("") || goodsType.trim().equals("")){
-            System.out.println("\""+goodsType+"\" ----------------  \n Set Goods Type =" + goods.getGoodsType());
-            goodsType = scanner1.next();
+        System.out.println("---------------- Change Goods Type = " + goods.getGoodsType());
+        goodsType = scanner.nextLine();
+        while (goodsType.equals("")){
+            System.out.println("\""+goodsType+"\" ----------------  Set Goods Type =" + goods.getGoodsType());
+            goodsType = scanner.nextLine();
         }
 
-        System.out.println("---------------- \n Set new Goods Price = " + goods.getGoodsPrice());
-        goodsPrice = scanner1.nextDouble();
+        System.out.println("---------------- Set new Goods Price = " + goods.getGoodsPrice());
+        goodsPrice = scanner.nextDouble();
         while (goodsPrice == 0.0 || goodsPrice < 0){
-            System.out.println("Set Correct Price \n ----------------  \n Change Goods Price = " + goods.getGoodsPrice());
-            goodsPrice = scanner1.nextDouble();
+            System.out.println("Set Correct Price  ----------------   Change Goods Price = " + goods.getGoodsPrice());
+            goodsPrice = scanner.nextDouble();
         }
 
         System.out.println("Change Product Id (1) or Create new Product  and Add(2)");
-        int choseProductAddType = scanner1.nextInt();
+        int choseProductAddType = scanner.nextInt();
         boolean existById = false;
         if (choseProductAddType == 1) {
             while (!existById) {
                 productService.productsPrint();
                 System.out.println("Set Product Id");
-                productId = scanner1.nextInt();
+                productId = scanner.nextInt();
                 existById = productService.existsById(productId);
             }
         } else if (choseProductAddType == 2) {
-            productId = productService.addNewProduct(null);
+            productId = productService.addNewProduct(conn);
             while (productId < 0) {
-                productId = productService.addNewProduct(null);
+                productId = productService.addNewProduct(conn);
             }
         }
 
         System.out.println("Name = " + goodsName + "\n Type = " + goodsType +"\n Price = " + goodsPrice + "\n Product Id  = " + productId );
-        goodsDAO.update(goodsName, goodsType, goodsPrice, productId, goodsId);
+        goodsDAO.update(goodsName, goodsType, goodsPrice, productId, goodsId, conn);
 
-        scanner1.close();
+        scanner.close();
     }
 
     public void goodsPrint(){

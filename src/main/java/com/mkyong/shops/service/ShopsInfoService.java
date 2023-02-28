@@ -45,7 +45,7 @@ public class ShopsInfoService {
         int hvhh;
 
             System.out.println("Set Shop Owner Name or Group Name");
-            shopOwner  = scanner1.nextLine();
+            shopOwner  = scanner1.next();
             System.out.println("Set Shop HVHH ");
             hvhh  = scanner1.nextInt();
 
@@ -82,7 +82,7 @@ public class ShopsInfoService {
 
             case 1:
                 System.out.println("---------------- \n Set new Shop Owner ");
-                shopOwner = scanner1.nextLine();
+                shopOwner = scanner1.next();
                 shopsInfoDAO.update(shopOwner, hvhh, addressId, shopInfoId,conn);
                 scanner1.close();
                 break;
@@ -103,7 +103,7 @@ public class ShopsInfoService {
 
             default:
                 System.out.println("---------------- \n Change All \n Set new Shop Owner ");
-                shopOwner = scanner1.nextLine();
+                shopOwner = scanner1.next();
                 System.out.println("Set new Shop HVHH ");
                 hvhh = scanner1.nextInt();
                 System.out.println("Set new Shop info id ");

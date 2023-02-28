@@ -3,6 +3,8 @@ package com.mkyong.shops.service;
 import com.mkyong.address.dao.AddressDAO;
 import com.mkyong.address.model.Address;
 import com.mkyong.address.model.AddressCountByCity;
+import com.mkyong.address.service.AddressService;
+import com.mkyong.orders.model.Orders;
 import com.mkyong.shops.dao.ShopsDAO;
 import com.mkyong.shops.model.Shops;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,10 @@ public class ShopsService {
     Scanner scanner2 = new Scanner(System.in);
     @Autowired
     private ShopsDAO shopsDAO;
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private ShopsInfoService shopsInfoService;
 
     public ArrayList<Shops> getAllShops() throws SQLException {
         return shopsDAO.getAllShops();
@@ -48,7 +54,7 @@ public class ShopsService {
         String shopName;
 
         System.out.println("Set shop Name");
-        shopName  = scanner1.nextLine();
+        shopName  = scanner1.next();
 
             Shops shops = new Shops();
             shops.setShopName(shopName);
@@ -62,55 +68,32 @@ public class ShopsService {
     }
 
     public void changeShops(Connection conn) throws SQLException {
+        int shopAddressId;
+        int shopInfoId;
+        String shopName;
+
         System.out.println("Set Address  ID ");
         int shopId = scanner2.nextInt();
 
-        Shops shops =  shopsDAO.findByShopsId(shopId);
+        Shops shops = shopsDAO.findByShopsId(shopId);
         System.out.println(shops.toString());
 
-        System.out.println("---------------- \n What do you change  \n 1- Change Shop name -- 2- Change Shop Address id -- 3- Change Shop Info id  -- 4- Change all  ");
+        System.out.println("---------------- \n Set new shop Address ");
+        shopName = scanner1.next();
 
-        int change_num = scanner2.nextInt();
-        Scanner scanner1 = new Scanner(System.in);
-        String shopName = null;
-        int shopAddressId = -1;
-        int shopInfoId = -1;
+        addressService.getAllAddress().forEach(System.out::println);
+        System.out.println("---------------- \n Set new Name City where in shop");
+        shopAddressId = scanner1.nextInt();
 
-        switch (change_num) {
+        shopsInfoService.getAllShopsInfo().forEach(System.out::println);
+        System.out.println("---------------- \n Set new Name City where in shop");
+        shopInfoId = scanner1.nextInt();
 
-            case 1:
-                System.out.println("---------------- \n Set new shop Address ");
-                shopName  = scanner1.nextLine();
-                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId,conn);
-                scanner1.close();
-                break;
+        shops.setShopName(shopName);
+        shops.setShopAddressId(shopAddressId);
+        shops.setShopInfoId(shopInfoId);
 
-            case 2:
-                System.out.println("---------------- \n Set new Name City where in shop");
-                shopAddressId  = scanner1.nextInt();
-                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId,conn);
-                scanner1.close();
-                break;
-
-            case 3:
-                System.out.println("---------------- \n Set new Name City where in shop");
-                shopInfoId  = scanner1.nextInt();
-                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId,conn);
-                scanner1.close();
-                break;
-
-            default:
-                System.out.println("---------------- \n Change All \n Set new Shop Name");
-                shopName  = scanner1.nextLine();
-                System.out.println("Set new Shop Address id ");
-                shopAddressId  = scanner1.nextInt();
-                System.out.println("Set new Shop info id ");
-                shopInfoId  = scanner1.nextInt();
-                shopsDAO.update(shopName,shopAddressId,shopInfoId,shopId,conn);
-                scanner1.close();
-
-        }
-        scanner2.close();
+        shopsDAO.update(shops,shopId ,conn);
 
     }
 
@@ -124,6 +107,13 @@ public class ShopsService {
         }
     }
 
+    public boolean existsById(int shopsId){
+        Shops retInfo = shopsDAO.findByShopsId(shopsId);
+        if (retInfo == null){
+            return false;
+        }
+        return true;
+    }
 
 
 }

@@ -45,19 +45,18 @@ public class AddressService {
     public int addNewAddress(Connection conn)  {
 
             System.out.println("Set shop Address");
-            String address_name  = scanner1.nextLine();
+            String address_name  = scanner1.next();
             System.out.println("Set Name City where in shop");
-            String address_city  = scanner1.nextLine();
+            String address_city  = scanner1.next();
 
+            Address address = new Address();
+            address.setAddress(address_name);
+            address.setCity(address_city);
+            address.setCreateDate(new Date(System.currentTimeMillis()));
+            address.setModifyDate(new Date(System.currentTimeMillis()));
 
-
-            Address address0 = new Address();
-            address0.setAddress(address_name);
-            address0.setCity(address_city);
-            address0.setCreateDate(new Date(System.currentTimeMillis()));
-            address0.setModifyDate(new Date(System.currentTimeMillis()));
-
-        return addressDAO.insert(address0,conn);
+        System.out.println(address);
+        return addressDAO.insert(address,conn);
     }
     public void countShopCity() {
         System.out.println("Set minimum count shop in city ( ? > 0 )| default=0");
@@ -79,49 +78,38 @@ public class AddressService {
     }
 
     public void changeAddress( Connection conn) throws SQLException {
-        System.out.println("Set Address  ID ");
-        int getId = scanner2.nextInt();
-
-        Address address =  addressDAO.findByAddressId(getId);
-        System.out.println(address.toString());
-
-        System.out.println("---------------- \n What do you change  \n 1- Change Address -- 2- Change City -- 3- Change all  ");
-
-        int change_num = scanner2.nextInt();
-        Scanner scanner1 = new Scanner(System.in);
         String addressName;
         String addressCity;
 
-        switch (change_num) {
+        System.out.println("Set Address  ID ");
+        int addressId = scanner2.nextInt();
 
-            case 1:
-                System.out.println("---------------- \n Set new shop Address ");
-                addressName  = scanner1.nextLine();
-                addressDAO.update(addressName,null,getId,conn);
-                scanner1.close();
-                break;
+        Address address =  addressDAO.findByAddressId(addressId);
+        System.out.println(address.toString());
 
-            case 2:
-                System.out.println("---------------- \n Set new Name City where in shop");
-                addressCity  = scanner1.nextLine();
-                addressDAO.update(null,addressCity,getId,conn);
-                scanner1.close();
-                break;
+        Scanner scanner = new Scanner(System.in);
 
-            default:
-                System.out.println("---------------- \n Change All \n Set new shop Address");
-                addressName  = scanner1.nextLine();
-                System.out.println("Set new Name City where in shop");
-                addressCity  = scanner1.nextLine();
-                addressDAO.update(addressName,addressCity,getId,conn);
-                scanner1.close();
-
+        System.out.println("Change shop Address");
+        addressName  = scanner.next();
+        while (addressName.equals("")){
+            System.out.println("Change shop Address");
+            addressName  = scanner.nextLine();
         }
-        scanner2.close();
+
+        System.out.println("Change Name City where in shop");
+        addressCity  = scanner.next();
+        while (addressCity.equals("")){
+            System.out.println("Change Name City where in shop");
+            addressCity  = scanner.nextLine();
+        }
+
+        address.setAddress(addressName);
+        address.setCity(addressCity);
+
+        addressDAO.update(address,addressId,null);
+
 
     }
-
-
 
 
 }
