@@ -11,7 +11,7 @@ public class ShopsInfo {
     private Date modifyDate;
     private Date deleteDate;
 
-    public ShopsInfo(){
+    public ShopsInfo() {
 
     }
 

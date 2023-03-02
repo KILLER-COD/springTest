@@ -10,8 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 @Component
-public class JdbcShopsDAO implements ShopsDAO
-{
+public class JdbcShopsDAO implements ShopsDAO {
     @Autowired
     private DataSource dataSource;
 
@@ -19,10 +18,10 @@ public class JdbcShopsDAO implements ShopsDAO
         this.dataSource = dataSource;
     }
 
-    public int insert(Shops shops,Connection conn){
+    public int insert(Shops shops, Connection conn) {
 
         String sql = "INSERT INTO shops (shop_name, shop_address_id ,shop_info_id ,create_date ,modify_date) VALUES ( ?,?,?,?,?)";
-        if (conn == null){
+        if (conn == null) {
             try {
                 conn = dataSource.getConnection();
             } catch (SQLException e) {
@@ -39,7 +38,7 @@ public class JdbcShopsDAO implements ShopsDAO
             ps.setDate(5, shops.getModifyDate());
             int shopsAdd = ps.executeUpdate();
             ps.close();
-            return shopsAdd ;
+            return shopsAdd;
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
@@ -48,7 +47,7 @@ public class JdbcShopsDAO implements ShopsDAO
         }
     }
 
-    public Shops findByShopsId(int shops_id){
+    public Shops findByShopsId(int shops_id) {
 
         String sql = "SELECT * FROM shops WHERE id = ?";
 
@@ -81,14 +80,14 @@ public class JdbcShopsDAO implements ShopsDAO
         }
     }
 
-    public void deleteSoft(int shopsId){
+    public void deleteSoft(int shopsId) {
         String sql = "UPDATE shops SET delete_date = ? WHERE id = ?";
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDate(1,new Date(System.currentTimeMillis()));
+            ps.setDate(1, new Date(System.currentTimeMillis()));
             ps.setInt(2, shopsId);
             ps.executeUpdate();
             ps.close();
@@ -102,7 +101,7 @@ public class JdbcShopsDAO implements ShopsDAO
 
     }
 
-    public void deleteHard(int shopsId){
+    public void deleteHard(int shopsId) {
         String sql = "DELETE FROM shops WHERE id = ?";
         Connection conn = null;
 
@@ -140,18 +139,18 @@ public class JdbcShopsDAO implements ShopsDAO
 //    }
 
 
-    public void update(Shops shops, int shopsId,Connection conn) throws SQLException {
+    public void update(Shops shops, int shopsId, Connection conn) throws SQLException {
 
         String sql;
         PreparedStatement ps;
-        if (conn == null ){
+        if (conn == null) {
             conn = dataSource.getConnection();
         }
         sql = "UPDATE shops SET shop_name = ? ,shop_address_id = ? ,shop_info_id = ? ,modify_date = ? WHERE id = ?";
         ps = conn.prepareStatement(sql);
         ps.setString(1, shops.getShopName());
-        ps.setInt(2,shops.getShopAddressId());
-        ps.setInt(3,shops.getShopInfoId());
+        ps.setInt(2, shops.getShopAddressId());
+        ps.setInt(3, shops.getShopInfoId());
         ps.setDate(4, new Date(System.currentTimeMillis()));
         ps.setInt(5, shopsId);
         ps.executeUpdate();
@@ -161,7 +160,7 @@ public class JdbcShopsDAO implements ShopsDAO
 
     }
 
-    public ArrayList<Shops> getAllShops(){
+    public ArrayList<Shops> getAllShops() {
         String sql = "SELECT * FROM shops WHERE ISNULL(delete_date)";
         Connection conn = null;
         try {
@@ -192,7 +191,7 @@ public class JdbcShopsDAO implements ShopsDAO
         }
     }
 
-    public ArrayList<Shops> getAllDeletedShops(){
+    public ArrayList<Shops> getAllDeletedShops() {
         String sql = "SELECT * FROM shops WHERE !ISNULL(delete_date)";
         Connection conn = null;
         try {
@@ -223,11 +222,12 @@ public class JdbcShopsDAO implements ShopsDAO
         }
     }
 
-    public void closeConnection(Connection conn){
+    public void closeConnection(Connection conn) {
         if (conn != null) {
             try {
                 conn.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) {
+            }
         }
     }
 

@@ -1,19 +1,16 @@
 package com.mkyong.orders.dao.impl;
 
-import com.mkyong.goods.dao.GoodsDAO;
-import com.mkyong.goods.model.Goods;
 import com.mkyong.orders.dao.OrdersDAO;
 import com.mkyong.orders.model.Orders;
-import com.mkyong.orders.model.OrdersInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+
 @Component
-public class JdbcOrdersDAO implements OrdersDAO
-{
+public class JdbcOrdersDAO implements OrdersDAO {
     @Autowired
     private DataSource dataSource;
 
@@ -21,10 +18,10 @@ public class JdbcOrdersDAO implements OrdersDAO
         this.dataSource = dataSource;
     }
 
-    public int insert(Orders orders,Connection conn){
+    public int insert(Orders orders, Connection conn) {
 
         String sql = "INSERT INTO orders (shop_id, create_date,modify_date) VALUES ( ?, ?, ?)";
-        if (conn == null){
+        if (conn == null) {
             try {
                 conn = dataSource.getConnection();
             } catch (SQLException e) {
@@ -33,7 +30,7 @@ public class JdbcOrdersDAO implements OrdersDAO
         }
 
         try {
-            PreparedStatement ps = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, orders.getShopId());
             ps.setDate(2, orders.getCreateDate());
             ps.setDate(3, orders.getModifyDate());
@@ -41,7 +38,7 @@ public class JdbcOrdersDAO implements OrdersDAO
 
             ResultSet getGenerationKey = ps.getGeneratedKeys();
             int ordersId = -1;
-            if (getGenerationKey.next()){
+            if (getGenerationKey.next()) {
                 ordersId = getGenerationKey.getInt(1);
             }
             ps.close();
@@ -54,7 +51,7 @@ public class JdbcOrdersDAO implements OrdersDAO
         }
     }
 
-    public Orders findByOrdersId(int orders_id){
+    public Orders findByOrdersId(int orders_id) {
 
         String sql = "SELECT * FROM orders WHERE id = ?";
 
@@ -85,14 +82,14 @@ public class JdbcOrdersDAO implements OrdersDAO
         }
     }
 
-    public void deleteSoft(int ordersId){
+    public void deleteSoft(int ordersId) {
         String sql = "UPDATE orders SET delete_date = ? WHERE id = ?";
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDate(1,new Date(System.currentTimeMillis()));
+            ps.setDate(1, new Date(System.currentTimeMillis()));
             ps.setInt(2, ordersId);
             ps.executeUpdate();
             ps.close();
@@ -106,7 +103,7 @@ public class JdbcOrdersDAO implements OrdersDAO
 
     }
 
-    public void deleteHard(int ordersId){
+    public void deleteHard(int ordersId) {
         String sql = "DELETE FROM orders WHERE id = ?";
         Connection conn = null;
 
@@ -125,7 +122,7 @@ public class JdbcOrdersDAO implements OrdersDAO
 
     }
 
-    public ArrayList<Orders> getAllOrders(){
+    public ArrayList<Orders> getAllOrders() {
         String sql = "SELECT * FROM orders WHERE delete_date IS NULL";
         Connection conn = null;
         try {
@@ -154,7 +151,7 @@ public class JdbcOrdersDAO implements OrdersDAO
         }
     }
 
-    public ArrayList<Orders> getAllDeletedOrders(){
+    public ArrayList<Orders> getAllDeletedOrders() {
         String sql = "SELECT * FROM orders WHERE delete_date IS NOT NULL";
         Connection conn = null;
         try {
@@ -191,7 +188,8 @@ public class JdbcOrdersDAO implements OrdersDAO
                 " join goods g on og.goods_id = g.id" +
                 " WHERE og.orders_id = ? && og.delete_date IS NULL; ";
 
-        Connection conn = dataSource.getConnection();;
+        Connection conn = dataSource.getConnection();
+        ;
         PreparedStatement ps;
 
         ps = conn.prepareStatement(sql);
@@ -199,13 +197,13 @@ public class JdbcOrdersDAO implements OrdersDAO
         ps.executeQuery();
         ResultSet rs = ps.getResultSet();
 //        OrdersInfo o = new OrdersInfo();
-        while (rs.next()){
+        while (rs.next()) {
             System.out.println(
                     "Id = " + rs.getInt("orders_id") +
-                            "| Shop Name = " + rs.getString("shop_name")+
-                            "| Goods Name = " + rs.getString("goods_name")+
-                            "| Goods Count = " + rs.getDouble("goods_count")+
-                            "| Goods Price = " + rs.getDouble("goods_price")+
+                            "| Shop Name = " + rs.getString("shop_name") +
+                            "| Goods Name = " + rs.getString("goods_name") +
+                            "| Goods Count = " + rs.getDouble("goods_count") +
+                            "| Goods Price = " + rs.getDouble("goods_price") +
                             "| Order Create = " + rs.getDate("create_date")
             );
         }
@@ -213,45 +211,49 @@ public class JdbcOrdersDAO implements OrdersDAO
 
         closeConnection(conn);
     }
+
     public void getAllOrderInfo() throws SQLException {
         String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price ,o.create_date" +
-                        " FROM orders_goods og" +
-                        " join orders o on og.orders_id = o.id " +
-                        " join shops s on o.shop_id = s.id " +
-                        " join goods g on og.goods_id = g.id" +
-                        " WHERE og.delete_date IS NULL;";
+                " FROM orders_goods og" +
+                " join orders o on og.orders_id = o.id " +
+                " join shops s on o.shop_id = s.id " +
+                " join goods g on og.goods_id = g.id" +
+                " WHERE og.delete_date IS NULL;";
 
-        Connection conn = dataSource.getConnection();;
+        Connection conn = dataSource.getConnection();
+        ;
         PreparedStatement ps;
 
         ps = conn.prepareStatement(sql);
         ps.executeQuery();
         ResultSet rs = ps.getResultSet();
 //        OrdersInfo o = new OrdersInfo();
-        while (rs.next()){
+        while (rs.next()) {
             System.out.println(
                     "Id = " + rs.getInt("orders_id") +
-                    "| Shop Name = " + rs.getString("shop_name")+
-                    "| Goods Name = " + rs.getString("goods_name")+
-                    "| Goods Count = " + rs.getDouble("goods_count")+
-                    "| Goods Price = " + rs.getDouble("goods_price")+
-                    "| Order Create = " + rs.getDate("create_date")+
-                    "\n-------------------------------------------------------"
+                            "| Shop Name = " + rs.getString("shop_name") +
+                            "| Goods Name = " + rs.getString("goods_name") +
+                            "| Goods Count = " + rs.getDouble("goods_count") +
+                            "| Goods Price = " + rs.getDouble("goods_price") +
+                            "| Order Create = " + rs.getDate("create_date") +
+                            "\n-------------------------------------------------------"
             );
         }
         ps.close();
 
         closeConnection(conn);
     }
+
     public void getAllOrdersInfoByDate(Date date) throws SQLException {
         String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price,o.create_date,og.delete_date " +
-                        " FROM orders_goods og" +
-                        " join orders o on og.orders_id = o.id && og.create_date = o.create_date" +
-                        " join shops s on o.shop_id = s.id" +
-                        " join goods g on og.goods_id = g.id" +
-                        " WHERE o.create_date = ? && og.delete_date IS NULL;";
+                " FROM orders_goods og" +
+                " join orders o on og.orders_id = o.id && og.create_date = o.create_date" +
+                " join shops s on o.shop_id = s.id" +
+                " join goods g on og.goods_id = g.id" +
+                " WHERE o.create_date = ? && og.delete_date IS NULL;";
 
-        Connection conn = dataSource.getConnection();;
+        Connection conn = dataSource.getConnection();
+        ;
         PreparedStatement ps;
 
         ps = conn.prepareStatement(sql);
@@ -259,13 +261,13 @@ public class JdbcOrdersDAO implements OrdersDAO
         ps.executeQuery();
         ResultSet rs = ps.getResultSet();
 //        OrdersInfo o = new OrdersInfo();
-        while (rs.next()){
+        while (rs.next()) {
             System.out.println(
                     "Id = " + rs.getInt("orders_id") +
-                            "| Shop Name = " + rs.getString("shop_name")+
-                            "| Goods Name = " + rs.getString("goods_name")+
-                            "| Goods Count = " + rs.getDouble("goods_count")+
-                            "| Goods Price = " + rs.getDouble("goods_price")+
+                            "| Shop Name = " + rs.getString("shop_name") +
+                            "| Goods Name = " + rs.getString("goods_name") +
+                            "| Goods Count = " + rs.getDouble("goods_count") +
+                            "| Goods Price = " + rs.getDouble("goods_price") +
                             "| Orders Create = " + rs.getDate("o.create_date")
             );
         }
@@ -277,7 +279,8 @@ public class JdbcOrdersDAO implements OrdersDAO
     public void update(Orders orders, int ordersId) throws SQLException {
 
         String sql = "UPDATE orders SET shop_id = ? ,modify_date = ? WHERE id = ?";
-        Connection conn = dataSource.getConnection();;
+        Connection conn = dataSource.getConnection();
+        ;
         PreparedStatement ps;
 
         ps = conn.prepareStatement(sql);
@@ -290,7 +293,7 @@ public class JdbcOrdersDAO implements OrdersDAO
         closeConnection(conn);
     }
 
-    public void closeConnection(Connection conn){
+    public void closeConnection(Connection conn) {
         if (conn != null) {
             try {
                 conn.close();

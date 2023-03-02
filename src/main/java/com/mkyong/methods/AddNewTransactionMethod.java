@@ -110,11 +110,11 @@ public class AddNewTransactionMethod {
 
     }
 
-    public void addNewProductMethod(){
+    public void addNewProductMethod() {
         productService.addNewProduct(null);
     }
 
-    public void addNewAddressMethod(){
+    public void addNewAddressMethod() {
         addressService.addNewAddress(null);
     }
 

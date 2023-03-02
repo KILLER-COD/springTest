@@ -19,7 +19,7 @@ public class GoodsService {
     @Autowired
     private GoodsDAO goodsDAO;
 
-    public ArrayList<Goods> getAllGoods() throws SQLException{
+    public ArrayList<Goods> getAllGoods() throws SQLException {
         return goodsDAO.getAllGoods();
     }
 
@@ -27,7 +27,7 @@ public class GoodsService {
         return goodsDAO.getAllDeletedGoods();
     }
 
-    public void deleteGoods( int goodsId) throws SQLException {
+    public void deleteGoods(int goodsId) throws SQLException {
         System.out.println("Set Delete Product | 1 - hard | 2 - Soft");
         Scanner scanner = new Scanner(System.in);
 
@@ -42,7 +42,7 @@ public class GoodsService {
         }
     }
 
-    public int addNewGoods( Connection conn) throws InterruptedException {
+    public int addNewGoods(Connection conn) throws InterruptedException {
         int choseProductAddType;
         String goodsName;
         String goodsType;
@@ -95,7 +95,7 @@ public class GoodsService {
 
     public void changeGoods(Connection conn) throws SQLException {
         String goodsName;
-        String goodsType ;
+        String goodsType;
         double goodsPrice;
         int productId = -1;
         int goodsId;
@@ -105,7 +105,7 @@ public class GoodsService {
         System.out.println("----------------  Set Goods  ID ");
         goodsId = scanner.nextInt();
 
-        while (!existsById(goodsId)){
+        while (!existsById(goodsId)) {
             System.out.println(" ---------------- Incorrect id,   ---------------- Set Goods  ID ");
             goodsId = scanner.nextInt();
         }
@@ -113,24 +113,24 @@ public class GoodsService {
         Goods goods = goodsDAO.findByGoodsId(goodsId);
         System.out.println(goods.toString());
 
-        System.out.println("----------------   Change Goods name ="+ goods.getGoodsName());
+        System.out.println("----------------   Change Goods name =" + goods.getGoodsName());
         goodsName = scanner.nextLine();
-        while (goodsName.equals("") ){
-            System.out.println("\""+ goodsName +"\" Set Correct Name ");
-            System.out.println( "--------------- Change Goods name ="+ goods.getGoodsName());
+        while (goodsName.equals("")) {
+            System.out.println("\"" + goodsName + "\" Set Correct Name ");
+            System.out.println("--------------- Change Goods name =" + goods.getGoodsName());
             goodsName = scanner.nextLine();
         }
 
         System.out.println("---------------- Change Goods Type = " + goods.getGoodsType());
         goodsType = scanner.nextLine();
-        while (goodsType.equals("")){
-            System.out.println("\""+goodsType+"\" ----------------  Set Goods Type =" + goods.getGoodsType());
+        while (goodsType.equals("")) {
+            System.out.println("\"" + goodsType + "\" ----------------  Set Goods Type =" + goods.getGoodsType());
             goodsType = scanner.nextLine();
         }
 
         System.out.println("---------------- Set new Goods Price = " + goods.getGoodsPrice());
         goodsPrice = scanner.nextDouble();
-        while (goodsPrice == 0.0 || goodsPrice < 0){
+        while (goodsPrice == 0.0 || goodsPrice < 0) {
             System.out.println("Set Correct Price  ----------------   Change Goods Price = " + goods.getGoodsPrice());
             goodsPrice = scanner.nextDouble();
         }
@@ -152,7 +152,7 @@ public class GoodsService {
             }
         }
 
-        System.out.println("Name = " + goodsName + "\n Type = " + goodsType +"\n Price = " + goodsPrice + "\n Product Id  = " + productId );
+        System.out.println("Name = " + goodsName + "\n Type = " + goodsType + "\n Price = " + goodsPrice + "\n Product Id  = " + productId);
 
         goods.setGoodsName(goodsName);
         goods.setGoodsType(goodsType);
@@ -164,7 +164,7 @@ public class GoodsService {
         scanner.close();
     }
 
-    public void goodsPrint(){
+    public void goodsPrint() {
         try {
             getAllGoods().forEach(System.out::println);
         } catch (SQLException e) {
@@ -172,9 +172,9 @@ public class GoodsService {
         }
     }
 
-    public boolean existsById(int goodsId){
+    public boolean existsById(int goodsId) {
         Goods retInfo = goodsDAO.findByGoodsId(goodsId);
-        if (retInfo == null){
+        if (retInfo == null) {
             return false;
         } else {
             return true;

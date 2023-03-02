@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.Scanner;
 
 @Component
@@ -25,7 +25,7 @@ public class OrdersService {
     }
 
     public void getSingleOrderInfo(int ordersId) throws SQLException {
-        if (existsById(ordersId)){
+        if (existsById(ordersId)) {
             ordersDAO.getSingleOrderInfo(ordersId);
         } else {
             Scanner scanner = new Scanner(System.in);
@@ -34,9 +34,11 @@ public class OrdersService {
             getSingleOrderInfo(ordersId);
         }
     }
+
     public void getOrdersInfoByDate(Date date) throws SQLException {
-       ordersDAO.getAllOrdersInfoByDate(date);
+        ordersDAO.getAllOrdersInfoByDate(date);
     }
+
     public void getAllOrderInfo() throws SQLException {
         ordersDAO.getAllOrderInfo();
     }
@@ -48,7 +50,7 @@ public class OrdersService {
     public void deleteOrders(int ordersId) throws SQLException {
         System.out.println("Set Delete Orders | 1 - hard | 2 - Soft");
         int deleteType = scanner.nextInt();
-        if (deleteType == 1){
+        if (deleteType == 1) {
             ordersDAO.deleteHard(ordersId);
         } else if (deleteType == 2) {
             ordersDAO.deleteSoft(ordersId);
@@ -59,27 +61,27 @@ public class OrdersService {
         scanner.close();
     }
 
-    public int addNewOrders( Connection conn)  {
+    public int addNewOrders(Connection conn) {
         int shopId;
         shopsService.shopsPrint();
         System.out.println("Set Shop id");
-        shopId  = scanner.nextInt();
+        shopId = scanner.nextInt();
 
         Orders orders = new Orders();
         orders.setShopId(shopId);
         orders.setCreateDate(new Date(System.currentTimeMillis()));
         orders.setModifyDate(new Date(System.currentTimeMillis()));
         scanner.close();
-        return  ordersDAO.insert(orders,conn);
+        return ordersDAO.insert(orders, conn);
     }
 
-    public void changeOrders() throws SQLException{
+    public void changeOrders() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         ordersPrint();
 
         System.out.println("---------------- \n Set Orders  ID ");
         int ordersId = scanner.nextInt();
-        while (!existsById(ordersId)){
+        while (!existsById(ordersId)) {
             System.out.println("---------------- \n Set Orders  ID ");
             ordersId = scanner.nextInt();
         }
@@ -90,17 +92,17 @@ public class OrdersService {
         shopsService.shopsPrint();
         System.out.println("---------------- \n Change Shop Id   ");
         int shopId = scanner.nextInt();
-        while (!shopsService.existsById(shopId)){
+        while (!shopsService.existsById(shopId)) {
             System.out.println("Incorrect Shop Id---------------- \n Change Shop Id   ");
             shopId = scanner.nextInt();
         }
 
         orders.setShopId(shopId);
-        ordersDAO.update(orders,ordersId);
+        ordersDAO.update(orders, ordersId);
         scanner.close();
     }
 
-    public void ordersPrint(){
+    public void ordersPrint() {
         try {
             ArrayList<Orders> ordersList = ordersDAO.getAllOrders();
             for (Orders orders : ordersList) {
@@ -111,9 +113,9 @@ public class OrdersService {
         }
     }
 
-    public boolean existsById(int ordersId){
+    public boolean existsById(int ordersId) {
         Orders retInfo = ordersDAO.findByOrdersId(ordersId);
-        if (retInfo == null){
+        if (retInfo == null) {
             return false;
         }
         return true;

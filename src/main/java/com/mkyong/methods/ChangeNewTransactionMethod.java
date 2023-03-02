@@ -38,10 +38,11 @@ public class ChangeNewTransactionMethod {
     public ChangeNewTransactionMethod(ApplicationContext context) {
         this.context = context;
     }
+
     public void changeGoodsMethod() throws SQLException {
         Connection conn = dataSource.getConnection();
         conn.setAutoCommit(false);
-            goodsService.changeGoods(conn);
+        goodsService.changeGoods(conn);
         conn.commit();
         conn.close();
     }
@@ -73,7 +74,6 @@ public class ChangeNewTransactionMethod {
         shopsInfoService.changeShopsInfo(conn);
         conn.close();
     }
-
 
 
 }

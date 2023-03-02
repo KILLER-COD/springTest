@@ -206,7 +206,7 @@ public class JdbcGoodsDAO implements GoodsDAO {
 //        update(goods, goodsId,conn);
 //    }
 
-    public void update(Goods goods, int goodsId,Connection conn) throws SQLException {
+    public void update(Goods goods, int goodsId, Connection conn) throws SQLException {
 
         String sql = "UPDATE goods SET goods_name = ? ,goods_type = ? ,goods_price = ? ,product_id = ?,modify_date = ? WHERE id = ?";
         PreparedStatement ps;

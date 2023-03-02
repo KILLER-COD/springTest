@@ -1,7 +1,7 @@
 package com.mkyong.address.model;
 
 public class AddressCountByCity {
-    private int count ;
+    private int count;
     private String city;
 
     public AddressCountByCity(int count, String city) {

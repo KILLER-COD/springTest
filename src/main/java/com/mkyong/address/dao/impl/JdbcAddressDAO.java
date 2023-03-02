@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+
 @Component
-public class JdbcAddressDAO implements AddressDAO
-{
+public class JdbcAddressDAO implements AddressDAO {
     @Autowired
     private DataSource dataSource;
 
-   public ArrayList<AddressCountByCity> findCountCity(){
+    public ArrayList<AddressCountByCity> findCountCity() {
         String sql = "SELECT COUNT(id) count, city FROM address WHERE delete_date IS NULL GROUP BY city;";
-        Connection conn =null;
+        Connection conn = null;
         ArrayList<AddressCountByCity> addressCountByCityList = new ArrayList<>();
         AddressCountByCity addressCountByCity;
         try {
@@ -26,11 +26,11 @@ public class JdbcAddressDAO implements AddressDAO
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                 addressCountByCity = new AddressCountByCity(
-                         rs.getInt("count"),
-                         rs.getString("city")
-                 );
-                 addressCountByCityList.add(addressCountByCity);
+                addressCountByCity = new AddressCountByCity(
+                        rs.getInt("count"),
+                        rs.getString("city")
+                );
+                addressCountByCityList.add(addressCountByCity);
             }
             ps.close();
             rs.close();
@@ -43,10 +43,10 @@ public class JdbcAddressDAO implements AddressDAO
         }
     }
 
-    public ArrayList<AddressCountByCity> findCountCity(Integer minCountShopInCity){
+    public ArrayList<AddressCountByCity> findCountCity(Integer minCountShopInCity) {
 
         String sql = "SELECT COUNT(id) cnt,BINARY city FROM address WHERE delete_date IS NULL GROUP BY BINARY city HAVING COUNT(id) > ?;";
-        Connection conn =null;
+        Connection conn = null;
         ArrayList<AddressCountByCity> addressCountByCityList = new ArrayList<>();
         AddressCountByCity addressCountByCity;
         try {
@@ -73,14 +73,14 @@ public class JdbcAddressDAO implements AddressDAO
         }
     }
 
-    public void deleteSoft(int addressId){
+    public void deleteSoft(int addressId) {
         String sql = "UPDATE address SET delete_date = ? WHERE id = ?";
         Connection conn = null;
 
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDate(1,new Date(System.currentTimeMillis()));
+            ps.setDate(1, new Date(System.currentTimeMillis()));
             ps.setInt(2, addressId);
             ps.executeUpdate();
             ps.close();
@@ -94,7 +94,7 @@ public class JdbcAddressDAO implements AddressDAO
 
     }
 
-    public void deleteHard(int addressId){
+    public void deleteHard(int addressId) {
         String sql = "DELETE FROM address WHERE id = ?";
         Connection conn = null;
 
@@ -114,25 +114,25 @@ public class JdbcAddressDAO implements AddressDAO
 
     }
 
-    public int insert(Address address,Connection conn){
+    public int insert(Address address, Connection conn) {
 
         String sql = "INSERT INTO address (address, city,create_date,modify_date) VALUES ( ?, ?,?,?)";
-       if (conn == null) {
-           try {
-               conn = dataSource.getConnection();
-           } catch (SQLException e) {
-               throw new RuntimeException(e);
-           }
-       }
+        if (conn == null) {
+            try {
+                conn = dataSource.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         try {
-            PreparedStatement ps = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, address.getAddress());
             ps.setString(2, address.getCity());
             ps.setDate(3, (Date) address.getCreateDate());
             ps.setDate(4, (Date) address.getModifyDate());
             ps.executeUpdate();
-            ResultSet generatedKeys  = ps.getGeneratedKeys();
+            ResultSet generatedKeys = ps.getGeneratedKeys();
             int insertId;
             if (generatedKeys.next()) {
                 insertId = generatedKeys.getInt(1);
@@ -141,7 +141,7 @@ public class JdbcAddressDAO implements AddressDAO
             }
 
             ps.close();
-            return  insertId;
+            return insertId;
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
@@ -166,7 +166,6 @@ public class JdbcAddressDAO implements AddressDAO
 //    }
 
 
-
     public void update(Address address, int addressId, Connection conn) throws SQLException {
 
         String sql = "UPDATE address SET address = ? ,city = ? ,modify_date = ? WHERE id = ?";
@@ -177,7 +176,7 @@ public class JdbcAddressDAO implements AddressDAO
 
         ps = conn.prepareStatement(sql);
         ps.setString(1, address.getAddress());
-        ps.setString(2,address.getCity());
+        ps.setString(2, address.getCity());
         ps.setDate(3, new Date(System.currentTimeMillis()));
         ps.setInt(4, addressId);
         ps.executeUpdate();
@@ -187,7 +186,7 @@ public class JdbcAddressDAO implements AddressDAO
 
     }
 
-    public ArrayList<Address> getAllAddress(){
+    public ArrayList<Address> getAllAddress() {
         String sql = "SELECT * FROM address WHERE delete_date IS NULL ";
         Connection conn = null;
         try {
@@ -197,15 +196,15 @@ public class JdbcAddressDAO implements AddressDAO
             ArrayList<Address> addressList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                    address = new Address(
-                            rs.getInt("id"),
-                            rs.getString("Address"),
-                            rs.getString("City"),
-                            rs.getDate("Create_Date"),
-                            rs.getDate("Modify_Date"),
-                            rs.getDate("Delete_Date")
-                    );
-                    addressList.add(address);
+                address = new Address(
+                        rs.getInt("id"),
+                        rs.getString("Address"),
+                        rs.getString("City"),
+                        rs.getDate("Create_Date"),
+                        rs.getDate("Modify_Date"),
+                        rs.getDate("Delete_Date")
+                );
+                addressList.add(address);
             }
             rs.close();
             ps.close();
@@ -217,7 +216,7 @@ public class JdbcAddressDAO implements AddressDAO
         }
     }
 
-    public ArrayList<Address> getAllDeletedAddress(){
+    public ArrayList<Address> getAllDeletedAddress() {
         String sql = "SELECT * FROM address WHERE delete_date IS NOT NULL";
         Connection conn = null;
         try {
@@ -227,15 +226,15 @@ public class JdbcAddressDAO implements AddressDAO
             ArrayList<Address> addressList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                    address = new Address(
-                            rs.getInt("id"),
-                            rs.getString("Address"),
-                            rs.getString("City"),
-                            rs.getDate("Create_Date"),
-                            rs.getDate("Modify_Date"),
-                            rs.getDate("Delete_Date")
-                    );
-                    addressList.add(address);
+                address = new Address(
+                        rs.getInt("id"),
+                        rs.getString("Address"),
+                        rs.getString("City"),
+                        rs.getDate("Create_Date"),
+                        rs.getDate("Modify_Date"),
+                        rs.getDate("Delete_Date")
+                );
+                addressList.add(address);
             }
             rs.close();
             ps.close();
@@ -247,7 +246,7 @@ public class JdbcAddressDAO implements AddressDAO
         }
     }
 
-    public Address findByAddressId(int addressId){
+    public Address findByAddressId(int addressId) {
 
         String sql = "SELECT * FROM address WHERE  id = ?";
 
@@ -260,14 +259,14 @@ public class JdbcAddressDAO implements AddressDAO
             Address address = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                    address = new Address(
-                            rs.getInt("id"),
-                            rs.getString("Address"),
-                            rs.getString("City"),
-                            rs.getDate("Create_Date"),
-                            rs.getDate("Modify_Date"),
-                            rs.getDate("Delete_Date")
-                    );
+                address = new Address(
+                        rs.getInt("id"),
+                        rs.getString("Address"),
+                        rs.getString("City"),
+                        rs.getDate("Create_Date"),
+                        rs.getDate("Modify_Date"),
+                        rs.getDate("Delete_Date")
+                );
             }
             rs.close();
             ps.close();
@@ -275,15 +274,16 @@ public class JdbcAddressDAO implements AddressDAO
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-           closeConnection(conn);
+            closeConnection(conn);
         }
     }
 
-    public void closeConnection(Connection conn){
+    public void closeConnection(Connection conn) {
         if (conn != null) {
             try {
                 conn.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) {
+            }
         }
     }
 }

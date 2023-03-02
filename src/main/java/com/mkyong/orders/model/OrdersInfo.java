@@ -12,7 +12,7 @@ public class OrdersInfo {
     private Date modifyDate;
     private Date deleteDate;
 
-    public OrdersInfo(){
+    public OrdersInfo() {
 
     }
 

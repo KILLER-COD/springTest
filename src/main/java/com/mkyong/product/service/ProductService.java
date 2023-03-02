@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.Scanner;
 
 @Component
@@ -24,14 +24,14 @@ public class ProductService {
         return productDAO.getAllProduct();
     }
 
-    public ArrayList<Product> getAllDeletedProduct() throws SQLException{
+    public ArrayList<Product> getAllDeletedProduct() throws SQLException {
         return productDAO.getAllDeletedProduct();
     }
 
     public void deleteProduct(int productId) throws SQLException {
         System.out.println("Set Delete Product | 1 - hard | 2 - Soft");
         int deleteType = scanner.nextInt();
-        if (deleteType == 1){
+        if (deleteType == 1) {
             productDAO.deleteHard(productId);
         } else if (deleteType == 2) {
             productDAO.deleteSoft(productId);
@@ -41,21 +41,21 @@ public class ProductService {
         }
     }
 
-    public int addNewProduct( Connection conn) {
+    public int addNewProduct(Connection conn) {
         String productName;
         String productType;
 
-            System.out.println("Set Product Name");
-            productName  = scanner1.next();
-            System.out.println("Set Product Type ");
-            productType  = scanner1.nextLine();
+        System.out.println("Set Product Name");
+        productName = scanner1.next();
+        System.out.println("Set Product Type ");
+        productType = scanner1.nextLine();
 
-            Product product = new Product();
-            product.setProductName(productName);
-            product.setProductType(productType);
-            product.setCreateDate(new Date(System.currentTimeMillis()));
-            product.setModifyDate(new Date(System.currentTimeMillis()));
-            return productDAO.insert(product,conn);
+        Product product = new Product();
+        product.setProductName(productName);
+        product.setProductType(productType);
+        product.setCreateDate(new Date(System.currentTimeMillis()));
+        product.setModifyDate(new Date(System.currentTimeMillis()));
+        return productDAO.insert(product, conn);
 
     }
 
@@ -71,27 +71,27 @@ public class ProductService {
         String productType;
 
         System.out.println("Set Product Name");
-        productName  = scanner1.nextLine();
-        while (productName.equals("")){
+        productName = scanner1.nextLine();
+        while (productName.equals("")) {
             System.out.println("Set Product Name");
-            productName  = scanner1.nextLine();
+            productName = scanner1.nextLine();
         }
         System.out.println("Set Product Type ");
-        productType  = scanner1.nextLine();
-        while (productType.equals("")){
+        productType = scanner1.nextLine();
+        while (productType.equals("")) {
             System.out.println("Set Product Name");
-            productType  = scanner1.nextLine();
+            productType = scanner1.nextLine();
         }
 
         product.setProductName(productName);
         product.setProductType(productType);
-        productDAO.update(product,productId);
+        productDAO.update(product, productId);
     }
 
-    public void productsPrint(){
+    public void productsPrint() {
         try {
-            ArrayList<Product> productList =  productDAO.getAllProduct();
-            for (Product product : productList ) {
+            ArrayList<Product> productList = productDAO.getAllProduct();
+            for (Product product : productList) {
                 System.out.println(product);
             }
         } catch (SQLException e) {
@@ -99,9 +99,9 @@ public class ProductService {
         }
     }
 
-    public boolean existsById(int productId){
+    public boolean existsById(int productId) {
         Product retInfo = productDAO.findByProductId(productId);
-        if (retInfo == null){
+        if (retInfo == null) {
             return false;
         }
         return true;

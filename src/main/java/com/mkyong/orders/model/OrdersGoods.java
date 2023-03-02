@@ -39,7 +39,7 @@ public class OrdersGoods {
         this.modifyDate = modifyDate;
     }
 
-    public OrdersGoods(){
+    public OrdersGoods() {
 
     }
 

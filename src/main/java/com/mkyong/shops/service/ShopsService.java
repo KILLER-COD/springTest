@@ -1,19 +1,15 @@
 package com.mkyong.shops.service;
 
-import com.mkyong.address.dao.AddressDAO;
-import com.mkyong.address.model.Address;
-import com.mkyong.address.model.AddressCountByCity;
 import com.mkyong.address.service.AddressService;
-import com.mkyong.orders.model.Orders;
 import com.mkyong.shops.dao.ShopsDAO;
 import com.mkyong.shops.model.Shops;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.Scanner;
 
 @Component
@@ -40,7 +36,7 @@ public class ShopsService {
     public void deleteShops(int shopsId) throws SQLException {
         System.out.println("Set Delete Shop type | 1 - hard | 2 - Soft");
         int deleteType = scanner.nextInt();
-        if (deleteType == 1){
+        if (deleteType == 1) {
             shopsDAO.deleteHard(shopsId);
         } else if (deleteType == 2) {
             shopsDAO.deleteSoft(shopsId);
@@ -50,20 +46,20 @@ public class ShopsService {
         }
     }
 
-    public int addNewShops(Connection conn,int addressIdShop,int shopsInfoId){
+    public int addNewShops(Connection conn, int addressIdShop, int shopsInfoId) {
         String shopName;
 
         System.out.println("Set shop Name");
-        shopName  = scanner1.next();
+        shopName = scanner1.next();
 
-            Shops shops = new Shops();
-            shops.setShopName(shopName);
-            shops.setShopAddressId(addressIdShop);
-            shops.setShopInfoId(shopsInfoId);
-            shops.setCreateDate(new Date(System.currentTimeMillis()));
-            shops.setModifyDate(new Date(System.currentTimeMillis()));
+        Shops shops = new Shops();
+        shops.setShopName(shopName);
+        shops.setShopAddressId(addressIdShop);
+        shops.setShopInfoId(shopsInfoId);
+        shops.setCreateDate(new Date(System.currentTimeMillis()));
+        shops.setModifyDate(new Date(System.currentTimeMillis()));
 
-       return shopsDAO.insert(shops,conn);
+        return shopsDAO.insert(shops, conn);
 
     }
 
@@ -93,11 +89,11 @@ public class ShopsService {
         shops.setShopAddressId(shopAddressId);
         shops.setShopInfoId(shopInfoId);
 
-        shopsDAO.update(shops,shopId ,conn);
+        shopsDAO.update(shops, shopId, conn);
 
     }
 
-    public void shopsPrint(){
+    public void shopsPrint() {
         try {
             for (Shops shops : getAllShops()) {
                 System.out.println(shops.toString());
@@ -107,9 +103,9 @@ public class ShopsService {
         }
     }
 
-    public boolean existsById(int shopsId){
+    public boolean existsById(int shopsId) {
         Shops retInfo = shopsDAO.findByShopsId(shopsId);
-        if (retInfo == null){
+        if (retInfo == null) {
             return false;
         }
         return true;

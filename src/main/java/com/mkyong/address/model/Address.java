@@ -18,14 +18,16 @@ public class Address {
         this.modifyDate = modifyDate;
         this.deleteDate = deleteDate;
     }
-    public Address( String address, String city, Date createDate, Date modifyDate, Date deleteDate) {
+
+    public Address(String address, String city, Date createDate, Date modifyDate, Date deleteDate) {
         this.address = address;
         this.city = city;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
         this.deleteDate = deleteDate;
     }
-    public Address(){
+
+    public Address() {
 
     }
 

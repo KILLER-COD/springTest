@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.sql.DataSource;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -17,15 +16,16 @@ public class App {
     private DataSource dataSource;
 
 
-    public static void main( String[] args ) throws SQLException, InterruptedException {
+    public static void main(String[] args) throws SQLException, InterruptedException {
         new App().start();
     }
+
     public void start() throws SQLException, InterruptedException {
         ApplicationContext context = new AnnotationConfigApplicationContext("com.mkyong");
         this.dataSource = (DataSource) context.getBean("dataSource");
         AddNewTransactionMethod addNewTransactionMethod = context.getBean(AddNewTransactionMethod.class);
         ChangeNewTransactionMethod changeNewTransactionMethod = context.getBean(ChangeNewTransactionMethod.class);
-        ShowAllNeedInfo showAllNeedInfo =  context.getBean(ShowAllNeedInfo.class);
+        ShowAllNeedInfo showAllNeedInfo = context.getBean(ShowAllNeedInfo.class);
         OrdersService ordersService1 = context.getBean(OrdersService.class);
         ordersService1.getAllOrders().forEach(System.out::println);
         Scanner scanner = new Scanner(System.in);
@@ -52,10 +52,21 @@ public class App {
 //      changeNewTransactionMethod.changeShopsInfoMethod();
 //      changeNewTransactionMethod.changeOrdersGoodsMethod();
 
+
+//                Add methods
+//        Add new Product in DataBase
 //      addNewTransactionMethod.addNewProductMethod();
+
+//        Add new Goods in DataBase
 //      addNewTransactionMethod.addNewGoodsMethod();
+
+//        Add new Order in DataBase
 //      addNewTransactionMethod.addNewOrdersMethod();
+
+//        Add new Shop in DataBase
 //      addNewTransactionMethod.addNewShopMethod();
+
+//        Add new Address in DataBase
 //      addNewTransactionMethod.addNewAddressMethod();
 
 

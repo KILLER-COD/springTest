@@ -11,9 +11,10 @@ public class Product {
     private Date modifyDate;
     private Date deleteDate;
 
-    public Product(){
-        
+    public Product() {
+
     }
+
     public Product(String productName, String productType, Date createDate, Date modifyDate) {
         this.productName = productName;
         this.productType = productType;

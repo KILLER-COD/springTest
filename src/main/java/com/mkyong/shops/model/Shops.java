@@ -12,7 +12,7 @@ public class Shops {
     private Date deleteDate;
 
 
-    public Shops(){
+    public Shops() {
 
     }
 
