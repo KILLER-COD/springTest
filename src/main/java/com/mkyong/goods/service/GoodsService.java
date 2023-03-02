@@ -153,7 +153,13 @@ public class GoodsService {
         }
 
         System.out.println("Name = " + goodsName + "\n Type = " + goodsType +"\n Price = " + goodsPrice + "\n Product Id  = " + productId );
-        goodsDAO.update(goodsName, goodsType, goodsPrice, productId, goodsId, conn);
+
+        goods.setGoodsName(goodsName);
+        goods.setGoodsType(goodsType);
+        goods.setGoodsPrice(goodsPrice);
+        goods.setProductId(productId);
+
+        goodsDAO.update(goods, goodsId, conn);
 
         scanner.close();
     }
@@ -170,7 +176,8 @@ public class GoodsService {
         Goods retInfo = goodsDAO.findByGoodsId(goodsId);
         if (retInfo == null){
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 }

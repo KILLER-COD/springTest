@@ -4,6 +4,7 @@ import com.mkyong.goods.dao.GoodsDAO;
 import com.mkyong.goods.model.Goods;
 import com.mkyong.orders.dao.OrdersDAO;
 import com.mkyong.orders.model.Orders;
+import com.mkyong.orders.model.OrdersInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -182,13 +183,93 @@ public class JdbcOrdersDAO implements OrdersDAO
         }
     }
 
-//    public void update(int shopId,int ordersId) throws SQLException {
-//        Orders orders =  findByOrdersId(ordersId);
-//        if (shopId > -1 ){
-//            orders.setShopId(shopId);
-//        }
-//        update(orders,ordersId);
-//    }
+    public void getSingleOrderInfo(int ordersId) throws SQLException {
+        String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price  " +
+                "FROM orders_goods og" +
+                " join orders o on og.orders_id = o.id " +
+                " join shops s on o.shop_id = s.id " +
+                " join goods g on og.goods_id = g.id" +
+                " WHERE orders_id = ? && delete_date IS NULL; ";
+
+        Connection conn = dataSource.getConnection();;
+        PreparedStatement ps;
+
+        ps = conn.prepareStatement(sql);
+        ps.setInt(1, ordersId);
+        ps.executeQuery();
+        ResultSet rs = ps.getResultSet();
+        OrdersInfo o = new OrdersInfo();
+        while (rs.next()){
+            System.out.println(
+                    "Id = " + rs.getInt("orders_id") +
+                            "| Shop Name = " + rs.getString("shop_name")+
+                            "| Goods Name = " + rs.getString("goods_name")+
+                            "| Goods Count = " + rs.getDouble("goods_count")+
+                            "| Goods Price = " + rs.getDouble("goods_price")
+            );
+        }
+        ps.close();
+
+        closeConnection(conn);
+    }
+    public void getAllOrderInfo() throws SQLException {
+        String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price,og.delete_date  " +
+                        " FROM orders_goods og" +
+                        " join orders o on og.orders_id = o.id " +
+                        " join shops s on o.shop_id = s.id " +
+                        " join goods g on og.goods_id = g.id" +
+                        " WHERE og.delete_date IS NULL;";
+
+        Connection conn = dataSource.getConnection();;
+        PreparedStatement ps;
+
+        ps = conn.prepareStatement(sql);
+        ps.executeQuery();
+        ResultSet rs = ps.getResultSet();
+        OrdersInfo o = new OrdersInfo();
+        while (rs.next()){
+            System.out.println(
+                    "Id = " + rs.getInt("orders_id") +
+                    "| Shop Name = " + rs.getString("shop_name")+
+                    "| Goods Name = " + rs.getString("goods_name")+
+                    "| Goods Count = " + rs.getDouble("goods_count")+
+                    "| Goods Price = " + rs.getDouble("goods_price")
+            );
+        }
+        ps.close();
+
+        closeConnection(conn);
+    }
+    public void getAllOrdersInfoByDate(Date date) throws SQLException {
+        String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price,o.create_date,og.delete_date " +
+                        " FROM orders_goods og" +
+                        " join orders o on og.orders_id = o.id && og.create_date = o.create_date" +
+                        " join shops s on o.shop_id = s.id" +
+                        " join goods g on og.goods_id = g.id" +
+                        " WHERE o.create_date = ? && og.delete_date IS NULL;";
+
+        Connection conn = dataSource.getConnection();;
+        PreparedStatement ps;
+
+        ps = conn.prepareStatement(sql);
+        ps.setDate(1, date);
+        ps.executeQuery();
+        ResultSet rs = ps.getResultSet();
+        OrdersInfo o = new OrdersInfo();
+        while (rs.next()){
+            System.out.println(
+                    "Id = " + rs.getInt("orders_id") +
+                            "| Shop Name = " + rs.getString("shop_name")+
+                            "| Goods Name = " + rs.getString("goods_name")+
+                            "| Goods Count = " + rs.getDouble("goods_count")+
+                            "| Goods Price = " + rs.getDouble("goods_price")+
+                            "| Orders Create = " + rs.getDate("o.create_date")
+            );
+        }
+        ps.close();
+
+        closeConnection(conn);
+    }
 
     public void update(Orders orders, int ordersId) throws SQLException {
 
@@ -198,8 +279,8 @@ public class JdbcOrdersDAO implements OrdersDAO
 
         ps = conn.prepareStatement(sql);
         ps.setInt(1, orders.getShopId());
-        ps.setInt(1, orders.getShopId());
-        ps.setInt(2, ordersId);
+        ps.setDate(2, new Date(System.currentTimeMillis()));
+        ps.setInt(3, ordersId);
         ps.executeUpdate();
         ps.close();
 

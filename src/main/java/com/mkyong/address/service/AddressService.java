@@ -3,6 +3,7 @@ package com.mkyong.address.service;
 import com.mkyong.address.dao.AddressDAO;
 import com.mkyong.address.model.Address;
 import com.mkyong.address.model.AddressCountByCity;
+import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,9 +46,9 @@ public class AddressService {
     public int addNewAddress(Connection conn)  {
 
             System.out.println("Set shop Address");
-            String address_name  = scanner1.next();
+            String address_name  = scanner1.nextLine();
             System.out.println("Set Name City where in shop");
-            String address_city  = scanner1.next();
+            String address_city  = scanner1.nextLine();
 
             Address address = new Address();
             address.setAddress(address_name);
@@ -60,7 +61,7 @@ public class AddressService {
     }
     public void countShopCity() {
         System.out.println("Set minimum count shop in city ( ? > 0 )| default=0");
-        Integer minCountShop  = scanner1.nextInt();
+        int minCountShop  = scanner1.nextInt();
 
         ArrayList<AddressCountByCity> addressCountByCityList;
         if(minCountShop < 0 ){
@@ -81,6 +82,7 @@ public class AddressService {
         String addressName;
         String addressCity;
 
+        addressPrint();
         System.out.println("Set Address  ID ");
         int addressId = scanner2.nextInt();
 
@@ -90,14 +92,14 @@ public class AddressService {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Change shop Address");
-        addressName  = scanner.next();
+        addressName  = scanner.nextLine();
         while (addressName.equals("")){
             System.out.println("Change shop Address");
             addressName  = scanner.nextLine();
         }
 
         System.out.println("Change Name City where in shop");
-        addressCity  = scanner.next();
+        addressCity  = scanner.nextLine();
         while (addressCity.equals("")){
             System.out.println("Change Name City where in shop");
             addressCity  = scanner.nextLine();
@@ -108,7 +110,25 @@ public class AddressService {
 
         addressDAO.update(address,addressId,null);
 
+    }
 
+    public void addressPrint(){
+        try {
+            ArrayList<Address> addressList = addressDAO.getAllAddress();
+            for (Address address : addressList) {
+                System.out.println(address);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean existsById(int addressId){
+        Address retInfo = addressDAO.findByAddressId(addressId);
+        if (retInfo == null){
+            return false;
+        }
+        return true;
     }
 
 

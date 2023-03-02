@@ -2,10 +2,13 @@ package com.mkyong.methods;
 
 import com.mkyong.address.service.AddressService;
 import com.mkyong.goods.service.GoodsService;
+import com.mkyong.orders.service.OrdersGoodsService;
 import com.mkyong.orders.service.OrdersService;
 import com.mkyong.product.service.ProductService;
+import com.mkyong.shops.service.ShopsInfoService;
 import com.mkyong.shops.service.ShopsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -14,6 +17,7 @@ import java.sql.SQLException;
 
 @Component
 public class ChangeNewTransactionMethod {
+    private ApplicationContext context;
     @Autowired
     private DataSource dataSource;
     @Autowired
@@ -26,6 +30,14 @@ public class ChangeNewTransactionMethod {
     private AddressService addressService;
     @Autowired
     private ShopsService shopsService;
+    @Autowired
+    private ShopsInfoService shopsInfoService;
+    @Autowired
+    private OrdersGoodsService ordersGoodsService;
+
+    public ChangeNewTransactionMethod(ApplicationContext context) {
+        this.context = context;
+    }
     public void changeGoodsMethod() throws SQLException {
         Connection conn = dataSource.getConnection();
         conn.setAutoCommit(false);
@@ -46,11 +58,22 @@ public class ChangeNewTransactionMethod {
         ordersService.changeOrders();
     }
 
+    public void changeOrdersGoodsMethod() throws SQLException {
+        ordersGoodsService.changeOrdersGoods();
+    }
+
     public void changeShopsMethod() throws SQLException {
         Connection conn = dataSource.getConnection();
         shopsService.changeShops(conn);
         conn.close();
     }
+
+    public void changeShopsInfoMethod() throws SQLException {
+        Connection conn = dataSource.getConnection();
+        shopsInfoService.changeShopsInfo(conn);
+        conn.close();
+    }
+
 
 
 }

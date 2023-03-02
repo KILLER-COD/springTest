@@ -4,23 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="Transaction Change Methods">
+    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment=" Change New Transaction Methods&#10; add * changeProductMethod()&#10; add * changeAddressMethod()&#10; add * changeOrdersMethod()&#10; add * changeShopsMethod()&#10; &#10; change * Address update&#10; change * Product update&#10; change * Shops update&#10; change * Orders update">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/ShowAllNeedInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/AddressDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/AddressDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/impl/JdbcAddressDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/impl/JdbcAddressDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/common/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/common/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/GoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/GoodsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/impl/JdbcGoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/impl/JdbcGoodsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/service/GoodsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/ChangeNewTransactionMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/ChangeNewTransactionMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersGoods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersGoods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersGoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersGoodsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/ProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/impl/JdbcProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/dao/impl/JdbcProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsInfoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsInfoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsInfoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsInfoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" afterDir="false" />
     </list>
@@ -235,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677533464959</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary=" Change New Transaction Methods&#10; add * changeProductMethod()&#10; add * changeAddressMethod()&#10; add * changeOrdersMethod()&#10; add * changeShopsMethod()&#10; &#10; change * Address update&#10; change * Product update&#10; change * Shops update&#10; change * Orders update">
+      <created>1677619614918</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1677619614918</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -272,7 +280,8 @@
     <MESSAGE value="shops - shopsInfo -Ok" />
     <MESSAGE value="Add Shops DB&#10;Add Address DB&#10;Add Shops Info DB &#10;Transaction" />
     <MESSAGE value="Transaction Change Methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Transaction Change Methods" />
+    <MESSAGE value=" Change New Transaction Methods&#10; add * changeProductMethod()&#10; add * changeAddressMethod()&#10; add * changeOrdersMethod()&#10; add * changeShopsMethod()&#10; &#10; change * Address update&#10; change * Product update&#10; change * Shops update&#10; change * Orders update" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Change New Transaction Methods&#10; add * changeProductMethod()&#10; add * changeAddressMethod()&#10; add * changeOrdersMethod()&#10; add * changeShopsMethod()&#10; &#10; change * Address update&#10; change * Product update&#10; change * Shops update&#10; change * Orders update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -293,11 +302,6 @@
           <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.3.9/spring-context-5.3.9-sources.jar!/org/springframework/context/annotation/AnnotationConfigApplicationContext.java</url>
           <line>164</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersGoodsDAO.java</url>
-          <line>8</line>
-          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,6 +1,5 @@
 package com.mkyong.orders.service;
 
-import com.mkyong.goods.model.Goods;
 import com.mkyong.orders.dao.OrdersDAO;
 import com.mkyong.orders.model.Orders;
 import com.mkyong.shops.service.ShopsService;
@@ -23,6 +22,16 @@ public class OrdersService {
 
     public ArrayList<Orders> getAllOrders() throws SQLException {
         return ordersDAO.getAllOrders();
+    }
+
+    public void getSingleOrderInfo(int ordersId) throws SQLException {
+       ordersDAO.getSingleOrderInfo(ordersId);
+    }
+    public void getOrdersInfoByDate(Date date) throws SQLException {
+       ordersDAO.getAllOrdersInfoByDate(date);
+    }
+    public void getAllOrderInfo() throws SQLException {
+        ordersDAO.getAllOrderInfo();
     }
 
     public ArrayList<Orders> getAllDeletedOrders() throws SQLException {

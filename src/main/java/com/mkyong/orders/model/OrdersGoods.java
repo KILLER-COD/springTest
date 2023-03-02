@@ -99,5 +99,16 @@ public class OrdersGoods {
         this.deleteDate = deleteDate;
     }
 
-
+    @Override
+    public String toString() {
+        return "OrdersGoods{" +
+                "id=" + id +
+                ", ordersId=" + ordersId +
+                ", goodsId=" + goodsId +
+                ", goodsCount=" + goodsCount +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", deleteDate=" + deleteDate +
+                '}';
+    }
 }

@@ -1,6 +1,8 @@
 package com.mkyong.shops.service;
 
+import com.mkyong.address.service.AddressService;
 import com.mkyong.shops.dao.ShopsInfoDAO;
+import com.mkyong.shops.model.Shops;
 import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,10 +15,12 @@ import java.util.Scanner;
 @Component
 public class ShopsInfoService {
     Scanner scanner = new Scanner(System.in);
-    Scanner scanner1 = new Scanner(System.in);
-    Scanner scanner2 = new Scanner(System.in);
+
     @Autowired
     private ShopsInfoDAO shopsInfoDAO;
+
+    @Autowired
+    private AddressService addressService;
 
     public ArrayList<ShopsInfo> getAllShopsInfo() throws SQLException {
         return shopsInfoDAO.getAllShopsInfo();
@@ -45,9 +49,9 @@ public class ShopsInfoService {
         int hvhh;
 
             System.out.println("Set Shop Owner Name or Group Name");
-            shopOwner  = scanner1.next();
+            shopOwner  = scanner.nextLine();
             System.out.println("Set Shop HVHH ");
-            hvhh  = scanner1.nextInt();
+            hvhh  = scanner.nextInt();
 
             ShopsInfo shopsInfo = new ShopsInfo();
             shopsInfo.setShopOwner(shopOwner);
@@ -61,58 +65,49 @@ public class ShopsInfoService {
     }
 
     public void changeShopsInfo( Connection conn) throws SQLException{
+        Scanner scanner = new Scanner(System.in);
 
         shopsInfoPrint();
-
-        System.out.println("---------------- \n Set Shop Info  ID ");
-        int shopInfoId = scanner2.nextInt();
+        System.out.println("----------------  Set Shop Info  ID ");
+        int shopInfoId = scanner.nextInt();
+        while (!existsById(shopInfoId)){
+            System.out.println("----------------  Set Shop Info  ID ");
+            shopInfoId = scanner.nextInt();
+        }
 
         ShopsInfo shopsInfo = shopsInfoDAO.findByShopsInfoId(shopInfoId);
         System.out.println(shopsInfo.toString());
-
-        System.out.println("---------------- \n What do you change  \n 1- Change Shop name -- 2- Change Shop Address id -- 3- Change Shop Info id  -- 4- Change all  ");
-
-        int change_num = scanner2.nextInt();
         Scanner scanner1 = new Scanner(System.in);
-        String shopOwner = null;
-        int hvhh = -1;
-        int addressId = -1;
-
-        switch (change_num) {
-
-            case 1:
-                System.out.println("---------------- \n Set new Shop Owner ");
-                shopOwner = scanner1.next();
-                shopsInfoDAO.update(shopOwner, hvhh, addressId, shopInfoId,conn);
-                scanner1.close();
-                break;
-
-            case 2:
-                System.out.println("---------------- \n Set new Name City where in shop");
-                hvhh = scanner1.nextInt();
-                shopsInfoDAO.update(shopOwner, hvhh, addressId, shopInfoId, conn);
-                scanner1.close();
-                break;
-
-            case 3:
-                System.out.println("---------------- \n Set new Shop Address id");
-                shopInfoId = scanner1.nextInt();
-                shopsInfoDAO.update(shopOwner, hvhh, addressId, shopInfoId ,conn);
-                scanner1.close();
-                break;
-
-            default:
-                System.out.println("---------------- \n Change All \n Set new Shop Owner ");
-                shopOwner = scanner1.next();
-                System.out.println("Set new Shop HVHH ");
-                hvhh = scanner1.nextInt();
-                System.out.println("Set new Shop info id ");
-                shopInfoId = scanner1.nextInt();
-                shopsInfoDAO.update(shopOwner, hvhh, addressId, shopInfoId,conn);
-                scanner1.close();
-
+        System.out.println("---------------- Set new Shop Owner = " + shopsInfo.getShopOwner());
+        String shopOwner = scanner1.nextLine();
+        while (shopOwner.equals("")){
+            System.out.println("---------------- Set Correct Shop Owner =" + shopsInfo.getShopOwner());
+            shopOwner = scanner1.nextLine();
         }
-        scanner2.close();
+
+        System.out.println("----------------  Set new HVHH in shop = " + shopsInfo.getHvhh());
+        int hvhh = scanner1.nextInt();
+        while (hvhh < 0 ){
+            System.out.println("---------------- Set Correct  HVHH in shop ="  + shopsInfo.getHvhh());
+            hvhh = scanner1.nextInt();
+        }
+
+        addressService.addressPrint();
+        System.out.println("----------------  Set new Shop Address id = " + shopsInfo.getAddressId());
+        int addressId = scanner1.nextInt();
+        while (!addressService.existsById(addressId ) && addressId > 0){
+            System.out.println("----------------  Set new Shop Address id = " + shopsInfo.getAddressId());
+            addressId = scanner1.nextInt();
+        }
+
+        shopsInfo.setShopOwner(shopOwner);
+        shopsInfo.setHvhh(hvhh);
+        shopsInfo.setAddressId(addressId);
+
+        System.out.println(shopsInfo.toString());
+        shopsInfoDAO.update(shopsInfo, shopInfoId,conn);
+
+        scanner.close();
     }
 
     public void shopsInfoPrint(){
@@ -124,6 +119,14 @@ public class ShopsInfoService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean existsById(int shopsInfoId){
+        ShopsInfo retInfo = shopsInfoDAO.findByShopsInfoId(shopsInfoId);
+        if (retInfo == null){
+            return false;
+        }
+        return true;
     }
 
 }

@@ -62,7 +62,7 @@ public class JdbcShopsDAO implements ShopsDAO
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 shops = new Shops(
-                        rs.getInt("Shops_id"),
+                        rs.getInt("id"),
                         rs.getString("Shop_name"),
                         rs.getInt("Shop_address_id"),
                         rs.getInt("Shop_info_id"),

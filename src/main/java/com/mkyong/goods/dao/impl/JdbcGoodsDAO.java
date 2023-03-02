@@ -187,24 +187,24 @@ public class JdbcGoodsDAO implements GoodsDAO {
         }
     }
 
-    public void update(String goodsName, String goodsType, double goodsPrice, int productId, int goodsId,Connection conn) throws SQLException {
-
-        Goods goods = findByGoodsId(goodsId);
-
-        if (goodsName != null) {
-            goods.setGoodsName(goodsName);
-        }
-        if (goodsType != null) {
-            goods.setGoodsType(goodsType);
-        }
-        if (goodsPrice > -1) {
-            goods.setGoodsPrice(goodsPrice);
-        }
-        if (productId > -1) {
-            goods.setProductId(productId);
-        }
-        update(goods, goodsId,conn);
-    }
+//    public void update(String goodsName, String goodsType, double goodsPrice, int productId, int goodsId,Connection conn) throws SQLException {
+//
+//        Goods goods = findByGoodsId(goodsId);
+//
+//        if (goodsName != null) {
+//            goods.setGoodsName(goodsName);
+//        }
+//        if (goodsType != null) {
+//            goods.setGoodsType(goodsType);
+//        }
+//        if (goodsPrice > -1) {
+//            goods.setGoodsPrice(goodsPrice);
+//        }
+//        if (productId > -1) {
+//            goods.setProductId(productId);
+//        }
+//        update(goods, goodsId,conn);
+//    }
 
     public void update(Goods goods, int goodsId,Connection conn) throws SQLException {
 

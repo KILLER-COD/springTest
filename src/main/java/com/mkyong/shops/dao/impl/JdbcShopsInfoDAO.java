@@ -1,7 +1,6 @@
 package com.mkyong.shops.dao.impl;
 
 import com.mkyong.shops.dao.ShopsInfoDAO;
-import com.mkyong.shops.model.Shops;
 import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -192,23 +191,23 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO
         }
     }
 
-    public void update(String shopsOwner, int hvhh,int addressId,int shopsInfoId,Connection conn) throws SQLException {
-
-        ShopsInfo shopsInfo =  findByShopsInfoId(shopsInfoId);
-
-        if (shopsOwner != null && hvhh == -1 && addressId == -1){
-            shopsInfo.setShopOwner(shopsOwner);
-        } else if (shopsOwner == null && hvhh >-1 && addressId == -1) {
-            shopsInfo.setHvhh(hvhh);
-        } else if (shopsOwner != null && hvhh == -1 && addressId > -1) {
-            shopsInfo.setAddressId(addressId);
-        } else {
-           shopsInfo.setShopOwner(shopsOwner);
-           shopsInfo.setHvhh(hvhh);
-           shopsInfo.setAddressId(addressId);
-        }
-        update(shopsInfo,shopsInfoId,conn);
-    }
+//    public void update(String shopsOwner, int hvhh,int addressId,int shopsInfoId,Connection conn) throws SQLException {
+//
+//        ShopsInfo shopsInfo =  findByShopsInfoId(shopsInfoId);
+//
+//        if (shopsOwner != null && hvhh == -1 && addressId == -1){
+//            shopsInfo.setShopOwner(shopsOwner);
+//        } else if (shopsOwner == null && hvhh >-1 && addressId == -1) {
+//            shopsInfo.setHvhh(hvhh);
+//        } else if (shopsOwner != null && hvhh == -1 && addressId > -1) {
+//            shopsInfo.setAddressId(addressId);
+//        } else {
+//           shopsInfo.setShopOwner(shopsOwner);
+//           shopsInfo.setHvhh(hvhh);
+//           shopsInfo.setAddressId(addressId);
+//        }
+//        update(shopsInfo,shopsInfoId,conn);
+//    }
 
 //    public void update(ShopsInfo shopsInfo, int shopsInfoId) throws SQLException {
 //
@@ -216,7 +215,7 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO
 //        Connection conn;
 //        PreparedStatement ps;
 //
-//        sql = "UPDATE shops SET shop_name = ? ,shop_address_id = ? ,shop_info_id = ? ,modify_date = ? WHERE id = ?";
+//        sql = "UPDATE shops_info SET shop_owner = ? ,hvhh = ? ,address_id = ? ,modify_date = ? WHERE id = ?";
 //        conn = dataSource.getConnection();
 //        ps = conn.prepareStatement(sql);
 //        ps.setString(1, shopsInfo.getShopOwner());
@@ -238,7 +237,7 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO
         if (conn == null){
             conn = dataSource.getConnection();
         }
-        sql = "UPDATE shops SET shop_name = ? ,shop_address_id = ? ,shop_info_id = ? ,modify_date = ? WHERE id = ?";
+        sql = "UPDATE shops_info SET shop_owner = ? ,hvhh = ? ,address_id = ? ,modify_date = ? WHERE id = ?";
         ps = conn.prepareStatement(sql);
         ps.setString(1, shopsInfo.getShopOwner());
         ps.setInt(2,shopsInfo.getHvhh());
@@ -248,7 +247,7 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO
         ps.executeUpdate();
         ps.close();
 
-        closeConnection(conn);
+//        closeConnection(conn);
 
     }
 

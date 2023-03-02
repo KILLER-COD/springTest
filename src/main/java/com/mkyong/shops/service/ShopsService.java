@@ -71,22 +71,22 @@ public class ShopsService {
         int shopAddressId;
         int shopInfoId;
         String shopName;
-
-        System.out.println("Set Address  ID ");
+        shopsPrint();
+        System.out.println("Set Shop  ID ");
         int shopId = scanner2.nextInt();
 
         Shops shops = shopsDAO.findByShopsId(shopId);
         System.out.println(shops.toString());
 
-        System.out.println("---------------- \n Set new shop Address ");
-        shopName = scanner1.next();
+        System.out.println("----------------  Set new shop Address ");
+        shopName = scanner1.nextLine();
 
         addressService.getAllAddress().forEach(System.out::println);
         System.out.println("---------------- \n Set new Name City where in shop");
         shopAddressId = scanner1.nextInt();
 
         shopsInfoService.getAllShopsInfo().forEach(System.out::println);
-        System.out.println("---------------- \n Set new Name City where in shop");
+        System.out.println("---------------- \n Set new shop Info ID");
         shopInfoId = scanner1.nextInt();
 
         shops.setShopName(shopName);

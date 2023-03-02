@@ -1,9 +1,9 @@
 package com.mkyong.orders.dao;
 
-import com.mkyong.goods.model.Goods;
 import com.mkyong.orders.model.Orders;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -16,4 +16,7 @@ public interface OrdersDAO {
     void deleteSoft(int ordersId) throws SQLException;
     ArrayList<Orders> getAllOrders() throws SQLException;
     ArrayList<Orders> getAllDeletedOrders() throws SQLException;
+    void getSingleOrderInfo(int ordersId) throws SQLException;
+    void getAllOrderInfo() throws SQLException;
+    void getAllOrdersInfoByDate(Date date) throws SQLException;
 }
