@@ -52,7 +52,7 @@ public class ChangeNewTransactionMethod {
     }
 
     public void changeAddressMethod() throws SQLException {
-        addressService.changeAddress(null);
+        addressService.changeAddress();
     }
 
     public void changeOrdersMethod() throws SQLException {

@@ -3,6 +3,7 @@ package com.mkyong.address.dao.impl;
 import com.mkyong.address.dao.AddressDAO;
 import com.mkyong.address.model.Address;
 import com.mkyong.address.model.AddressCountByCity;
+import com.mkyong.common.ColumnNames;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -192,19 +193,10 @@ public class JdbcAddressDAO implements AddressDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            Address address = null;
             ArrayList<Address> addressList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                address = new Address(
-                        rs.getInt("id"),
-                        rs.getString("Address"),
-                        rs.getString("City"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                addressList.add(address);
+                addressList.add(getResultAddress(rs));
             }
             rs.close();
             ps.close();
@@ -222,19 +214,10 @@ public class JdbcAddressDAO implements AddressDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            Address address = null;
             ArrayList<Address> addressList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                address = new Address(
-                        rs.getInt("id"),
-                        rs.getString("Address"),
-                        rs.getString("City"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                addressList.add(address);
+                addressList.add(getResultAddress(rs));
             }
             rs.close();
             ps.close();
@@ -259,14 +242,7 @@ public class JdbcAddressDAO implements AddressDAO {
             Address address = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                address = new Address(
-                        rs.getInt("id"),
-                        rs.getString("Address"),
-                        rs.getString("City"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
+                address = getResultAddress(rs);
             }
             rs.close();
             ps.close();
@@ -285,6 +261,18 @@ public class JdbcAddressDAO implements AddressDAO {
             } catch (SQLException e) {
             }
         }
+    }
+
+    public Address getResultAddress(ResultSet resultSet) throws SQLException {
+        Address address = new Address(
+                resultSet.getInt(ColumnNames.id),
+                resultSet.getString(ColumnNames.address),
+                resultSet.getString(ColumnNames.city),
+                resultSet.getDate(ColumnNames.createDate),
+                resultSet.getDate(ColumnNames.modifyDate),
+                resultSet.getDate(ColumnNames.deleteDate)
+        );
+        return address;
     }
 }
 

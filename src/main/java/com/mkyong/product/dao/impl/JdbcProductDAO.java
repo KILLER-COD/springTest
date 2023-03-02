@@ -1,5 +1,6 @@
 package com.mkyong.product.dao.impl;
 
+import com.mkyong.common.ColumnNames;
 import com.mkyong.product.dao.ProductDAO;
 import com.mkyong.product.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,14 +63,7 @@ public class JdbcProductDAO implements ProductDAO {
             Product product = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                product = new Product(
-                        rs.getInt("id"),
-                        rs.getString("product_name"),
-                        rs.getString("product_type"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
+                product = getResultProduct(rs);
             }
             rs.close();
             ps.close();
@@ -162,19 +156,10 @@ public class JdbcProductDAO implements ProductDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            Product product = null;
             ArrayList<Product> productList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                product = new Product(
-                        rs.getInt("id"),
-                        rs.getString("Product_name"),
-                        rs.getString("Product_type"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                productList.add(product);
+                productList.add(getResultProduct(rs));
             }
             rs.close();
             ps.close();
@@ -192,19 +177,10 @@ public class JdbcProductDAO implements ProductDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            Product product = null;
             ArrayList<Product> productList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                product = new Product(
-                        rs.getInt("id"),
-                        rs.getString("Product_name"),
-                        rs.getString("Product_type"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                productList.add(product);
+                productList.add(getResultProduct(rs));
             }
             rs.close();
             ps.close();
@@ -223,6 +199,18 @@ public class JdbcProductDAO implements ProductDAO {
             } catch (SQLException e) {
             }
         }
+    }
+
+    public Product getResultProduct(ResultSet resultSet) throws SQLException {
+        Product product = new Product(
+                resultSet.getInt(ColumnNames.id),
+                resultSet.getString(ColumnNames.productName),
+                resultSet.getString(ColumnNames.productType),
+                resultSet.getDate(ColumnNames.createDate),
+                resultSet.getDate(ColumnNames.modifyDate),
+                resultSet.getDate(ColumnNames.deleteDate)
+        );
+        return product;
     }
 
 }

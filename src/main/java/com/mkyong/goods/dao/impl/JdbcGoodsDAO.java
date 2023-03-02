@@ -1,5 +1,6 @@
 package com.mkyong.goods.dao.impl;
 
+import com.mkyong.common.ColumnNames;
 import com.mkyong.goods.dao.GoodsDAO;
 import com.mkyong.goods.model.Goods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,16 +63,7 @@ public class JdbcGoodsDAO implements GoodsDAO {
             Goods goods = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                goods = new Goods(
-                        rs.getInt("id"),
-                        rs.getString("Goods_name"),
-                        rs.getString("Goods_type"),
-                        rs.getDouble("Goods_price"),
-                        rs.getInt("Product_id"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
+                goods = getResultGoods(rs);
             }
             rs.close();
             ps.close();
@@ -133,17 +125,7 @@ public class JdbcGoodsDAO implements GoodsDAO {
             ArrayList<Goods> goodsList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                goods = new Goods(
-                        rs.getInt("id"),
-                        rs.getString("goods_name"),
-                        rs.getString("goods_type"),
-                        rs.getDouble("goods_Price"),
-                        rs.getInt("product_id"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                goodsList.add(goods);
+                goodsList.add(getResultGoods(rs));
             }
             rs.close();
             ps.close();
@@ -161,21 +143,10 @@ public class JdbcGoodsDAO implements GoodsDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            Goods goods = null;
             ArrayList<Goods> goodsList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                goods = new Goods(
-                        rs.getInt("id"),
-                        rs.getString("goods_name"),
-                        rs.getString("goods_type"),
-                        rs.getDouble("goods_Price"),
-                        rs.getInt("product_id"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                goodsList.add(goods);
+                goodsList.add(getResultGoods(rs));
             }
             rs.close();
             ps.close();
@@ -247,5 +218,19 @@ public class JdbcGoodsDAO implements GoodsDAO {
             } catch (SQLException e) {
             }
         }
+    }
+
+    public Goods getResultGoods(ResultSet resultSet) throws SQLException {
+        Goods goods = new Goods(
+                resultSet.getInt(ColumnNames.id),
+                resultSet.getString(ColumnNames.goodsName),
+                resultSet.getString(ColumnNames.goodsType),
+                resultSet.getDouble(ColumnNames.goodsPrice),
+                resultSet.getInt(ColumnNames.productId),
+                resultSet.getDate(ColumnNames.createDate),
+                resultSet.getDate(ColumnNames.modifyDate),
+                resultSet.getDate(ColumnNames.deleteDate)
+        );
+        return goods;
     }
 }

@@ -174,10 +174,6 @@ public class GoodsService {
 
     public boolean existsById(int goodsId) {
         Goods retInfo = goodsDAO.findByGoodsId(goodsId);
-        if (retInfo == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return retInfo != null;
     }
 }

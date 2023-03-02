@@ -1,5 +1,6 @@
 package com.mkyong.shops.dao.impl;
 
+import com.mkyong.common.ColumnNames;
 import com.mkyong.shops.dao.ShopsDAO;
 import com.mkyong.shops.model.Shops;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,15 +61,7 @@ public class JdbcShopsDAO implements ShopsDAO {
             Shops shops = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                shops = new Shops(
-                        rs.getInt("id"),
-                        rs.getString("Shop_name"),
-                        rs.getInt("Shop_address_id"),
-                        rs.getInt("Shop_info_id"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
+                shops = getResultShop(rs);
             }
             rs.close();
             ps.close();
@@ -166,20 +159,10 @@ public class JdbcShopsDAO implements ShopsDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            Shops shops = null;
             ArrayList<Shops> shopList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                shops = new Shops(
-                        rs.getInt("id"),
-                        rs.getString("shop_name"),
-                        rs.getInt("shop_address_id"),
-                        rs.getInt("shop_info_id"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                shopList.add(shops);
+                shopList.add(getResultShop(rs));
             }
             rs.close();
             ps.close();
@@ -197,20 +180,10 @@ public class JdbcShopsDAO implements ShopsDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            Shops shops = null;
             ArrayList<Shops> shopList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                shops = new Shops(
-                        rs.getInt("id"),
-                        rs.getString("shop_name"),
-                        rs.getInt("shop_address_id"),
-                        rs.getInt("shop_info_id"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                shopList.add(shops);
+                shopList.add(getResultShop(rs));
             }
             rs.close();
             ps.close();
@@ -229,6 +202,19 @@ public class JdbcShopsDAO implements ShopsDAO {
             } catch (SQLException e) {
             }
         }
+    }
+
+    public Shops getResultShop(ResultSet resultSet) throws SQLException {
+        Shops shop = new Shops(
+                resultSet.getInt(ColumnNames.id),
+                resultSet.getString(ColumnNames.shopName),
+                resultSet.getInt(ColumnNames.shopAddressId),
+                resultSet.getInt(ColumnNames.shopInfoId),
+                resultSet.getDate(ColumnNames.createDate),
+                resultSet.getDate(ColumnNames.modifyDate),
+                resultSet.getDate(ColumnNames.deleteDate)
+        );
+        return shop;
     }
 
 

@@ -66,19 +66,16 @@ public class AddressService {
         ArrayList<AddressCountByCity> addressCountByCityList;
         if (minCountShop < 0) {
             addressCountByCityList = addressDAO.findCountCity();
-            for (AddressCountByCity a : addressCountByCityList) {
-                System.out.println("count = " + a.getCount() + " | " + "city = " + a.getCity());
-            }
         } else {
             addressCountByCityList = addressDAO.findCountCity(minCountShop);
-            for (AddressCountByCity a : addressCountByCityList) {
-                System.out.println("count = " + a.getCount() + " | " + "city = " + a.getCity());
-            }
+        }
+        for (AddressCountByCity a : addressCountByCityList) {
+            System.out.println("count = " + a.getCount() + " | " + "city = " + a.getCity());
         }
         scanner1.close();
     }
 
-    public void changeAddress(Connection conn) throws SQLException {
+    public void changeAddress() throws SQLException {
         String addressName;
         String addressCity;
 
@@ -114,10 +111,7 @@ public class AddressService {
 
     public void addressPrint() {
         try {
-            ArrayList<Address> addressList = addressDAO.getAllAddress();
-            for (Address address : addressList) {
-                System.out.println(address);
-            }
+            addressDAO.getAllAddress().forEach(System.out::println);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -125,10 +119,7 @@ public class AddressService {
 
     public boolean existsById(int addressId) {
         Address retInfo = addressDAO.findByAddressId(addressId);
-        if (retInfo == null) {
-            return false;
-        }
-        return true;
+        return retInfo != null;
     }
 
 

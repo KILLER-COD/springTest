@@ -1,5 +1,6 @@
 package com.mkyong.shops.dao.impl;
 
+import com.mkyong.common.ColumnNames;
 import com.mkyong.shops.dao.ShopsInfoDAO;
 import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,15 +70,7 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO {
             ShopsInfo shopsInfo = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                shopsInfo = new ShopsInfo(
-                        rs.getInt("Id"),
-                        rs.getString("Shop_owner"),
-                        rs.getInt("HVHH"),
-                        rs.getInt("Address_id"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
+                shopsInfo = getResultShopsInfo(rs);
             }
             rs.close();
             ps.close();
@@ -135,20 +128,10 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ShopsInfo shopsInfo = null;
             ArrayList<ShopsInfo> shopsInfoList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                shopsInfo = new ShopsInfo(
-                        rs.getInt("id"),
-                        rs.getString("shop_owner"),
-                        rs.getInt("hvhh"),
-                        rs.getInt("address_id"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                shopsInfoList.add(shopsInfo);
+                shopsInfoList.add(getResultShopsInfo(rs));
             }
             rs.close();
             ps.close();
@@ -166,20 +149,10 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ShopsInfo shopsInfo = null;
             ArrayList<ShopsInfo> shopListList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                shopsInfo = new ShopsInfo(
-                        rs.getInt("id"),
-                        rs.getString("shop_owner"),
-                        rs.getInt("hvhh"),
-                        rs.getInt("address_id"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                shopListList.add(shopsInfo);
+                shopListList.add(getResultShopsInfo(rs));
             }
             rs.close();
             ps.close();
@@ -258,5 +231,18 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO {
             } catch (SQLException e) {
             }
         }
+    }
+
+    public ShopsInfo getResultShopsInfo(ResultSet resultSet) throws SQLException {
+        ShopsInfo shopsInfo = new ShopsInfo(
+                resultSet.getInt(ColumnNames.id),
+                resultSet.getString(ColumnNames.shopOwner),
+                resultSet.getInt(ColumnNames.hvhh),
+                resultSet.getInt(ColumnNames.addressId),
+                resultSet.getDate(ColumnNames.createDate),
+                resultSet.getDate(ColumnNames.modifyDate),
+                resultSet.getDate(ColumnNames.deleteDate)
+        );
+        return shopsInfo;
     }
 }

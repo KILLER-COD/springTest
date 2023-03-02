@@ -1,5 +1,6 @@
 package com.mkyong.orders.dao.impl;
 
+import com.mkyong.common.ColumnNames;
 import com.mkyong.orders.dao.OrdersGoodsDAO;
 import com.mkyong.orders.model.OrdersGoods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,15 +62,7 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO {
             OrdersGoods ordersGoods = null;
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                ordersGoods = new OrdersGoods(
-                        rs.getInt("id"),
-                        rs.getInt("Orders_id"),
-                        rs.getInt("Goods_id"),
-                        rs.getDouble("Goods_count"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
+                ordersGoods = getResultOrdersGoods(rs);
             }
             rs.close();
             ps.close();
@@ -127,20 +120,10 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            OrdersGoods ordersGoods = null;
             ArrayList<OrdersGoods> ordersGoodsList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ordersGoods = new OrdersGoods(
-                        rs.getInt("id"),
-                        rs.getInt("Orders_id"),
-                        rs.getInt("Goods_id"),
-                        rs.getInt("Goods_Count"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                ordersGoodsList.add(ordersGoods);
+                ordersGoodsList.add(getResultOrdersGoods(rs));
             }
             rs.close();
             ps.close();
@@ -158,20 +141,10 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO {
         try {
             conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            OrdersGoods ordersGoods = null;
             ArrayList<OrdersGoods> ordersGoodsList = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ordersGoods = new OrdersGoods(
-                        rs.getInt("id"),
-                        rs.getInt("Orders_id"),
-                        rs.getInt("Goods_id"),
-                        rs.getInt("Goods_Count"),
-                        rs.getDate("Create_Date"),
-                        rs.getDate("Modify_Date"),
-                        rs.getDate("Delete_Date")
-                );
-                ordersGoodsList.add(ordersGoods);
+                ordersGoodsList.add(getResultOrdersGoods(rs));
             }
             rs.close();
             ps.close();
@@ -229,5 +202,18 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO {
             } catch (SQLException e) {
             }
         }
+    }
+
+    public OrdersGoods getResultOrdersGoods(ResultSet resultSet) throws SQLException {
+        OrdersGoods ordersGoods = new OrdersGoods(
+                resultSet.getInt(ColumnNames.id),
+                resultSet.getInt(ColumnNames.ordersId),
+                resultSet.getInt(ColumnNames.goodsId),
+                resultSet.getDouble(ColumnNames.goodsCount),
+                resultSet.getDate(ColumnNames.createDate),
+                resultSet.getDate(ColumnNames.modifyDate),
+                resultSet.getDate(ColumnNames.deleteDate)
+        );
+        return ordersGoods;
     }
 }
