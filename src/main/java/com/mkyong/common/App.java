@@ -28,19 +28,21 @@ public class App {
         ShowAllNeedInfo showAllNeedInfo =  context.getBean(ShowAllNeedInfo.class);
         OrdersService ordersService1 = context.getBean(OrdersService.class);
         ordersService1.getAllOrders().forEach(System.out::println);
+        Scanner scanner = new Scanner(System.in);
 
-
-//      Scanner scanner = new Scanner(System.in);
+//      //      Show single Order info
 //      System.out.println("Choose Order id");
 //      int orderId = scanner.nextInt();
 //      showAllNeedInfo.showSingleOrderInfo(orderId);
+//
+//      //      Show All Orders info
 //      showAllNeedInfo.showAllOrderInfo();
 //
-      Scanner scanner = new Scanner(System.in);
-      System.out.println("Set orders Date ");
-      String setDateStr = scanner.nextLine();
-      Date date= Date.valueOf(setDateStr);
-      showAllNeedInfo.showAllOrdersInfoByDate(date);
+//      //      Show Orders By Set Date
+//      System.out.println("Set orders Date ");
+//      String setDateStr = scanner.nextLine();
+//      Date date= Date.valueOf(setDateStr);
+//      showAllNeedInfo.showAllOrdersInfoByDate(date);
 
 //      changeNewTransactionMethod.changeGoodsMethod();
 //      changeNewTransactionMethod.changeProductMethod();

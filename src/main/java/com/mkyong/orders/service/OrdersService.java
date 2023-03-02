@@ -25,7 +25,14 @@ public class OrdersService {
     }
 
     public void getSingleOrderInfo(int ordersId) throws SQLException {
-       ordersDAO.getSingleOrderInfo(ordersId);
+        if (existsById(ordersId)){
+            ordersDAO.getSingleOrderInfo(ordersId);
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Choose correct Order id");
+            ordersId = scanner.nextInt();
+            getSingleOrderInfo(ordersId);
+        }
     }
     public void getOrdersInfoByDate(Date date) throws SQLException {
        ordersDAO.getAllOrdersInfoByDate(date);

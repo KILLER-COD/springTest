@@ -184,12 +184,12 @@ public class JdbcOrdersDAO implements OrdersDAO
     }
 
     public void getSingleOrderInfo(int ordersId) throws SQLException {
-        String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price  " +
-                "FROM orders_goods og" +
+        String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price,o.create_date" +
+                " FROM orders_goods og" +
                 " join orders o on og.orders_id = o.id " +
                 " join shops s on o.shop_id = s.id " +
                 " join goods g on og.goods_id = g.id" +
-                " WHERE orders_id = ? && delete_date IS NULL; ";
+                " WHERE og.orders_id = ? && og.delete_date IS NULL; ";
 
         Connection conn = dataSource.getConnection();;
         PreparedStatement ps;
@@ -198,14 +198,15 @@ public class JdbcOrdersDAO implements OrdersDAO
         ps.setInt(1, ordersId);
         ps.executeQuery();
         ResultSet rs = ps.getResultSet();
-        OrdersInfo o = new OrdersInfo();
+//        OrdersInfo o = new OrdersInfo();
         while (rs.next()){
             System.out.println(
                     "Id = " + rs.getInt("orders_id") +
                             "| Shop Name = " + rs.getString("shop_name")+
                             "| Goods Name = " + rs.getString("goods_name")+
                             "| Goods Count = " + rs.getDouble("goods_count")+
-                            "| Goods Price = " + rs.getDouble("goods_price")
+                            "| Goods Price = " + rs.getDouble("goods_price")+
+                            "| Order Create = " + rs.getDate("create_date")
             );
         }
         ps.close();
@@ -213,7 +214,7 @@ public class JdbcOrdersDAO implements OrdersDAO
         closeConnection(conn);
     }
     public void getAllOrderInfo() throws SQLException {
-        String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price,og.delete_date  " +
+        String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price ,o.create_date" +
                         " FROM orders_goods og" +
                         " join orders o on og.orders_id = o.id " +
                         " join shops s on o.shop_id = s.id " +
@@ -226,14 +227,16 @@ public class JdbcOrdersDAO implements OrdersDAO
         ps = conn.prepareStatement(sql);
         ps.executeQuery();
         ResultSet rs = ps.getResultSet();
-        OrdersInfo o = new OrdersInfo();
+//        OrdersInfo o = new OrdersInfo();
         while (rs.next()){
             System.out.println(
                     "Id = " + rs.getInt("orders_id") +
                     "| Shop Name = " + rs.getString("shop_name")+
                     "| Goods Name = " + rs.getString("goods_name")+
                     "| Goods Count = " + rs.getDouble("goods_count")+
-                    "| Goods Price = " + rs.getDouble("goods_price")
+                    "| Goods Price = " + rs.getDouble("goods_price")+
+                    "| Order Create = " + rs.getDate("create_date")+
+                    "\n-------------------------------------------------------"
             );
         }
         ps.close();
@@ -255,7 +258,7 @@ public class JdbcOrdersDAO implements OrdersDAO
         ps.setDate(1, date);
         ps.executeQuery();
         ResultSet rs = ps.getResultSet();
-        OrdersInfo o = new OrdersInfo();
+//        OrdersInfo o = new OrdersInfo();
         while (rs.next()){
             System.out.println(
                     "Id = " + rs.getInt("orders_id") +
