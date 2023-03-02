@@ -27,7 +27,7 @@ public class App {
         ChangeNewTransactionMethod changeNewTransactionMethod = context.getBean(ChangeNewTransactionMethod.class);
         ShowAllNeedInfo showAllNeedInfo = context.getBean(ShowAllNeedInfo.class);
         OrdersService ordersService1 = context.getBean(OrdersService.class);
-        ordersService1.getAllOrders().forEach(System.out::println);
+        ordersService1.ordersPrint();
         Scanner scanner = new Scanner(System.in);
 
 //      //      Show single Order info
