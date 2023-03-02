@@ -56,13 +56,13 @@ public class App {
 //        Change Address
 //      changeNewTransactionMethod.changeAddressMethod();
 
-//        Change Shop goods
+//        Change Shop
 //      changeNewTransactionMethod.changeShopsMethod();
 
-//        Change Shop Info goods
+//        Change Shop Info
 //      changeNewTransactionMethod.changeShopsInfoMethod();
 
-//        Change single goods
+//        Change Order Goods
 //      changeNewTransactionMethod.changeOrdersGoodsMethod();
 
 
