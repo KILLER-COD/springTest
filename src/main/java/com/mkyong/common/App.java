@@ -44,12 +44,25 @@ public class App {
 //      Date date= Date.valueOf(setDateStr);
 //      showAllNeedInfo.showAllOrdersInfoByDate(date);
 
+//        Change Goods
 //      changeNewTransactionMethod.changeGoodsMethod();
+
+//        Change Product
 //      changeNewTransactionMethod.changeProductMethod();
+
+//        Change Order
 //      changeNewTransactionMethod.changeOrdersMethod();
+
+//        Change Address
 //      changeNewTransactionMethod.changeAddressMethod();
+
+//        Change Shop goods
 //      changeNewTransactionMethod.changeShopsMethod();
+
+//        Change Shop Info goods
 //      changeNewTransactionMethod.changeShopsInfoMethod();
+
+//        Change single goods
 //      changeNewTransactionMethod.changeOrdersGoodsMethod();
 
 
