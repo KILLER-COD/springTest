@@ -2,6 +2,7 @@ package com.mkyong.common;
 
 import com.mkyong.methods.AddNewTransactionMethod;
 import com.mkyong.methods.ChangeNewTransactionMethod;
+import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.methods.ShowAllNeedInfo;
 import com.mkyong.orders.service.OrdersService;
 import org.springframework.context.ApplicationContext;
@@ -9,12 +10,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class App {
 
     private DataSource dataSource;
-
 
     public static void main(String[] args) throws SQLException, InterruptedException {
         new App().start();
@@ -27,20 +26,20 @@ public class App {
         ChangeNewTransactionMethod changeNewTransactionMethod = context.getBean(ChangeNewTransactionMethod.class);
         ShowAllNeedInfo showAllNeedInfo = context.getBean(ShowAllNeedInfo.class);
         OrdersService ordersService1 = context.getBean(OrdersService.class);
-        ordersService1.ordersPrint();
-        Scanner scanner = new Scanner(System.in);
+        ConsoleInputService consoleInputService = context.getBean(ConsoleInputService.class);
 
 //      //      Show single Order info
-//      System.out.println("Choose Order id");
-//      int orderId = scanner.nextInt();
-//      showAllNeedInfo.showSingleOrderInfo(orderId);
+//        ordersService1.ordersPrint();
+//        System.out.println("Choose Order id");
+//        int orderId = consoleInputService.readInt();
+//        showAllNeedInfo.showSingleOrderInfo(orderId);
 //
 //      //      Show All Orders info
 //      showAllNeedInfo.showAllOrderInfo();
 //
 //      //      Show Orders By Set Date
 //      System.out.println("Set orders Date ");
-//      String setDateStr = scanner.nextLine();
+//      String setDateStr = consoleInputService.readString();
 //      Date date= Date.valueOf(setDateStr);
 //      showAllNeedInfo.showAllOrdersInfoByDate(date);
 
@@ -50,7 +49,7 @@ public class App {
 //      changeNewTransactionMethod.changeGoodsMethod();
 
 //        Change Product
-//      changeNewTransactionMethod.changeProductMethod();
+//        changeNewTransactionMethod.changeProductMethod();
 
 //        Change Order
 //      changeNewTransactionMethod.changeOrdersMethod();
@@ -86,7 +85,6 @@ public class App {
 
 
     }
-
 
 }
 

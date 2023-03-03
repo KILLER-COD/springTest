@@ -3,6 +3,7 @@ package com.mkyong.address.service;
 import com.mkyong.address.dao.AddressDAO;
 import com.mkyong.address.model.Address;
 import com.mkyong.address.model.AddressCountByCity;
+import com.mkyong.methods.ConsoleInputService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,14 +11,11 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 @Component
 public class AddressService {
-    Scanner scanner = new Scanner(System.in);
-    Scanner scanner1 = new Scanner(System.in);
-    Scanner scanner2 = new Scanner(System.in);
-
+    @Autowired
+    private ConsoleInputService consoleInputService;
     @Autowired
     private AddressDAO addressDAO;
 
@@ -31,7 +29,7 @@ public class AddressService {
 
     public void deleteAddress(int addressId) throws SQLException {
         System.out.println("Set Delete Address type | 1 - hard | 2 - Soft");
-        int deleteType = scanner.nextInt();
+        int deleteType = consoleInputService.readInt();
         if (deleteType == 1) {
             addressDAO.deleteHard(addressId);
         } else if (deleteType == 2) {
@@ -45,9 +43,9 @@ public class AddressService {
     public int addNewAddress(Connection conn) {
 
         System.out.println("Set shop Address");
-        String address_name = scanner1.nextLine();
+        String address_name = consoleInputService.readString();
         System.out.println("Set Name City where in shop");
-        String address_city = scanner1.nextLine();
+        String address_city = consoleInputService.readString();
 
         Address address = new Address();
         address.setAddress(address_name);
@@ -61,7 +59,7 @@ public class AddressService {
 
     public void countShopCity() {
         System.out.println("Set minimum count shop in city ( ? > 0 )| default=0");
-        int minCountShop = scanner1.nextInt();
+        int minCountShop = consoleInputService.readInt();
 
         ArrayList<AddressCountByCity> addressCountByCityList;
         if (minCountShop < 0) {
@@ -72,34 +70,30 @@ public class AddressService {
         for (AddressCountByCity a : addressCountByCityList) {
             System.out.println("count = " + a.getCount() + " | " + "city = " + a.getCity());
         }
-        scanner1.close();
     }
 
     public void changeAddress() throws SQLException {
-        String addressName;
-        String addressCity;
-
         addressPrint();
         System.out.println("Set Address  ID ");
-        int addressId = scanner2.nextInt();
+        int addressId = consoleInputService.readInt();
 
         Address address = addressDAO.findByAddressId(addressId);
         System.out.println(address.toString());
 
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("Change shop Address");
-        addressName = scanner.nextLine();
+        String addressName = consoleInputService.readString();
         while (addressName.equals("")) {
             System.out.println("Change shop Address");
-            addressName = scanner.nextLine();
+            addressName = consoleInputService.readString();
         }
 
         System.out.println("Change Name City where in shop");
-        addressCity = scanner.nextLine();
+        String addressCity = consoleInputService.readString();
+        ;
         while (addressCity.equals("")) {
             System.out.println("Change Name City where in shop");
-            addressCity = scanner.nextLine();
+            addressCity = consoleInputService.readString();
+            ;
         }
 
         address.setAddress(addressName);

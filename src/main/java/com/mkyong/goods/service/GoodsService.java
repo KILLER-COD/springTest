@@ -2,6 +2,7 @@ package com.mkyong.goods.service;
 
 import com.mkyong.goods.dao.GoodsDAO;
 import com.mkyong.goods.model.Goods;
+import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 @Component
 public class GoodsService {
@@ -18,6 +18,8 @@ public class GoodsService {
     private ProductService productService;
     @Autowired
     private GoodsDAO goodsDAO;
+    @Autowired
+    private ConsoleInputService consoleInputService;
 
     public ArrayList<Goods> getAllGoods() throws SQLException {
         return goodsDAO.getAllGoods();
@@ -29,9 +31,8 @@ public class GoodsService {
 
     public void deleteGoods(int goodsId) throws SQLException {
         System.out.println("Set Delete Product | 1 - hard | 2 - Soft");
-        Scanner scanner = new Scanner(System.in);
 
-        int deleteType = scanner.nextInt();
+        int deleteType = consoleInputService.readInt();
         if (deleteType == 1) {
             goodsDAO.deleteHard(goodsId);
         } else if (deleteType == 2) {
@@ -48,23 +49,22 @@ public class GoodsService {
         String goodsType;
         double goodsPrice;
         int productId = -1;
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Set Goods Name");
-        goodsName = scanner.nextLine();
+        goodsName = consoleInputService.readString();
         System.out.println("Set Goods Type ");
-        goodsType = scanner.nextLine();
+        goodsType = consoleInputService.readString();
         System.out.println("Set Goods Price ");
-        goodsPrice = scanner.nextDouble();
+        goodsPrice = consoleInputService.readDouble();
         System.out.println("Set Product Id (1) or Create new Product (2)");
-        choseProductAddType = scanner.nextInt();
+        choseProductAddType = consoleInputService.readInt();
         boolean existById = false;
         if (choseProductAddType == 1) {
             while (!existById) {
 
                 productService.productsPrint();
                 System.out.println("Set Product Id");
-                productId = scanner.nextInt();
+                productId = consoleInputService.readInt();
                 existById = productService.existsById(productId);
 
             }
@@ -82,67 +82,61 @@ public class GoodsService {
         goods.setProductId(productId);
         goods.setCreateDate(new Date(System.currentTimeMillis()));
         goods.setModifyDate(new Date(System.currentTimeMillis()));
-        System.out.println(goods.toString());
+        System.out.println(goods);
         int goodsId = goodsDAO.insert(goods, conn);
         while (goodsId < 0) {
             goodsId = addNewGoods(conn);
         }
-        scanner.close();
         return goodsId;
 
 
     }
 
     public void changeGoods(Connection conn) throws SQLException {
-        String goodsName;
-        String goodsType;
-        double goodsPrice;
         int productId = -1;
-        int goodsId;
-        Scanner scanner = new Scanner(System.in);
 
         goodsPrint();
         System.out.println("----------------  Set Goods  ID ");
-        goodsId = scanner.nextInt();
+        int goodsId = consoleInputService.readInt();
 
         while (!existsById(goodsId)) {
             System.out.println(" ---------------- Incorrect id,   ---------------- Set Goods  ID ");
-            goodsId = scanner.nextInt();
+            goodsId = consoleInputService.readInt();
         }
 
         Goods goods = goodsDAO.findByGoodsId(goodsId);
         System.out.println(goods.toString());
 
         System.out.println("----------------   Change Goods name =" + goods.getGoodsName());
-        goodsName = scanner.nextLine();
+        String goodsName = consoleInputService.readString();
         while (goodsName.equals("")) {
             System.out.println("\"" + goodsName + "\" Set Correct Name ");
             System.out.println("--------------- Change Goods name =" + goods.getGoodsName());
-            goodsName = scanner.nextLine();
+            goodsName = consoleInputService.readString();
         }
 
         System.out.println("---------------- Change Goods Type = " + goods.getGoodsType());
-        goodsType = scanner.nextLine();
+        String goodsType = consoleInputService.readString();
         while (goodsType.equals("")) {
             System.out.println("\"" + goodsType + "\" ----------------  Set Goods Type =" + goods.getGoodsType());
-            goodsType = scanner.nextLine();
+            goodsType = consoleInputService.readString();
         }
 
         System.out.println("---------------- Set new Goods Price = " + goods.getGoodsPrice());
-        goodsPrice = scanner.nextDouble();
-        while (goodsPrice == 0.0 || goodsPrice < 0) {
+        double goodsPrice = consoleInputService.readDouble();
+        while (goodsPrice == 0.0) {
             System.out.println("Set Correct Price  ----------------   Change Goods Price = " + goods.getGoodsPrice());
-            goodsPrice = scanner.nextDouble();
+            goodsPrice = consoleInputService.readDouble();
         }
 
         System.out.println("Change Product Id (1) or Create new Product  and Add(2)");
-        int choseProductAddType = scanner.nextInt();
+        int choseProductAddType = consoleInputService.readInt();
         boolean existById = false;
         if (choseProductAddType == 1) {
             while (!existById) {
                 productService.productsPrint();
                 System.out.println("Set Product Id");
-                productId = scanner.nextInt();
+                productId = consoleInputService.readInt();
                 existById = productService.existsById(productId);
             }
         } else if (choseProductAddType == 2) {
@@ -161,7 +155,6 @@ public class GoodsService {
 
         goodsDAO.update(goods, goodsId, conn);
 
-        scanner.close();
     }
 
     public void goodsPrint() {

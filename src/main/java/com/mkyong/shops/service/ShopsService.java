@@ -1,6 +1,7 @@
 package com.mkyong.shops.service;
 
 import com.mkyong.address.service.AddressService;
+import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.shops.dao.ShopsDAO;
 import com.mkyong.shops.model.Shops;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +11,11 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 @Component
 public class ShopsService {
-
-    Scanner scanner = new Scanner(System.in);
-    Scanner scanner1 = new Scanner(System.in);
-    Scanner scanner2 = new Scanner(System.in);
+    @Autowired
+    private ConsoleInputService consoleInputService;
     @Autowired
     private ShopsDAO shopsDAO;
     @Autowired
@@ -35,7 +33,7 @@ public class ShopsService {
 
     public void deleteShops(int shopsId) throws SQLException {
         System.out.println("Set Delete Shop type | 1 - hard | 2 - Soft");
-        int deleteType = scanner.nextInt();
+        int deleteType = consoleInputService.readInt();
         if (deleteType == 1) {
             shopsDAO.deleteHard(shopsId);
         } else if (deleteType == 2) {
@@ -50,7 +48,7 @@ public class ShopsService {
         String shopName;
 
         System.out.println("Set shop Name");
-        shopName = scanner1.next();
+        shopName = consoleInputService.readString();
 
         Shops shops = new Shops();
         shops.setShopName(shopName);
@@ -64,26 +62,24 @@ public class ShopsService {
     }
 
     public void changeShops(Connection conn) throws SQLException {
-        int shopAddressId;
-        int shopInfoId;
-        String shopName;
+
         shopsPrint();
         System.out.println("Set Shop  ID ");
-        int shopId = scanner2.nextInt();
+        int shopId = consoleInputService.readInt();
 
         Shops shops = shopsDAO.findByShopsId(shopId);
         System.out.println(shops.toString());
 
         System.out.println("----------------  Set new shop Address ");
-        shopName = scanner1.nextLine();
+        String shopName = consoleInputService.readString();
 
         addressService.getAllAddress().forEach(System.out::println);
         System.out.println("---------------- \n Set new Name City where in shop");
-        shopAddressId = scanner1.nextInt();
+        int shopAddressId = consoleInputService.readInt();
 
         shopsInfoService.getAllShopsInfo().forEach(System.out::println);
         System.out.println("---------------- \n Set new shop Info ID");
-        shopInfoId = scanner1.nextInt();
+        int shopInfoId = consoleInputService.readInt();
 
         shops.setShopName(shopName);
         shops.setShopAddressId(shopAddressId);
@@ -95,9 +91,7 @@ public class ShopsService {
 
     public void shopsPrint() {
         try {
-            for (Shops shops : getAllShops()) {
-                System.out.println(shops.toString());
-            }
+            shopsDAO.getAllShops().forEach(System.out::println);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -105,10 +99,7 @@ public class ShopsService {
 
     public boolean existsById(int shopsId) {
         Shops retInfo = shopsDAO.findByShopsId(shopsId);
-        if (retInfo == null) {
-            return false;
-        }
-        return true;
+        return retInfo != null;
     }
 
 

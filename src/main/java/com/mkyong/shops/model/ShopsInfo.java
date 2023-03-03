@@ -1,7 +1,12 @@
 package com.mkyong.shops.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Date;
 
+@Getter
+@Setter
 public class ShopsInfo {
     private int id;
     private String shopOwner;
@@ -39,62 +44,6 @@ public class ShopsInfo {
         this.addressId = addressId;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
-        this.deleteDate = deleteDate;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getShopOwner() {
-        return shopOwner;
-    }
-
-    public void setShopOwner(String shopOwner) {
-        this.shopOwner = shopOwner;
-    }
-
-    public int getHvhh() {
-        return hvhh;
-    }
-
-    public void setHvhh(int hvhh) {
-        this.hvhh = hvhh;
-    }
-
-    public int getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
-    }
-
-    public Date getDeleteDate() {
-        return deleteDate;
-    }
-
-    public void setDeleteDate(Date deleteDate) {
         this.deleteDate = deleteDate;
     }
 

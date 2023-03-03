@@ -42,7 +42,9 @@ public class JdbcOrdersDAO implements OrdersDAO {
             if (getGenerationKey.next()) {
                 ordersId = getGenerationKey.getInt(1);
             }
+            getGenerationKey.close();
             ps.close();
+
             return ordersId;
         } catch (SQLException e) {
             throw new RuntimeException(e);

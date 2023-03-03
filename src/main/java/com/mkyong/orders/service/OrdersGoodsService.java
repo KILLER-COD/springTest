@@ -1,6 +1,7 @@
 package com.mkyong.orders.service;
 
 import com.mkyong.goods.service.GoodsService;
+import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.orders.dao.OrdersGoodsDAO;
 import com.mkyong.orders.model.OrdersGoods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +11,17 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 @Component
 public class OrdersGoodsService {
-    Scanner scanner = new Scanner(System.in);
-
     @Autowired
     private OrdersGoodsDAO ordersGoodsDAO;
     @Autowired
     private GoodsService goodsService;
     @Autowired
     private OrdersService ordersService;
+    @Autowired
+    private ConsoleInputService consoleInputService;
 
     public ArrayList<OrdersGoods> getAllOrdersGoods() throws SQLException {
         return ordersGoodsDAO.getAllOrdersGoods();
@@ -33,7 +33,7 @@ public class OrdersGoodsService {
 
     public void deleteOrdersGoods(int ordersGoodsId) throws SQLException {
         System.out.println("Set Delete Orders Goods | 1 - hard | 2 - Soft");
-        int deleteType = scanner.nextInt();
+        int deleteType = consoleInputService.readInt();
         if (deleteType == 1) {
             ordersGoodsDAO.deleteHard(ordersGoodsId);
         } else if (deleteType == 2) {
@@ -45,17 +45,15 @@ public class OrdersGoodsService {
     }
 
     public ArrayList<Integer> addNewOrdersGoods(int ordersId, Connection conn) throws InterruptedException {
-        int goodsId;
-        double goodsCount;
         OrdersGoods ordersGoods;
 
         goodsService.goodsPrint();
         ArrayList<Integer> ordersGoodsList = new ArrayList<>();
         while (true) {
             System.out.println("Set Goods Id ");
-            goodsId = scanner.nextInt();
-            System.out.println("Set  Goods count ");
-            goodsCount = scanner.nextDouble();
+            int goodsId = consoleInputService.readInt();
+            System.out.println("Set Goods count ");
+            double goodsCount = consoleInputService.readDouble();
 
             ordersGoods = new OrdersGoods();
             ordersGoods.setOrdersId(ordersId);
@@ -66,7 +64,7 @@ public class OrdersGoodsService {
 
             ordersGoodsList.add(ordersGoodsDAO.insert(ordersGoods, conn));
             System.out.println("Add new Goods in Order | 1 - yes | 2 - No");
-            int addNewGoods = scanner.nextInt();
+            int addNewGoods = consoleInputService.readInt();
             if (addNewGoods == 2) {
                 break;
             }
@@ -78,38 +76,36 @@ public class OrdersGoodsService {
     public void changeOrdersGoods() throws SQLException {
         System.out.println("---------------- \n What do you change  \n 1- Change Orders Goods orders_Id -- 2- Change Goods_ID -- 3-Change Goods_Count  -- 4- Change all  ");
 
-        Scanner scanner = new Scanner(System.in);
-
         ordersGoodsPrint();
         System.out.println("---------------- \n Set Orders Goods  ID ");
-        int ordersGoodsId = scanner.nextInt();
-        while (!existsById(ordersGoodsId) && ordersGoodsId > 0) {
+        int ordersGoodsId = consoleInputService.readInt();
+        while (!existsById(ordersGoodsId)) {
             System.out.println("---------------- \n Set Correct Orders Goods ID ");
-            ordersGoodsId = scanner.nextInt();
+            ordersGoodsId = consoleInputService.readInt();
         }
         OrdersGoods ordersGoods = ordersGoodsDAO.findByOrdersGoodsId(ordersGoodsId);
         System.out.println(ordersGoods.toString());
 
-        ordersService.getAllOrders().forEach(System.out::println);
+        ordersService.ordersPrint();
         System.out.println("----------------  Set new Orders Goods orders_Id " + ordersGoods.getOrdersId());
-        int ordersId = scanner.nextInt();
-        while (!goodsService.existsById(ordersId) && ordersId < 0) {
+        int ordersId = consoleInputService.readInt();
+        while (!goodsService.existsById(ordersId)) {
             System.out.println("Set new Orders Goods  Orders_ID = " + ordersGoods.getOrdersId());
-            ordersId = scanner.nextInt();
+            ordersId = consoleInputService.readInt();
         }
-        goodsService.getAllGoods().forEach(System.out::println);
+        goodsService.goodsPrint();
         System.out.println("Set new Orders Goods  Goods_ID " + ordersGoods.getGoodsId());
-        int goodsId = scanner.nextInt();
-        while (!goodsService.existsById(goodsId) && goodsId < 0) {
+        int goodsId = consoleInputService.readInt();
+        while (!goodsService.existsById(goodsId)) {
             System.out.println("Set new Orders Goods  Goods_ID = " + ordersGoods.getGoodsId());
-            goodsId = scanner.nextInt();
+            goodsId = consoleInputService.readInt();
         }
 
         System.out.println("Set new  Orders Goods Goods_Count = " + ordersGoods.getGoodsCount());
-        double goodsCount = scanner.nextDouble();
-        while (goodsCount == 0.0 || goodsCount < 0) {
+        double goodsCount = consoleInputService.readDouble();
+        while (goodsCount == 0.0) {
             System.out.println("Set Correct Count  ----------------   Change Goods Count = " + ordersGoods.getGoodsCount());
-            goodsCount = scanner.nextDouble();
+            goodsCount = consoleInputService.readDouble();
         }
 
         ordersGoods.setOrdersId(ordersId);
@@ -118,13 +114,11 @@ public class OrdersGoodsService {
 
 
         ordersGoodsDAO.update(ordersGoods, ordersGoodsId);
-        scanner.close();
     }
 
     public void ordersGoodsPrint() {
         try {
-            ArrayList<OrdersGoods> ordersGoodsList = ordersGoodsDAO.getAllOrdersGoods();
-            ordersGoodsList.forEach(System.out::println);
+            ordersGoodsDAO.getAllOrdersGoods().forEach(System.out::println);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -132,9 +126,6 @@ public class OrdersGoodsService {
 
     public boolean existsById(int ordersGoodsId) {
         OrdersGoods retInfo = ordersGoodsDAO.findByOrdersGoodsId(ordersGoodsId);
-        if (retInfo == null) {
-            return false;
-        }
-        return true;
+        return retInfo != null;
     }
 }

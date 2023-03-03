@@ -204,13 +204,6 @@ public class JdbcGoodsDAO implements GoodsDAO {
 
     }
 
-    public int plus(int n1, int n2) {
-        if (n1 > 100) {
-            return 10;
-        }
-        return n1 + n2;
-    }
-
     public void closeConnection(Connection conn) {
         if (conn != null) {
             try {
@@ -232,5 +225,12 @@ public class JdbcGoodsDAO implements GoodsDAO {
                 resultSet.getDate(ColumnNames.deleteDate)
         );
         return goods;
+    }
+
+    public int plus(int n1, int n2) {
+        if (n1 > 100) {
+            return 10;
+        }
+        return n1 + n2;
     }
 }
