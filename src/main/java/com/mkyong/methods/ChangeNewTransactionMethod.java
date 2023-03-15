@@ -51,9 +51,9 @@ public class ChangeNewTransactionMethod {
         productService.changeProduct();
     }
 
-    public void changeAddressMethod() throws SQLException {
-        addressService.changeAddress();
-    }
+//    public void changeAddressMethod() throws SQLException {
+//        addressService.changeAddress();
+//    }
 
     public void changeOrdersMethod() throws SQLException {
         ordersService.changeOrders();

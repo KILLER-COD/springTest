@@ -1,5 +1,6 @@
 package com.mkyong.methods;
 
+import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
 import com.mkyong.goods.service.GoodsService;
 import com.mkyong.orders.service.OrdersGoodsService;
@@ -81,41 +82,41 @@ public class AddNewTransactionMethod {
     }
 
 
-    public void addNewShopMethod() throws SQLException {
-
-        Connection conn = dataSource.getConnection();
-
-        try {
-            conn.setAutoCommit(false);
-            int addressIdShop = addressService.addNewAddress(conn);
-            System.out.println(addressIdShop);
-            int addressIdShopInfo = addressService.addNewAddress(conn);
-            System.out.println(addressIdShopInfo);
-            int shopInfoId = shopsInfoService.addNewShopsInfo(conn, addressIdShopInfo);
-            System.out.println(shopInfoId);
-            int shopsAdd = shopsService.addNewShops(conn, addressIdShop, shopInfoId);
-            System.out.println(shopsAdd);
-            if (shopsAdd > 0) {
-                System.out.println("Commit (Ok) Add DB");
-                conn.commit();
-                conn.close();
-            } else {
-                System.out.println("Commit (Error) Not Add Db");
-                conn.rollback();
-                conn.close();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
+//    public void addNewShopMethod() throws SQLException {
+//
+//        Connection conn = dataSource.getConnection();
+//
+//        try {
+//            conn.setAutoCommit(false);
+//            int addressIdShop = addressService.addNewAddress(conn);
+//            System.out.println(addressIdShop);
+//            int addressIdShopInfo = addressService.addNewAddress(conn);
+//            System.out.println(addressIdShopInfo);
+//            int shopInfoId = shopsInfoService.addNewShopsInfo(conn, addressIdShopInfo);
+//            System.out.println(shopInfoId);
+//            int shopsAdd = shopsService.addNewShops(conn, addressIdShop, shopInfoId);
+//            System.out.println(shopsAdd);
+//            if (shopsAdd > 0) {
+//                System.out.println("Commit (Ok) Add DB");
+//                conn.commit();
+//                conn.close();
+//            } else {
+//                System.out.println("Commit (Error) Not Add Db");
+//                conn.rollback();
+//                conn.close();
+//            }
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
 
     public void addNewProductMethod() {
         productService.addNewProduct(null);
     }
 
-    public void addNewAddressMethod() {
-        addressService.addNewAddress(null);
+    public void addNewAddressMethod(Address address) {
+        addressService.addNewAddress(address, null);
     }
 
 

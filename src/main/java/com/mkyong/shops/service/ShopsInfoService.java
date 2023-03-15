@@ -87,7 +87,7 @@ public class ShopsInfoService {
             hvhh = consoleInputService.readInt();
         }
 
-        addressService.addressPrint();
+//        addressService.addressPrint();
         System.out.println("----------------  Set new Shop Address id = " + shopsInfo.getAddressId());
         int addressId = consoleInputService.readInt();
         while (!addressService.existsById(addressId)) {

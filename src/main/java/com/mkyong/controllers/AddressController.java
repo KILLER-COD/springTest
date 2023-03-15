@@ -1,7 +1,7 @@
 package com.mkyong.controllers;
 
-import com.mkyong.address.dao.AddressDAO;
 import com.mkyong.address.model.Address;
+import com.mkyong.address.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,22 +13,22 @@ import java.sql.SQLException;
 @RequestMapping("/address")
 public class AddressController {
 
-    private final AddressDAO addressDAO;
+    private final AddressService addressService;
 
     @Autowired
-    public AddressController(AddressDAO addressDAO) {
-        this.addressDAO = addressDAO;
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
     }
 
     @GetMapping()
     public String index(Model model) throws SQLException {
-        model.addAttribute("addressList", addressDAO.getAllAddress());
+        model.addAttribute("addressList", addressService.getAllAddress());
         return "address/index";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("address", addressDAO.findByAddressId(id));
+    public String show(@PathVariable("id") int id, Model model) throws SQLException {
+        model.addAttribute("address", addressService.findByAddressId(id));
         return "address/show";
     }
 
@@ -39,26 +39,25 @@ public class AddressController {
 
     @PostMapping()
     public String create(@ModelAttribute("address") Address address) {
-        addressDAO.insert(address, null);
+        addressService.addNewAddress(address, null);
         return "redirect:/address";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("address", addressDAO.findByAddressId(id));
+    public String edit(Model model, @PathVariable("id") int id) throws SQLException {
+        model.addAttribute("address", addressService.findByAddressId(id));
         return "address/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") Address address, @PathVariable("id") int id) throws SQLException {
-
-        addressDAO.update(address, id, null);
+    public String update(@ModelAttribute("address") Address address, @PathVariable("id") int id) throws SQLException {
+        addressService.changeAddress(address, id);
         return "redirect:/address";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) throws SQLException {
-        addressDAO.deleteSoft(id);
+        addressService.deleteAddress(id);
         return "redirect:/address";
     }
 }

@@ -5,7 +5,7 @@ import com.mkyong.address.model.AddressCountByCity;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface AddressDAO {
     int insert(Address address, Connection conn);
@@ -17,13 +17,13 @@ public interface AddressDAO {
 
     void deleteSoft(int addressId) throws SQLException;
 
-    ArrayList<Address> getAllAddress() throws SQLException;
+    List<Address> getAllAddress() throws SQLException;
 
-    ArrayList<Address> getAllDeletedAddress() throws SQLException;
+    List<Address> getAllDeletedAddress() throws SQLException;
 
     Address findByAddressId(int addressId);
 
-    ArrayList<AddressCountByCity> findCountCity();
+    List<AddressCountByCity> findCountCity();
 
-    ArrayList<AddressCountByCity> findCountCity(Integer minCountShopInCity);
+    List<AddressCountByCity> findCountCity(Integer minCountShopInCity);
 }
