@@ -29,10 +29,10 @@ public class App {
         ConsoleInputService consoleInputService = context.getBean(ConsoleInputService.class);
 
 //      //      Show single Order info
-//        ordersService1.ordersPrint();
-//        System.out.println("Choose Order id");
-//        int orderId = consoleInputService.readInt();
-//        showAllNeedInfo.showSingleOrderInfo(orderId);
+        ordersService1.ordersPrint();
+        System.out.println("Choose Order id");
+        int orderId = consoleInputService.readInt();
+        showAllNeedInfo.showSingleOrderInfo(orderId);
 //
 //      //      Show All Orders info
 //      showAllNeedInfo.showAllOrderInfo();

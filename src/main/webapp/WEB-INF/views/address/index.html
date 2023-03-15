@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="address : ${addressList}">
+    <a th:href="@{/address/{id}(id=${address.getId()})}" th:text="${address.getAddress()+' - '+address.getCity()}">address</a>
+</div>
+
+<br>
+<hr>
+<a href="/address/new">Create address</a>
+</body>
+</html>

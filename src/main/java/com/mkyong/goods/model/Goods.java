@@ -19,13 +19,8 @@ public class Goods {
 
 
     public Goods(int id, String goodsName, String goodsType, double goodsPrice, int productId, Date createDate, Date modifyDate, Date deleteDate) {
+        this(goodsName, goodsType, goodsPrice, productId, createDate, modifyDate);
         this.id = id;
-        this.goodsName = goodsName;
-        this.goodsType = goodsType;
-        this.goodsPrice = goodsPrice;
-        this.productId = productId;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
         this.deleteDate = deleteDate;
     }
 
@@ -36,6 +31,11 @@ public class Goods {
         this.productId = productId;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
+    }
+
+    public Goods(String goodsName, String goodsType, double goodsPrice, int productId, Date createDate, Date modifyDate, Date deleteDate) {
+        this(goodsName, goodsType, goodsPrice, productId, createDate, modifyDate);
+        this.deleteDate = deleteDate;
     }
 
     public Goods() {

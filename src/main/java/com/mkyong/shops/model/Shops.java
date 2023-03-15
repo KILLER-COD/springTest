@@ -1,12 +1,16 @@
 package com.mkyong.shops.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Shops {
     private int id;
     private String shopName;
@@ -16,36 +20,6 @@ public class Shops {
     private Date modifyDate;
     private Date deleteDate;
 
-    public Shops() {
-
-    }
-
-    public Shops(String shopName, int shopAddressId, int shopInfoId, Date createDate, Date modifyDate) {
-        this.shopName = shopName;
-        this.shopAddressId = shopAddressId;
-        this.shopInfoId = shopInfoId;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
-    }
-
-    public Shops(String shopName, int shopAddressId, int shopInfoId, Date createDate, Date modifyDate, Date deleteDate) {
-        this.shopName = shopName;
-        this.shopAddressId = shopAddressId;
-        this.shopInfoId = shopInfoId;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
-        this.deleteDate = deleteDate;
-    }
-
-    public Shops(int id, String shopName, int shopAddressId, int shopInfoId, Date createDate, Date modifyDate, Date deleteDate) {
-        this.id = id;
-        this.shopName = shopName;
-        this.shopAddressId = shopAddressId;
-        this.shopInfoId = shopInfoId;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
-        this.deleteDate = deleteDate;
-    }
 
     @Override
     public String toString() {
