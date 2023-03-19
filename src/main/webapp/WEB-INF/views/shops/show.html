@@ -23,12 +23,12 @@
 <p th:text="${shopsData.getShops().getDeleteDate()}">VALUE</p>
 
 <br>
-
-<a th:href="@{/address/{id}/edit(id=${address.getId()})}">edit</a>
+<hr>
+<a th:href="@{/shops/{id}/edit(id=${shopsData.getShops.getId()})}">edit</a>
 
 <br>
 
-<form th:method="DELETE" th:action="@{/address/{id}(id=${address.getId()})}">
+<form th:method="DELETE" th:action="@{/shops/{id}(id=${shopsData.getShops.getId()})}">
     <input type="submit" value="Delete">
 </form>
 </body>

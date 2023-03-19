@@ -64,9 +64,8 @@ public class JdbcAddressDAO implements AddressDAO {
             return preparedStatement;
 
         }, generatedKeyHolder);
-        int insertId = generatedKeyHolder.getKey().intValue();
 
-        return insertId;
+        return generatedKeyHolder.getKey().intValue();
     }
 
     public void update(Address address, int addressId, Connection conn) throws SQLException {

@@ -34,24 +34,9 @@ public class AddressService {
         addressDAO.deleteSoft(addressId);
     }
 
-//    public void deleteAddress(int addressId) throws SQLException {
-//        System.out.println("Set Delete Address type | 1 - hard | 2 - Soft");
-//        int deleteType = consoleInputService.readInt();
-//        if (deleteType == 1) {
-//            addressDAO.deleteHard(addressId);
-//        } else if (deleteType == 2) {
-//            addressDAO.deleteSoft(addressId);
-//        } else {
-//            System.out.println("Error : Set correct Number ");
-//            deleteAddress(addressId);
-//        }
-//    }
-
     public int addNewAddress(Address address) {
-
         address.setCreateDate(new Date(System.currentTimeMillis()));
         address.setModifyDate(new Date(System.currentTimeMillis()));
-
         System.out.println(address);
         return addressDAO.insert(address);
     }
@@ -74,36 +59,6 @@ public class AddressService {
     public void changeAddress(Address address, int addressId) throws SQLException {
         addressDAO.update(address, addressId, null);
     }
-//    public void changeAddress(Address address,int addressId) throws SQLException {
-//        addressPrint();
-//        System.out.println("Set Address  ID ");
-//        int addressId = consoleInputService.readInt();
-//
-//        Address address = addressDAO.findByAddressId(addressId);
-//        System.out.println(address.toString());
-//
-//        System.out.println("Change shop Address");
-//        String addressName = consoleInputService.readString();
-//        while (addressName.equals("")) {
-//            System.out.println("Change shop Address");
-//            addressName = consoleInputService.readString();
-//        }
-//
-//        System.out.println("Change Name City where in shop");
-//        String addressCity = consoleInputService.readString();
-//        ;
-//        while (addressCity.equals("")) {
-//            System.out.println("Change Name City where in shop");
-//            addressCity = consoleInputService.readString();
-//            ;
-//        }
-//
-//        address.setAddress(addressName);
-//        address.setCity(addressCity);
-//
-//        addressDAO.update(address, addressId, null);
-//
-//    }
 
     public boolean existsById(int addressId) {
         Address retInfo = addressDAO.findByAddressId(addressId);

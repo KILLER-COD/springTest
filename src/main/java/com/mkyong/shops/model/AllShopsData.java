@@ -13,7 +13,6 @@ import java.util.List;
 public class AllShopsData {
     private Shops shops;
     private Address addressShop;
-    private Address addressShopsInfo;
     private NewShopInfo newShopInfo;
 
     @Override
@@ -21,9 +20,7 @@ public class AllShopsData {
         return "AllShopsData{" +
                 "shops=" + shops +
                 ", addressShop=" + addressShop +
-                ", addressShopsInfo=" + addressShopsInfo +
                 ", newShopInfo=" + newShopInfo +
-                ", shopsInfoList=" + shopsInfoList +
                 '}';
     }
 

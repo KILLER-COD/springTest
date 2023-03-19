@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ShopsService {
@@ -23,11 +23,11 @@ public class ShopsService {
     @Autowired
     private ShopsInfoService shopsInfoService;
 
-    public ArrayList<Shops> getAllShops() throws SQLException {
+    public List<Shops> getAllShops() throws SQLException {
         return shopsDAO.getAllShops();
     }
 
-    public ArrayList<Shops> getAllDeletedShops() throws SQLException {
+    public List<Shops> getAllDeletedShops() throws SQLException {
         return shopsDAO.getAllDeletedShops();
     }
 
@@ -36,16 +36,7 @@ public class ShopsService {
     }
 
     public void deleteShops(int shopsId) throws SQLException {
-        System.out.println("Set Delete Shop type | 1 - hard | 2 - Soft");
-        int deleteType = consoleInputService.readInt();
-        if (deleteType == 1) {
-            shopsDAO.deleteHard(shopsId);
-        } else if (deleteType == 2) {
-            shopsDAO.deleteSoft(shopsId);
-        } else {
-            System.out.println("Error : Set correct Number ");
-            deleteShops(shopsId);
-        }
+        shopsDAO.deleteSoft(shopsId);
     }
 
     public int addNewShops(Shops shops, Connection conn) {
@@ -55,31 +46,8 @@ public class ShopsService {
 
     }
 
-    public void changeShops(Connection conn) throws SQLException {
-
-        shopsPrint();
-        System.out.println("Set Shop  ID ");
-        int shopId = consoleInputService.readInt();
-
-        Shops shops = shopsDAO.findByShopsId(shopId);
-        System.out.println(shops.toString());
-
-        System.out.println("----------------  Set new shop Address ");
-        String shopName = consoleInputService.readString();
-
-        addressService.getAllAddress().forEach(System.out::println);
-        System.out.println("---------------- \n Set new Name City where in shop");
-        int shopAddressId = consoleInputService.readInt();
-
-        shopsInfoService.getAllShopsInfo().forEach(System.out::println);
-        System.out.println("---------------- \n Set new shop Info ID");
-        int shopInfoId = consoleInputService.readInt();
-
-        shops.setShopName(shopName);
-        shops.setShopAddressId(shopAddressId);
-        shops.setShopInfoId(shopInfoId);
-
-        shopsDAO.update(shops, shopId, conn);
+    public void changeShops(Shops shops, Connection conn) throws SQLException {
+        shopsDAO.update(shops, conn);
 
     }
 

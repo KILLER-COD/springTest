@@ -5,12 +5,11 @@ import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 @Component
@@ -30,13 +29,20 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO {
 
     public int insert(ShopsInfo shopsInfo, Connection conn) {
         String sql = "INSERT INTO shops_info (shop_owner,hvhh,address_id,create_date,modify_date) VALUES ( ?, ?,?,?,?)";
-        return jdbcTemplate.update(sql,
-                shopsInfo.getShopOwner(),
-                shopsInfo.getHvhh(),
-                shopsInfo.getAddressId(),
-                shopsInfo.getCreateDate(),
-                shopsInfo.getModifyDate()
-        );
+        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, shopsInfo.getShopOwner());
+            preparedStatement.setInt(2, shopsInfo.getHvhh());
+            preparedStatement.setInt(3, shopsInfo.getAddressId());
+            preparedStatement.setDate(4, shopsInfo.getCreateDate());
+            preparedStatement.setDate(5, shopsInfo.getModifyDate());
+
+            return preparedStatement;
+
+        }, generatedKeyHolder);
+
+        return generatedKeyHolder.getKey().intValue();
     }
 
     public ShopsInfo findByShopsInfoId(int shopInfoId) {

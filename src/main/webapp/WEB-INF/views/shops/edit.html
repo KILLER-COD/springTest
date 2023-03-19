@@ -7,34 +7,76 @@
 <body>
 <form th:method="PATCH" th:action="@{/shops/{id}(id=${allShopsData.getShops().getId()})}" th:object="${allShopsData}">
     <div class="container">
-        <label for="address">Address : </label>
-        <input type="text" th:field="*{address}" id="address">
-        <!--    <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</div>-->
+        <label for="shopName">Shop Name : </label>
+        <input type="text" th:field="*{shops.shopName}" id="shopName">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('shops')}" th:errors="*{shops}">Name Error</div>-->
+        <hr>
+        <br>
+
+        <label for="addressShop">Shop Address : </label>
+        <input type="text" th:field="*{addressShop.address}" id="addressShop">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name Error</div>-->
+        <hr>
 
         <br>
 
-        <label for="city">City : </label>
-        <input type="text" th:field="*{city}" id="city">
-        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</div>-->
+        <label for="cityShop">Shop City : </label>
+        <input type="text" th:field="*{addressShop.city}" id="cityShop">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+        <hr>
+        <h2>New Shops Owner Info</h2>
+        <hr>
+
+        <label for="shopOwner">Shop Owner : </label>
+        <input type="text" th:field="*{newShopInfo.shopsInfo.shopOwner}" id="shopOwner">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('shopOwner')}" th:errors="*{shopOwner}">Shop Owner Error</div>-->
+
+        <br>
+        <hr>
+
+        <label for="hvhh">Shop HVHH : </label>
+        <input type="text" th:field="*{newShopInfo.shopsInfo.hvhh}" id="hvhh">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('hvhh')}" th:errors="*{hvhh}">Hvhh Error</div>-->
+
+        <br>
+        <hr>
+
+        <label for="address">P/S Address : </label>
+        <input type="text" th:field="*{newShopInfo.address.address}" id="address">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name Error</div>-->
 
         <br>
 
-        <select th:field="*{addressId}" id="addressId">-->
-            <option th:each="address : ${addressList}"
-                    th:value="${address.getId()}"
-                    th:text="${address.getAddress()+' - '+address.getCity()}"
-                    th:selected="(${address.getId()} == *{addressId})"
-                    th:readonly="(${address.getId()} == *{addressId})">Shop Address And City
-            </option>
-        </select>
-        <!--        <span><a th:href="@{/address/new/{id}(id=${shopsInfo.getId()})}">   Create New Address</a></span>-->
-        <!--        <br>-->
-        <!--        <hr>-->
+        <label for="city">P/S City : </label>
+        <input type="text" th:field="*{newShopInfo.address.city}" id="city">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+        <hr>
 
-
-        <input type="submit" value="Update Address">
+        <input type="submit" value="Update Shops and Shops Info">
 
     </div>
 </form>
 </body>
 </html>
+
+<!--        <br>-->
+<!--        <select th:field="*{shops.shopInfoId}" id="address-select">-->
+<!--            <option th:each="shopsInfo : ${shopsInfoList}"-->
+<!--                    th:value="${shopsInfo.getId()}"-->
+<!--                    th:text="${shopsInfo.getShopOwner()+' - '+shopsInfo.getHvhh()}"-->
+<!--                    th:selected="(${shopsInfo.getId()} == *{shops.shopInfoId})"-->
+<!--                    th:readonly="(${shopsInfo.getId()} == *{shops.shopInfoId})">Shop Owner And Hvhh-->
+<!--            </option>-->
+<!--        </select>-->
+
+<!--        <select th:field="*{addressId}" id="addressId">&ndash;&gt;-->
+<!--            <option th:each="address : ${addressList}"-->
+<!--                    th:value="${address.getId()}"-->
+<!--                    th:text="${address.getAddress()+' - '+address.getCity()}"-->
+<!--                    th:selected="(${address.getId()} == *{addressId})"-->
+<!--                    th:readonly="(${address.getId()} == *{addressId})">Shop Address And City-->
+<!--            </option>-->
+<!--        </select>-->
+<!--        <span><a th:href="@{/address/new/{id}(id=${shopsInfo.getId()})}">   Create New Address</a></span>-->
+<!--        <br>-->
+<!--        <hr>-->

@@ -35,6 +35,7 @@ public class JdbcProductDAO implements ProductDAO {
 
             return preparedStatement;
         }, generatedKeyHolder);
+
         return generatedKeyHolder.getKey().intValue();
     }
 
@@ -80,78 +81,4 @@ public class JdbcProductDAO implements ProductDAO {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
 
     }
-
-
-//    public void closeConnection(Connection conn) {
-//        if (conn != null) {
-//            try {
-//                conn.close();
-//            } catch (SQLException e) {
-//            }
-//        }
-//    }
-
-//    public Product getResultProduct(ResultSet resultSet) throws SQLException {
-//        Product product = new Product(
-//                resultSet.getInt(ColumnNames.id),
-//                resultSet.getString(ColumnNames.productName),
-//                resultSet.getString(ColumnNames.productType),
-//                resultSet.getDate(ColumnNames.createDate),
-//                resultSet.getDate(ColumnNames.modifyDate),
-//                resultSet.getDate(ColumnNames.deleteDate)
-//        );
-//        return product;
-//    }
-
-
-//    public void update(String productName, String productType,int productId) throws SQLException {
-//
-//        Product product =  findByProductId(productId);
-//
-//        if (productName != null && productType == null){
-//            product.setProductName(productName);
-//        } else if (productName == null && productType != null) {
-//            product.setProductType(productType);
-//        } else  {
-//           product.setProductName(productName);
-//           product.setProductType(productType);
-//        }
-//        update(product,productId);
-//    }
-
-//    public int insert(Product product, Connection conn) {
-//
-//        String sql = "INSERT INTO product (product_name,product_type,create_date,modify_date) VALUES ( ?,?,?,?)";
-//        if (conn == null) {
-//            try {
-//                conn = dataSource.getConnection();
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//
-//        try {
-//
-//            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//            ps.setString(1, product.getProductName());
-//            ps.setString(2, product.getProductType());
-//            ps.setDate(3, product.getCreateDate());
-//            ps.setDate(4, product.getModifyDate());
-//            ps.executeUpdate();
-//            int productId = -1;
-//            ResultSet getGenerateKey = ps.getGeneratedKeys();
-//            if (getGenerateKey.next()) {
-//                productId = getGenerateKey.getInt(1);
-//            }
-//            ps.close();
-//            System.out.println(productId);
-//            return productId;
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//
-//        } finally {
-////            closeConnection(conn);
-//        }
-//    }
-
 }

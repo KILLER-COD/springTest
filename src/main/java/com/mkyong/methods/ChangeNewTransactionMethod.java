@@ -12,8 +12,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 @Component
 public class ChangeNewTransactionMethod {
@@ -54,20 +52,20 @@ public class ChangeNewTransactionMethod {
 //    public void changeAddressMethod() throws SQLException {
 //        addressService.changeAddress();
 //    }
+//
+//    public void changeOrdersMethod() throws SQLException {
+//        ordersService.changeOrders();
+//    }
+//
+//    public void changeOrdersGoodsMethod() throws SQLException {
+//        ordersGoodsService.changeOrdersGoods();
+//    }
 
-    public void changeOrdersMethod() throws SQLException {
-        ordersService.changeOrders();
-    }
-
-    public void changeOrdersGoodsMethod() throws SQLException {
-        ordersGoodsService.changeOrdersGoods();
-    }
-
-    public void changeShopsMethod() throws SQLException {
-        Connection conn = dataSource.getConnection();
-        shopsService.changeShops(conn);
-        conn.close();
-    }
+//    public void changeShopsMethod() throws SQLException {
+//        Connection conn = dataSource.getConnection();
+//        shopsService.changeShops(conn);
+//        conn.close();
+//    }
 
 //    public void changeShopsInfoMethod() throws SQLException {
 //        Connection conn = dataSource.getConnection();
