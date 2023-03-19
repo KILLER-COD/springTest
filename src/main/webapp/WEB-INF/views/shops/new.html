@@ -4,25 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/style.css">
-    <title> New Address </title>
+    <title> New Shop </title>
 </head>
 <body>
 <h1> Add New Address </h1>
-<form th:method="POST" th:action="@{/address}" th:object="${address}">
+<form th:method="POST" th:action="@{/shops}" th:object="${allShopsData}">
     <div class="container">
-        <label for="address">Address : </label>
-        <input type="text" th:field="*{address}" id="address">
+        <label for="shopName">Shop Name : </label>
+        <input type="text" th:field="*{shops.shopName}" id="shopName">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('shops')}" th:errors="*{shops}">Name Error</div>-->
+        <hr>
+        <br>
+
+        <label for="address">Shop Address : </label>
+        <input type="text" th:field="*{addressShop.address}" id="address">
         <!--    <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name Error</div>-->
+        <hr>
 
         <br>
 
-        <label for="city">City : </label>
-        <input type="text" th:field="*{city}" id="city">
+        <label for="city">Shop City : </label>
+        <input type="text" th:field="*{addressShop.city}" id="city">
         <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+        <hr>
+        <hr>
 
         <br>
+        <select name="shops.shopInfoId" id="address-select">
+            <option th:each="shopsInfo : ${shopsInfoList}"
+                    th:value="${shopsInfo.getId()}"
+                    th:text="${shopsInfo.getShopOwner()+' - '+shopsInfo.getHvhh()}">Shop Owner And Hvhh
+            </option>
+        </select>
+        <hr>
 
-        <input type="submit" value="Add Address">
+        <input type="submit" value="Add Shop">
 
     </div>
 </form>

@@ -1,11 +1,13 @@
 package com.mkyong.shops.model;
 
 import com.mkyong.address.model.Address;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class NewShopInfo {
     private ShopsInfo shopsInfo;
     private Address address;

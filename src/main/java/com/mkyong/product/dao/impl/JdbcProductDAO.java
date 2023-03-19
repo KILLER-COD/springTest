@@ -15,14 +15,13 @@ import java.util.List;
 @Component
 public class JdbcProductDAO implements ProductDAO {
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private DataSource dataSource;
 
     @Autowired
     public JdbcProductDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
-    @Autowired
-    private DataSource dataSource;
 
     public int insert(Product product, Connection conn) {
         String sql = "INSERT INTO product (product_name,product_type,create_date,modify_date) VALUES ( ?,?,?,?)";

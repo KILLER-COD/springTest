@@ -19,14 +19,13 @@ import java.util.List;
 public class JdbcGoodsDAO implements GoodsDAO {
 
     private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    private DataSource dataSource;
 
     @Autowired
     public JdbcGoodsDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
-    @Autowired
-    private DataSource dataSource;
 
     public int insert(Goods goods, Connection conn) {
         String sql = "INSERT INTO goods (goods_name, goods_type,goods_price, product_id ,create_date,modify_date) VALUES ( ?, ?,?,?,?,?)";

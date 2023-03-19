@@ -16,13 +16,12 @@ import java.util.List;
 @Component
 public class JdbcShopsInfoDAO implements ShopsInfoDAO {
     private final JdbcTemplate jdbcTemplate;
+    private DataSource dataSource;
 
     @Autowired
     public JdbcShopsInfoDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
-    private DataSource dataSource;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {

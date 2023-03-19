@@ -17,14 +17,13 @@ import java.util.List;
 public class JdbcAddressDAO implements AddressDAO {
 
     private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    private DataSource dataSource;
 
     @Autowired
     public JdbcAddressDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
-    @Autowired
-    private DataSource dataSource;
 
     public List<AddressCountByCity> findCountCity() {
         String sql = "SELECT COUNT(id) count, city FROM address WHERE delete_date IS NULL GROUP BY city;";

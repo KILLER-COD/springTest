@@ -31,6 +31,10 @@ public class ShopsService {
         return shopsDAO.getAllDeletedShops();
     }
 
+    public Shops findByShopsId(int id) throws SQLException {
+        return shopsDAO.findByShopsId(id);
+    }
+
     public void deleteShops(int shopsId) throws SQLException {
         System.out.println("Set Delete Shop type | 1 - hard | 2 - Soft");
         int deleteType = consoleInputService.readInt();
@@ -44,19 +48,9 @@ public class ShopsService {
         }
     }
 
-    public int addNewShops(Connection conn, int addressIdShop, int shopsInfoId) {
-        String shopName;
-
-        System.out.println("Set shop Name");
-        shopName = consoleInputService.readString();
-
-        Shops shops = new Shops();
-        shops.setShopName(shopName);
-        shops.setShopAddressId(addressIdShop);
-        shops.setShopInfoId(shopsInfoId);
+    public int addNewShops(Shops shops, Connection conn) {
         shops.setCreateDate(new Date(System.currentTimeMillis()));
         shops.setModifyDate(new Date(System.currentTimeMillis()));
-
         return shopsDAO.insert(shops, conn);
 
     }

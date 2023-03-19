@@ -5,12 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-<p th:text="${address.getId()}">VALUE</p>
-<p th:text="${address.getAddress()}">VALUE</p>
-<p th:text="${address.getCity()}">VALUE</p>
-<p th:text="${address.getCreateDate()}">VALUE</p>
-<p th:text="${address.getModifyDate()}">VALUE</p>
-<p th:text="${address.getDeleteDate()}">VALUE</p>
+<p th:text="${shopsData.getShops().getId()}">VALUE</p>
+<p th:text="${shopsData.getShops().getShopName()}">VALUE</p>
+<p th:text="${shopsData.getAddressShop().getAddress()}">VALUE</p>
+<p th:text="${shopsData.getAddressShop().getCity()}">VALUE</p>
+<hr>
+<h3>Shops info</h3>
+<p th:text="${shopsData.getNewShopInfo().getShopsInfo.getShopOwner()}">VALUE</p>
+<p th:text="${shopsData.getNewShopInfo().getShopsInfo().getHvhh()}">VALUE</p>
+<p th:text="${shopsData.getNewShopInfo().getAddress().getAddress()}">VALUE</p>
+<p th:text="${shopsData.getNewShopInfo().getAddress.getCity()}">VALUE</p>
+<hr>
+<h3>Shops Create and Modified Date</h3>
+
+<p th:text="${shopsData.getShops().getCreateDate()}">VALUE</p>
+<p th:text="${shopsData.getShops().getModifyDate()}">VALUE</p>
+<p th:text="${shopsData.getShops().getDeleteDate()}">VALUE</p>
 
 <br>
 

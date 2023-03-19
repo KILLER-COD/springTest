@@ -1,6 +1,5 @@
 package com.mkyong.methods;
 
-import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
 import com.mkyong.goods.service.GoodsService;
 import com.mkyong.orders.service.OrdersGoodsService;
@@ -13,9 +12,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 @Component
 public class AddNewTransactionMethod {

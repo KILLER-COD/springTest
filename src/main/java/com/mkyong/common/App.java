@@ -1,10 +1,5 @@
 package com.mkyong.common;
 
-import com.mkyong.methods.AddNewTransactionMethod;
-import com.mkyong.methods.ChangeNewTransactionMethod;
-import com.mkyong.methods.ConsoleInputService;
-import com.mkyong.methods.ShowAllNeedInfo;
-import com.mkyong.orders.service.OrdersService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
