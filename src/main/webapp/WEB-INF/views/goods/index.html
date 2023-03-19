@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="goods : ${goodsList}">
+    <a th:href="@{/goods/{id}(id=${goods.getId()})}"
+       th:text="${goods.getGoodsName()+'- '+goods.getGoodsType()+' - '+goods.getGoodsPrice()+' - '+goods.getProductId()}">goods</a>
+    <br>
+    <hr>
+</div>
+
+<br>
+<hr>
+<a href="/goods/new">Create address</a>
+</body>
+</html>

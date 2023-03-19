@@ -48,13 +48,13 @@ public class AddressService {
 //        }
 //    }
 
-    public int addNewAddress(Address address, Connection conn) {
+    public int addNewAddress(Address address) {
 
         address.setCreateDate(new Date(System.currentTimeMillis()));
         address.setModifyDate(new Date(System.currentTimeMillis()));
 
         System.out.println(address);
-        return addressDAO.insert(address, conn);
+        return addressDAO.insert(address);
     }
 
     public void countShopCity() {

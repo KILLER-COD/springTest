@@ -1,170 +1,96 @@
 package com.mkyong.shops.dao.impl;
 
-import com.mkyong.common.ColumnNames;
 import com.mkyong.shops.dao.ShopsInfoDAO;
 import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.List;
 
 @Component
 public class JdbcShopsInfoDAO implements ShopsInfoDAO {
+    private final JdbcTemplate jdbcTemplate;
+
     @Autowired
+    public JdbcShopsInfoDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     private DataSource dataSource;
 
+    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     public int insert(ShopsInfo shopsInfo, Connection conn) {
-
         String sql = "INSERT INTO shops_info (shop_owner,hvhh,address_id,create_date,modify_date) VALUES ( ?, ?,?,?,?)";
-        if (conn == null) {
-            try {
-                conn = dataSource.getConnection();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, shopsInfo.getShopOwner());
-            ps.setInt(2, shopsInfo.getHvhh());
-            ps.setInt(3, shopsInfo.getAddressId());
-            ps.setDate(4, shopsInfo.getCreateDate());
-            ps.setDate(5, shopsInfo.getModifyDate());
-            ps.executeUpdate();
-
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-            int insertId;
-            if (generatedKeys.next()) {
-                insertId = generatedKeys.getInt(1);
-            } else {
-                throw new SQLException("Creating user failed, no ID obtained.");
-            }
-            ps.close();
-
-            return insertId;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-
-        } finally {
-//            closeConnection(conn);
-        }
+        return jdbcTemplate.update(sql,
+                shopsInfo.getShopOwner(),
+                shopsInfo.getHvhh(),
+                shopsInfo.getAddressId(),
+                shopsInfo.getCreateDate(),
+                shopsInfo.getModifyDate()
+        );
     }
 
     public ShopsInfo findByShopsInfoId(int shopInfoId) {
-
         String sql = "SELECT * FROM shops_info WHERE id = ?";
-
-        Connection conn = null;
-
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, shopInfoId);
-            ShopsInfo shopsInfo = null;
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                shopsInfo = getResultShopsInfo(rs);
-            }
-            rs.close();
-            ps.close();
-            return shopsInfo;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(conn);
-        }
+        return jdbcTemplate.query(sql, new Object[]{shopInfoId}, new BeanPropertyRowMapper<>(ShopsInfo.class))
+                .stream().findAny().orElse(null);
     }
 
     public void deleteSoft(int shopsId) {
         String sql = "UPDATE shops_info SET delete_date = ? WHERE id = ?";
-        Connection conn = null;
-
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDate(1, new Date(System.currentTimeMillis()));
-            ps.setInt(2, shopsId);
-            ps.executeUpdate();
-            ps.close();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(conn);
-        }
-
-
+        jdbcTemplate.update(sql,
+                new Date(System.currentTimeMillis()),
+                shopsId
+        );
     }
 
     public void deleteHard(int shopsId) {
         String sql = "DELETE FROM shops_info WHERE id = ?";
-        Connection conn = null;
-
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, shopsId);
-            ps.execute();
-            ps.close();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(conn);
-        }
-
+        jdbcTemplate.update(sql, shopsId);
     }
 
-    public ArrayList<ShopsInfo> getAllShopsInfo() {
+    public List<ShopsInfo> getAllShopsInfo() {
         String sql = "SELECT * FROM shops_info WHERE delete_date IS NULL";
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ArrayList<ShopsInfo> shopsInfoList = new ArrayList<>();
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                shopsInfoList.add(getResultShopsInfo(rs));
-            }
-            rs.close();
-            ps.close();
-            return shopsInfoList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(conn);
-        }
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ShopsInfo.class));
     }
 
-    public ArrayList<ShopsInfo> getAllDeletedShopsInfo() {
+    public List<ShopsInfo> getAllDeletedShopsInfo() {
         String sql = "SELECT * FROM shops_info WHERE delete_date IS NOT NULL";
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ArrayList<ShopsInfo> shopListList = new ArrayList<>();
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                shopListList.add(getResultShopsInfo(rs));
-            }
-            rs.close();
-            ps.close();
-            return shopListList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(conn);
-        }
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ShopsInfo.class));
     }
 
-//    public void update(String shopsOwner, int hvhh,int addressId,int shopsInfoId,Connection conn) throws SQLException {
+
+    public void update(ShopsInfo shopsInfo, int shopsInfoId, Connection conn) throws SQLException {
+        String sql = "UPDATE shops_info SET shop_owner = ? ,hvhh = ? ,address_id = ? ,modify_date = ? WHERE id = ?";
+        jdbcTemplate.update(sql,
+                shopsInfo.getShopOwner(),
+                shopsInfo.getHvhh(),
+                shopsInfo.getAddressId(),
+                new Date(System.currentTimeMillis()),
+                shopsInfoId
+        );
+    }
+
+//    public void closeConnection(Connection conn) {
+//        if (conn != null) {
+//            try {
+//                conn.close();
+//            } catch (SQLException e) {
+//            }
+//        }
+//    }
+
+    //    public void update(String shopsOwner, int hvhh,int addressId,int shopsInfoId,Connection conn) throws SQLException {
 //
 //        ShopsInfo shopsInfo =  findByShopsInfoId(shopsInfoId);
 //
@@ -203,46 +129,4 @@ public class JdbcShopsInfoDAO implements ShopsInfoDAO {
 //
 //    }
 
-    public void update(ShopsInfo shopsInfo, int shopsInfoId, Connection conn) throws SQLException {
-
-        String sql;
-        PreparedStatement ps;
-        if (conn == null) {
-            conn = dataSource.getConnection();
-        }
-        sql = "UPDATE shops_info SET shop_owner = ? ,hvhh = ? ,address_id = ? ,modify_date = ? WHERE id = ?";
-        ps = conn.prepareStatement(sql);
-        ps.setString(1, shopsInfo.getShopOwner());
-        ps.setInt(2, shopsInfo.getHvhh());
-        ps.setInt(3, shopsInfo.getAddressId());
-        ps.setDate(4, new Date(System.currentTimeMillis()));
-        ps.setInt(5, shopsInfoId);
-        ps.executeUpdate();
-        ps.close();
-
-//        closeConnection(conn);
-
-    }
-
-    public void closeConnection(Connection conn) {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-            }
-        }
-    }
-
-    public ShopsInfo getResultShopsInfo(ResultSet resultSet) throws SQLException {
-        ShopsInfo shopsInfo = new ShopsInfo(
-                resultSet.getInt(ColumnNames.id),
-                resultSet.getString(ColumnNames.shopOwner),
-                resultSet.getInt(ColumnNames.hvhh),
-                resultSet.getInt(ColumnNames.addressId),
-                resultSet.getDate(ColumnNames.createDate),
-                resultSet.getDate(ColumnNames.modifyDate),
-                resultSet.getDate(ColumnNames.deleteDate)
-        );
-        return shopsInfo;
-    }
 }

@@ -4,7 +4,7 @@ import com.mkyong.product.model.Product;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ProductDAO {
     int insert(Product product, Connection conn);
@@ -18,7 +18,7 @@ public interface ProductDAO {
 
     void deleteSoft(int productId) throws SQLException;
 
-    ArrayList<Product> getAllProduct() throws SQLException;
+    List<Product> getAllProduct() throws SQLException;
 
-    ArrayList<Product> getAllDeletedProduct() throws SQLException;
+    List<Product> getAllDeletedProduct() throws SQLException;
 }

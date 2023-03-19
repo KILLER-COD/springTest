@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/style.css">
+    <title> New Goods </title>
+</head>
+<body>
+<h1> Add New Goods </h1>
+<form th:method="POST" th:action="@{/goods}" th:object="${newGoods}">
+    <div class="container">
+        <label for="goodsName">Goods Name : </label>
+        <input type="text" th:field="*{goods.goodsName}" id="goodsName">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name Error</div>-->
+
+        <br>
+
+        <label for="goodsType">Goods Type : </label>
+        <input type="text" th:field="*{goods.goodsType}" id="goodsType">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+
+        <br>
+
+        <label for="goodsPrice">Goods Price : </label>
+        <input type="text" th:field="*{goods.goodsPrice}" id="goodsPrice">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+
+        <br>
+
+        <label for="productName">Product name : </label>
+        <input type="text" th:field="*{product.productName}" id="productName">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+
+        <br>
+
+        <label for="productType">Product Type : </label>
+        <input type="text" th:field="*{product.productType}" id="productType">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+
+        <br>
+
+
+        <input type="submit" value="Add New Goods">
+
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Product</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/product/{id}(id=${product.getId()})}" th:object="${product}">
+    <div class="container">
+        <label for="productName">Product Name : </label>
+        <input type="text" th:field="*{productName}" id="productName">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('product')}" th:errors="*{product}">Address Error</div>-->
+
+        <br>
+
+        <label for="productType">Product Type : </label>
+        <input type="text" th:field="*{productType}" id="productType">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('productType')}" th:errors="*{productType}">City Error</div>-->
+
+        <br>
+
+        <input type="submit" value="Update Address">
+
+    </div>
+</form>
+</body>
+</html>

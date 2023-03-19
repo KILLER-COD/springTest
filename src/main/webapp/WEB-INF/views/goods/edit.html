@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update address</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/goods/{id}(id=${newGoods.getGoods().getId()})}" th:object="${newGoods}">
+    <div class="container">
+        <label for="goodsName">Address : </label>
+        <input type="text" th:field="*{goods.goodsName}" id="goodsName">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name Error</div>-->
+
+        <br>
+
+        <label for="goodsType">City : </label>
+        <input type="text" th:field="*{goods.goodsType}" id="goodsType">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+
+        <br>
+
+        <label for="goodsPrice">City : </label>
+        <input type="text" th:field="*{goods.goodsPrice}" id="goodsPrice">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+
+        <br>
+
+        <label for="productName">City : </label>
+        <input type="text" th:field="*{product.productName}" id="productName">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+
+        <br>
+
+        <label for="productType">City : </label>
+        <input type="text" th:field="*{product.productType}" id="productType">
+        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
+
+        <br>
+
+        <input type="submit" value="Update Address">
+
+    </div>
+</form>
+</body>
+</html>

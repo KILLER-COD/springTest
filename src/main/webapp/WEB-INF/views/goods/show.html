@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Single Product</title>
+</head>
+<body>
+<h1>Single Product</h1>
+<br>
+<div class="container text-center">
+    <p th:text="${showGoods.getGoods().getId()}">VALUE</p>
+    <p th:text="${showGoods.getGoods().getGoodsName()}">VALUE</p>
+    <p th:text="${showGoods.getGoods().getGoodsType()}">VALUE</p>
+    <p th:text="${showGoods.getGoods().getGoodsPrice()}">VALUE</p>
+    <p th:text="${showGoods.getProduct().getProductName()}">VALUE</p>
+    <p th:text="${showGoods.getProduct().getProductType()}">VALUE</p>
+    <p th:text="${showGoods.getGoods().getCreateDate()}">VALUE</p>
+    <p th:text="${showGoods.getGoods().getModifyDate()}">VALUE</p>
+    <p th:text="${showGoods.getGoods().getDeleteDate()}">VALUE</p>
+
+    <br>
+    <hr>
+</div>
+<a th:href="@{/goods/{id}/edit(id=${showGoods.getGoods().getId()})}">edit</a>
+
+<br>
+
+<form th:method="DELETE" th:action="@{/goods/{id}(id=${showGoods.getGoods().getId()})}">
+    <input type="submit" value="Delete">
+</form>
+</body>
+</html>

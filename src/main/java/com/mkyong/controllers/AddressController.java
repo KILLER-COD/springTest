@@ -39,7 +39,8 @@ public class AddressController {
 
     @PostMapping()
     public String create(@ModelAttribute("address") Address address) {
-        addressService.addNewAddress(address, null);
+        System.out.println(address.getAddress() + "---" + address.getCity());
+        addressService.addNewAddress(address);
         return "redirect:/address";
     }
 

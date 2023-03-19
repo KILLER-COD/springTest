@@ -1,12 +1,14 @@
 package com.mkyong.address.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
 @Setter
+@Builder
 public class Address {
     private int id;
     private String address;
@@ -47,5 +49,4 @@ public class Address {
                 ", deleteDate=" + deleteDate +
                 '}';
     }
-
 }

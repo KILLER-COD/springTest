@@ -22,11 +22,11 @@ public class App {
     public void start() throws SQLException, InterruptedException {
         ApplicationContext context = new AnnotationConfigApplicationContext("com.mkyong");
         this.dataSource = (DataSource) context.getBean("dataSource");
-        AddNewTransactionMethod addNewTransactionMethod = context.getBean(AddNewTransactionMethod.class);
-        ChangeNewTransactionMethod changeNewTransactionMethod = context.getBean(ChangeNewTransactionMethod.class);
-        ShowAllNeedInfo showAllNeedInfo = context.getBean(ShowAllNeedInfo.class);
-        OrdersService ordersService1 = context.getBean(OrdersService.class);
-        ConsoleInputService consoleInputService = context.getBean(ConsoleInputService.class);
+//        AddNewTransactionMethod addNewTransactionMethod = context.getBean(AddNewTransactionMethod.class);
+//        ChangeNewTransactionMethod changeNewTransactionMethod = context.getBean(ChangeNewTransactionMethod.class);
+//        ShowAllNeedInfo showAllNeedInfo = context.getBean(ShowAllNeedInfo.class);
+//        OrdersService ordersService1 = context.getBean(OrdersService.class);
+//        ConsoleInputService consoleInputService = context.getBean(ConsoleInputService.class);
 
 //      //      Show single Order info
 //        ordersService1.ordersPrint();

@@ -4,7 +4,7 @@ import com.mkyong.shops.model.ShopsInfo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ShopsInfoDAO {
     int insert(ShopsInfo shopsInfo, Connection conn);
@@ -19,7 +19,7 @@ public interface ShopsInfoDAO {
 
     void deleteSoft(int shopsInfoId) throws SQLException;
 
-    ArrayList<ShopsInfo> getAllShopsInfo() throws SQLException;
+    List<ShopsInfo> getAllShopsInfo() throws SQLException;
 
-    ArrayList<ShopsInfo> getAllDeletedShopsInfo() throws SQLException;
+    List<ShopsInfo> getAllDeletedShopsInfo() throws SQLException;
 }

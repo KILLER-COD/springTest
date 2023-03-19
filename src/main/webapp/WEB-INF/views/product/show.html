@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Single Product Info Page</title>
+</head>
+<body>
+<h1>Product Info </h1>
+<br>
+<p th:text="${product.getId()}">VALUE</p>
+<p th:text="${product.getProductName()}">VALUE</p>
+<p th:text="${product.getProductType()}">VALUE</p>
+<p th:text="${product.getCreateDate()}">VALUE</p>
+<p th:text="${product.getModifyDate()}">VALUE</p>
+<p th:text="${product.getDeleteDate()}">VALUE</p>
+
+<br>
+
+<a th:href="@{/address/{id}/edit(id=${address.getId()})}">edit</a>
+
+<br>
+
+<form th:method="DELETE" th:action="@{/address/{id}(id=${address.getId()})}">
+    <input type="submit" value="Delete">
+</form>
+</body>
+</html>

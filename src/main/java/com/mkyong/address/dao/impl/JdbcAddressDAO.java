@@ -6,12 +6,11 @@ import com.mkyong.address.model.AddressCountByCity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.List;
 
 @Component
@@ -23,6 +22,9 @@ public class JdbcAddressDAO implements AddressDAO {
     public JdbcAddressDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    @Autowired
+    private DataSource dataSource;
 
     public List<AddressCountByCity> findCountCity() {
         String sql = "SELECT COUNT(id) count, city FROM address WHERE delete_date IS NULL GROUP BY city;";
@@ -47,15 +49,24 @@ public class JdbcAddressDAO implements AddressDAO {
         jdbcTemplate.update(sql, addressId);
     }
 
-    public int insert(Address address, Connection conn) {
+    public int insert(Address address) {
         String sql = "INSERT  INTO address (address, city,create_date,modify_date) VALUES ( ?, ?,?,?)";
-        int insertId = jdbcTemplate.update(sql,
-                address.getAddress(),
-                address.getCity(),
-                address.getCreateDate(),
-                address.getModifyDate(),
-                Statement.RETURN_GENERATED_KEYS
-        );
+        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(conn -> {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            // Set parameters
+            preparedStatement.setString(1, address.getAddress());
+            preparedStatement.setString(2, address.getCity());
+            preparedStatement.setDate(3, address.getCreateDate());
+            preparedStatement.setDate(4, address.getModifyDate());
+
+            return preparedStatement;
+
+        }, generatedKeyHolder);
+        int insertId = generatedKeyHolder.getKey().intValue();
+
         return insertId;
     }
 

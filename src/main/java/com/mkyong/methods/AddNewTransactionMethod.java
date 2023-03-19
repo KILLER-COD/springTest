@@ -37,49 +37,49 @@ public class AddNewTransactionMethod {
     @Autowired
     private ProductService productService;
 
-    public AddNewTransactionMethod(ApplicationContext context) {
-        this.context = context;
-    }
-
-    public void addNewOrdersMethod() throws SQLException {
-
-        Connection conn = dataSource.getConnection();
-
-        try {
-            conn.setAutoCommit(false);
-            int ordersAddId = ordersService.addNewOrders(conn);
-            ArrayList<Integer> ordersGoodsIdList = ordersGoodsService.addNewOrdersGoods(ordersAddId, conn);
-            if (ordersAddId > 0 && ordersGoodsIdList.size() > 0) {
-                conn.commit();
-                conn.close();
-            } else {
-                conn.rollback();
-                conn.close();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public void addNewGoodsMethod() throws SQLException {
-
-        Connection conn = dataSource.getConnection();
-
-        try {
-            conn.setAutoCommit(false);
-            int goodsAddOk = goodsService.addNewGoods(conn);
-            if (goodsAddOk > 0) {
-                conn.commit();
-                conn.close();
-            } else {
-                conn.rollback();
-                conn.close();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public AddNewTransactionMethod(ApplicationContext context) {
+//        this.context = context;
+//    }
+//
+//    public void addNewOrdersMethod() throws SQLException {
+//
+//        Connection conn = dataSource.getConnection();
+//
+//        try {
+//            conn.setAutoCommit(false);
+//            int ordersAddId = ordersService.addNewOrders(conn);
+//            ArrayList<Integer> ordersGoodsIdList = ordersGoodsService.addNewOrdersGoods(ordersAddId, conn);
+//            if (ordersAddId > 0 && ordersGoodsIdList.size() > 0) {
+//                conn.commit();
+//                conn.close();
+//            } else {
+//                conn.rollback();
+//                conn.close();
+//            }
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
+//
+//    public void addNewGoodsMethod() throws SQLException {
+//
+//        Connection conn = dataSource.getConnection();
+//
+//        try {
+//            conn.setAutoCommit(false);
+//            int goodsAddOk = goodsService.addNewGoods(conn);
+//            if (goodsAddOk > 0) {
+//                conn.commit();
+//                conn.close();
+//            } else {
+//                conn.rollback();
+//                conn.close();
+//            }
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 
 //    public void addNewShopMethod() throws SQLException {
@@ -111,13 +111,13 @@ public class AddNewTransactionMethod {
 //
 //    }
 
-    public void addNewProductMethod() {
-        productService.addNewProduct(null);
-    }
-
-    public void addNewAddressMethod(Address address) {
-        addressService.addNewAddress(address, null);
-    }
+//    public void addNewProductMethod() {
+//        productService.addNewProduct(null);
+//    }
+//
+//    public void addNewAddressMethod(Address address) {
+//        addressService.addNewAddress(address, null);
+//    }
 
 
 }

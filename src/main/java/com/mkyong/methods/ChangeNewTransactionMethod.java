@@ -39,17 +39,17 @@ public class ChangeNewTransactionMethod {
         this.context = context;
     }
 
-    public void changeGoodsMethod() throws SQLException {
-        Connection conn = dataSource.getConnection();
-        conn.setAutoCommit(false);
-        goodsService.changeGoods(conn);
-        conn.commit();
-        conn.close();
-    }
+//    public void changeGoodsMethod() throws SQLException {
+//        Connection conn = dataSource.getConnection();
+//        conn.setAutoCommit(false);
+//        goodsService.changeGoods(conn);
+//        conn.commit();
+//        conn.close();
+//    }
 
-    public void changeProductMethod() throws SQLException {
-        productService.changeProduct();
-    }
+//    public void changeProductMethod() throws SQLException {
+//        productService.changeProduct();
+//    }
 
 //    public void changeAddressMethod() throws SQLException {
 //        addressService.changeAddress();
@@ -69,11 +69,11 @@ public class ChangeNewTransactionMethod {
         conn.close();
     }
 
-    public void changeShopsInfoMethod() throws SQLException {
-        Connection conn = dataSource.getConnection();
-        shopsInfoService.changeShopsInfo(conn);
-        conn.close();
-    }
+//    public void changeShopsInfoMethod() throws SQLException {
+//        Connection conn = dataSource.getConnection();
+//        shopsInfoService.changeShopsInfo(conn);
+//        conn.close();
+//    }
 
 
 }

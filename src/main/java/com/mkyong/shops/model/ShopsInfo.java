@@ -1,5 +1,6 @@
 package com.mkyong.shops.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import java.sql.Date;
 
 @Getter
 @Setter
+@Builder
 public class ShopsInfo {
     private int id;
     private String shopOwner;

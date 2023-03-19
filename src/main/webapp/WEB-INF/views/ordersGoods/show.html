@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${address.getId()}">VALUE</p>
+<p th:text="${address.getAddress()}">VALUE</p>
+<p th:text="${address.getCity()}">VALUE</p>
+<p th:text="${address.getCreateDate()}">VALUE</p>
+<p th:text="${address.getModifyDate()}">VALUE</p>
+<p th:text="${address.getDeleteDate()}">VALUE</p>
+
+<br>
+
+<a th:href="@{/address/{id}/edit(id=${address.getId()})}">edit</a>
+
+<br>
+
+<form th:method="DELETE" th:action="@{/address/{id}(id=${address.getId()})}">
+    <input type="submit" value="Delete">
+</form>
+</body>
+</html>

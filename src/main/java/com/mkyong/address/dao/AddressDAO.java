@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface AddressDAO {
-    int insert(Address address, Connection conn);
+    int insert(Address address);
 
     void update(Address address, int addressId, Connection conn) throws SQLException;
 
