@@ -5,11 +5,14 @@ import com.mkyong.orders.model.OrdersGoods;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface OrdersGoodsDAO {
     int insert(OrdersGoods ordersGoods, Connection conn);
 
     OrdersGoods findByOrdersGoodsId(int id);
+
+    List<OrdersGoods> findByOrdersGoodsOrdersId(int id);
 
     void update(OrdersGoods ordersGoods, int ordersGoodsId) throws SQLException;
 

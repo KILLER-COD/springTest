@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class OrdersGoodsService {
@@ -29,6 +30,14 @@ public class OrdersGoodsService {
 
     public ArrayList<OrdersGoods> getAllDeletedOrdersGoods() throws SQLException {
         return ordersGoodsDAO.getAllDeletedOrdersGoods();
+    }
+
+    public OrdersGoods findByOrdersGoodsId(int id) throws SQLException {
+        return ordersGoodsDAO.findByOrdersGoodsId(id);
+    }
+
+    public List<OrdersGoods> findByOrdersGoodsOrdersId(int id) throws SQLException {
+        return ordersGoodsDAO.findByOrdersGoodsOrdersId(id);
     }
 
     public void deleteOrdersGoods(int ordersGoodsId) throws SQLException {

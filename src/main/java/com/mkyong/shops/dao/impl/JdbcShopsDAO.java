@@ -34,7 +34,7 @@ public class JdbcShopsDAO implements ShopsDAO {
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, shops.getShopName());
                 preparedStatement.setInt(2, shops.getShopAddressId());
                 preparedStatement.setInt(3, shops.getShopInfoId());

@@ -5,20 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-<p th:text="${address.getId()}">VALUE</p>
-<p th:text="${address.getAddress()}">VALUE</p>
-<p th:text="${address.getCity()}">VALUE</p>
-<p th:text="${address.getCreateDate()}">VALUE</p>
-<p th:text="${address.getModifyDate()}">VALUE</p>
-<p th:text="${address.getDeleteDate()}">VALUE</p>
+<div th:each="ordersGoods : ${ordersGoodsList}">
+    <p th:text="${ordersGoods.getId()}">VALUE</p>
+    <p th:text="${ordersGoods.getOrdersId()}">VALUE</p>
+    <p th:text="${ordersGoods.getGoodsId()}">VALUE</p>
+    <p th:text="${ordersGoods.getGoodsCount()}">VALUE</p>
+    <p th:text="${ordersGoods.getCreateDate()}">VALUE</p>
+    <p th:text="${ordersGoods.getModifyDate()}">VALUE</p>
+    <p th:text="${ordersGoods.getDeleteDate()}">VALUE</p>
+    <hr>
+</div>
+<br>
+
+<a th:href="@{/ordersGoods/{id}/edit(id=${ordersGoods.getId()})}">edit</a>
 
 <br>
 
-<a th:href="@{/address/{id}/edit(id=${address.getId()})}">edit</a>
-
-<br>
-
-<form th:method="DELETE" th:action="@{/address/{id}(id=${address.getId()})}">
+<form th:method="DELETE" th:action="@{/ordersGoods/{id}(id=${ordersGoods.getId()})}">
     <input type="submit" value="Delete">
 </form>
 </body>

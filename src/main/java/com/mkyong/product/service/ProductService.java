@@ -1,5 +1,6 @@
 package com.mkyong.product.service;
 
+import com.mkyong.goods.model.ShowGoods;
 import com.mkyong.product.dao.ProductDAO;
 import com.mkyong.product.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,18 @@ public class ProductService {
 
     public void changeProduct(Product product, int productId) throws SQLException {
         productDAO.update(product, productId);
+    }
+
+    public void checkedUpdateProduct(ShowGoods showGoods, int productId) throws SQLException {
+        Product product = findByProductId(productId);
+        if (!product.getProductName().equals(showGoods.getProduct().getProductName())) {
+            product.setProductName(showGoods.getProduct().getProductName());
+        }
+        if (!product.getProductType().equals(showGoods.getProduct().getProductType())) {
+            product.setProductType(showGoods.getProduct().getProductType());
+        }
+
+        changeProduct(product, productId);
     }
 
 

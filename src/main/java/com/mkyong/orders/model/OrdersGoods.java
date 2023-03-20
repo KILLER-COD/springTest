@@ -1,12 +1,14 @@
 package com.mkyong.orders.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Date;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrdersGoods {
     private int id;
     private int ordersId;
@@ -16,15 +18,6 @@ public class OrdersGoods {
     private Date modifyDate;
     private Date deleteDate;
 
-    public OrdersGoods(int id, int ordersId, int goodsId, double goodsCount, Date createDate, Date modifyDate, Date deleteDate) {
-        this.id = id;
-        this.ordersId = ordersId;
-        this.goodsId = goodsId;
-        this.goodsCount = goodsCount;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
-        this.deleteDate = deleteDate;
-    }
 
     public OrdersGoods(int ordersId, int goodsId, double goodsCount, Date createDate, Date modifyDate, Date deleteDate) {
         this.ordersId = ordersId;
@@ -43,9 +36,6 @@ public class OrdersGoods {
         this.modifyDate = modifyDate;
     }
 
-    public OrdersGoods() {
-
-    }
 
     @Override
     public String toString() {

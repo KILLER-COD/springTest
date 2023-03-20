@@ -8,13 +8,13 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewGoods {
+public class ShowGoods {
     private Goods goods;
     private Product product;
 
     @Override
     public String toString() {
-        return "NewGoods{" +
+        return "ShowGoods{" +
                 "goods=" + goods +
                 ", product=" + product +
                 '}';

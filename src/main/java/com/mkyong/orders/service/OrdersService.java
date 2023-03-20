@@ -25,6 +25,10 @@ public class OrdersService {
         return ordersDAO.getAllOrders();
     }
 
+    public Orders findByOrdersId(int id) throws SQLException {
+        return ordersDAO.findByOrdersId(id);
+    }
+
     public void getSingleOrderInfo(int ordersId) throws SQLException {
         if (existsById(ordersId)) {
             ordersDAO.getSingleOrderInfo(ordersId);
@@ -60,13 +64,7 @@ public class OrdersService {
         }
     }
 
-    public int addNewOrders(Connection conn) {
-        shopsService.shopsPrint();
-        System.out.println("Set Shop id");
-        int shopId = consoleInputService.readInt();
-
-        Orders orders = new Orders();
-        orders.setShopId(shopId);
+    public int addNewOrders(Orders orders, Connection conn) {
         orders.setCreateDate(new Date(System.currentTimeMillis()));
         orders.setModifyDate(new Date(System.currentTimeMillis()));
         return ordersDAO.insert(orders, conn);

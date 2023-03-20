@@ -1,18 +1,23 @@
 package com.mkyong.orders.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Orders {
     private int id;
     private int shopId;
     private Date createDate;
     private Date modifyDate;
     private Date deleteDate;
+    private List<String> goodsCount;
+    private List<String> goodsId;
 
     public Orders(int id, int shopId, Date createDate, Date modifyDate, Date deleteDate) {
         this.id = id;
@@ -33,10 +38,6 @@ public class Orders {
         this.shopId = shopId;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
-    }
-
-    public Orders() {
-
     }
 
     @Override

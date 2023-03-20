@@ -4,25 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/style.css">
-    <title> New Address </title>
+    <title> New Orders </title>
 </head>
 <body>
-<h1> Add New Address </h1>
-<form th:method="POST" th:action="@{/address}" th:object="${address}">
+<h1> Add New Orders </h1>
+<form th:method="POST" th:action="@{/orders}" th:object="${orders}">
     <div class="container">
-        <label for="address">Address : </label>
-        <input type="text" th:field="*{address}" id="address">
-        <!--    <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name Error</div>-->
+        <br>
+        <select name="shopId" id="shop-select">
+            <option th:each="shop : ${shopsList}"
+                    th:value="${shop.getId()}"
+                    th:text="${shop.getShopName()+' - '+shop.getAddress()+' - '+shop.getCity()}"> New order Shops
+            </option>
+        </select>
+        <hr>
+        <br>
+        <select name="goodsId" id="goods-select">
+            <option th:each="goods : ${goodsList}"
+                    th:value="${goods.getId()}"
+                    th:text="${goods.getGoodsName()+' - '+goods.getGoodsType()+' - '+goods.getGoodsPrice()}"> New Goods
+            </option>
+        </select>
 
+        <input type="text" name="goodsCount" id="goods">
+        <hr>
+        <br>
+        <select name="goodsId" id="goods-select1">
+            <option th:each="goods : ${goodsList}"
+                    th:value="${goods.getId()}"
+                    th:text="${goods.getGoodsName()+' - '+goods.getGoodsType()+' - '+goods.getGoodsPrice()}"> New Goods
+            </option>
+        </select>
+
+        <input type="text" name="goodsCount" id="goods1">
+        <br>
+        <hr>
+        <br>
+        <select name="goodsId" id="goods-select2">
+            <option th:each="goods : ${goodsList}"
+                    th:value="${goods.getId()}"
+                    th:text="${goods.getGoodsName()+' - '+goods.getGoodsType()+' - '+goods.getGoodsPrice()}"> New Goods
+            </option>
+        </select>
+
+        <input type="text" name="goodsCount" id="goods2">
         <br>
 
-        <label for="city">City : </label>
-        <input type="text" th:field="*{city}" id="city">
-        <!--    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>-->
-
-        <br>
-
-        <input type="submit" value="Add Address">
+        <hr>
+        <input type="submit" value="Add Order">
 
     </div>
 </form>

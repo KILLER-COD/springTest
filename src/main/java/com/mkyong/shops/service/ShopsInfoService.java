@@ -3,6 +3,7 @@ package com.mkyong.shops.service;
 import com.mkyong.address.service.AddressService;
 import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.shops.dao.ShopsInfoDAO;
+import com.mkyong.shops.model.NewShopInfo;
 import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,8 +46,8 @@ public class ShopsInfoService {
     }
 
 
-    public void changeShopsInfo(ShopsInfo shopsInfo, int shopInfoId, Connection conn) throws SQLException {
-        shopsInfoDAO.update(shopsInfo, shopInfoId, conn);
+    public void changeShopsInfo(NewShopInfo newShopInfo, int shopInfoId, Connection conn) throws SQLException {
+        shopsInfoDAO.update(checkedUpdateShops(newShopInfo, shopInfoId), shopInfoId, conn);
     }
 
 
@@ -61,6 +62,21 @@ public class ShopsInfoService {
     public boolean existsById(int shopsInfoId) {
         ShopsInfo retInfo = shopsInfoDAO.findByShopsInfoId(shopsInfoId);
         return retInfo != null;
+    }
+
+    public ShopsInfo checkedUpdateShops(NewShopInfo newShopInfo, int shopsInfoId) throws SQLException {
+        // Checked Change Shops Info and Shops Info Address ------------------------
+        ShopsInfo shopsInfo = findByShopInfoId(shopsInfoId);
+
+        if (!shopsInfo.getShopOwner().equals(newShopInfo.getShopsInfo().getShopOwner())) {
+            shopsInfo.setShopOwner(newShopInfo.getShopsInfo().getShopOwner());
+        }
+        if (shopsInfo.getHvhh() != newShopInfo.getShopsInfo().getHvhh()) {
+            shopsInfo.setHvhh(newShopInfo.getShopsInfo().getHvhh());
+        }
+
+        return shopsInfo;
+
     }
 
 

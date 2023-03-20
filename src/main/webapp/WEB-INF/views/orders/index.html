@@ -5,12 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<div th:each="address : ${addressList}">
-    <a th:href="@{/address/{id}(id=${address.getId()})}" th:text="${address.getAddress()+' - '+address.getCity()}">address</a>
+<div th:each="ordersShopInfo : ${ordersDataList}">
+    <a th:href="@{/orders/{id}(id=${ordersShopInfo.getId()})}"
+       th:text="${ordersShopInfo.getId()} +'---'+ ${ordersShopInfo.getShopName()}+'---'+ ${ordersShopInfo.getAddress()}+'---'+ ${ordersShopInfo.getCity()}+'---'+ ${ordersShopInfo.getCreateDate()}">orders
+        <span>Shop Name</span></a>
+    <hr>
 </div>
 
 <br>
 <hr>
-<a href="/address/new">Create address</a>
+<a href="/orders/new">Create address</a>
 </body>
 </html>

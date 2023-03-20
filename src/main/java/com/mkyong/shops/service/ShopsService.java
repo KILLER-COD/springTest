@@ -1,9 +1,13 @@
 package com.mkyong.shops.service;
 
+import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
 import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.shops.dao.ShopsDAO;
+import com.mkyong.shops.model.AllShopsData;
+import com.mkyong.shops.model.NewShopInfo;
 import com.mkyong.shops.model.Shops;
+import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,16 +43,26 @@ public class ShopsService {
         shopsDAO.deleteSoft(shopsId);
     }
 
-    public int addNewShops(Shops shops, Connection conn) {
+    public int addNewShops(AllShopsData allShopsData, Connection conn) {
+        System.out.println(allShopsData);
+        ShopsInfo shopsInfo = allShopsData.getNewShopInfo().getShopsInfo();
+        int shopAddressId = addressService.addNewAddress(allShopsData.getAddressShop());
+        int shopInfoAddressId = addressService.addNewAddress(allShopsData.getNewShopInfo().getAddress());
+        shopsInfo.setAddressId(shopInfoAddressId);
+        int newShopsInfoId = shopsInfoService.addNewShopsInfo(shopsInfo);
+        Shops shops = Shops.builder()
+                .shopName(allShopsData.getShops().getShopName())
+                .shopAddressId(shopAddressId)
+                .shopInfoId(newShopsInfoId)
+                .build();
         shops.setCreateDate(new Date(System.currentTimeMillis()));
         shops.setModifyDate(new Date(System.currentTimeMillis()));
         return shopsDAO.insert(shops, conn);
 
     }
 
-    public void changeShops(Shops shops, Connection conn) throws SQLException {
-        shopsDAO.update(shops, conn);
-
+    public void changeShops(AllShopsData allShopsData, int shopsId, Connection conn) throws SQLException {
+        shopsDAO.update(checkedUpdateShops(allShopsData, shopsId), conn);
     }
 
     public void shopsPrint() {
@@ -62,6 +76,45 @@ public class ShopsService {
     public boolean existsById(int shopsId) {
         Shops retInfo = shopsDAO.findByShopsId(shopsId);
         return retInfo != null;
+    }
+
+    public AllShopsData getShowShopsData(int shopsSId) throws SQLException {
+        Shops shops = findByShopsId(shopsSId);
+        ShopsInfo shopsInfo = shopsInfoService.findByShopInfoId(shops.getShopInfoId());
+        NewShopInfo newShopInfo = NewShopInfo.builder()
+                .shopsInfo(shopsInfo)
+                .address(addressService.findByAddressId(shopsInfo.getAddressId()))
+                .build();
+
+        return AllShopsData.builder()
+                .shops(shops)
+                .addressShop(addressService.findByAddressId(shops.getShopAddressId()))
+                .newShopInfo(newShopInfo)
+                .build();
+    }
+
+    public Shops checkedUpdateShops(AllShopsData allShopsData, int shopsId) throws SQLException {
+        //Checked Change Shops name -------------------------------------------------
+        Shops shops = findByShopsId(shopsId);
+        Shops shopsNew = allShopsData.getShops();
+        if (!shops.getShopName().equals(shopsNew.getShopName())) {
+            shops.setShopName(shopsNew.getShopName());
+        }
+
+        int addressShopsId = shops.getShopAddressId();
+        Address addressShop = addressService.checkedUpdateAddress(allShopsData.getAddressShop(), addressShopsId);
+        addressService.changeAddress(addressShop, shops.getShopAddressId());
+
+        int addressShopsInfoId = shopsInfoService.findByShopInfoId(shops.getShopInfoId()).getAddressId();
+        Address addressShopInfo = addressService.checkedUpdateAddress(allShopsData.getNewShopInfo().getAddress(), addressShopsInfoId);
+        addressService.changeAddress(addressShopInfo, shopsInfoService.findByShopInfoId(shops.getShopInfoId()).getAddressId());
+
+        shopsInfoService.changeShopsInfo(allShopsData.getNewShopInfo(), shops.getShopInfoId(), null);
+        return shops;
+    }
+
+    public List<ShopsInfo> getAllShopsInfo() throws SQLException {
+        return shopsInfoService.getAllShopsInfo();
     }
 
 

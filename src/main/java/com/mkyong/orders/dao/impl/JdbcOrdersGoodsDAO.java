@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO {
@@ -67,6 +68,31 @@ public class JdbcOrdersGoodsDAO implements OrdersGoodsDAO {
             rs.close();
             ps.close();
             return ordersGoods;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            closeConnection(conn);
+        }
+    }
+
+    public List<OrdersGoods> findByOrdersGoodsOrdersId(int orders_goods_id) {
+
+        String sql = "SELECT * FROM orders_goods WHERE orders_id = ?";
+
+        Connection conn = null;
+
+        try {
+            conn = dataSource.getConnection();
+            List<OrdersGoods> ordersGoodsList = new ArrayList<>();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, orders_goods_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ordersGoodsList.add(getResultOrdersGoods(rs));
+            }
+            rs.close();
+            ps.close();
+            return ordersGoodsList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1> Add New Goods </h1>
-<form th:method="POST" th:action="@{/goods}" th:object="${newGoods}">
+<form th:method="POST" th:action="@{/goods}" th:object="${showGoods}">
     <div class="container">
         <label for="goodsName">Goods Name : </label>
         <input type="text" th:field="*{goods.goodsName}" id="goodsName">

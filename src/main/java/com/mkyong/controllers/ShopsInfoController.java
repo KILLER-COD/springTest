@@ -78,25 +78,7 @@ public class ShopsInfoController {
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("newShopsInfo") NewShopInfo newShopInfo, @PathVariable("id") int id) throws SQLException {
-        ShopsInfo shopsInfo = shopsInfoService.findByShopInfoId(id);
-        Address address = addressService.findByAddressId(shopsInfo.getAddressId());
-
-        if (!address.getAddress().equals(newShopInfo.getAddress().getAddress())) {
-            address.setAddress(newShopInfo.getAddress().getAddress());
-        }
-        if (!address.getCity().equals(newShopInfo.getAddress().getCity())) {
-            address.setCity(newShopInfo.getAddress().getCity());
-        }
-        if (!shopsInfo.getShopOwner().equals(newShopInfo.getShopsInfo().getShopOwner())) {
-            shopsInfo.setShopOwner(newShopInfo.getShopsInfo().getShopOwner());
-        }
-        if (shopsInfo.getHvhh() != newShopInfo.getShopsInfo().getHvhh()) {
-            shopsInfo.setHvhh(newShopInfo.getShopsInfo().getHvhh());
-        }
-
-        addressService.changeAddress(address, address.getId());
-        System.out.println(newShopInfo);
-        shopsInfoService.changeShopsInfo(shopsInfo, id, null);
+        shopsInfoService.changeShopsInfo(newShopInfo, id, null);
         return "redirect:/shopsInfo";
     }
 

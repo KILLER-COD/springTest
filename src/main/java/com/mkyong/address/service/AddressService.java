@@ -65,5 +65,18 @@ public class AddressService {
         return retInfo != null;
     }
 
+    public Address checkedUpdateAddress(Address newaddress, int addressId) throws SQLException {
+        //Checked Changes Shops Address -------------------------------------------------
+        Address address = findByAddressId(addressId);
+
+        if (!address.getAddress().equals(newaddress.getAddress())) {
+            address.setAddress(newaddress.getAddress());
+        }
+        if (!address.getCity().equals(newaddress.getCity())) {
+            address.setCity(newaddress.getCity());
+        }
+
+        return address;
+    }
 
 }
