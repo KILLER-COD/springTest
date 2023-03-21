@@ -3,7 +3,7 @@ package com.mkyong.controllers;
 import com.mkyong.shops.model.NewShopInfo;
 import com.mkyong.shops.model.ShopsInfo;
 import com.mkyong.shops.service.ShopsInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +12,11 @@ import java.sql.SQLException;
 
 @Controller
 @RequestMapping("/shopsInfo")
+@RequiredArgsConstructor
 public class ShopsInfoController {
     private final ShopsInfoService shopsInfoService;
 
-    @Autowired
-    public ShopsInfoController(ShopsInfoService shopsInfoService) {
-        this.shopsInfoService = shopsInfoService;
-    }
-
-
-    @GetMapping()
+    @GetMapping
     public String index(Model model) throws SQLException {
         model.addAttribute("shopsInfoList", shopsInfoService.getAllShopsInfo());
         return "shopsInfo/index";
@@ -40,11 +35,11 @@ public class ShopsInfoController {
         return "shopsInfo/new";
     }
 
-    @PostMapping()
-    public String create(@ModelAttribute("newShopsInfo") NewShopInfo newShopInfo) {
-        shopsInfoService.setNewShopsInfoData(newShopInfo);
-        return "redirect:/shopsInfo";
-    }
+//    @PostMapping
+//    public String create(@ModelAttribute("newShopsInfo") NewShopInfo newShopInfo) {
+//        shopsInfoService.setNewShopsInfoData(newShopInfo);
+//        return "redirect:/shopsInfo";
+//    }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) throws SQLException {
@@ -52,14 +47,14 @@ public class ShopsInfoController {
         return "redirect:/shopsInfo";
     }
 
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) throws SQLException {
-        model.addAttribute("newShopsInfo", shopsInfoService.getShowShopsInfoData(id));
-        return "shopsInfo/edit";
-    }
+//    @GetMapping("/{id}/edit")
+//    public String edit(Model model, @PathVariable("id") int id) throws SQLException {
+//        model.addAttribute("newShopsInfo", shopsInfoService.getShowShopsInfoData(id));
+//        return "shopsInfo/edit";
+//    }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("newShopsInfo") NewShopInfo newShopInfo, @PathVariable("id") int id) throws SQLException {
+    public String update(@ModelAttribute("newShopsInfo") ShopsInfo newShopInfo, @PathVariable("id") int id) throws SQLException {
         shopsInfoService.changeShopsInfo(newShopInfo, id, null);
         return "redirect:/shopsInfo";
     }

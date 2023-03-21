@@ -1,7 +1,8 @@
 package com.mkyong.methods;
 
 import com.mkyong.orders.model.AllOrdersData;
-import com.mkyong.orders.model.OrdersShopInfo;
+import com.mkyong.orders.model.OrderShopInfo;
+import com.mkyong.shops.model.GetShopAllData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,36 +42,56 @@ public class JoinByQueryDAO {
                 "join shops s on o.shop_id = s.id " +
                 "join address a on s.shop_address_id = a.id " +
                 "WHERE o.id = ? && o.delete_date IS NULL;";
-        jdbcTemplate.query(sql, new Object[]{ordersId}, new BeanPropertyRowMapper<>(OrdersShopInfo.class));
+        jdbcTemplate.query(sql, new Object[]{ordersId}, new BeanPropertyRowMapper<>(OrderShopInfo.class));
 
         return allOrdersData;
     }
 
-    public List<OrdersShopInfo> allOrdersShopsInfo() {
+    public List<OrderShopInfo> allOrdersShopsInfo() {
         String sql = "SELECT o.id,shop_name,address,city,o.create_date" +
                 " FROM orders o" +
                 " join shops s on o.shop_id = s.id " +
                 " join address a on s.shop_address_id = a.id " +
                 " WHERE o.delete_date IS NULL;";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrdersShopInfo.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderShopInfo.class));
     }
 
-    public List<OrdersShopInfo> allShopsInformation() {
+    public List<OrderShopInfo> allShopsInformation() {
         String sql = "SELECT s.id,shop_name,address,city,s.create_date " +
                 " FROM shops s " +
                 " join address a on s.shop_address_id = a.id " +
                 " WHERE s.delete_date IS NULL;";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrdersShopInfo.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderShopInfo.class));
     }
 
-    public OrdersShopInfo getSingleOrderInformation(int ordersId) throws SQLException {
+    public OrderShopInfo getSingleOrderInformation(int ordersId) throws SQLException {
         String sql = "SELECT o.id,o.shopId,shop_name,address,city,o.create_date " +
                 " FROM orders o " +
                 " join shops s on o.shop_id = s.id " +
                 " join address a on s.shop_address_id = a.id " +
                 " WHERE o.delete_date IS NULL;";
-        return jdbcTemplate.query(sql, new Object[]{ordersId}, new BeanPropertyRowMapper<>(OrdersShopInfo.class))
+        return jdbcTemplate.query(sql, new Object[]{ordersId}, new BeanPropertyRowMapper<>(OrderShopInfo.class))
                 .stream().findAny().orElse(null);
+    }
+
+    public GetShopAllData getSingleShopData(int shopId) {
+        String sql = "SELECT s.id ,s.shop_name,a.address as shopAddress,a.city as shopCity,s.shop_info_id as shopInfoId,sInfo.shop_owner,sInfo.hvhh,adressSInfo.address as shopInfoAddress,adressSInfo.city as shopInfoCity, s.create_date ,s.modify_date" +
+                "               FROM shops s  " +
+                "               join shops_info sInfo on s.shop_info_id = sInfo.id " +
+                "               join address a on s.shop_address_id= a.id " +
+                "               join address adressSInfo on sInfo.address_id= adressSInfo.id " +
+                "               WHERE s.id = ? && s.delete_date IS NULL ;";
+        return jdbcTemplate.query(sql, new Object[]{shopId}, new BeanPropertyRowMapper<>(GetShopAllData.class)).stream().findAny().orElse(null);
+    }
+
+    public List<GetShopAllData> getAllShopData() {
+        String sql = "SELECT s.id ,s.shop_name,a.address as shopAddress,a.city as shopCity,sInfo.shop_owner,sInfo.hvhh,adressSInfo.address as shopInfoAddress,adressSInfo.city as shopInfoCity, s.create_date ,s.modify_date" +
+                "               FROM shops s  " +
+                "               join shops_info sInfo on s.shop_info_id = sInfo.id " +
+                "               join address a on s.shop_address_id= a.id " +
+                "               join address adressSInfo on sInfo.address_id= adressSInfo.id " +
+                "               WHERE s.delete_date IS NULL ;";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(GetShopAllData.class));
     }
 
 }

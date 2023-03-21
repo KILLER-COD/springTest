@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class AddressService {
@@ -65,13 +66,13 @@ public class AddressService {
     }
 
     public Address checkedUpdateAddress(Address newaddress, int addressId) throws SQLException {
-        //Checked Changes Shops Address -------------------------------------------------
+        //Checked Changes  Address -------------------------------------------------
         Address address = findByAddressId(addressId);
 
-        if (!address.getAddress().equals(newaddress.getAddress())) {
+        if (!Objects.equals(address.getAddress(), newaddress.getAddress())) {
             address.setAddress(newaddress.getAddress());
         }
-        if (!address.getCity().equals(newaddress.getCity())) {
+        if (!Objects.equals(address.getCity(), newaddress.getCity())) {
             address.setCity(newaddress.getCity());
         }
 

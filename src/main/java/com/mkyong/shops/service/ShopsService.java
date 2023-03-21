@@ -4,8 +4,7 @@ import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
 import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.shops.dao.ShopsDAO;
-import com.mkyong.shops.model.AllShopsData;
-import com.mkyong.shops.model.NewShopInfo;
+import com.mkyong.shops.model.GetShopAllData;
 import com.mkyong.shops.model.Shops;
 import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class ShopsService {
@@ -43,15 +43,27 @@ public class ShopsService {
         shopsDAO.deleteSoft(shopsId);
     }
 
-    public int addNewShops(AllShopsData allShopsData, Connection conn) {
-        ShopsInfo shopsInfo = allShopsData.getNewShopInfo().getShopsInfo();
-        int shopAddressId = addressService.addNewAddress(allShopsData.getAddressShop());
-        int shopInfoAddressId = addressService.addNewAddress(allShopsData.getNewShopInfo().getAddress());
-        shopsInfo.setAddressId(shopInfoAddressId);
-        allShopsData.getNewShopInfo().setShopsInfo(shopsInfo);
+    public int addNewShops(GetShopAllData getShopAllData, Connection conn) {
+        Address shopInfoAddress = Address.builder()
+                .address(getShopAllData.getShopInfoAddress())
+                .city(getShopAllData.getShopInfoCity())
+                .build();
+        Address shopAddress = Address.builder()
+                .address(getShopAllData.getShopAddress())
+                .city(getShopAllData.getShopCity())
+                .build();
+        int shopAddressId = addressService.addNewAddress(shopAddress);
+        int shopInfoAddressId = addressService.addNewAddress(shopInfoAddress);
+
+        ShopsInfo shopsInfo = ShopsInfo.builder()
+                .shopOwner(getShopAllData.getShopOwner())
+                .hvhh(getShopAllData.getHvhh())
+                .addressId(shopInfoAddressId)
+                .build();
         int newShopsInfoId = shopsInfoService.addNewShopsInfo(shopsInfo);
+
         Shops shops = Shops.builder()
-                .shopName(allShopsData.getShops().getShopName())
+                .shopName(getShopAllData.getShopName())
                 .shopAddressId(shopAddressId)
                 .shopInfoId(newShopsInfoId)
                 .createDate(new Date(System.currentTimeMillis()))
@@ -60,8 +72,8 @@ public class ShopsService {
         return shopsDAO.insert(shops, conn);
     }
 
-    public void changeShops(AllShopsData allShopsData, int shopsId, Connection conn) throws SQLException {
-        shopsDAO.update(checkedUpdateShops(allShopsData, shopsId), conn);
+    public void changeShops(GetShopAllData getShopAllData, int shopsId, Connection conn) throws SQLException {
+        shopsDAO.update(checkedUpdateShops(getShopAllData, shopsId), conn);
     }
 
     public void shopsPrint() {
@@ -77,38 +89,36 @@ public class ShopsService {
         return retInfo != null;
     }
 
-    public AllShopsData getShowShopsData(int shopsId) throws SQLException {
-        Shops shops = findByShopsId(shopsId);
-        ShopsInfo shopsInfo = shopsInfoService.findByShopInfoId(shops.getShopInfoId());
-        NewShopInfo newShopInfo = NewShopInfo.builder()
-                .shopsInfo(shopsInfo)
-                .address(addressService.findByAddressId(shopsInfo.getAddressId()))
-                .build();
-
-        return AllShopsData.builder()
-                .shops(shops)
-                .addressShop(addressService.findByAddressId(shops.getShopAddressId()))
-                .newShopInfo(newShopInfo)
-                .build();
-    }
-
-    public Shops checkedUpdateShops(AllShopsData allShopsData, int shopsId) throws SQLException {
+    public Shops checkedUpdateShops(GetShopAllData getShopAllData, int shopsId) throws SQLException {
         //Checked Change Shops name -------------------------------------------------
         Shops shops = findByShopsId(shopsId);
-        Shops shopsNew = allShopsData.getShops();
-        if (!shops.getShopName().equals(shopsNew.getShopName())) {
-            shops.setShopName(shopsNew.getShopName());
+
+        if (!Objects.equals(shops.getShopName(), getShopAllData.getShopName())) {
+            shops.setShopName(getShopAllData.getShopName());
         }
 
+        Address shopInfoAddress = Address.builder()
+                .address(getShopAllData.getShopInfoAddress())
+                .city(getShopAllData.getShopInfoCity())
+                .build();
+        Address shopAddress = Address.builder()
+                .address(getShopAllData.getShopAddress())
+                .city(getShopAllData.getShopCity())
+                .build();
+        ShopsInfo shopsInfo = ShopsInfo.builder()
+                .shopOwner(getShopAllData.getShopOwner())
+                .hvhh(getShopAllData.getHvhh())
+                .build();
+
         int addressShopsId = shops.getShopAddressId();
-        Address addressShop = addressService.checkedUpdateAddress(allShopsData.getAddressShop(), addressShopsId);
-        addressService.changeAddress(addressShop, shops.getShopAddressId());
+        Address addressShop = addressService.checkedUpdateAddress(shopAddress, addressShopsId);
+        addressService.changeAddress(addressShop, addressShopsId);
 
         int addressShopsInfoId = shopsInfoService.findByShopInfoId(shops.getShopInfoId()).getAddressId();
-        Address addressShopInfo = addressService.checkedUpdateAddress(allShopsData.getNewShopInfo().getAddress(), addressShopsInfoId);
+        Address addressShopInfo = addressService.checkedUpdateAddress(shopInfoAddress, addressShopsInfoId);
         addressService.changeAddress(addressShopInfo, addressShopsInfoId);
 
-        shopsInfoService.changeShopsInfo(allShopsData.getNewShopInfo(), shops.getShopInfoId(), null);
+        shopsInfoService.changeShopsInfo(shopsInfo, shops.getShopInfoId(), null);
         return shops;
     }
 

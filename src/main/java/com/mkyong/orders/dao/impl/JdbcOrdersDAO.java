@@ -4,163 +4,82 @@ import com.mkyong.common.ColumnNames;
 import com.mkyong.orders.dao.OrdersDAO;
 import com.mkyong.orders.model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class JdbcOrdersDAO implements OrdersDAO {
-
+    private final JdbcTemplate jdbcTemplate;
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    public JdbcOrdersDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     public int insert(Orders orders, Connection conn) {
-
+        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         String sql = "INSERT INTO orders (shop_id, create_date,modify_date) VALUES ( ?, ?, ?)";
-        if (conn == null) {
-            try {
-                conn = dataSource.getConnection();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        return jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, orders.getShopId());
             ps.setDate(2, orders.getCreateDate());
             ps.setDate(3, orders.getModifyDate());
-            ps.executeUpdate();
+            return ps;
+        }, generatedKeyHolder);
+    }
 
-            ResultSet getGenerationKey = ps.getGeneratedKeys();
-            int ordersId = -1;
-            if (getGenerationKey.next()) {
-                ordersId = getGenerationKey.getInt(1);
-            }
-            getGenerationKey.close();
-            ps.close();
-
-            return ordersId;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-
-        } finally {
-//            closeConnection(conn);
-        }
+    public void update(Orders orders, int ordersId) throws SQLException {
+        String sql = "UPDATE orders SET shop_id = ? ,modify_date = ? WHERE id = ?";
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, orders.getShopId());
+            ps.setDate(2, new Date(System.currentTimeMillis()));
+            ps.setInt(3, ordersId);
+            return ps;
+        });
     }
 
     public Orders findByOrdersId(int orders_id) {
-
         String sql = "SELECT * FROM orders WHERE id = ?";
-
-        Connection conn = null;
-
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, orders_id);
-            Orders orders = null;
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                orders = getResultOrder(rs);
-            }
-            rs.close();
-            ps.close();
-            return orders;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            //            closeConnection(conn);
-        }
+        return jdbcTemplate.query(sql, new Object[]{orders_id}, new BeanPropertyRowMapper<>(Orders.class))
+                .stream().findAny().orElse(null);
     }
 
     public void deleteSoft(int ordersId) {
         String sql = "UPDATE orders SET delete_date = ? WHERE id = ?";
-        Connection conn = null;
-
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDate(1, new Date(System.currentTimeMillis()));
-            ps.setInt(2, ordersId);
-            ps.executeUpdate();
-            ps.close();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(conn);
-        }
-
-
+        jdbcTemplate.update(sql,
+                new Date(System.currentTimeMillis()),
+                ordersId
+        );
     }
 
     public void deleteHard(int ordersId) {
         String sql = "DELETE FROM orders WHERE id = ?";
-        Connection conn = null;
-
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, ordersId);
-            ps.execute();
-            ps.close();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(conn);
-        }
-
+        jdbcTemplate.update(sql, ordersId);
     }
 
-    public ArrayList<Orders> getAllOrders() {
+    public List<Orders> getAllOrders() {
         String sql = "SELECT * FROM orders WHERE delete_date IS NULL";
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ArrayList<Orders> ordersList = new ArrayList<>();
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                ordersList.add(getResultOrder(rs));
-            }
-            rs.close();
-            ps.close();
-            return ordersList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(conn);
-        }
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Orders.class));
     }
 
-    public ArrayList<Orders> getAllDeletedOrders() {
+    public List<Orders> getAllDeletedOrders() {
         String sql = "SELECT * FROM orders WHERE delete_date IS NOT NULL";
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ArrayList<Orders> ordersList = new ArrayList<>();
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                ordersList.add(getResultOrder(rs));
-            }
-            rs.close();
-            ps.close();
-            return ordersList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(conn);
-        }
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Orders.class));
     }
+
 
     public void getSingleOrderInfo(int ordersId) throws SQLException {
         String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price,o.create_date" +
@@ -257,22 +176,6 @@ public class JdbcOrdersDAO implements OrdersDAO {
         closeConnection(conn);
     }
 
-    public void update(Orders orders, int ordersId) throws SQLException {
-
-        String sql = "UPDATE orders SET shop_id = ? ,modify_date = ? WHERE id = ?";
-        Connection conn = dataSource.getConnection();
-        ;
-        PreparedStatement ps;
-
-        ps = conn.prepareStatement(sql);
-        ps.setInt(1, orders.getShopId());
-        ps.setDate(2, new Date(System.currentTimeMillis()));
-        ps.setInt(3, ordersId);
-        ps.executeUpdate();
-        ps.close();
-
-        closeConnection(conn);
-    }
 
     public void closeConnection(Connection conn) {
         if (conn != null) {

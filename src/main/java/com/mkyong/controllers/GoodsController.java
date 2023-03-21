@@ -2,8 +2,8 @@ package com.mkyong.controllers;
 
 import com.mkyong.goods.model.ShowGoods;
 import com.mkyong.goods.service.GoodsService;
-import com.mkyong.product.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mkyong.methods.JoinByQueryDAO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,17 +12,12 @@ import java.sql.SQLException;
 
 @Controller
 @RequestMapping("/goods")
+@RequiredArgsConstructor
 public class GoodsController {
-    private final ProductService productService;
     private final GoodsService goodsService;
+    private final JoinByQueryDAO joinByQueryDAO;
 
-    @Autowired
-    private GoodsController(ProductService productService, GoodsService goodsService) {
-        this.productService = productService;
-        this.goodsService = goodsService;
-    }
-
-    @GetMapping()
+    @GetMapping
     public String index(Model model) throws SQLException {
         model.addAttribute("goodsList", goodsService.getAllGoods());
         return "goods/index";
@@ -39,7 +34,7 @@ public class GoodsController {
         return "goods/new";
     }
 
-    @PostMapping()
+    @PostMapping
     public String create(@ModelAttribute("showGoods") ShowGoods showGoods) throws InterruptedException {
         goodsService.addNewGoods(showGoods);
         return "redirect:/goods";

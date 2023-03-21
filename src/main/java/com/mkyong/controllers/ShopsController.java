@@ -1,8 +1,9 @@
 package com.mkyong.controllers;
 
-import com.mkyong.shops.model.AllShopsData;
+import com.mkyong.methods.JoinByQueryDAO;
+import com.mkyong.shops.model.GetShopAllData;
 import com.mkyong.shops.service.ShopsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,47 +12,43 @@ import java.sql.SQLException;
 
 @Controller
 @RequestMapping("shops")
+@RequiredArgsConstructor
 public class ShopsController {
     private final ShopsService shopsService;
+    private final JoinByQueryDAO joinByQueryDAO;
 
-    @Autowired
-    public ShopsController(ShopsService shopsService) {
-        this.shopsService = shopsService;
-    }
-
-    @GetMapping()
-    public String index(Model model) throws SQLException {
-        model.addAttribute("shopsList", shopsService.getAllShops());
+    @GetMapping
+    public String index(Model model) {
+        model.addAttribute("shopsList", joinByQueryDAO.getAllShopData());
         return "shops/index";
     }
 
     @GetMapping("/{id}")
     public String show(Model model, @PathVariable("id") int id) throws SQLException {
-        model.addAttribute("shopsData", shopsService.getShowShopsData(id));
+        model.addAttribute("shopSingleData", joinByQueryDAO.getSingleShopData(id));
         return "shops/show";
     }
 
     @GetMapping("/new")
-    public String newShops(@ModelAttribute("allShopsData") AllShopsData allShopsData, Model model) throws SQLException {
+    public String newShops(@ModelAttribute("shopAllData") GetShopAllData getShopAllData) {
         return "shops/new";
     }
 
-    @PostMapping()
-    public String create(@ModelAttribute("allShopsData") AllShopsData allShopsData) {
-        shopsService.addNewShops(allShopsData, null);
+    @PostMapping
+    public String create(@ModelAttribute("shopAllData") GetShopAllData getShopAllData) {
+        shopsService.addNewShops(getShopAllData, null);
         return "redirect:/shops";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) throws SQLException {
-        model.addAttribute("allShopsData", shopsService.getShowShopsData(id));
-        model.addAttribute("shopsInfoList", shopsService.getAllShopsInfo());
+        model.addAttribute("allShopData", joinByQueryDAO.getSingleShopData(id));
         return "shops/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("allShopsData") AllShopsData allShopsData, @PathVariable("id") int id) throws SQLException {
-        shopsService.changeShops(allShopsData, id, null);
+    public String update(@ModelAttribute("allShopData") GetShopAllData getShopAllData, @PathVariable("id") int id) throws SQLException {
+        shopsService.changeShops(getShopAllData, id, null);
         return "redirect:/shops";
     }
 

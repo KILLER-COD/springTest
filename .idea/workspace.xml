@@ -5,17 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="Change view files&#10;&#10;Change All Controller&#10;&#10;Change All Service">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/GetShopAllData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/AddressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/GoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsInfoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/JoinByQueryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/JoinByQueryDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersShopInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersShopInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/AllShopsInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersShopInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrderShopInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/NewShopInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/NewShopInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679355007711</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Change view files&#10;&#10;Change All Controller&#10;&#10;Change All Service">
+      <created>1679404207265</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1679404207265</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="UnknownFeatures">

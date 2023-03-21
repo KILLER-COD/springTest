@@ -2,7 +2,7 @@ package com.mkyong.controllers;
 
 import com.mkyong.product.model.Product;
 import com.mkyong.product.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,16 +11,12 @@ import java.sql.SQLException;
 
 @Controller
 @RequestMapping("/product")
+@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
 
-    @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @GetMapping()
+    @GetMapping
     public String index(Model model) throws SQLException {
         model.addAttribute("productList", productService.getAllProduct());
         return "product/index";
@@ -37,7 +33,7 @@ public class ProductController {
         return "product/new";
     }
 
-    @PostMapping()
+    @PostMapping
     public String create(@ModelAttribute("product") Product product) {
 
         productService.addNewProduct(product, null);

@@ -5,7 +5,7 @@ import com.mkyong.orders.model.Orders;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface OrdersDAO {
     int insert(Orders orders, Connection conn);
@@ -19,9 +19,9 @@ public interface OrdersDAO {
 
     void deleteSoft(int ordersId) throws SQLException;
 
-    ArrayList<Orders> getAllOrders() throws SQLException;
+    List<Orders> getAllOrders() throws SQLException;
 
-    ArrayList<Orders> getAllDeletedOrders() throws SQLException;
+    List<Orders> getAllDeletedOrders() throws SQLException;
 
     void getSingleOrderInfo(int ordersId) throws SQLException;
 

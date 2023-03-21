@@ -4,7 +4,6 @@ import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
 import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.shops.dao.ShopsInfoDAO;
-import com.mkyong.shops.model.NewShopInfo;
 import com.mkyong.shops.model.ShopsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,8 +46,8 @@ public class ShopsInfoService {
     }
 
 
-    public void changeShopsInfo(NewShopInfo newShopInfo, int shopInfoId, Connection conn) throws SQLException {
-        shopsInfoDAO.update(checkedUpdateShops(newShopInfo, shopInfoId), shopInfoId, conn);
+    public void changeShopsInfo(ShopsInfo newShopsInfo, int shopInfoId, Connection conn) throws SQLException {
+        shopsInfoDAO.update(checkedUpdateShops(newShopsInfo, shopInfoId), shopInfoId, conn);
     }
 
 
@@ -65,43 +64,41 @@ public class ShopsInfoService {
         return retInfo != null;
     }
 
-    public ShopsInfo checkedUpdateShops(NewShopInfo newShopInfo, int shopsInfoId) throws SQLException {
+    public ShopsInfo checkedUpdateShops(ShopsInfo newShopsInfo, int shopsInfoId) throws SQLException {
         // Checked Change Shops Info and Shops Info Address ------------------------
         ShopsInfo shopsInfo = findByShopInfoId(shopsInfoId);
 
-        if (!shopsInfo.getShopOwner().equals(newShopInfo.getShopsInfo().getShopOwner())) {
-            shopsInfo.setShopOwner(newShopInfo.getShopsInfo().getShopOwner());
+        if (!shopsInfo.getShopOwner().equals(newShopsInfo.getShopOwner())) {
+            shopsInfo.setShopOwner(newShopsInfo.getShopOwner());
         }
-        if (shopsInfo.getHvhh() != newShopInfo.getShopsInfo().getHvhh()) {
-            shopsInfo.setHvhh(newShopInfo.getShopsInfo().getHvhh());
+        if (shopsInfo.getHvhh() != newShopsInfo.getHvhh()) {
+            shopsInfo.setHvhh(newShopsInfo.getHvhh());
         }
-
         return shopsInfo;
-
     }
 
     public Address getShopsInfoAddressInfo(int shopsInfoAddressId) throws SQLException {
         return addressService.findByAddressId(shopsInfoAddressId);
     }
 
-    public NewShopInfo getShowShopsInfoData(int shopsInfoId) throws SQLException {
-        ShopsInfo shopsInfo = findByShopInfoId(shopsInfoId);
-        Address address = addressService.findByAddressId(shopsInfo.getAddressId());
-        return NewShopInfo.builder()
-                .shopsInfo(shopsInfo)
-                .address(address)
-                .build();
-
-    }
-
-
-    public void setNewShopsInfoData(NewShopInfo newShopInfo) {
-        Address address = newShopInfo.getAddress();
-        int addressId = addressService.addNewAddress(address);
-
-        ShopsInfo shopsInfo = newShopInfo.getShopsInfo();
-        shopsInfo.setAddressId(addressId);
-        addNewShopsInfo(shopsInfo);
-    }
+//    public NewShopInfo getShowShopsInfoData(int shopsInfoId) throws SQLException {
+//        ShopsInfo shopsInfo = findByShopInfoId(shopsInfoId);
+//        Address address = addressService.findByAddressId(shopsInfo.getAddressId());
+//        return NewShopInfo.builder()
+//                .shopsInfo(shopsInfo)
+//                .address(address)
+//                .build();
+//
+//    }
+//
+//
+//    public void setNewShopsInfoData(NewShopInfo newShopInfo) {
+//        Address address = newShopInfo.getAddress();
+//        int addressId = addressService.addNewAddress(address);
+//
+//        ShopsInfo shopsInfo = newShopInfo.getShopsInfo();
+//        shopsInfo.setAddressId(addressId);
+//        addNewShopsInfo(shopsInfo);
+//    }
 
 }

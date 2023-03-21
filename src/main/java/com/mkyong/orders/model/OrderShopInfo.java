@@ -9,7 +9,7 @@ import java.sql.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrdersShopInfo {
+public class OrderShopInfo {
     private int id;
     private int shopId;
     private String shopName;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class OrdersService {
@@ -21,7 +21,7 @@ public class OrdersService {
     @Autowired
     private ConsoleInputService consoleInputService;
 
-    public ArrayList<Orders> getAllOrders() throws SQLException {
+    public List<Orders> getAllOrders() throws SQLException {
         return ordersDAO.getAllOrders();
     }
 
@@ -47,7 +47,7 @@ public class OrdersService {
         ordersDAO.getAllOrderInfo();
     }
 
-    public ArrayList<Orders> getAllDeletedOrders() throws SQLException {
+    public List<Orders> getAllDeletedOrders() throws SQLException {
         return ordersDAO.getAllDeletedOrders();
     }
 

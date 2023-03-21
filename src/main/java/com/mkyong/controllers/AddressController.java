@@ -2,7 +2,7 @@ package com.mkyong.controllers;
 
 import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,16 +11,12 @@ import java.sql.SQLException;
 
 @Controller
 @RequestMapping("/address")
+@RequiredArgsConstructor
 public class AddressController {
 
     private final AddressService addressService;
 
-    @Autowired
-    public AddressController(AddressService addressService) {
-        this.addressService = addressService;
-    }
-
-    @GetMapping()
+    @GetMapping
     public String index(Model model) throws SQLException {
         model.addAttribute("addressList", addressService.getAllAddress());
         return "address/index";
@@ -37,7 +33,7 @@ public class AddressController {
         return "address/new";
     }
 
-    @PostMapping()
+    @PostMapping
     public String create(@ModelAttribute("address") Address address) {
         addressService.addNewAddress(address);
         return "redirect:/address";
