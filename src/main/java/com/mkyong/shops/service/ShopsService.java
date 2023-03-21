@@ -44,21 +44,20 @@ public class ShopsService {
     }
 
     public int addNewShops(AllShopsData allShopsData, Connection conn) {
-        System.out.println(allShopsData);
         ShopsInfo shopsInfo = allShopsData.getNewShopInfo().getShopsInfo();
         int shopAddressId = addressService.addNewAddress(allShopsData.getAddressShop());
         int shopInfoAddressId = addressService.addNewAddress(allShopsData.getNewShopInfo().getAddress());
         shopsInfo.setAddressId(shopInfoAddressId);
+        allShopsData.getNewShopInfo().setShopsInfo(shopsInfo);
         int newShopsInfoId = shopsInfoService.addNewShopsInfo(shopsInfo);
         Shops shops = Shops.builder()
                 .shopName(allShopsData.getShops().getShopName())
                 .shopAddressId(shopAddressId)
                 .shopInfoId(newShopsInfoId)
+                .createDate(new Date(System.currentTimeMillis()))
+                .modifyDate(new Date(System.currentTimeMillis()))
                 .build();
-        shops.setCreateDate(new Date(System.currentTimeMillis()));
-        shops.setModifyDate(new Date(System.currentTimeMillis()));
         return shopsDAO.insert(shops, conn);
-
     }
 
     public void changeShops(AllShopsData allShopsData, int shopsId, Connection conn) throws SQLException {
@@ -78,8 +77,8 @@ public class ShopsService {
         return retInfo != null;
     }
 
-    public AllShopsData getShowShopsData(int shopsSId) throws SQLException {
-        Shops shops = findByShopsId(shopsSId);
+    public AllShopsData getShowShopsData(int shopsId) throws SQLException {
+        Shops shops = findByShopsId(shopsId);
         ShopsInfo shopsInfo = shopsInfoService.findByShopInfoId(shops.getShopInfoId());
         NewShopInfo newShopInfo = NewShopInfo.builder()
                 .shopsInfo(shopsInfo)
@@ -107,7 +106,7 @@ public class ShopsService {
 
         int addressShopsInfoId = shopsInfoService.findByShopInfoId(shops.getShopInfoId()).getAddressId();
         Address addressShopInfo = addressService.checkedUpdateAddress(allShopsData.getNewShopInfo().getAddress(), addressShopsInfoId);
-        addressService.changeAddress(addressShopInfo, shopsInfoService.findByShopInfoId(shops.getShopInfoId()).getAddressId());
+        addressService.changeAddress(addressShopInfo, addressShopsInfoId);
 
         shopsInfoService.changeShopsInfo(allShopsData.getNewShopInfo(), shops.getShopInfoId(), null);
         return shops;
@@ -116,6 +115,5 @@ public class ShopsService {
     public List<ShopsInfo> getAllShopsInfo() throws SQLException {
         return shopsInfoService.getAllShopsInfo();
     }
-
 
 }

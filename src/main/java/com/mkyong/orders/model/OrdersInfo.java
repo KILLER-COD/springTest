@@ -1,14 +1,18 @@
 package com.mkyong.orders.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Date;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrdersInfo {
+    private int id;
     private int ordersId;
+    private int shopsId;
     private String shopName;
     private String goodsName;
     private double goodsCount;
@@ -17,19 +21,19 @@ public class OrdersInfo {
     private Date modifyDate;
     private Date deleteDate;
 
-    public OrdersInfo() {
-
+    @Override
+    public String toString() {
+        return "OrdersInfo{" +
+                "id=" + id +
+                ", ordersId=" + ordersId +
+                ", shopsId=" + shopsId +
+                ", shopName='" + shopName + '\'' +
+                ", goodsName='" + goodsName + '\'' +
+                ", goodsCount=" + goodsCount +
+                ", goodsPrice=" + goodsPrice +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                ", deleteDate=" + deleteDate +
+                '}';
     }
-
-    public OrdersInfo(int ordersId, String shopName, String goodsName, double goodsCount, double goodsPrice, Date createDate, Date modifyDate, Date deleteDate) {
-        this.ordersId = ordersId;
-        this.shopName = shopName;
-        this.goodsName = goodsName;
-        this.goodsCount = goodsCount;
-        this.goodsPrice = goodsPrice;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
-        this.deleteDate = deleteDate;
-    }
-
 }

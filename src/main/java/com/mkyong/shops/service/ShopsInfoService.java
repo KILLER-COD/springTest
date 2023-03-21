@@ -1,5 +1,6 @@
 package com.mkyong.shops.service;
 
+import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
 import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.shops.dao.ShopsInfoDAO;
@@ -79,5 +80,28 @@ public class ShopsInfoService {
 
     }
 
+    public Address getShopsInfoAddressInfo(int shopsInfoAddressId) throws SQLException {
+        return addressService.findByAddressId(shopsInfoAddressId);
+    }
+
+    public NewShopInfo getShowShopsInfoData(int shopsInfoId) throws SQLException {
+        ShopsInfo shopsInfo = findByShopInfoId(shopsInfoId);
+        Address address = addressService.findByAddressId(shopsInfo.getAddressId());
+        return NewShopInfo.builder()
+                .shopsInfo(shopsInfo)
+                .address(address)
+                .build();
+
+    }
+
+
+    public void setNewShopsInfoData(NewShopInfo newShopInfo) {
+        Address address = newShopInfo.getAddress();
+        int addressId = addressService.addNewAddress(address);
+
+        ShopsInfo shopsInfo = newShopInfo.getShopsInfo();
+        shopsInfo.setAddressId(addressId);
+        addNewShopsInfo(shopsInfo);
+    }
 
 }

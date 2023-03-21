@@ -4,38 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="Change Shops view files&#10;&#10;Add ShopsController&#10;&#10;Change ShopsService&#10;Create AllShopsData Object&#10;&#10;Change JdbcShopsDAO">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/OrdersController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/OrdersGoodsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/JoinByQueryDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/AllOrdersData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersShopInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/AllShopsInfo.java" afterDir="false" />
+    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="Change view files&#10;&#10;Change All Controller&#10;&#10;Change All Service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/AddressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/GoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsExceptionHandler.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/model/NewGoods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/model/ShowGoods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/service/GoodsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersGoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/OrdersGoodsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/JoinByQueryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/JoinByQueryDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersGoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersGoodsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/Orders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersGoods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersGoods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersGoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersGoodsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersShopInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/OrdersShopInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/AllShopsInfo.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ordersGoods/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ordersGoods/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ordersGoods/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ordersGoods/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +55,9 @@
         <option name="workspaceImportEnabled" value="true" />
       </MavenImportingSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2Lmb25ndCgzgl7KgeFMkdloIcwC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -327,7 +310,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679267115278</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Change view files&#10;&#10;Change All Controller&#10;&#10;Change All Service">
+      <created>1679355007711</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1679355007711</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -376,7 +366,8 @@
     <MESSAGE value="Add Address view&#10;Add AddressController&#10;Change AddressService&#10;Change JdbcAddressDAO" />
     <MESSAGE value="Add Goods view files&#10;Add Product view files&#10;Add ShopsInfo view files&#10;&#10;Add GoodsController&#10;Add ProductController&#10;Add ShopsInfoController&#10;Change AddressController&#10;&#10;Change ShopsInfoService&#10;Change ProductService&#10;Change AddressService&#10;&#10;Change JdbcAddressDAO&#10;Change JdbcProductDAO&#10;Change JdbcGoodsDAO" />
     <MESSAGE value="Change Shops view files&#10;&#10;Add ShopsController&#10;&#10;Change ShopsService&#10;Create AllShopsData Object&#10;&#10;Change JdbcShopsDAO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change Shops view files&#10;&#10;Add ShopsController&#10;&#10;Change ShopsService&#10;Create AllShopsData Object&#10;&#10;Change JdbcShopsDAO" />
+    <MESSAGE value="Change view files&#10;&#10;Change All Controller&#10;&#10;Change All Service" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change view files&#10;&#10;Change All Controller&#10;&#10;Change All Service" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -399,11 +390,6 @@
           <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.3.9/spring-context-5.3.9-sources.jar!/org/springframework/context/annotation/AnnotationConfigApplicationContext.java</url>
           <line>164</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsExceptionHandler.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

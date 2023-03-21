@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.List;
 
 @Component
@@ -23,10 +24,10 @@ public class JoinByQueryDAO {
 
     public AllOrdersData ordersGoodsInfoByOrdersId(int ordersId) {
         AllOrdersData allOrdersData = new AllOrdersData();
-        String sql = "SELECT orders_id,goods_name,goods_count,goods_price,o.create_date\n" +
+        String sql = "SELECT o.id,o.shopId,og.orders_id,goods_name,goods_count,goods_price,o.create_date " +
                 "FROM orders_goods og " +
                 "join orders o on og.orders_id = o.id && og.create_date = o.create_date " +
-                "join goods g on og.goods_id = g.id" +
+                "join goods g on og.goods_id = g.id " +
                 "WHERE og.orders_id = 2 && og.delete_date IS NULL;";
 //        jdbcTemplate.query(sql,new BeanPropertyRowMapper<>())
 
@@ -55,11 +56,21 @@ public class JoinByQueryDAO {
     }
 
     public List<OrdersShopInfo> allShopsInformation() {
-        String sql = "SELECT s.id,shop_name,address,city,s.create_date" +
-                " FROM shops s" +
+        String sql = "SELECT s.id,shop_name,address,city,s.create_date " +
+                " FROM shops s " +
                 " join address a on s.shop_address_id = a.id " +
                 " WHERE s.delete_date IS NULL;";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrdersShopInfo.class));
+    }
+
+    public OrdersShopInfo getSingleOrderInformation(int ordersId) throws SQLException {
+        String sql = "SELECT o.id,o.shopId,shop_name,address,city,o.create_date " +
+                " FROM orders o " +
+                " join shops s on o.shop_id = s.id " +
+                " join address a on s.shop_address_id = a.id " +
+                " WHERE o.delete_date IS NULL;";
+        return jdbcTemplate.query(sql, new Object[]{ordersId}, new BeanPropertyRowMapper<>(OrdersShopInfo.class))
+                .stream().findAny().orElse(null);
     }
 
 }

@@ -171,7 +171,6 @@ public class JdbcOrdersDAO implements OrdersDAO {
                 " WHERE og.orders_id = ? && og.delete_date IS NULL; ";
 
         Connection conn = dataSource.getConnection();
-        ;
         PreparedStatement ps;
 
         ps = conn.prepareStatement(sql);
@@ -227,7 +226,7 @@ public class JdbcOrdersDAO implements OrdersDAO {
     }
 
     public void getAllOrdersInfoByDate(Date date) throws SQLException {
-        String sql = "SELECT orders_id,shop_name,goods_name,goods_count,goods_price,o.create_date,og.delete_date " +
+        String sql = "SELECT orders_id,s.id,shop_name,goods_name,goods_count,goods_price,o.create_date,og.delete_date " +
                 " FROM orders_goods og" +
                 " join orders o on og.orders_id = o.id && og.create_date = o.create_date" +
                 " join shops s on o.shop_id = s.id" +

@@ -11,6 +11,7 @@ import java.sql.Date;
 @AllArgsConstructor
 public class OrdersShopInfo {
     private int id;
+    private int shopId;
     private String shopName;
     private String address;
     private String city;
@@ -20,6 +21,7 @@ public class OrdersShopInfo {
     public String toString() {
         return "OrdersShopInfo{" +
                 "id=" + id +
+                ", shopId=" + shopId +
                 ", shopName='" + shopName + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
