@@ -1,9 +1,10 @@
 package com.mkyong.goods.service;
 
 import com.mkyong.goods.dao.GoodsDAO;
+import com.mkyong.goods.model.GetAllGoodsData;
 import com.mkyong.goods.model.Goods;
-import com.mkyong.goods.model.ShowGoods;
 import com.mkyong.methods.ConsoleInputService;
+import com.mkyong.methods.JoinByQueryDAO;
 import com.mkyong.product.model.Product;
 import com.mkyong.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import java.util.List;
 
 @Component
 public class GoodsService {
+    @Autowired
+    private JoinByQueryDAO joinByQueryDAO;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -31,24 +34,37 @@ public class GoodsService {
     }
 
     public Goods findByGoodsId(int id) throws SQLException {
-        return goodsDAO.findByGoodsId(id);
+        return goodsDAO.findByGoodsId(id).orElseThrow();
     }
 
     public void deleteGoods(int goodsId) throws SQLException {
         goodsDAO.deleteSoft(goodsId);
     }
 
-    public int addNewGoods(ShowGoods showGoods) throws InterruptedException {
-        Goods goods = showGoods.getGoods();
-        Product product = showGoods.getProduct();
+    public int addNewGoods(GetAllGoodsData getAllGoodsData) throws InterruptedException {
+
+
+        Product product = Product.builder()
+                .productType(getAllGoodsData.getProductType())
+                .productName(getAllGoodsData.getProductName())
+                .build();
         int productId = productService.addNewProduct(product, null);
-        goods.setProductId(productId);
-        int goodsId = goodsDAO.insert(goods, null);
-        return goodsId;
+        Goods goods = Goods.builder()
+                .goodsName(getAllGoodsData.getGoodsName())
+                .goodsType(getAllGoodsData.getGoodsType())
+                .goodsPrice(getAllGoodsData.getGoodsPrice())
+                .productId(productId)
+                .build();
+        return goodsDAO.insert(goods, null);
     }
 
-    public void changeGoods(ShowGoods showGoods, int goodsId, Connection conn) throws SQLException {
-        goodsDAO.update(checkedUpdateGoods(showGoods, goodsId), conn);
+    public void changeGoods(GetAllGoodsData getAllGoodsData, int goodsId, Connection conn) throws SQLException {
+        Goods goods = Goods.builder()
+                .goodsName(getAllGoodsData.getGoodsName())
+                .goodsType(getAllGoodsData.getGoodsType())
+                .goodsPrice(getAllGoodsData.getGoodsPrice())
+                .build();
+        goodsDAO.update(goods, conn);
     }
 
     public void goodsPrint() {
@@ -60,30 +76,14 @@ public class GoodsService {
     }
 
     public boolean existsById(int goodsId) {
-        Goods retInfo = goodsDAO.findByGoodsId(goodsId);
-        return retInfo != null;
+        return goodsDAO.findByGoodsId(goodsId).isPresent();
     }
 
-    public ShowGoods getShowGoods(int goodsId) throws SQLException {
-        ShowGoods showGoods = new ShowGoods();
-        showGoods.setGoods(findByGoodsId(goodsId));
-        showGoods.setProduct(productService.findByProductId(findByGoodsId(goodsId).getProductId()));
-        return showGoods;
+    public List<GetAllGoodsData> getAllGoodsData() {
+        return joinByQueryDAO.getAllGoodsData();
     }
 
-    public Goods checkedUpdateGoods(ShowGoods showGoods, int goodsId) throws SQLException {
-        Goods goods = findByGoodsId(goodsId);
-        if (!goods.getGoodsName().equals(showGoods.getGoods().getGoodsName())) {
-            goods.setGoodsName(showGoods.getGoods().getGoodsName());
-        }
-        if (!goods.getGoodsType().equals(showGoods.getGoods().getGoodsType())) {
-            goods.setGoodsType(showGoods.getGoods().getGoodsType());
-        }
-        if (goods.getGoodsPrice() == showGoods.getGoods().getGoodsPrice()) {
-            goods.setGoodsPrice(showGoods.getGoods().getGoodsPrice());
-        }
-        productService.checkedUpdateProduct(showGoods, goods.getProductId());
-
-        return goods;
+    public GetAllGoodsData getSingleGoodsData(int goodsId) {
+        return joinByQueryDAO.getSingleGoodsData(goodsId);
     }
 }

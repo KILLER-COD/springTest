@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<footer th:fragment="footer">
+<footer th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -18,23 +11,18 @@
     <script src="https://demos.creative-tim.com/material-dashboard-dark/assets/js/material-dashboard.min.js?v=2.1.0"></script>
     <script>
         function rowClicked(value) {
-            location.href = "/address/" + value;
+            location.href = document.location.pathname+"/" + value;
         }
         $(document).ready(function() {
-            $(".nav .nav-item").removeClass("active");
+<!--            $(".nav .nav-item").removeClass("active");-->
               let localPath=  document.location.pathname;
                 document.querySelectorAll(".nav a.nav-link").
             forEach(link => {
                 if(link.href.includes(localPath)){
-                link.parentElement.classList.add("active")
-              } else {
-                console.log("error =  not add active class")
-              }
-                });
+                    link.parentElement.classList.add("active");
+                }
+            });
         });
 
     </script>
 </footer>
-
-</body>
-</html>

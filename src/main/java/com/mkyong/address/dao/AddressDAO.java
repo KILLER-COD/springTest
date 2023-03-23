@@ -12,7 +12,6 @@ public interface AddressDAO {
 
     void update(Address address, int addressId, Connection conn) throws SQLException;
 
-    //    void update(String addressName,String cityName , int addressId,Connection conn) throws SQLException;
     void deleteHard(int addressId) throws SQLException;
 
     void deleteSoft(int addressId) throws SQLException;

@@ -1,6 +1,6 @@
 package com.mkyong.controllers;
 
-import com.mkyong.goods.model.ShowGoods;
+import com.mkyong.goods.model.GetAllGoodsData;
 import com.mkyong.goods.service.GoodsService;
 import com.mkyong.methods.JoinByQueryDAO;
 import lombok.RequiredArgsConstructor;
@@ -19,36 +19,36 @@ public class GoodsController {
 
     @GetMapping
     public String index(Model model) throws SQLException {
-        model.addAttribute("goodsList", goodsService.getAllGoods());
+        model.addAttribute("goodsDataList", goodsService.getAllGoodsData());
         return "goods/index";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) throws SQLException {
-        model.addAttribute("showGoods", goodsService.getShowGoods(id));
+    public String show(@PathVariable("id") int goodsId, Model model) throws SQLException {
+        model.addAttribute("showGoodsData", goodsService.getSingleGoodsData(goodsId));
         return "goods/show";
     }
 
     @GetMapping("/new")
-    public String newGoods(@ModelAttribute("showGoods") ShowGoods showGoods) {
+    public String newGoods(@ModelAttribute("getAlGoodsData") GetAllGoodsData getAllGoodsData) {
         return "goods/new";
     }
 
     @PostMapping
-    public String create(@ModelAttribute("showGoods") ShowGoods showGoods) throws InterruptedException {
-        goodsService.addNewGoods(showGoods);
+    public String create(@ModelAttribute("getAlGoodsData") GetAllGoodsData getAllGoodsData) throws InterruptedException {
+        goodsService.addNewGoods(getAllGoodsData);
         return "redirect:/goods";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) throws SQLException {
-        model.addAttribute("showGoods", goodsService.getShowGoods(id));
+        model.addAttribute("getAllGoodsData", goodsService.getSingleGoodsData(id));
         return "goods/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("showGoods") ShowGoods showGoods, @PathVariable("id") int id) throws SQLException {
-        goodsService.changeGoods(showGoods, id, null);
+    public String update(@ModelAttribute("getAllGoodsData") GetAllGoodsData getAllGoodsData, @PathVariable("id") int id) throws SQLException {
+        goodsService.changeGoods(getAllGoodsData, id, null);
         return "redirect:/goods";
     }
 

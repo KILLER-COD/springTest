@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
 
@@ -17,8 +16,6 @@ import java.util.List;
 public class JdbcAddressDAO implements AddressDAO {
 
     private final JdbcTemplate jdbcTemplate;
-    @Autowired
-    private DataSource dataSource;
 
     @Autowired
     public JdbcAddressDAO(JdbcTemplate jdbcTemplate) {

@@ -5,33 +5,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="Change Shops view files&#10;&#10;Add Methods in JoinByQueryDAO&#10;&#10;Change Shops and ShopsInfo  Controller&#10;&#10;Change Shops and ShopsInfo Service">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/GetAlOrdersData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/GetAllOrdersGoodsList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static.styles/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/styles/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/footer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/material-dashboard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resource/styles/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/styles/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/model/GetAllGoodsData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/AllShopsData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/head.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/OrdersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/OrdersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/AddressDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/AddressDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/impl/JdbcAddressDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/dao/impl/JdbcAddressDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/address/service/AddressService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/common/DataConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/DataConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/AddressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/GoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/GoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/GoodsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/impl/JdbcGoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/dao/impl/JdbcGoodsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/model/Goods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/model/Goods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/model/ShowGoods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/ShowGoods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/goods/service/GoodsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/AddNewTransactionMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/AddNewTransactionMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/ChangeNewTransactionMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/ChangeNewTransactionMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/JoinByQueryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/JoinByQueryDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/dao/impl/JdbcOrdersDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/Orders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/service/OrdersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/ShowAllNeedInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/ShowAllNeedInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/AllOrdersData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/orders/model/AllOrdersData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/product/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/product/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/AllShopsData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/NewShopInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopInfoData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/styles/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/address/new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/address/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/address/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/orders/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ordersGoods/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ordersGoods/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/goods/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product/edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/product/new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/deleteFiles/product/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shopsInfo/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shopsInfo/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resource/styles/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/styles/main.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +65,8 @@
       <list>
         <option value="Interface" />
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -94,7 +116,7 @@
     "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.5257426",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+    "settings.editor.selected.configurable": "preferences.sourceCode"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -106,11 +128,11 @@
       <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\webapp\WEB-INF\views\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\deleteFiles" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\deleteFiles\address" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\deleteFiles\product" />
       <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\static\css" />
       <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\webapp\WEB-INF\views\shop" />
-      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\address" />
-      <recent name="C:\Users\gamer\IdeaProjects\springTest" />
-      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\java\org\example\tutorialspoint " />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -348,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679442450189</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Change Shops view files&#10;&#10;Add Methods in JoinByQueryDAO&#10;&#10;Change Shops and ShopsInfo  Controller&#10;&#10;Change Shops and ShopsInfo Service">
+      <created>1679536051899</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1679536051899</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="UnknownFeatures">

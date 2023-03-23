@@ -1,26 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet"
-          href="https://demos.creative-tim.com/material-dashboard-dark/assets/css/material-dashboard.min.css?v=2.1.0">
-    <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        .btn.btn-danger.pull-right {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-transform:none;
-        }
-
-    </style>
-    <title>Title</title>
-</head>
-<body class="dark-edition">
+<div th:replace="/head :: head"></div>
+<body class="dark-edition address">
 <div th:replace="/header :: header"></div>
 <div class="main-panel ps-container ps-theme-default ps-active-y" data-ps-id="b866d6e5-d2aa-4430-aee0-d08bcdb1fac3">
     <!-- Navbar -->
@@ -86,7 +67,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table">
-                                    <thead class=" text-primary">
+                                    <thead class="text-center  text-primary">
                                     <tr>
                                         <th scope="col">#id</th>
                                         <th scope="col">Address Name</th>
@@ -96,17 +77,22 @@
                                         <th scope="col">Edit</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr style="cursor: pointer">
+                                    <tbody class="text-center">
+                                    <tr class="trHover" style="cursor: pointer">
                                         <th th:utext="${address.getId()}" scope="row">#id</th>
                                         <td th:utext="${address.getAddress()}" scope="col">Shop Address</td>
                                         <td th:utext="${address.getCity()}" scope="col">Shop City</td>
                                         <td th:utext="${address.getCreateDate()}" scope="col">Shop Created</td>
                                         <td th:utext="${address.getModifyDate()}" scope="col">Shop Modify</td>
-                                        <td><a th:href="@{/address/{id}/edit(id=${address.getId()})}">
-                                            Edit
-                                            <i class="material-icons md-18">edit</i>
-                                        </a>
+                                        <td>
+                                            <a th:href="@{/address/{id}/edit(id=${address.getId()})}">
+                                                <button type="submit" class="btn btn-warning"
+                                                        style="padding: 5px 15px;">
+                                                    <i class="material-icons md-18">edit</i>
+                                                    <span class="mr-1">Edit</span>
+                                                    <div class="ripple-container"></div>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                     </tbody>

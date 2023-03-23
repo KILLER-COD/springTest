@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 public class AddressService {
@@ -63,20 +62,6 @@ public class AddressService {
     public boolean existsById(int addressId) {
         Address retInfo = addressDAO.findByAddressId(addressId);
         return retInfo != null;
-    }
-
-    public Address checkedUpdateAddress(Address newaddress, int addressId) throws SQLException {
-        //Checked Changes  Address -------------------------------------------------
-        Address address = findByAddressId(addressId);
-
-        if (!Objects.equals(address.getAddress(), newaddress.getAddress())) {
-            address.setAddress(newaddress.getAddress());
-        }
-        if (!Objects.equals(address.getCity(), newaddress.getCity())) {
-            address.setCity(newaddress.getCity());
-        }
-
-        return address;
     }
 
 }

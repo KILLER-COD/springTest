@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewShopInfo {
+public class ShopInfoData {
     private int id;
     private String shopOwner;
     private int hvhh;
@@ -16,7 +16,7 @@ public class NewShopInfo {
 
     @Override
     public String toString() {
-        return "NewShopInfo{" +
+        return "ShopInfoData{" +
                 "id=" + id +
                 ", shopOwner='" + shopOwner + '\'' +
                 ", hvhh=" + hvhh +

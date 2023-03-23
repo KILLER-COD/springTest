@@ -1,18 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet"
-          href="https://demos.creative-tim.com/material-dashboard-dark/assets/css/material-dashboard.min.css?v=2.1.0">
-    <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Product Page</title>
-</head>
-<body class="dark-edition">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="/head :: head"></div>
+<body class="dark-edition product">
 <div th:replace="/header :: header"></div>
+
 <div class="main-panel ps-container ps-theme-default ps-active-y" data-ps-id="b866d6e5-d2aa-4430-aee0-d08bcdb1fac3">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
@@ -57,23 +48,63 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1> All Product Page </h1>
-                    <br>
-                    <div th:each="product : ${productList}">
-                        <a th:href="@{/product/{id}(id=${product.getId()})}"
-                           th:text="${product.getProductName()+' - '+product.getProductType()}">product</a>
+                    <div class="card">
+                        <div class="row card-header card-header-warning">
+                            <div style="align-content: center"
+                                 class="col-md-12 d-flex align-items-left justify-content-center flex-column">
+                                <h4 class="card-title ">All Product </h4>
+                                <p class="card-category">Information</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="text-center text-primary">
+                                    <tr>
+                                        <th scope="col">#id</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Product Type</th>
+                                        <th scope="col">Product Created</th>
+                                        <th scope="col">Product Modify</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                    <tr class="trHover" th:each="product : ${productList}" style="cursor: pointer">
+                                        <th th:utext="${product.getId()}" scope="row">#id</th>
+                                        <td th:text="${product.getProductName()}" scope="col">Product Name</td>
+                                        <td th:text="${product.getProductType()}" scope="col">Product Type</td>
+                                        <td th:utext="${product.getCreateDate()}" scope="col">Product Created</td>
+                                        <td th:utext="${product.getModifyDate()}" scope="col">Product Modify</td>
+                                        <td>
+                                            <a th:href="@{/product/{id}/edit(id=${product.getId()})}">
+                                                <button type="submit" class="btn btn-warning">
+                                                    <i class="material-icons">edit</i>
+                                                    <div class="ripple-container"></div>
+                                                </button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form th:method="DELETE"
+                                                  th:action="@{/product/{id}(id=${product.getId()})}">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="material-icons">delete_forever </i>
+                                                    <div class="ripple-container"></div>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<br>
-<hr>
-<a href="/product/new">Create Product</a>
 <div th:replace="/footer :: footer"></div>
-
 </body>
 </html>

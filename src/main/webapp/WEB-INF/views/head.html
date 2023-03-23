@@ -1,0 +1,71 @@
+<head th:fragment="head" xmlns:th="http://www.w3.org/1999/xhtml">
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://demos.creative-tim.com/material-dashboard-dark/assets/css/material-dashboard.min.css?v=2.1.0">
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Title</title>
+    <style>
+        .btn.btn-success.pull-right,.card-header .btn.btn-danger.pull-right {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-transform:none;
+        }
+        td .btn i {
+          font-size:25px !important;
+        }
+        .shops .btn.btn-warning, .shops .btn.btn-danger ,
+        .goods .btn.btn-warning, .goods .btn.btn-danger ,
+        .product .btn.btn-warning, .product .btn.btn-danger ,
+        .address .btn.btn-warning, .address .btn.btn-danger {
+          display: flex;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          align-items: center;
+        }
+
+        #createNewAddress span.material-icons{
+            font-size:25px;
+        }
+        .dark-edition .form-control {
+          color: #ff8300;
+        }
+        .newAddress label {
+            font-size:20px;
+        }
+
+         .trHover:hover th,th {
+            background: #f5700c;
+            color: white !important;
+          }
+
+          .trHover:hover > td, .trHover:hover th {
+            background-color: deepskyblue;
+            color: white !important;
+          }
+
+          .newShop hr ,
+          .newGoods hr {
+            border: 2px solid #f5700c;
+          }
+         .newShop .btn.btn-warning {
+            width: 50%;
+          }
+          .newShop .shopInfo hr {
+                width:74%;
+            }
+
+            .btn.btn-warning {
+                margin: 0 auto;
+              }
+               .btn.btn-danger {
+                margin: 0 auto;
+              }
+
+    </style>
+</head>

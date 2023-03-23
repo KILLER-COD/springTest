@@ -9,28 +9,28 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Goods {
+public class GetAllGoodsData {
     private int id;
     private String goodsName;
     private String goodsType;
     private double goodsPrice;
-    private int productId;
+    private String productType;
+    private String productName;
     private Date createDate;
     private Date modifyDate;
-    private Date deleteDate;
 
 
     @Override
     public String toString() {
-        return "Goods{" +
+        return "GetAllGoodsData{" +
                 "id=" + id +
                 ", goodsName='" + goodsName + '\'' +
                 ", goodsType='" + goodsType + '\'' +
                 ", goodsPrice=" + goodsPrice +
-                ", productId=" + productId +
+                ", productType='" + productType + '\'' +
+                ", productName='" + productName + '\'' +
                 ", createDate=" + createDate +
                 ", modifyDate=" + modifyDate +
-                ", deleteDate=" + deleteDate +
                 '}';
     }
 }

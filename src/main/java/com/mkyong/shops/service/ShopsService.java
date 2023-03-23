@@ -111,12 +111,10 @@ public class ShopsService {
                 .build();
 
         int addressShopsId = shops.getShopAddressId();
-        Address addressShop = addressService.checkedUpdateAddress(shopAddress, addressShopsId);
-        addressService.changeAddress(addressShop, addressShopsId);
+        addressService.changeAddress(shopAddress, addressShopsId);
 
         int addressShopsInfoId = shopsInfoService.findByShopInfoId(shops.getShopInfoId()).getAddressId();
-        Address addressShopInfo = addressService.checkedUpdateAddress(shopInfoAddress, addressShopsInfoId);
-        addressService.changeAddress(addressShopInfo, addressShopsInfoId);
+        addressService.changeAddress(shopInfoAddress, addressShopsInfoId);
 
         shopsInfoService.changeShopsInfo(shopsInfo, shops.getShopInfoId(), null);
         return shops;

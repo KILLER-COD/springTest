@@ -5,11 +5,12 @@ import com.mkyong.goods.model.Goods;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public interface GoodsDAO {
     int insert(Goods goods, Connection conn);
 
-    Goods findByGoodsId(int goods_id);
+    Optional<Goods> findByGoodsId(int goods_id);
 
     void update(Goods goods, Connection conn) throws SQLException;
 

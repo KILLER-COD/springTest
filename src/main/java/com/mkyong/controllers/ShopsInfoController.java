@@ -1,6 +1,6 @@
 package com.mkyong.controllers;
 
-import com.mkyong.shops.model.NewShopInfo;
+import com.mkyong.shops.model.ShopInfoData;
 import com.mkyong.shops.model.ShopsInfo;
 import com.mkyong.shops.service.ShopsInfoService;
 import lombok.RequiredArgsConstructor;
@@ -31,12 +31,12 @@ public class ShopsInfoController {
     }
 
     @GetMapping("/new")
-    public String newAddress(@ModelAttribute("newShopsInfo") NewShopInfo newShopInfo) {
+    public String newAddress(@ModelAttribute("newShopsInfo") ShopInfoData shopInfoData) {
         return "shopsInfo/new";
     }
 
 //    @PostMapping
-//    public String create(@ModelAttribute("newShopsInfo") NewShopInfo newShopInfo) {
+//    public String create(@ModelAttribute("newShopsInfo") ShopInfoData newShopInfo) {
 //        shopsInfoService.setNewShopsInfoData(newShopInfo);
 //        return "redirect:/shopsInfo";
 //    }

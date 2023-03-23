@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class JdbcGoodsDAO implements GoodsDAO {
@@ -39,10 +40,10 @@ public class JdbcGoodsDAO implements GoodsDAO {
         );
     }
 
-    public Goods findByGoodsId(int goodsId) {
+    public Optional<Goods> findByGoodsId(int goodsId) {
         String sql = "SELECT * FROM goods WHERE id = ?";
         return jdbcTemplate.query(sql, new Object[]{goodsId}, new BeanPropertyRowMapper<>(Goods.class))
-                .stream().findAny().orElse(null);
+                .stream().findAny();
     }
 
     public void deleteSoft(int goodsId) {
