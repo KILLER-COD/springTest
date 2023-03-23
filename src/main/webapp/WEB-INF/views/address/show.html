@@ -2,28 +2,123 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://demos.creative-tim.com/material-dashboard-dark/assets/css/material-dashboard.min.css?v=2.1.0">
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .btn.btn-danger.pull-right {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-transform:none;
+        }
 
+    </style>
     <title>Title</title>
 </head>
-<body>
-<div class="container">
-    <p th:text="${address.getId()}">VALUE</p>
-    <p th:text="${address.getAddress()}">VALUE</p>
-    <p th:text="${address.getCity()}">VALUE</p>
-    <p th:text="${address.getCreateDate()}">VALUE</p>
-    <p th:text="${address.getModifyDate()}">VALUE</p>
-    <p th:text="${address.getDeleteDate()}">VALUE</p>
-
-    <br>
-
-    <a th:href="@{/address/{id}/edit(id=${address.getId()})}">edit</a>
-
-    <br>
-
-    <form th:method="DELETE" th:action="@{/address/{id}(id=${address.getId()})}">
-        <input type="submit" value="Delete">
-    </form>
+<body class="dark-edition">
+<div th:replace="/header :: header"></div>
+<div class="main-panel ps-container ps-theme-default ps-active-y" data-ps-id="b866d6e5-d2aa-4430-aee0-d08bcdb1fac3">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+        <div class="container-fluid">
+            <div class="navbar-wrapper">
+                <a class="navbar-brand" href="javascript:void(0)">Show Single Address Page</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                    aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end">
+                <form class="navbar-form">
+                          <span class="bmd-form-group">
+                              <div class="input-group no-border">
+                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <button type="submit" class="btn btn-default btn-round btn-just-icon">
+                                  <i class="material-icons">search</i>
+                                  <div class="ripple-container"></div>
+                                </button>
+                            </div>
+                          </span>
+                </form>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)">
+                            <i class="material-icons">dashboard</i>
+                            <p class="d-lg-none d-md-block">
+                                Stats
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="row card-header card-header-warning">
+                            <div style="align-content: center"
+                                 class="col-md-6 d-flex align-items-left justify-content-center flex-column">
+                                <h4 class="card-title ">Show Single Address </h4>
+                                <p class="card-category">Information</p>
+                            </div>
+                            <div class="col-md-2 offset-4" style="display: inline-block;">
+                                <form th:method="DELETE" th:action="@{/address/{id}(id=${address.getId()})}">
+                                    <button type="submit" class="btn btn-danger pull-right" style="padding: 10px 30px;">
+                                        <span class="material-icons">delete_forever </span>
+                                        <span class="mr-3">Delete</span>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <tr>
+                                        <th scope="col">#id</th>
+                                        <th scope="col">Address Name</th>
+                                        <th scope="col">Address City</th>
+                                        <th scope="col">Address Created</th>
+                                        <th scope="col">Address Modify</th>
+                                        <th scope="col">Edit</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr style="cursor: pointer">
+                                        <th th:utext="${address.getId()}" scope="row">#id</th>
+                                        <td th:utext="${address.getAddress()}" scope="col">Shop Address</td>
+                                        <td th:utext="${address.getCity()}" scope="col">Shop City</td>
+                                        <td th:utext="${address.getCreateDate()}" scope="col">Shop Created</td>
+                                        <td th:utext="${address.getModifyDate()}" scope="col">Shop Modify</td>
+                                        <td><a th:href="@{/address/{id}/edit(id=${address.getId()})}">
+                                            Edit
+                                            <i class="material-icons md-18">edit</i>
+                                        </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<footer th:replace="/footer :: footer"></footer>
 </body>
 </html>

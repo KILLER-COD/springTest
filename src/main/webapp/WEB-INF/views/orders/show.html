@@ -2,24 +2,152 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://demos.creative-tim.com/material-dashboard-dark/assets/css/material-dashboard.min.css?v=2.1.0">
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <title>Title</title>
 </head>
-<body>
-<p th:text="${address.getId()}">VALUE</p>
-<p th:text="${address.getAddress()}">VALUE</p>
-<p th:text="${address.getCity()}">VALUE</p>
-<p th:text="${address.getCreateDate()}">VALUE</p>
-<p th:text="${address.getModifyDate()}">VALUE</p>
-<p th:text="${address.getDeleteDate()}">VALUE</p>
+<body class="dark-edition">
+<div th:replace="/header :: header"></div>
+<div class="main-panel ps-container ps-theme-default ps-active-y" data-ps-id="b866d6e5-d2aa-4430-aee0-d08bcdb1fac3">
+    <!-- Navbar -->
+    <!-- End Navbar -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-warning">
+                            <h4 class="card-title ">Orders Shop </h4>
+                            <p class="card-category">Information</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <tr>
+                                        <th scope="col">#id</th>
+                                        <th scope="col">Shop Name</th>
+                                        <th scope="col">Shop Address</th>
+                                        <th scope="col">Shop City</th>
+                                        <th scope="col">Shop Owner Name</th>
+                                        <th scope="col">Shop HVHH</th>
+                                        <th scope="col">Shop Owner Address</th>
+                                        <th scope="col">Shop Owner City</th>
+                                        <th scope="col">Shop Created</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr style="cursor: pointer"
+                                        th:onclick="'javascript:rowClickedShop(\'' + ${showOrderAllData.getOrdersShopAllData().getId()} + '\');'">
+                                        <th th:utext="${showOrderAllData.getOrdersShopAllData().getId()}" scope="row">
+                                            #id
+                                        </th>
+                                        <td th:utext="${showOrderAllData.getOrdersShopAllData().getShopName()}"
+                                            scope="col">Shop Name
+                                        </td>
+                                        <td th:utext="${showOrderAllData.getOrdersShopAllData().getShopAddress()}"
+                                            scope="col">Shop Address
+                                        </td>
+                                        <td th:utext="${showOrderAllData.getOrdersShopAllData().getShopCity()}"
+                                            scope="col">Shop City
+                                        </td>
+                                        <td th:utext="${showOrderAllData.getOrdersShopAllData().getShopOwner()}"
+                                            scope="col">Shop Owner Name
+                                        </td>
+                                        <td th:utext="${showOrderAllData.getOrdersShopAllData().getHvhh()}" scope="col">
+                                            Shop HVHH
+                                        </td>
+                                        <td th:utext="${showOrderAllData.getOrdersShopAllData().getShopInfoAddress()}"
+                                            scope="col">Shop Owner
+                                            Address
+                                        </td>
+                                        <td th:utext="${showOrderAllData.getOrdersShopAllData().getShopInfoCity()}"
+                                            scope="col">Shop Owner
+                                            City
+                                        </td>
+                                        <td th:utext="${showOrderAllData.getOrdersShopAllData().getCreateDate()}"
+                                            scope="col">Shop Created
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-warning">
+                            <h4 class="card-title ">Orders Goods List </h4>
+                            <p class="card-category">Information</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <tr>
+                                        <th scope="col">#id</th>
+                                        <th scope="col">Goods Name</th>
+                                        <th scope="col">Goods Count</th>
+                                        <th scope="col">Goods Type</th>
+                                        <th scope="col">Goods Price</th>
+                                        <th scope="col">Order Created</th>
+                                        <th scope="col">Order Modify</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each=" orderGoods :  ${showOrderAllData.getOrderGoodsList()}"
+                                        style="cursor: pointer"
+                                        th:onclick="'javascript:rowClickedGoods(\'' + ${orderGoods.getId()} + '\');'">
+                                        <th th:utext="${orderGoods.getId()}" scope="row">#id</th>
+                                        <td th:utext="${orderGoods.getGoodsName()}" scope="col"> Goods Name</td>
+                                        <td th:utext="${orderGoods.getGoodsCount()}" scope="col">Goods Count</td>
+                                        <td th:utext="${orderGoods.getGoodsType()}" scope="col"> Goods Type</td>
+                                        <td th:utext="${orderGoods.getGoodsPrice()}" scope="col">Goods Price</td>
+                                        <td th:utext="${orderGoods.getCreateDate()}" scope="col">Order Created</td>
+                                        <td th:utext="${orderGoods.getModifyDate()}" scope="col">Order Modify</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<br>
+    <!--<a th:href="@{/orders/{id}/edit(id=${orders.getId()})}">edit</a>-->
 
-<a th:href="@{/address/{id}/edit(id=${address.getId()})}">edit</a>
 
-<br>
+    <!--<form th:method="DELETE" th:action="@{/orders/{id}(id=${address.getId()})}">-->
+    <!--    <input type="submit" value="Delete">-->
+    <!--</form>-->
+</div>
 
-<form th:method="DELETE" th:action="@{/address/{id}(id=${address.getId()})}">
-    <input type="submit" value="Delete">
-</form>
+
 </body>
+<script>
+        function rowClickedShop(value) {
+            location.href = "/shops/" + value;
+        }
+
+</script>
+<script>
+        function rowClickedGoods(value) {
+            location.href = "/goods/" + value;
+        }
+
+</script>
 </html>

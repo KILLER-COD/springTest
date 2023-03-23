@@ -1,6 +1,5 @@
 package com.mkyong.orders.dao.impl;
 
-import com.mkyong.common.ColumnNames;
 import com.mkyong.orders.dao.OrdersDAO;
 import com.mkyong.orders.model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -187,14 +186,14 @@ public class JdbcOrdersDAO implements OrdersDAO {
         }
     }
 
-    public Orders getResultOrder(ResultSet resultSet) throws SQLException {
-        Orders orders = new Orders(
-                resultSet.getInt(ColumnNames.id),
-                resultSet.getInt(ColumnNames.shopId),
-                resultSet.getDate(ColumnNames.createDate),
-                resultSet.getDate(ColumnNames.modifyDate),
-                resultSet.getDate(ColumnNames.deleteDate)
-        );
-        return orders;
-    }
+//    public Orders getResultOrder(ResultSet resultSet) throws SQLException {
+//        Orders orders = new Orders(
+//                resultSet.getInt(ColumnNames.id),
+//                resultSet.getInt(ColumnNames.shopId),
+//                resultSet.getDate(ColumnNames.createDate),
+//                resultSet.getDate(ColumnNames.modifyDate),
+//                resultSet.getDate(ColumnNames.deleteDate)
+//        );
+//        return orders;
+//    }
 }

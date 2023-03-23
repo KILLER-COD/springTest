@@ -1,6 +1,7 @@
 package com.mkyong.methods;
 
 import com.mkyong.orders.model.AllOrdersData;
+import com.mkyong.orders.model.GetAllOrdersGoodsList;
 import com.mkyong.orders.model.OrderShopInfo;
 import com.mkyong.shops.model.GetShopAllData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class JoinByQueryDAO {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderShopInfo.class));
     }
 
-    public OrderShopInfo getSingleOrderInformation(int ordersId) throws SQLException {
+    public OrderShopInfo getSingleOrderShopInformation(int ordersId) throws SQLException {
         String sql = "SELECT o.id,o.shopId,shop_name,address,city,o.create_date " +
                 " FROM orders o " +
                 " join shops s on o.shop_id = s.id " +
@@ -92,6 +93,15 @@ public class JoinByQueryDAO {
                 "               join address adressSInfo on sInfo.address_id= adressSInfo.id " +
                 "               WHERE s.delete_date IS NULL ;";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(GetShopAllData.class));
+    }
+
+    public List<GetAllOrdersGoodsList> getOrderGoodsInformation(int ordersId) {
+        String sql = "SELECT o.id,g.id as goodsId,goods_name as goodsName,goods_count as goodsCount,goods_type as goodsType,goods_price as goodsPrice,og.create_date as createDate,og.modify_date as modifyDate " +
+                "                FROM orders o " +
+                "                join orders_goods og on o.id = og.orders_id && o.create_date = og.create_date" +
+                "                join goods g on og.goods_id = g.id " +
+                "                WHERE og.orders_id = ? && og.delete_date IS NULL;";
+        return jdbcTemplate.query(sql, new Object[]{ordersId}, new BeanPropertyRowMapper<>(GetAllOrdersGoodsList.class));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.mkyong.orders.model;
 
+import com.mkyong.shops.model.GetShopAllData;
 import lombok.*;
 
 import java.sql.Date;
@@ -7,28 +8,24 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Orders {
+@Builder
+public class GetAlOrdersData {
     private int id;
-    private int shopId;
+    private GetShopAllData ordersShopAllData;
+    private List<GetAllOrdersGoodsList> orderGoodsList;
     private Date createDate;
     private Date modifyDate;
-    private Date deleteDate;
-    private List<Integer> goodsId;
-    private List<Double> goodsCount;
 
     @Override
     public String toString() {
-        return "Orders{" +
+        return "GetAlOrdersData{" +
                 "id=" + id +
-                ", shopId=" + shopId +
+                ", ordersShopAllData=" + ordersShopAllData +
+                ", orderGoodsList=" + orderGoodsList +
                 ", createDate=" + createDate +
                 ", modifyDate=" + modifyDate +
-                ", deleteDate=" + deleteDate +
-                ", goodsId=" + goodsId +
-                ", goodsCount=" + goodsCount +
                 '}';
     }
 }
