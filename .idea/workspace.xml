@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="Change All&#10;local tomcat project &#10;create new branch for Spring boot project" />
+    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="Change All&#10;local tomcat project &#10;create new branch for Spring boot project">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -437,7 +440,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679911354682</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Change All&#10;local tomcat project &#10;create new branch for Spring boot project">
+      <created>1679911508329</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1679911508329</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="UnknownFeatures">
