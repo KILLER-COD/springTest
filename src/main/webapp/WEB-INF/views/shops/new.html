@@ -118,41 +118,29 @@
                                         <h2>Shop Contacting Information</h2>
                                         <hr>
                                     </div>
-                                    <div id="contactInfoAdder">
+                                    <div id="contactInfoAdder" class="col-md-12 d-flex justify-content-center">
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Contact Name </label>
-                                                <input type="text" th:field="*{contactingInfoList[0].name}"
-                                                       class="form-control" required>
+                                                <input type="text" th:field="*{name}"
+                                                       class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Email</label>
-                                                <input type="email" th:field="*{contactingInfoList[0].email}"
+                                                <input type="email" th:field="*{email}"
                                                        class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group bmd-form-group mt-0">
-                                                <label class="label">Phone 1 required</label>
-                                                <input type="text" th:field="*{contactingInfoList[0].phone1}"
-                                                       class="form-control" required>
-                                            </div>
+                                        <div id="contactInfoAdder-button"
+                                             class="col-md-6 d-flex justify-content-center">
+                                            <span onclick="addNewContactInfo()">
+                                                <i class="material-icons">add_circle</i> Add new Person </span>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group bmd-form-group mt-0">
-                                                <label class="label">Phone 2</label>
-                                                <input type="text" th:field="*{contactingInfoList[0].phone2}"
-                                                       class="form-control">
-                                            </div>
-                                        </div>
-                                        <div id="contactInfoAdder-button">
-                                            <span onclick="addNewContactInfo()">  <i
-                                                    class="material-icons">dashboard</i> add </span>
-                                        </div>
-                                        <p id="demo"></p>
+
                                     </div>
+                                    <p id="newAdderId"></p>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-md-5 mt-4">
@@ -173,12 +161,10 @@
 <div th:replace="/footer :: footer"></div>
 <script>
     function addNewContactInfo() {
-      const h2 = document.getElementById("demo");
-      const h3 = document.getElementById("contactInfoAdder").outerHTML+  '<p id="demo"></p>';
+      const h2 = document.getElementById("newAdderId");
+      const h3 = document.getElementById("contactInfoAdder").outerHTML+  '<p id="newAdderId"></p>';
       h2.insertAdjacentHTML("afterend", h3);
     }
-
-
 </script>
 </body>
 </html>

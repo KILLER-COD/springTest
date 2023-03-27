@@ -43,7 +43,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr style="cursor: pointer" orderGoodsList
+                                    <tr style="cursor: pointer"
                                         th:onclick="'javascript:rowClickedShop(\'' + ${showOrderAllData.getOrdersShopAllData().getId()} + '\');'">
                                         <th th:utext="${showOrderAllData.getOrdersShopAllData().getId()}" scope="row">
                                             #id
@@ -108,8 +108,7 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each=" orderGoods :  ${showOrderAllData.getOrderGoodsList()}"
-                                        style="cursor: pointer"
-                                        th:onclick="'javascript:rowClickedGoods(\'' + ${orderGoods.getId()} + '\');'">
+                                        style="cursor: pointer">
                                         <th th:utext="${orderGoods.getId()}" scope="row">#id</th>
                                         <td th:utext="${orderGoods.getGoodsName()}" scope="col"> Goods Name</td>
                                         <td th:utext="${orderGoods.getGoodsCount()}" scope="col">Goods Count</td>

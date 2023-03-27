@@ -19,7 +19,7 @@ public class JdbcShopContactingInfoDAO implements ShopContactingInfoDAO {
 
     @Override
     public int insert(ShopContactingInfo contactingInfo, Connection conn) {
-        String sql = "INSERT INTO shop_contact_info (name, email,phone1, phone2 ,shop_info_id,create_date,modify_date) VALUES ( ?, ?,?,?,?,?,?)";
+        String sql = "INSERT INTO shop_contact_info (name, email,shop_info_id,create_date,modify_date) VALUES ( ?, ?,?,?,?,?,?)";
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
@@ -28,11 +28,9 @@ public class JdbcShopContactingInfoDAO implements ShopContactingInfoDAO {
             // Set parameters
             preparedStatement.setString(1, contactingInfo.getName());
             preparedStatement.setString(2, contactingInfo.getEmail());
-            preparedStatement.setString(3, contactingInfo.getPhone1());
-            preparedStatement.setString(4, contactingInfo.getPhone2());
-            preparedStatement.setInt(5, contactingInfo.getShopInfoId());
-            preparedStatement.setDate(6, new Date(System.currentTimeMillis()));
-            preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
+            preparedStatement.setInt(3, contactingInfo.getShopInfoId());
+            preparedStatement.setDate(4, new Date(System.currentTimeMillis()));
+            preparedStatement.setDate(5, new Date(System.currentTimeMillis()));
 
             return preparedStatement;
 
@@ -50,12 +48,10 @@ public class JdbcShopContactingInfoDAO implements ShopContactingInfoDAO {
 
     @Override
     public void update(ShopContactingInfo contactingInfo, Connection conn) throws SQLException {
-        String sql = "UPDATE shop_contact_info SET name = ? ,email = ? ,phone1 = ?,phone2 = ? ,shop_info_id = ?,modify_date = ? WHERE id = ?";
+        String sql = "UPDATE shop_contact_info SET name = ? ,email = ? ,shop_info_id = ?,modify_date = ? WHERE id = ?";
         jdbcTemplate.update(sql,
                 contactingInfo.getName(),
                 contactingInfo.getEmail(),
-                contactingInfo.getPhone1(),
-                contactingInfo.getPhone2(),
                 contactingInfo.getShopInfoId(),
                 new Date(System.currentTimeMillis()),
                 contactingInfo.getId()

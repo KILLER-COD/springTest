@@ -22,8 +22,6 @@ public class ShopsContactingInfoService {
         ShopContactingInfo shopContactingInfo = ShopContactingInfo.builder()
                 .name(newShopContactingInfo.getName())
                 .email(newShopContactingInfo.getEmail())
-                .phone1(newShopContactingInfo.getPhone1())
-                .phone2(newShopContactingInfo.getPhone2())
                 .shopInfoId(newShopContactingInfo.getShopInfoId())
                 .build();
         return shopContactingInfoDAO.insert(shopContactingInfo, null);
@@ -40,6 +38,17 @@ public class ShopsContactingInfoService {
 
     public void deleteHard(int contactingInfoId) throws SQLException {
         shopContactingInfoDAO.deleteHard(contactingInfoId);
+    }
+
+    public ShopContactingInfo setValuesShopContactInfoData() {
+        ShopContactingInfo shopContactingInfo = ShopContactingInfo.builder()
+                .id(0)
+                .shopInfoId(0)
+                .email("")
+                .name("")
+                .build();
+        return shopContactingInfo;
+
     }
 
 }

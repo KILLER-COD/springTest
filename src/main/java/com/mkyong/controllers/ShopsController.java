@@ -30,7 +30,7 @@ public class ShopsController {
     }
 
     @GetMapping("/new")
-    public String newShops(@ModelAttribute("shopAllData") ShopAllData shopAllData) {
+    public String newShops(@ModelAttribute("shopAllData") ShopAllData shopAllData, Model model) {
         return "shops/new";
     }
 

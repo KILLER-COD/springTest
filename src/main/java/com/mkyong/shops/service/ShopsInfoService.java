@@ -45,6 +45,7 @@ public class ShopsInfoService {
 
 
     public void changeShopsInfo(ShopsInfo newShopsInfo, int shopInfoId, Connection conn) throws SQLException {
+        newShopsInfo.setAddressId(findByShopInfoId(shopInfoId).getAddressId());
         shopsInfoDAO.update(newShopsInfo, shopInfoId, conn);
     }
 
@@ -65,25 +66,5 @@ public class ShopsInfoService {
     public Address getShopsInfoAddressInfo(int shopsInfoAddressId) throws SQLException {
         return addressService.findByAddressId(shopsInfoAddressId);
     }
-
-//    public ShopInfoData getShowShopsInfoData(int shopsInfoId) throws SQLException {
-//        ShopsInfo shopsInfo = findByShopInfoId(shopsInfoId);
-//        Address address = addressService.findByAddressId(shopsInfo.getAddressId());
-//        return ShopInfoData.builder()
-//                .shopsInfo(shopsInfo)
-//                .address(address)
-//                .build();
-//
-//    }
-//
-//
-//    public void setNewShopsInfoData(ShopInfoData newShopInfo) {
-//        Address address = newShopInfo.getAddress();
-//        int addressId = addressService.addNewAddress(address);
-//
-//        ShopsInfo shopsInfo = newShopInfo.getShopsInfo();
-//        shopsInfo.setAddressId(addressId);
-//        addNewShopsInfo(shopsInfo);
-//    }
 
 }

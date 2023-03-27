@@ -3,6 +3,8 @@ package com.mkyong.shops.model;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -19,7 +21,9 @@ public class ShopAllData {
     private int hvhh;
     private String shopInfoAddress;
     private String shopInfoCity;
-    private List<ShopContactingInfo> contactingInfoList;
+    //    private List<ShopContactingInfo> contactingInfoList = setValuesShopContactInfoData();
+    private String[] name;
+    private String[] email;
     private Date createDate;
     private Date modifyDate;
 
@@ -34,8 +38,23 @@ public class ShopAllData {
                 ", hvhh=" + hvhh +
                 ", shopInfoAddress='" + shopInfoAddress + '\'' +
                 ", shopInfoCity='" + shopInfoCity + '\'' +
-                ", createDate=" + createDate + '\'' +
+                ", name=" + Arrays.toString(name) +
+                ", email=" + Arrays.toString(email) +
+                ", createDate=" + createDate +
                 ", modifyDate=" + modifyDate +
                 '}';
+    }
+
+    public List<ShopContactingInfo> setValuesShopContactInfoData() {
+        ShopContactingInfo shopContactingInfo = ShopContactingInfo.builder()
+                .id(0)
+                .shopInfoId(0)
+                .email("")
+                .name("")
+                .build();
+        List<ShopContactingInfo> shopContactingInfoList = new ArrayList<>();
+        shopContactingInfoList.add(shopContactingInfo);
+        return shopContactingInfoList;
+
     }
 }
