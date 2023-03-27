@@ -3,13 +3,14 @@ package com.mkyong.shops.model;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GetShopAllData {
+public class ShopAllData {
     private int id;
     private String shopName;
     private String shopAddress;
@@ -18,12 +19,13 @@ public class GetShopAllData {
     private int hvhh;
     private String shopInfoAddress;
     private String shopInfoCity;
+    private List<ShopContactingInfo> contactingInfoList;
     private Date createDate;
     private Date modifyDate;
 
     @Override
     public String toString() {
-        return "GetShopAllData{" +
+        return "ShopAllData{" +
                 "id=" + id +
                 ", shopName='" + shopName + '\'' +
                 ", shopAddress='" + shopAddress + '\'' +

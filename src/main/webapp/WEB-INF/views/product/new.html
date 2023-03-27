@@ -9,7 +9,7 @@
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
             <div class="navbar-wrapper">
-                <a class="navbar-brand" href="javascript:void(0)">Add New Goods Page</a>
+                <a class="navbar-brand" href="javascript:void(0)">New Product Page</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
                     aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
@@ -52,60 +52,27 @@
                         <div class="row card-header card-header-warning">
                             <div style="align-content: center"
                                  class="col-md-12 d-flex align-items-left justify-content-center flex-column">
-                                <h4 class="card-title ">New Goods </h4>
+                                <h4 class="card-title ">New Product </h4>
                                 <p class="card-category">Information</p>
                             </div>
                         </div>
-                        <div class="card-body text-center">
-                            <form th:method="POST" th:action="@{/goods}" th:object="${goodsAllData}" class="newGoods">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-12 mb-4 mt-2 shopInfo">
-                                        <h2>Goods Information</h2>
-                                        <hr>
-                                    </div>
-                                    <div class="col-md-3">
+                        <div class="card-body">
+                            <form th:method="POST" th:action="@{/product}" th:object="${product}" class="newproduct">
+                                <div class="row">
+                                    <div class="col-md-5">
                                         <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Goods Name </label>
-                                            <input type="text" th:field="*{goodsName}" class="form-control">
+                                            <label class="label">Product Name</label>
+                                            <input type="text" th:field="*{productName}" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-5">
                                         <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Goods Unit Typ</label>
-                                            <input type="text" th:field="*{goodsType}" class="form-control">
+                                            <label class="label">Product Type</label>
+                                            <input type="text" th:field="*{productType}" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Goods Price</label>
-                                            <input type="text" th:field="*{goodsPrice}" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row justify-content-center">
-                                    <div class="col-md-12 mb-4 mt-5">
-                                        <h2>Goods Category Information</h2>
-                                        <hr>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <div class="form-group">
-                                                <label class="label"></label>
-                                                <select th:field="*{productId}"
-                                                        class="js-example-basic-single form-control">
-                                                    <option th:each="product : ${productList} "
-                                                            th:text="${product.getProductName()}"
-                                                            th:value="${product.getId()}">Alabama
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-5 mt-4">
-                                        <button type="submit" class="btn btn-warning">Add Goods
+                                    <div class="col-md-2 mt-4">
+                                        <button type="submit" class="btn btn-primary pull-right">Add Product
                                             <div class="ripple-container"></div>
                                         </button>
                                     </div>
@@ -117,7 +84,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 <div th:replace="/footer :: footer"></div>
 </body>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <div th:replace="/head :: head"></div>
-<body class="dark-edition goods">
+<body class="dark-edition shops">
 <div th:replace="/header :: header"></div>
 
 <div class="main-panel ps-container ps-theme-default ps-active-y" data-ps-id="b866d6e5-d2aa-4430-aee0-d08bcdb1fac3">
@@ -9,7 +9,7 @@
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
             <div class="navbar-wrapper">
-                <a class="navbar-brand" href="javascript:void(0)">Goods Page</a>
+                <a class="navbar-brand" href="javascript:void(0)">Shops Page</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
                     aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
@@ -52,15 +52,15 @@
                         <div class="row card-header card-header-warning">
                             <div style="align-content: center"
                                  class="col-md-6 d-flex align-items-left justify-content-center flex-column">
-                                <h4 class="card-title ">All Goods </h4>
+                                <h4 class="card-title ">All Shop </h4>
                                 <p class="card-category">Information</p>
                             </div>
                             <div class="col-md-2 offset-4" style="display: inline-block;">
-                                <a id="createNewAddress" class="nav-link left" href="/goods/new">
+                                <a id="createNewAddress" class="nav-link left" href="/shops/new">
                                     <button type="submit" class="btn btn-success pull-right"
                                             style="padding: 10px 30px;">
                                         <span class="material-icons">add_circle</span>
-                                        <span class=" ml-1 ">Create Goods</span>
+                                        <span class=" ml-1 ">Create Shop</span>
                                         <div class="ripple-container"></div>
                                     </button>
                                 </a>
@@ -73,29 +73,32 @@
                                     <thead class="text-center text-primary">
                                     <tr>
                                         <th scope="col">#id</th>
-                                        <th scope="col">Goods Name</th>
-                                        <th scope="col">Goods Unit Typ</th>
-                                        <th scope="col">Goods Price</th>
-                                        <th scope="col">Goods Product Name</th>
-                                        <th scope="col">Goods Product Type</th>
-                                        <th scope="col">Goods Created</th>
-                                        <th scope="col">Goods Modify</th>
+                                        <th scope="col">Shop Name</th>
+                                        <th scope="col">Shop Address</th>
+                                        <th scope="col">Shop City</th>
+                                        <th scope="col">Shop Owner Name</th>
+                                        <!--                                        <th scope="col">Shop HVHH</th>-->
+                                        <!--                                        <th scope="col">Shop Owner Address</th>-->
+                                        <!--                                        <th scope="col">Shop Owner City</th>-->
+                                        <!--                                        <th scope="col">Shop Created</th>-->
                                         <th scope="col">Edit</th>
                                         <th scope="col">Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                    <tr class="trHover" style="cursor: pointer">
-                                        <th th:utext="${showGoodsData.getId()}" scope="row">#id</th>
-                                        <td th:utext="${showGoodsData.getGoodsName()}" scope="col">Goods Name</td>
-                                        <td th:utext="${showGoodsData.getGoodsType()}" scope="col">Goods Type</td>
-                                        <td th:utext="${showGoodsData.getGoodsPrice()}" scope="col">Goods Price</td>
-                                        <td th:utext="${showGoodsData.getProductName()}" scope="col">Product Name</td>
-                                        <td th:utext="${showGoodsData.getProductType()}" scope="col">Product Type</td>
-                                        <td th:utext="${showGoodsData.getCreateDate()}" scope="col">Goods Created</td>
-                                        <td th:utext="${showGoodsData.getModifyDate()}" scope="col">Goods Modify</td>
+                                    <tr class="trHover" th:each="shop : ${shopsList}" style="cursor: pointer"
+                                        th:onclick="'javascript:rowClicked(\'' + ${shop.getId()} + '\');'">
+                                        <th th:utext="${shop.getId()}" scope="row">#id</th>
+                                        <td th:text="${shop.getShopName()}" scope="col">Shop Name</td>
+                                        <td th:utext="${shop.getShopAddress()}" scope="col">Shop Address</td>
+                                        <td th:utext="${shop.getShopCity()}" scope="col">Shop City</td>
+                                        <td th:utext="${shop.getShopOwner()}" scope="col">Shop Owner Name</td>
+                                        <!--                                        <td th:utext="${shop.getHvhh()}" scope="col">Shop HVHH</td>-->
+                                        <!--                                        <td th:utext="${shop.getShopInfoAddress()}" scope="col">Shop Owner Address</td>-->
+                                        <!--                                        <td th:utext="${shop.getShopInfoCity()}" scope="col">Shop Owner City</td>-->
+                                        <!--                                        <td th:utext="${shop.getCreateDate()}" scope="col">Shop Created</td>-->
                                         <td>
-                                            <a th:href="@{/goods/{id}/edit(id=${showGoodsData.getId()})}">
+                                            <a th:href="@{/shops/{id}/edit(id=${shop.getId()})}">
                                                 <button type="submit" class="btn btn-warning">
                                                     <i class="material-icons">edit</i>
                                                     <div class="ripple-container"></div>
@@ -103,8 +106,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <form th:method="DELETE"
-                                                  th:action="@{/goods/{id}(id=${showGoodsData.getId()})}">
+                                            <form th:method="DELETE" th:action="@{/shops/{id}(id=${shop.getId()})}">
                                                 <button type="submit" class="btn btn-danger">
                                                     <i class="material-icons">delete_forever </i>
                                                     <div class="ripple-container"></div>

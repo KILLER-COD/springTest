@@ -9,7 +9,7 @@
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
             <div class="navbar-wrapper">
-                <a class="navbar-brand" href="javascript:void(0)">Add New Shop Page</a>
+                <a class="navbar-brand" href="javascript:void(0)">Edit Shop Information Page</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
                     aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
@@ -52,12 +52,13 @@
                         <div class="row card-header card-header-warning">
                             <div style="align-content: center"
                                  class="col-md-12 d-flex align-items-left justify-content-center flex-column">
-                                <h4 class="card-title ">New Shop </h4>
+                                <h4 class="card-title ">Edit Shop </h4>
                                 <p class="card-category">Information</p>
                             </div>
                         </div>
                         <div class="card-body text-center">
-                            <form th:method="POST" th:action="@{/shops}" th:object="${shopAllData}" class="newShop">
+                            <form th:method="PATCH" th:action="@{/shops/{id}(id=${allShopData.getId()})}"
+                                  th:object="${allShopData}">
                                 <div class="row justify-content-center">
                                     <div class="col-md-12 mb-4 mt-2 shopInfo">
                                         <h2>Shop Name and Location Information</h2>
@@ -114,49 +115,8 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-md-12 mb-4 mt-5">
-                                        <h2>Shop Contacting Information</h2>
-                                        <hr>
-                                    </div>
-                                    <div id="contactInfoAdder">
-                                        <div class="col-md-3">
-                                            <div class="form-group bmd-form-group mt-0">
-                                                <label class="label">Contact Name </label>
-                                                <input type="text" th:field="*{contactingInfoList[0].name}"
-                                                       class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group bmd-form-group mt-0">
-                                                <label class="label">Email</label>
-                                                <input type="email" th:field="*{contactingInfoList[0].email}"
-                                                       class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group bmd-form-group mt-0">
-                                                <label class="label">Phone 1 required</label>
-                                                <input type="text" th:field="*{contactingInfoList[0].phone1}"
-                                                       class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group bmd-form-group mt-0">
-                                                <label class="label">Phone 2</label>
-                                                <input type="text" th:field="*{contactingInfoList[0].phone2}"
-                                                       class="form-control">
-                                            </div>
-                                        </div>
-                                        <div id="contactInfoAdder-button">
-                                            <span onclick="addNewContactInfo()">  <i
-                                                    class="material-icons">dashboard</i> add </span>
-                                        </div>
-                                        <p id="demo"></p>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
                                     <div class="col-md-5 mt-4">
-                                        <button type="submit" class="btn btn-warning">Add Shop
+                                        <button type="submit" class="btn btn-warning">Edit Shop
                                             <div class="ripple-container"></div>
                                         </button>
                                     </div>
@@ -171,14 +131,26 @@
 </div>
 </div>
 <div th:replace="/footer :: footer"></div>
-<script>
-    function addNewContactInfo() {
-      const h2 = document.getElementById("demo");
-      const h3 = document.getElementById("contactInfoAdder").outerHTML+  '<p id="demo"></p>';
-      h2.insertAdjacentHTML("afterend", h3);
-    }
-
-
-</script>
 </body>
 </html>
+<!--        <br>-->
+<!--        <select th:field="*{shops.shopInfoId}" id="address-select">-->
+<!--            <option th:each="shopsInfo : ${shopsInfoList}"-->
+<!--                    th:value="${shopsInfo.getId()}"-->
+<!--                    th:text="${shopsInfo.getShopOwner()+' - '+shopsInfo.getHvhh()}"-->
+<!--                    th:selected="(${shopsInfo.getId()} == *{shops.shopInfoId})"-->
+<!--                    th:readonly="(${shopsInfo.getId()} == *{shops.shopInfoId})">Shop Owner And Hvhh-->
+<!--            </option>-->
+<!--        </select>-->
+
+<!--        <select th:field="*{addressId}" id="addressId">&ndash;&gt;-->
+<!--            <option th:each="address : ${addressList}"-->
+<!--                    th:value="${address.getId()}"-->
+<!--                    th:text="${address.getAddress()+' - '+address.getCity()}"-->
+<!--                    th:selected="(${address.getId()} == *{addressId})"-->
+<!--                    th:readonly="(${address.getId()} == *{addressId})">Shop Address And City-->
+<!--            </option>-->
+<!--        </select>-->
+<!--        <span><a th:href="@{/address/new/{id}(id=${shopsInfo.getId()})}">   Create New Address</a></span>-->
+<!--        <br>-->
+<!--        <hr>-->

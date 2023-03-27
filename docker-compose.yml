@@ -2,10 +2,35 @@ version: '3.1'
 services:
   db:
     image: mysql:8.0.32
-    container_name: test-mysql-db
+    container_name: araqichDB
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: araqichDBNew
+      MYSQL_USER: admin
       MYSQL_PASSWORD: root
-      MYSQL_ROOT_HOST: '%'
+  phpmyadmin:
+    depends_on:
+      - db
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      PMA_HOST: araqichDB
+  web:
+    depends_on:
+      - db
+    container_name: myTomcat
+    image: myappnew:araqich
+    ports:
+      - '8082:8080'
+    environment:
+      MYSQL_DATABASE: araqichDBNew
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_USER: admin

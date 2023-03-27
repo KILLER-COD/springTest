@@ -1,13 +1,12 @@
 package com.mkyong.goods.service;
 
 import com.mkyong.goods.dao.GoodsDAO;
-import com.mkyong.goods.model.GetAllGoodsData;
 import com.mkyong.goods.model.Goods;
-import com.mkyong.methods.ConsoleInputService;
+import com.mkyong.goods.model.GoodsAllData;
 import com.mkyong.methods.JoinByQueryDAO;
 import com.mkyong.product.model.Product;
 import com.mkyong.product.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -15,15 +14,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class GoodsService {
-    @Autowired
-    private JoinByQueryDAO joinByQueryDAO;
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private GoodsDAO goodsDAO;
-    @Autowired
-    private ConsoleInputService consoleInputService;
+
+    private final JoinByQueryDAO joinByQueryDAO;
+
+    private final ProductService productService;
+
+    private final GoodsDAO goodsDAO;
 
     public List<Goods> getAllGoods() throws SQLException {
         return goodsDAO.getAllGoods();
@@ -41,28 +39,23 @@ public class GoodsService {
         goodsDAO.deleteSoft(goodsId);
     }
 
-    public int addNewGoods(GetAllGoodsData getAllGoodsData) throws InterruptedException {
-
-
-        Product product = Product.builder()
-                .productType(getAllGoodsData.getProductType())
-                .productName(getAllGoodsData.getProductName())
-                .build();
-        int productId = productService.addNewProduct(product, null);
+    public int addNewGoods(GoodsAllData goodsAllData) throws InterruptedException {
         Goods goods = Goods.builder()
-                .goodsName(getAllGoodsData.getGoodsName())
-                .goodsType(getAllGoodsData.getGoodsType())
-                .goodsPrice(getAllGoodsData.getGoodsPrice())
-                .productId(productId)
+                .goodsName(goodsAllData.getGoodsName())
+                .goodsType(goodsAllData.getGoodsType())
+                .goodsPrice(goodsAllData.getGoodsPrice())
+                .productId(goodsAllData.getProductId())
                 .build();
         return goodsDAO.insert(goods, null);
     }
 
-    public void changeGoods(GetAllGoodsData getAllGoodsData, int goodsId, Connection conn) throws SQLException {
+    public void changeGoods(GoodsAllData goodsAllData, Connection conn) throws SQLException {
         Goods goods = Goods.builder()
-                .goodsName(getAllGoodsData.getGoodsName())
-                .goodsType(getAllGoodsData.getGoodsType())
-                .goodsPrice(getAllGoodsData.getGoodsPrice())
+                .id(goodsAllData.getId())
+                .goodsName(goodsAllData.getGoodsName())
+                .goodsType(goodsAllData.getGoodsType())
+                .goodsPrice(goodsAllData.getGoodsPrice())
+                .productId(goodsAllData.getProductId())
                 .build();
         goodsDAO.update(goods, conn);
     }
@@ -79,11 +72,15 @@ public class GoodsService {
         return goodsDAO.findByGoodsId(goodsId).isPresent();
     }
 
-    public List<GetAllGoodsData> getAllGoodsData() {
+    public List<GoodsAllData> getAllGoodsData() {
         return joinByQueryDAO.getAllGoodsData();
     }
 
-    public GetAllGoodsData getSingleGoodsData(int goodsId) {
+    public List<Product> getAllProduct() throws SQLException {
+        return productService.getAllProduct();
+    }
+
+    public GoodsAllData getSingleGoodsData(int goodsId) {
         return joinByQueryDAO.getSingleGoodsData(goodsId);
     }
 }

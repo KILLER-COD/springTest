@@ -3,7 +3,6 @@ package com.mkyong.controllers;
 import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +33,6 @@ public class AddressController {
         return "address/new";
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public String create(@ModelAttribute("address") Address address) {
         addressService.addNewAddress(address);
@@ -53,7 +51,6 @@ public class AddressController {
         return "redirect:/address";
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) throws SQLException {
         addressService.deleteAddress(id);

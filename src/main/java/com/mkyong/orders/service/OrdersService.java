@@ -6,11 +6,11 @@ import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.methods.JoinByQueryDAO;
 import com.mkyong.orders.dao.OrdersDAO;
 import com.mkyong.orders.model.GetAlOrdersData;
-import com.mkyong.orders.model.GetAllOrdersGoodsList;
+import com.mkyong.orders.model.OrderAllGoodsList;
 import com.mkyong.orders.model.Orders;
-import com.mkyong.shops.model.GetShopAllData;
+import com.mkyong.shops.model.ShopAllData;
 import com.mkyong.shops.service.ShopsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -20,21 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class OrdersService {
-    @Autowired
-    private OrdersDAO ordersDAO;
-    @Autowired
-    private ShopsService shopsService;
+    private final OrdersDAO ordersDAO;
+    private final ShopsService shopsService;
 
-    @Autowired
-    private GoodsService goodsService;
-    @Autowired
-    private OrdersGoodsService ordersGoodsService;
-
-    @Autowired
-    private JoinByQueryDAO joinByQueryDAO;
-    @Autowired
-    private ConsoleInputService consoleInputService;
+    private final GoodsService goodsService;
+    private final JoinByQueryDAO joinByQueryDAO;
+    private final ConsoleInputService consoleInputService;
 
     public List<Orders> getAllOrders() throws SQLException {
         return ordersDAO.getAllOrders();
@@ -126,8 +119,8 @@ public class OrdersService {
 
     public GetAlOrdersData getSingleOrdersData(int orderId) throws SQLException {
         Orders orders = findByOrdersId(orderId);
-        GetShopAllData getSingleShopAllData = joinByQueryDAO.getSingleShopData(orders.getShopId());
-        List<GetAllOrdersGoodsList> orderGoodsList = joinByQueryDAO.getOrderGoodsInformation(orderId);
+        ShopAllData getSingleShopAllData = joinByQueryDAO.getSingleShopData(orders.getShopId());
+        List<OrderAllGoodsList> orderGoodsList = joinByQueryDAO.getOrderGoodsInformation(orderId);
         return GetAlOrdersData.builder()
                 .id(orderId)
                 .ordersShopAllData(getSingleShopAllData)

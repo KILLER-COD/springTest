@@ -118,36 +118,36 @@
                                         <h2>Shop Contacting Information</h2>
                                         <hr>
                                     </div>
-                                    <div id="contactInfoAdder">
+                                    <div class="contactInfoAdder">
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Contact Name </label>
-                                                <input type="text" th:field="*{contactingInfoList[0].name}"
+                                                <input type="text" th:field="*{contactingInfoList.name}"
                                                        class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Email</label>
-                                                <input type="email" th:field="*{contactingInfoList[0].email}"
+                                                <input type="email" th:field="*{contactingInfoList.email}"
                                                        class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Phone 1 required</label>
-                                                <input type="text" th:field="*{contactingInfoList[0].phone1}"
+                                                <input type="text" th:field="*{contactingInfoList.phone1}"
                                                        class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Phone 2</label>
-                                                <input type="text" th:field="*{contactingInfoList[0].phone2}"
+                                                <input type="text" th:field="*{contactingInfoList.phone2}"
                                                        class="form-control">
                                             </div>
                                         </div>
-                                        <div id="contactInfoAdder-button">
+                                        <div id="contactInfoAdder">
                                             <span onclick="addNewContactInfo()">  <i
                                                     class="material-icons">dashboard</i> add </span>
                                         </div>

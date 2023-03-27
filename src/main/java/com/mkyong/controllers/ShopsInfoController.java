@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 
 @Controller
-@RequestMapping("/shopsInfo")
+@RequestMapping("/shops/shopsInfo")
 @RequiredArgsConstructor
 public class ShopsInfoController {
     private final ShopsInfoService shopsInfoService;
@@ -19,7 +19,7 @@ public class ShopsInfoController {
     @GetMapping
     public String index(Model model) throws SQLException {
         model.addAttribute("shopsInfoList", shopsInfoService.getAllShopsInfo());
-        return "shopsInfo/index";
+        return "shops/shopsInfo/index";
     }
 
     @GetMapping("/{id}")
@@ -27,7 +27,7 @@ public class ShopsInfoController {
         ShopsInfo shopsInfo = shopsInfoService.findByShopInfoId(id);
         model.addAttribute("shopsInfo", shopsInfo);
         model.addAttribute("address", shopsInfoService.getShopsInfoAddressInfo(id));
-        return "shopsInfo/show";
+        return "shops/shopsInfo/show";
     }
 
     @GetMapping("/new")
@@ -44,7 +44,7 @@ public class ShopsInfoController {
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) throws SQLException {
         shopsInfoService.deleteShopsInfo(id);
-        return "redirect:/shopsInfo";
+        return "redirect:shops/shopsInfo";
     }
 
 //    @GetMapping("/{id}/edit")
@@ -56,7 +56,7 @@ public class ShopsInfoController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("newShopsInfo") ShopsInfo newShopInfo, @PathVariable("id") int id) throws SQLException {
         shopsInfoService.changeShopsInfo(newShopInfo, id, null);
-        return "redirect:/shopsInfo";
+        return "redirect:shops/shopsInfo";
     }
 
 }

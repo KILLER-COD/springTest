@@ -2,7 +2,7 @@ package com.mkyong.product.service;
 
 import com.mkyong.product.dao.ProductDAO;
 import com.mkyong.product.model.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -11,9 +11,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ProductService {
-    @Autowired
-    private ProductDAO productDAO;
+    private final ProductDAO productDAO;
 
     public List<Product> getAllProduct() throws SQLException {
         return productDAO.getAllProduct();

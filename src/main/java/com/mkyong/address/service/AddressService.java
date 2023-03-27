@@ -4,7 +4,7 @@ import com.mkyong.address.dao.AddressDAO;
 import com.mkyong.address.model.Address;
 import com.mkyong.address.model.AddressCountByCity;
 import com.mkyong.methods.ConsoleInputService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
@@ -12,11 +12,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class AddressService {
-    @Autowired
-    private ConsoleInputService consoleInputService;
-    @Autowired
-    private AddressDAO addressDAO;
+    private final ConsoleInputService consoleInputService;
+    private final AddressDAO addressDAO;
 
     public List<Address> getAllAddress() throws SQLException {
         return addressDAO.getAllAddress();

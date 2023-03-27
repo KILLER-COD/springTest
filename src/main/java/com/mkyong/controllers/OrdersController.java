@@ -1,13 +1,10 @@
 package com.mkyong.controllers;
 
 import com.mkyong.goods.model.Goods;
-import com.mkyong.goods.service.GoodsService;
 import com.mkyong.methods.JoinByQueryDAO;
 import com.mkyong.orders.model.Orders;
-import com.mkyong.orders.service.OrdersGoodsService;
 import com.mkyong.orders.service.OrdersService;
-import com.mkyong.shops.service.ShopsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +14,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/orders")
+@RequiredArgsConstructor
 public class OrdersController {
     private final OrdersService ordersService;
     private final JoinByQueryDAO joinByQueryDAO;
 
-    @Autowired
-    public OrdersController(GoodsService goodsService, ShopsService shopsService, OrdersGoodsService ordersGoodsService, OrdersService ordersService, JoinByQueryDAO joinByQueryDAO) {
-        this.ordersService = ordersService;
-        this.joinByQueryDAO = joinByQueryDAO;
-    }
 
     @GetMapping()
     public String index(Model model) throws SQLException {

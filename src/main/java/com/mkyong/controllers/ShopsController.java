@@ -1,7 +1,7 @@
 package com.mkyong.controllers;
 
 import com.mkyong.methods.JoinByQueryDAO;
-import com.mkyong.shops.model.GetShopAllData;
+import com.mkyong.shops.model.ShopAllData;
 import com.mkyong.shops.service.ShopsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,13 +30,13 @@ public class ShopsController {
     }
 
     @GetMapping("/new")
-    public String newShops(@ModelAttribute("shopAllData") GetShopAllData getShopAllData) {
+    public String newShops(@ModelAttribute("shopAllData") ShopAllData shopAllData) {
         return "shops/new";
     }
 
     @PostMapping
-    public String create(@ModelAttribute("shopAllData") GetShopAllData getShopAllData) {
-        shopsService.addNewShops(getShopAllData, null);
+    public String create(@ModelAttribute("shopAllData") ShopAllData shopAllData) {
+        shopsService.addNewShops(shopAllData, null);
         return "redirect:/shops";
     }
 
@@ -47,10 +47,11 @@ public class ShopsController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("allShopData") GetShopAllData getShopAllData, @PathVariable("id") int id) throws SQLException {
-        shopsService.changeShops(getShopAllData, id, null);
+    public String update(@ModelAttribute("allShopData") ShopAllData shopAllData, @PathVariable("id") int id) throws SQLException {
+        shopsService.changeShops(shopAllData, id, null);
         return "redirect:/shops";
     }
+
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) throws SQLException {

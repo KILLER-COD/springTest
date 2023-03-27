@@ -1,35 +1,37 @@
-package com.mkyong.orders.model;
+package com.mkyong.goods.model;
 
 import lombok.*;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-public class GetAllOrdersGoodsList {
+@NoArgsConstructor
+@AllArgsConstructor
+public class GoodsAllData {
     private int id;
-    private int goodsId;
     private String goodsName;
-    private String goodsCount;
     private String goodsType;
-    private Double goodsPrice;
+    private double goodsPrice;
+    private int productId;
+    private String productType;
+    private String productName;
     private Date createDate;
     private Date modifyDate;
 
     @Override
     public String toString() {
-        return "GetAllOrdersGoodsList{" +
+        return "GoodsAllData{" +
                 "id=" + id +
-                ", goodsId=" + goodsId +
                 ", goodsName='" + goodsName + '\'' +
-                ", goodsCount='" + goodsCount + '\'' +
                 ", goodsType='" + goodsType + '\'' +
                 ", goodsPrice=" + goodsPrice +
+                ", productId=" + productId +
+                ", productType='" + productType + '\'' +
+                ", productName='" + productName + '\'' +
                 ", createDate=" + createDate +
                 ", modifyDate=" + modifyDate +
-                '}' + "\n";
+                '}';
     }
 }

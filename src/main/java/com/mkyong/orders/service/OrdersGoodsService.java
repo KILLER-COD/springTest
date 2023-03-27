@@ -4,7 +4,7 @@ import com.mkyong.goods.service.GoodsService;
 import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.orders.dao.OrdersGoodsDAO;
 import com.mkyong.orders.model.OrdersGoods;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -14,15 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class OrdersGoodsService {
-    @Autowired
-    private OrdersGoodsDAO ordersGoodsDAO;
-    @Autowired
-    private GoodsService goodsService;
-    @Autowired
-    private OrdersService ordersService;
-    @Autowired
-    private ConsoleInputService consoleInputService;
+    private final OrdersGoodsDAO ordersGoodsDAO;
+    private final GoodsService goodsService;
+    private final OrdersService ordersService;
+    private final ConsoleInputService consoleInputService;
 
     public ArrayList<OrdersGoods> getAllOrdersGoods() throws SQLException {
         return ordersGoodsDAO.getAllOrdersGoods();

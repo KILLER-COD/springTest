@@ -57,8 +57,8 @@
                             </div>
                         </div>
                         <div class="card-body text-center">
-                            <form th:method="PATCH" th:action="@{/goods/{id}(id=${getAllGoodsData.getId()})}"
-                                  th:object="${getAllGoodsData}">
+                            <form th:method="PATCH" th:action="@{/goods/{id}(id=${getGoodsAllData.getId()})}"
+                                  th:object="${getGoodsAllData}">
                                 <div class="row justify-content-center">
                                     <div class="col-md-12 mb-4 mt-2 shopInfo">
                                         <h2>Goods Information</h2>
@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Goods Type</label>
+                                            <label class="label">Goods Unit Typ</label>
                                             <input type="text" th:field="*{goodsType}" class="form-control">
                                         </div>
                                     </div>
@@ -91,14 +91,19 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Product Name </label>
-                                            <input type="text" th:field="*{productName}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Product Type</label>
-                                            <input type="text" th:field="*{productType}" class="form-control">
+                                            <div class="form-group">
+                                                <label class="label"></label>
+                                                <select th:field="*{productId}"
+                                                        class="js-example-basic-single form-control">
+                                                    <option th:each="product : ${productList} "
+                                                            th:text="${product.getProductName()}"
+                                                            th:value="${product.getId()}"
+                                                            th:selected="(${product.getId} == ${productId})"
+                                                            th:readonly="(${product.getId} == ${productId})">
+                                                        Product Name
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

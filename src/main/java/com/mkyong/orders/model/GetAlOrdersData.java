@@ -1,6 +1,6 @@
 package com.mkyong.orders.model;
 
-import com.mkyong.shops.model.GetShopAllData;
+import com.mkyong.shops.model.ShopAllData;
 import lombok.*;
 
 import java.sql.Date;
@@ -13,8 +13,8 @@ import java.util.List;
 @Builder
 public class GetAlOrdersData {
     private int id;
-    private GetShopAllData ordersShopAllData;
-    private List<GetAllOrdersGoodsList> orderGoodsList;
+    private ShopAllData ordersShopAllData;
+    private List<OrderAllGoodsList> orderGoodsList;
     private Date createDate;
     private Date modifyDate;
 

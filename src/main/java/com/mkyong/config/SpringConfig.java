@@ -25,6 +25,8 @@ public class SpringConfig implements WebMvcConfigurer {
 
     @Autowired
     public SpringConfig(ApplicationContext applicationContext) {
+        System.setProperty("server.servlet.context-path", "/");
+        System.setProperty("spring.mvc.servlet.path", "/");
         this.applicationContext = applicationContext;
     }
 
@@ -51,9 +53,9 @@ public class SpringConfig implements WebMvcConfigurer {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         resolver.setCharacterEncoding("UTF-8");
-//        resolver.setContentType("text/html; charset=UTF-8");
         registry.viewResolver(resolver);
     }
+
 
     @Bean
     public DataSource dataSource() {
@@ -61,8 +63,7 @@ public class SpringConfig implements WebMvcConfigurer {
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/araqichDBNew");
         dataSource.setUsername("root");
-        dataSource.setPassword("159357");
-
+        dataSource.setPassword("root");
         return dataSource;
     }
 

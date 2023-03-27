@@ -1,6 +1,6 @@
 package com.mkyong.controllers;
 
-import com.mkyong.goods.model.GetAllGoodsData;
+import com.mkyong.goods.model.GoodsAllData;
 import com.mkyong.goods.service.GoodsService;
 import com.mkyong.methods.JoinByQueryDAO;
 import lombok.RequiredArgsConstructor;
@@ -30,27 +30,30 @@ public class GoodsController {
     }
 
     @GetMapping("/new")
-    public String newGoods(@ModelAttribute("getAlGoodsData") GetAllGoodsData getAllGoodsData) {
+    public String newGoods(@ModelAttribute("goodsAllData") GoodsAllData goodsAllData, Model model) throws SQLException {
+        model.addAttribute("productList", goodsService.getAllProduct());
         return "goods/new";
     }
 
     @PostMapping
-    public String create(@ModelAttribute("getAlGoodsData") GetAllGoodsData getAllGoodsData) throws InterruptedException {
-        goodsService.addNewGoods(getAllGoodsData);
+    public String create(@ModelAttribute("getAlGoodsData") GoodsAllData goodsAllData) throws InterruptedException {
+        goodsService.addNewGoods(goodsAllData);
         return "redirect:/goods";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) throws SQLException {
-        model.addAttribute("getAllGoodsData", goodsService.getSingleGoodsData(id));
+        model.addAttribute("getGoodsAllData", goodsService.getSingleGoodsData(id));
+        model.addAttribute("productList", goodsService.getAllProduct());
         return "goods/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("getAllGoodsData") GetAllGoodsData getAllGoodsData, @PathVariable("id") int id) throws SQLException {
-        goodsService.changeGoods(getAllGoodsData, id, null);
+    public String update(@ModelAttribute("getGoodsAllData") GoodsAllData goodsAllData, @PathVariable("id") int id) throws SQLException {
+        goodsService.changeGoods(goodsAllData, null);
         return "redirect:/goods";
     }
+
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) throws SQLException {

@@ -2,10 +2,9 @@ package com.mkyong.shops.service;
 
 import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
-import com.mkyong.methods.ConsoleInputService;
 import com.mkyong.shops.dao.ShopsInfoDAO;
 import com.mkyong.shops.model.ShopsInfo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -13,14 +12,12 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
+
 @Component
+@RequiredArgsConstructor
 public class ShopsInfoService {
-    @Autowired
-    private ShopsInfoDAO shopsInfoDAO;
-    @Autowired
-    private AddressService addressService;
-    @Autowired
-    private ConsoleInputService consoleInputService;
+    private final ShopsInfoDAO shopsInfoDAO;
+    private final AddressService addressService;
 
     public List<ShopsInfo> getAllShopsInfo() throws SQLException {
         return shopsInfoDAO.getAllShopsInfo();
@@ -34,8 +31,9 @@ public class ShopsInfoService {
         return shopsInfoDAO.findByShopsInfoId(id);
     }
 
-    public void deleteShopsInfo(int shopsId) throws SQLException {
-        shopsInfoDAO.deleteSoft(shopsId);
+    public void deleteShopsInfo(int shopsInfoId) throws SQLException {
+        addressService.deleteAddress(findByShopInfoId(shopsInfoId).getAddressId());
+        shopsInfoDAO.deleteSoft(shopsInfoId);
     }
 
 
