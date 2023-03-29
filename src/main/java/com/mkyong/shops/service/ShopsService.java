@@ -20,6 +20,8 @@ public class ShopsService {
     private final ShopsPersonContactService personContactService;
     private final ShopsPersonDataService personDataService;
     private final ShopsInfoService shopsInfoService;
+    private static List<ShopPersonContact> personContactList = new ArrayList<>();
+    private static Map<Integer, List<ShopPersonContact>> mapResults = new HashMap<>();
 //    private final ShopContactingInfo contactingInfo;
 
     public List<Shop> getAllShops() throws SQLException {
@@ -146,44 +148,26 @@ public class ShopsService {
         List<ShopPersonData> personDataList = personDataService.findAllByIdShopId(shopId);
         //Update and Create Person Checking
 
-        //Test Post Person Data Request
-        List<ShopPersonData> testPersonDataList = new ArrayList<>();
-        testPersonDataList.add(ShopPersonData.builder()
-                .id(22)
-                .shopId(33)
-                .personName("Aramais")
-                .personEmail("aram225@mail.ru")
-                .build()
-        );
-        testPersonDataList.add(ShopPersonData.builder()
-                .id(0)
-                .shopId(33)
-                .personName("Aram")
-                .personEmail("aram225@mail.ru")
-                .build()
-        );
-        testPersonDataList.add(ShopPersonData.builder()
-                .id(0)
-                .shopId(33)
-                .personName("Garik")
-                .personEmail("Garik225@mail.ru")
-                .build()
-        );
 
-        testPersonDataList.add(ShopPersonData.builder()
-                .id(0)
-                .shopId(33)
-                .personName("Vahag")
-                .personEmail("Vahag22@mail.ru")
-                .build()
-        );
+        //Test Post Person Data Request Start
+        List<ShopPersonData> testPersonDataList = testPersonDataList();
+        //Test Post Person Data Request End
 
         List<ShopPersonData> deletedPersonDataList = new ArrayList<>(personDataList);
         Set<ShopPersonData> createdPersonDataList = new HashSet<>();
 
-
         personDataList.forEach(
                 personData -> {
+
+                    //Current Shop Person Data Contact Request Start
+                    try {
+                        personContactList = personContactService.findByShopPersonDataId(personData.getId());
+                        mapResults.put(personData.getId(), personContactList);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    //Current Shop Person Data Contact Request End
+
                     testPersonDataList.forEach(
                             testPersonData -> {
                                 if (personData.getId() == testPersonData.getId()) {
@@ -201,9 +185,14 @@ public class ShopsService {
                             }
                     );
 
+
                 }
         );
-        //Delete Person Data Checking
+
+        System.out.println(mapResults);
+
+
+        //Delete Person Data Checking Start
         deletedPersonDataList.forEach(
                 personData -> {
                     try {
@@ -214,14 +203,22 @@ public class ShopsService {
                     }
                 }
         );
+        //Delete Person Data Checking End
 
-        //Create Person Data Checking
+
+        //Create Person Data Checking Start
         createdPersonDataList.forEach(
                 personData -> {
                     personDataService.create(personData, null);
                 }
         );
+        //Create Person Data Checking End
 
+        printShopPersonDataAndPhoneByShopId(shopId);
+
+    }
+
+    public void printShopPersonDataAndPhoneByShopId(int shopId) throws SQLException {
         //Show Changes List
         List<ShopPersonData> newPersonDataList = personDataService.findAllByIdShopId(shopId);
         newPersonDataList.forEach(System.out::println);
@@ -247,6 +244,76 @@ public class ShopsService {
             );
             System.out.println("------------------");
         }
+    }
+
+    public Map<Integer, List<ShopPersonContact>> testPersonContactMap(int shopId) {
+        List<ShopPersonData> personDataList = personDataService.findAllByIdShopId(shopId);
+        Map<Integer, List<ShopPersonContact>> singleMapResults = new HashMap<>();
+
+        personDataList.forEach(
+                personData -> {
+                    try {
+                        personContactList = personContactService.findByShopPersonDataId(personData.getId());
+                        singleMapResults.put(personData.getId(), personContactList);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        );
+
+        return singleMapResults;
+    }
+
+    public Map<ShopPersonData, List<ShopPersonContact>> testPersonContactAndDataMap(int shopId) {
+        List<ShopPersonData> personDataList = personDataService.findAllByIdShopId(shopId);
+        Map<ShopPersonData, List<ShopPersonContact>> singleMapResults = new HashMap<>();
+        int i = 0;
+        personDataList.forEach(
+                personData -> {
+                    try {
+                        personContactList = personContactService.findByShopPersonDataId(personData.getId());
+                        singleMapResults.put(personData, personContactList);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        );
+
+        return singleMapResults;
+    }
+
+
+    public List<ShopPersonData> testPersonDataList() {
+        List<ShopPersonData> testPersonDataList = new ArrayList<>();
+        testPersonDataList.add(ShopPersonData.builder()
+                .id(22)
+                .shopId(33)
+                .personName("Aramais")
+                .personEmail("aram225@mail.ru")
+                .build()
+        );
+        testPersonDataList.add(ShopPersonData.builder()
+                .id(0)
+                .shopId(33)
+                .personName("Aram")
+                .personEmail("aram225@mail.ru")
+                .build()
+        );
+        testPersonDataList.add(ShopPersonData.builder()
+                .id(0)
+                .shopId(33)
+                .personName("Garik")
+                .personEmail("Garik225@mail.ru")
+                .build()
+        );
+        testPersonDataList.add(ShopPersonData.builder()
+                .id(0)
+                .shopId(33)
+                .personName("Vahag")
+                .personEmail("Vahag22@mail.ru")
+                .build()
+        );
+        return testPersonDataList;
     }
 
 }

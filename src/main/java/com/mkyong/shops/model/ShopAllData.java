@@ -5,6 +5,7 @@ import lombok.*;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -23,7 +24,7 @@ public class ShopAllData {
     private String[] personName;
     private String[] personEmail;
     private List<String[]> personPhone;
-    private List<ShopPersonContact> personPhoneTestList;
+    private Map<ShopPersonData, List<ShopPersonContact>> personPhoneTestMap;
     private Date createDate;
     private Date modifyDate;
 

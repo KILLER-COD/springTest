@@ -27,7 +27,9 @@ public class SpringConfig implements WebMvcConfigurer {
     @Autowired
     public SpringConfig(ApplicationContext applicationContext) {
         System.setProperty("server.servlet.context-path", "/");
+        System.setProperty("spring.resources.add-mappings", "true");
         System.setProperty("spring.mvc.servlet.path", "/");
+        System.setProperty("spring.mvc.static-path-pattern", "/resources/**");
         this.applicationContext = applicationContext;
     }
 
@@ -59,7 +61,8 @@ public class SpringConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
     }
 
     @Bean

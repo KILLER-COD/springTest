@@ -10,7 +10,6 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShopPersonData {
-
     private int id;
     private int shopId;
     private String personName;

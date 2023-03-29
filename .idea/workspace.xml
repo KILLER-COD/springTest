@@ -4,46 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="&#10;changes docker compose and Dockerfil">
-      <change afterPath="$PROJECT_DIR$/source-files/dd-java-agent.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopPersonContactDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopPersonDataDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopPersonContactDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopPersonContact.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsPersonContactService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/recources/static/main.js" afterDir="false" />
+    <list default="true" id="dc44155e-bfcd-4591-8fd6-1e050645dab7" name="Changes" comment="add Shop Person Data Service-Model-DAO-JdbcDAO&#10;add Shop Person Contact Service-Model-DAO-JdbcDAO&#10;Add in shops/new.html {Person Data and Phone inputs }&#10;&#10;Change Shops">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/config/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/PersonDataController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/TestShopData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/personData/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/personData/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/recources/static/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/common/ColumnNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/common/ColumnNames.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/config/SpringConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/controllers/ShopsInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/JoinByQueryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/methods/JoinByQueryDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/modelInterface/StandartObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/modellAbstract/StandartObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopContactingInfoDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopsInfoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/ShopInfoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopContactingInfoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopPersonDataDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopsInfoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopInfoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopAllData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopAllData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopContactingInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopPersonData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/Shops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopsInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsContactingInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsPersonDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopPersonData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/model/ShopPersonData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static.styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/recources/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/head.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/shopsInfo/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/shopsInfo/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/shopsInfo/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/shopsInfo/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/shopsInfo/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/shopsInfo/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/shopsInfo/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/shops/shopsInfo/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/recources/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/recources/static/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/recources/static/js/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,8 +32,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="HTML File" />
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -121,11 +99,11 @@
       <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\webapp\WEB-INF\views\shops\shopsContactingInfo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\webapp\recources" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\webapp\recources\static\css" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\webapp\recources\static\js" />
       <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\static\js" />
-      <recent name="C:\Users\gamer\IdeaProjects\springTest\srcNew" />
-      <recent name="C:\Users\gamer\IdeaProjects\springTest\src.conf\conf" />
-      <recent name="C:\Users\gamer\IdeaProjects\springTest\src.conf" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\static\css" />
+      <recent name="C:\Users\gamer\IdeaProjects\springTest\src\main\resources\static" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -135,10 +113,10 @@
       <recent name="com.mkyong.goods.dao.impl" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mkyong.controllers" />
       <recent name="com.mkyong.shops.service" />
       <recent name="com.mkyong.shops.dao.impl" />
       <recent name="com.mkyong.shops.dao" />
-      <recent name="com.mkyong.controllers" />
       <recent name="com.mkyong.product.dao.impl" />
     </key>
   </component>
@@ -511,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679944482100</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="add Shop Person Data Service-Model-DAO-JdbcDAO&#10;add Shop Person Contact Service-Model-DAO-JdbcDAO&#10;Add in shops/new.html {Person Data and Phone inputs }&#10;&#10;Change Shops">
+      <created>1680099311231</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1680099311231</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -565,7 +550,8 @@
     <MESSAGE value="Change All" />
     <MESSAGE value="Change All&#10;local tomcat project &#10;create new branch for Spring boot project" />
     <MESSAGE value="&#10;changes docker compose and Dockerfil" />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;changes docker compose and Dockerfil" />
+    <MESSAGE value="add Shop Person Data Service-Model-DAO-JdbcDAO&#10;add Shop Person Contact Service-Model-DAO-JdbcDAO&#10;Add in shops/new.html {Person Data and Phone inputs }&#10;&#10;Change Shops" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Shop Person Data Service-Model-DAO-JdbcDAO&#10;add Shop Person Contact Service-Model-DAO-JdbcDAO&#10;Add in shops/new.html {Person Data and Phone inputs }&#10;&#10;Change Shops" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -598,21 +584,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/mkyong/shops/dao/impl/JdbcShopDAO.java</url>
           <line>40</line>
           <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java</url>
-          <line>190</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java</url>
-          <line>186</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mkyong/shops/service/ShopsService.java</url>
-          <line>197</line>
-          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

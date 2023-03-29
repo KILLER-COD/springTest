@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymleaf.org">
 <div th:replace="/head :: head"></div>
 <body class="dark-edition">
 <div th:replace="/header :: header"></div>
@@ -9,7 +9,7 @@
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
             <div class="navbar-wrapper">
-                <a class="navbar-brand" href="javascript:void(0)">Add New Shop Page</a>
+                <a class="navbar-brand" href="javascript:void(0)">Edit Shop Person Information Page</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
                     aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
@@ -52,99 +52,49 @@
                         <div class="row card-header card-header-warning">
                             <div style="align-content: center"
                                  class="col-md-12 d-flex align-items-left justify-content-center flex-column">
-                                <h4 class="card-title ">New Shop </h4>
+                                <h4 class="card-title ">Edit Shop Person Data </h4>
                                 <p class="card-category">Information</p>
                             </div>
                         </div>
                         <div class="card-body text-center">
-                            <form th:method="POST" th:action="@{/shops}" th:object="${shopAllData}" class="newShop">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-12 mb-4 mt-2 shopInfo">
-                                        <h2>Shop Name and Location Information</h2>
-                                        <hr>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Shop Name </label>
-                                            <input type="text" th:field="*{shopName}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Shop Address</label>
-                                            <input type="text" th:field="*{shopAddress}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Shop City</label>
-                                            <input type="text" th:field="*{shopCity}" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row justify-content-center">
-                                    <div class="col-md-12 mb-4 mt-5">
-                                        <h2>Shop Owner Information</h2>
-                                        <hr>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Shop Owner </label>
-                                            <input type="text" th:field="*{shopOwner}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">Shop HVHH</label>
-                                            <input type="text" th:field="*{hvhh}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">P/S Address</label>
-                                            <input type="text" th:field="*{shopInfoAddress}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group bmd-form-group mt-0">
-                                            <label class="label">P/S City</label>
-                                            <input type="text" th:field="*{shopInfoCity}" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
+                            <form th:method="PATCH" th:action="@{/personData/33}" th:object="${testMap}">
                                 <div class="row justify-content-center">
                                     <div class="col-md-12 mb-4 mt-5">
                                         <h2>Shop Contacting Information</h2>
                                         <hr>
                                     </div>
-                                    <div id="contactInfoAdder" class="col-md-12 d-flex justify-content-center">
+                                    <div id="contactInfoAdder" class="col-md-12 d-flex justify-content-center"
+                                         th:each="entry : ${testMap.getPersonPhoneTestMap()}">
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Person Name </label>
-                                                <input type="text" th:field="*{personName}" class="form-control"
-                                                       required>
+                                                <!--                                                <input name="personName" th:attrappend="name=${entry.key.id}"  type="text" th:value="${entry.key.personName}" class="form-control" required>-->
+                                                <input name="personName" type="text" th:value="${entry.key.personName}"
+                                                       class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Email</label>
-                                                <input type="email" th:field="*{personEmail}"
-                                                       class="form-control">
+                                                <input type="email" name="personEmail"
+                                                       th:value="${entry.key.personEmail}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-3 d-flex justify-content-center flex-column">
-                                            <div class="col-md-12" id="contactPhoneAdder">
+                                            <div class="col-md-12" id="contactPhoneAdder"
+                                                 th:each=" row : ${entry.value}">
                                                 <div class="form-group bmd-form-group mt-0">
                                                     <label class="label">Phone</label>
-                                                    <input type="tel" th:field="*{personPhone[0]}" class="form-control"
-                                                           required>
+                                                    <input name="personPhone"
+                                                           th:attrappend="name=${'['+entry.key.id+']'}" type="tel"
+                                                           th:value="${row.phone}" class="form-control" required>
                                                 </div>
                                             </div>
                                             <p id="newAdderPhoneId-0"></p>
                                         </div>
                                     </div>
                                     <p id="newAdderId-0"></p>
+                                    <hr col-md-12>
                                     <div id="contactInfoAdderPhone-button"
                                          class="col-md-3 d-flex justify-content-center align-item-center">
                                         <span class="btn btn-warning" onclick="addNewContactInfo()">
@@ -159,11 +109,10 @@
                                                 Add new Phone
                                             </span>
                                     </div>
-                                    <hr col-md-12>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-md-5 mt-4">
-                                        <button type="submit" class="btn btn-warning">Add Shop
+                                        <button type="submit" class="btn btn-warning">Edit Shop
                                             <div class="ripple-container"></div>
                                         </button>
                                     </div>

@@ -43,7 +43,9 @@ public class ShopsController {
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) throws SQLException {
-        model.addAttribute("allShopData", joinByQueryDAO.getSingleShopData(id));
+//        ShopAllData shopAllData = joinByQueryDAO.getSingleShopData(id);
+//        shopAllData.setPersonPhoneTestMap(shopsService.testPersonContactMap(id));
+//        model.addAttribute("allShopData", shopAllData);
         return "shops/edit";
     }
 
