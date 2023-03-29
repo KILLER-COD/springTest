@@ -26,28 +26,28 @@ public class JoinByQueryDAO {
 
     public List<OrderShopInfo> allShopsInformation() {
         String sql = "SELECT s.id,shop_name,address,city,s.create_date as createDate" +
-                " FROM shops s " +
+                " FROM shop s " +
                 " join address a on s.shop_address_id = a.id " +
                 " WHERE s.delete_date IS NULL;";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderShopInfo.class));
     }
 
     public ShopAllData getSingleShopData(int shopId) {
-        String sql = "SELECT s.id ,s.shop_name,a.address as shopAddress,a.city as shopCity,s.shop_info_id as shopInfoId,sInfo.shop_owner,sInfo.hvhh,adressSInfo.address as shopInfoAddress,adressSInfo.city as shopInfoCity, s.create_date as createDate,s.modify_date as modifyDate" +
-                "               FROM shops s  " +
-                "               join shops_info sInfo on s.shop_info_id = sInfo.id " +
+        String sql = "SELECT s.id ,s.shop_name,a.address as shopAddress,a.city as shopCity,s.shop_info_id as shopInfoId,sInfo.shop_owner,sInfo.hvhh,sia.address as shopInfoAddress,sia.city as shopInfoCity, s.create_date as createDate,s.modify_date as modifyDate" +
+                "               FROM shop s  " +
+                "               join shop_info sInfo on s.shop_info_id = sInfo.id " +
                 "               join address a on s.shop_address_id= a.id " +
-                "               join address adressSInfo on sInfo.address_id= adressSInfo.id " +
+                "               join address sia on sInfo.address_id= sia.id " +
                 "               WHERE s.id = ? && s.delete_date IS NULL ;";
         return jdbcTemplate.query(sql, new Object[]{shopId}, new BeanPropertyRowMapper<>(ShopAllData.class)).stream().findAny().orElse(null);
     }
 
     public List<ShopAllData> getAllShopData() {
-        String sql = "SELECT s.id ,s.shop_name,a.address as shopAddress,a.city as shopCity,sInfo.shop_owner,sInfo.hvhh,adressSInfo.address as shopInfoAddress,adressSInfo.city as shopInfoCity, s.create_date as createDate,s.modify_date as modifyDate" +
-                "               FROM shops s  " +
-                "               join shops_info sInfo on s.shop_info_id = sInfo.id " +
+        String sql = "SELECT s.id ,s.shop_name,a.address as shopAddress,a.city as shopCity,sInfo.shop_owner,sInfo.hvhh,sia.address as shopInfoAddress,sia.city as shopInfoCity, s.create_date as createDate,s.modify_date as modifyDate" +
+                "               FROM shop s  " +
+                "               join shop_info sInfo on s.shop_info_id = sInfo.id " +
                 "               join address a on s.shop_address_id= a.id " +
-                "               join address adressSInfo on sInfo.address_id= adressSInfo.id " +
+                "               join address sia on sInfo.address_id= sia.id " +
                 "               WHERE s.delete_date IS NULL ;";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ShopAllData.class));
     }
@@ -99,7 +99,7 @@ public class JoinByQueryDAO {
 //        AllOrdersData allOrdersData = new AllOrdersData();
 //        String sql = "SELECT o.id,shop_name,address,city,o.create_date as createDate" +
 //                "FROM orders o " +
-//                "join shops s on o.shop_id = s.id " +
+//                "join shop s on o.shop_id = s.id " +
 //                "join address a on s.shop_address_id = a.id " +
 //                "WHERE o.id = ? && o.delete_date IS NULL;";
 //        jdbcTemplate.query(sql, new Object[]{ordersId}, new BeanPropertyRowMapper<>(OrderShopInfo.class));
@@ -110,7 +110,7 @@ public class JoinByQueryDAO {
 //    public List<OrderShopInfo> allOrdersShopsInfo() {
 //        String sql = "SELECT o.id,shop_name,address,city,o.create_date as createDate" +
 //                " FROM orders o" +
-//                " join shops s on o.shop_id = s.id " +
+//                " join shop s on o.shop_id = s.id " +
 //                " join address a on s.shop_address_id = a.id " +
 //                " WHERE o.delete_date IS NULL;";
 //        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderShopInfo.class));
@@ -119,7 +119,7 @@ public class JoinByQueryDAO {
 //    public OrderShopInfo getSingleOrderShopInformation(int ordersId) throws SQLException {
 //        String sql = "SELECT o.id,o.shopId,shop_name,address,city,o.create_date as createDate" +
 //                " FROM orders o " +
-//                " join shops s on o.shop_id = s.id " +
+//                " join shop s on o.shop_id = s.id " +
 //                " join address a on s.shop_address_id = a.id " +
 //                " WHERE o.delete_date IS NULL;";
 //        return jdbcTemplate.query(sql, new Object[]{ordersId}, new BeanPropertyRowMapper<>(OrderShopInfo.class))

@@ -7,23 +7,23 @@
     <title>Title</title>
 </head>
 <body>
-<p th:text="${shopsInfo.getId()}">VALUE</p>
-<p th:text="${shopsInfo.getShopOwner()}">VALUE</p>
-<p th:text="${shopsInfo.getHvhh()}">VALUE</p>
+<p th:text="${shopInfo.getId()}">VALUE</p>
+<p th:text="${shopInfo.getShopOwner()}">VALUE</p>
+<p th:text="${shopInfo.getHvhh()}">VALUE</p>
 <p th:text="${address.getAddress()}">VALUE</p>
 <p th:text="${address.getCity()}">VALUE</p>
-<p th:text="${shopsInfo.getCreateDate()}">VALUE</p>
-<p th:text="${shopsInfo.getModifyDate()}">VALUE</p>
-<p th:text="${shopsInfo.getDeleteDate()}">VALUE</p>
+<p th:text="${shopInfo.getCreateDate()}">VALUE</p>
+<p th:text="${shopInfo.getModifyDate()}">VALUE</p>
+<p th:text="${shopInfo.getDeleteDate()}">VALUE</p>
 
 <hr>
-<a th:href="@{/shopsInfo/{id}/edit(id=${shopsInfo.getId()})}">E-D-I-T</a>
+<a th:href="@{/shopInfo/{id}/edit(id=${shopInfo.getId()})}">E-D-I-T</a>
 <br>
 <hr>
-<a th:href="@{/shopsInfo}">Home Shop Info</a>
+<a th:href="@{/shopInfo}">Home Shop Info</a>
 <br>
 <hr>
-<form th:method="DELETE" th:action="@{/shopsInfo/{id}(id=${shopsInfo.getId()})}">
+<form th:method="DELETE" th:action="@{/shopInfo/{id}(id=${shopInfo.getId()})}">
     <input type="submit" value="Delete Info">
 </form>
 </body>

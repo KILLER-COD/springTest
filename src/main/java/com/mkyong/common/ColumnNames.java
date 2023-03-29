@@ -29,12 +29,12 @@ public class ColumnNames {
     public static final String productName = "product_name";
     public static final String productType = "product_type";
 
-    //    Shops Columns Names
+    //    Shop Columns Names
     public static final String shopName = "shop_name";
     public static final String shopAddressId = "shop_address_id";
     public static final String shopInfoId = "shop_info_id";
 
-    //    Shops Info Columns Names
+    //    Shop Info Columns Names
     public static final String shopOwner = "shop_owner";
     public static final String hvhh = "hvhh";
     public static final String addressId = "address_id";

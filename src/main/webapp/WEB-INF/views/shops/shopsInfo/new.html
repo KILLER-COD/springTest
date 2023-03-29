@@ -9,17 +9,17 @@
 </head>
 <body>
 <h1> New Shop Information </h1>
-<form th:method="POST" th:action="@{/shopsInfo}" th:object="${newShopsInfo}">
+<form th:method="POST" th:action="@{/shopInfo}" th:object="${newShopInfo}">
     <div class="container">
         <label for="shopOwner">Shop Owner : </label>
-        <input type="text" th:field="*{shopsInfo.shopOwner}" id="shopOwner">
+        <input type="text" th:field="*{shopInfo.shopOwner}" id="shopOwner">
         <!--    <div style="color:red" th:if="${#fields.hasErrors('shopOwner')}" th:errors="*{shopOwner}">Shop Owner Error</div>-->
 
         <br>
         <hr>
 
         <label for="hvhh">Shop HVHH : </label>
-        <input type="text" th:field="*{shopsInfo.hvhh}" id="hvhh">
+        <input type="text" th:field="*{shopInfo.hvhh}" id="hvhh">
         <!--    <div style="color:red" th:if="${#fields.hasErrors('hvhh')}" th:errors="*{hvhh}">Hvhh Error</div>-->
 
         <br>

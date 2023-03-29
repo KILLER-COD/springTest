@@ -58,9 +58,9 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    <div th:each="shopsInfo : ${shopsInfoList}">
-                        <a th:href="@{/shopsInfo/{id}(id=${shopsInfo.getId()})}"
-                           th:text="${shopsInfo.getShopOwner()+' - '+shopsInfo.getHvhh()+' - '+shopsInfo.getAddressId()}">ShopInfo</a>
+                    <div th:each="shopInfo : ${shopsInfoList}">
+                        <a th:href="@{/shopInfo/{id}(id=${shopInfo.getId()})}"
+                           th:text="${shopInfo.getShopOwner()+' - '+shopInfo.getHvhh()+' - '+shopInfo.getAddressId()}">ShopInfo</a>
                         <hr>
                         <br>
                     </div>
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <a href="/shopsInfo/new">Create New Shop Info</a>
+    <a href="/shopInfo/new">Create New Shop Info</a>
 </div>
 </body>
 <script>

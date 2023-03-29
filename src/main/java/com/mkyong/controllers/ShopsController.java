@@ -36,6 +36,7 @@ public class ShopsController {
 
     @PostMapping
     public String create(@ModelAttribute("shopAllData") ShopAllData shopAllData) {
+        System.out.println(shopAllData);
         shopsService.addNewShops(shopAllData, null);
         return "redirect:/shops";
     }
@@ -48,7 +49,8 @@ public class ShopsController {
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("allShopData") ShopAllData shopAllData, @PathVariable("id") int id) throws SQLException {
-        shopsService.changeShops(shopAllData, id, null);
+        shopsService.testGetPersonDataAndPhoneData(id);
+//        shopsService.changeShops(shopAllData, id, null);
         return "redirect:/shops";
     }
 

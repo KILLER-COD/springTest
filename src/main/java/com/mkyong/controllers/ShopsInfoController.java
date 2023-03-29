@@ -1,7 +1,7 @@
 package com.mkyong.controllers;
 
+import com.mkyong.shops.model.ShopInfo;
 import com.mkyong.shops.model.ShopInfoData;
-import com.mkyong.shops.model.ShopsInfo;
 import com.mkyong.shops.service.ShopsInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,8 +24,8 @@ public class ShopsInfoController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) throws SQLException {
-        ShopsInfo shopsInfo = shopsInfoService.findByShopInfoId(id);
-        model.addAttribute("shopsInfo", shopsInfo);
+        ShopInfo shopInfo = shopsInfoService.findByShopInfoId(id);
+        model.addAttribute("shopsInfo", shopInfo);
         model.addAttribute("address", shopsInfoService.getShopsInfoAddressInfo(id));
         return "shops/shopsInfo/show";
     }
@@ -54,7 +54,7 @@ public class ShopsInfoController {
 //    }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("newShopsInfo") ShopsInfo newShopInfo, @PathVariable("id") int id) throws SQLException {
+    public String update(@ModelAttribute("newShopsInfo") ShopInfo newShopInfo, @PathVariable("id") int id) throws SQLException {
         shopsInfoService.changeShopsInfo(newShopInfo, id, null);
         return "redirect:shops/shopsInfo";
     }

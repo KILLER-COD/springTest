@@ -7,18 +7,18 @@
 </head>
 <body>
 <h1>Edit Shops Info</h1>
-<form th:method="PATCH" th:action="@{/shopsInfo/{id}(id=${newShopsInfo.getShopsInfo().getId()})}"
-      th:object="${newShopsInfo}">
+<form th:method="PATCH" th:action="@{/shopInfo/{id}(id=${newShopInfo.getShopsInfo().getId()})}"
+      th:object="${newShopInfo}">
     <div class="container">
         <label for="shopOwner">Shop Owner : </label>
-        <input type="text" th:field="*{shopsInfo.shopOwner}" id="shopOwner">
+        <input type="text" th:field="*{shopInfo.shopOwner}" id="shopOwner">
         <!--    <div style="color:red" th:if="${#fields.hasErrors('shopOwner')}" th:errors="*{shopOwner}">Shop Owner Error</div>-->
 
         <br>
         <hr>
 
         <label for="hvhh">Shop HVHH : </label>
-        <input type="text" th:field="*{shopsInfo.hvhh}" id="hvhh">
+        <input type="text" th:field="*{shopInfo.hvhh}" id="hvhh">
         <!--    <div style="color:red" th:if="${#fields.hasErrors('hvhh')}" th:errors="*{hvhh}">Hvhh Error</div>-->
 
         <br>

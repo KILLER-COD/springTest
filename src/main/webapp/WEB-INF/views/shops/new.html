@@ -121,26 +121,44 @@
                                     <div id="contactInfoAdder" class="col-md-12 d-flex justify-content-center">
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
-                                                <label class="label">Contact Name </label>
-                                                <input type="text" th:field="*{name}"
+                                                <label class="label">Person Name </label>
+                                                <input type="text" th:field="*{personName}"
                                                        class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Email</label>
-                                                <input type="email" th:field="*{email}"
+                                                <input type="email" th:field="*{personEmail}"
                                                        class="form-control">
                                             </div>
                                         </div>
-                                        <div id="contactInfoAdder-button"
-                                             class="col-md-6 d-flex justify-content-center">
-                                            <span onclick="addNewContactInfo()">
-                                                <i class="material-icons">add_circle</i> Add new Person </span>
+                                        <div class="col-md-3 d-flex justify-content-center flex-column">
+                                            <div class="col-md-12" id="contactPhoneAdder">
+                                                <div class="form-group bmd-form-group mt-0">
+                                                    <label class="label">Phone</label>
+                                                    <input type="tel" th:field="*{personPhone[0]}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <p id="newAdderPhoneId-0"></p>
                                         </div>
-
                                     </div>
-                                    <p id="newAdderId"></p>
+                                    <p id="newAdderId-0"></p>
+                                    <div id="contactInfoAdderPhone-button"
+                                         class="col-md-3 d-flex justify-content-center align-item-center">
+                                        <span class="btn btn-warning" onclick="addNewContactInfo()">
+                                                <i class="material-icons">add_circle</i>
+                                                Add new Person
+                                            </span>
+                                    </div>
+                                    <div id="contactInfoAdder-button"
+                                         class="col-md-3 d-flex justify-content-center align-item-center">
+                                        <span class="btn btn-warning" onclick="addNewContactPhone()">
+                                                <i class="material-icons">add_circle</i>
+                                                Add new Phone
+                                            </span>
+                                    </div>
+                                    <hr col-md-12>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-md-5 mt-4">
@@ -160,11 +178,25 @@
 </div>
 <div th:replace="/footer :: footer"></div>
 <script>
-    function addNewContactInfo() {
-      const h2 = document.getElementById("newAdderId");
-      const h3 = document.getElementById("contactInfoAdder").outerHTML+  '<p id="newAdderId"></p>';
-      h2.insertAdjacentHTML("afterend", h3);
+     var i = 1;
+     var j = 1;
+     function addNewContactPhone() {
+     let newJ = j-1;
+      let newI = i-1;
+      const h2e = document.getElementById(`newAdderPhoneId-${newJ}`);
+      let adderHtmlPhone = '<div class="col-md-12" id="contactPhoneAdder"> <div class="form-group bmd-form-group mt-0"> <label class="label">Phone</label> <input type="tel" class="form-control" id="personPhone" name="personPhone['+newI+']" value=""></div></div><p id="newAdderPhoneId-'+j+'"></p>';
+       j++;
+      h2e.insertAdjacentHTML("afterend", adderHtmlPhone);
     }
+    function addNewContactInfo() {
+        let newI = i-1;
+      const h2 = document.getElementById(`newAdderId-${newI}`);
+      let adderHtml = '<div id="contactInfoAdder" class="col-md-12 d-flex justify-content-center">  <div class="col-md-3">  <div class="form-group bmd-form-group mt-0"> <label class="label">Person Name </label><input type="text" class="form-control" id="personName" name="personName" value=""></div></div><div class="col-md-3"><div class="form-group bmd-form-group mt-0"><label class="label">Email</label><input type="email" class="form-control" id="personEmail" name="personEmail" value=""></div></div> <div class="col-md-3 d-flex justify-content-center flex-column"> <div class="col-md-12" id="contactPhoneAdder"> <div class="form-group bmd-form-group mt-0"> <label class="label">Phone</label> <input type="tel" class="form-control" id="personPhone" name="personPhone['+i+']" value=""></div></div> <p id="newAdderPhoneId-'+j+'"></p></div></div> <p id="newAdderId-'+i+'" ></p>';
+       i++;
+       j++;
+      h2.insertAdjacentHTML("afterend", adderHtml);
+    }
+
 </script>
 </body>
 </html>

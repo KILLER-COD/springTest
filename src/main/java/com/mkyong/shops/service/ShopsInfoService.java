@@ -2,8 +2,8 @@ package com.mkyong.shops.service;
 
 import com.mkyong.address.model.Address;
 import com.mkyong.address.service.AddressService;
-import com.mkyong.shops.dao.ShopsInfoDAO;
-import com.mkyong.shops.model.ShopsInfo;
+import com.mkyong.shops.dao.ShopInfoDAO;
+import com.mkyong.shops.model.ShopInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,50 +16,50 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class ShopsInfoService {
-    private final ShopsInfoDAO shopsInfoDAO;
+    private final ShopInfoDAO shopInfoDAO;
     private final AddressService addressService;
 
-    public List<ShopsInfo> getAllShopsInfo() throws SQLException {
-        return shopsInfoDAO.getAllShopsInfo();
+    public List<ShopInfo> getAllShopsInfo() throws SQLException {
+        return shopInfoDAO.getAllShopsInfo();
     }
 
-    public List<ShopsInfo> getAllDeletedShopsInfo() throws SQLException {
-        return shopsInfoDAO.getAllDeletedShopsInfo();
+    public List<ShopInfo> getAllDeletedShopsInfo() throws SQLException {
+        return shopInfoDAO.getAllDeletedShopsInfo();
     }
 
-    public ShopsInfo findByShopInfoId(int id) throws SQLException {
-        return shopsInfoDAO.findByShopsInfoId(id);
+    public ShopInfo findByShopInfoId(int id) throws SQLException {
+        return shopInfoDAO.findByShopsInfoId(id);
     }
 
     public void deleteShopsInfo(int shopsInfoId) throws SQLException {
         addressService.deleteAddress(findByShopInfoId(shopsInfoId).getAddressId());
-        shopsInfoDAO.deleteSoft(shopsInfoId);
+        shopInfoDAO.deleteSoft(shopsInfoId);
     }
 
 
-    public int addNewShopsInfo(ShopsInfo shopsInfo) {
-        shopsInfo.setCreateDate(new Date(System.currentTimeMillis()));
-        shopsInfo.setModifyDate(new Date(System.currentTimeMillis()));
-        return shopsInfoDAO.insert(shopsInfo, null);
+    public int addNewShopsInfo(ShopInfo shopInfo) {
+        shopInfo.setCreateDate(new Date(System.currentTimeMillis()));
+        shopInfo.setModifyDate(new Date(System.currentTimeMillis()));
+        return shopInfoDAO.insert(shopInfo, null);
     }
 
 
-    public void changeShopsInfo(ShopsInfo newShopsInfo, int shopInfoId, Connection conn) throws SQLException {
-        newShopsInfo.setAddressId(findByShopInfoId(shopInfoId).getAddressId());
-        shopsInfoDAO.update(newShopsInfo, shopInfoId, conn);
+    public void changeShopsInfo(ShopInfo newShopInfo, int shopInfoId, Connection conn) throws SQLException {
+        newShopInfo.setAddressId(findByShopInfoId(shopInfoId).getAddressId());
+        shopInfoDAO.update(newShopInfo, shopInfoId, conn);
     }
 
 
     public void shopsInfoPrint() {
         try {
-            shopsInfoDAO.getAllShopsInfo().forEach(System.out::println);
+            shopInfoDAO.getAllShopsInfo().forEach(System.out::println);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     public boolean existsById(int shopsInfoId) {
-        ShopsInfo retInfo = shopsInfoDAO.findByShopsInfoId(shopsInfoId);
+        ShopInfo retInfo = shopInfoDAO.findByShopsInfoId(shopsInfoId);
         return retInfo != null;
     }
 
