@@ -34,9 +34,10 @@ public class PersonDataController {
     public String edit(Model model, @PathVariable("id") int id) throws SQLException {
         Map<ShopPersonData, List<ShopPersonContact>> testMap = shopsService.testPersonContactAndDataMap(id);
         ShopAllData shopAllData = joinByQueryDAO.getSingleShopData(id);
-        shopAllData.setPersonPhoneTestMap(shopsService.testPersonContactAndDataMap(id));
-
+        shopAllData.setPersonPhoneTestMap(testMap);
+        int maxPersonSize = testMap.size() + 1;
         model.addAttribute("testMap", shopAllData);
+        model.addAttribute("maxPerson", maxPersonSize);
         return "personData/edit";
     }
 
@@ -63,7 +64,7 @@ public class PersonDataController {
         System.out.println(Arrays.toString(testShopData.getPersonName()));
         System.out.println(Arrays.toString(testShopData.getPersonEmail()));
 
-//        shopsService.testGetPersonDataAndPhoneData(id);
+//        shopsService.testGetPersonDataAndPhoneData(testShopData,id);
 //        shopsService.changeShops(shopAllData, id, null);
         return "redirect:/personData";
     }

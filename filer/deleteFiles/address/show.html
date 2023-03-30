@@ -108,3 +108,46 @@
 <footer th:replace="/footer :: footer"></footer>
 </body>
 </html>
+
+<!--        <br>-->
+<!--        <select th:field="*{shops.shopInfoId}" id="address-select">-->
+<!--            <option th:each="shopsInfo : ${shopsInfoList}"-->
+<!--                    th:value="${shopsInfo.getId()}"-->
+<!--                    th:text="${shopsInfo.getShopOwner()+' - '+shopsInfo.getHvhh()}"-->
+<!--                    th:selected="(${shopsInfo.getId()} == *{shops.shopInfoId})"-->
+<!--                    th:readonly="(${shopsInfo.getId()} == *{shops.shopInfoId})">Shop Owner And Hvhh-->
+<!--            </option>-->
+<!--        </select>-->
+
+<!--        <select th:field="*{addressId}" id="addressId">&ndash;&gt;-->
+<!--            <option th:each="address : ${addressList}"-->
+<!--                    th:value="${address.getId()}"-->
+<!--                    th:text="${address.getAddress()+' - '+address.getCity()}"-->
+<!--                    th:selected="(${address.getId()} == *{addressId})"-->
+<!--                    th:readonly="(${address.getId()} == *{addressId})">Shop Address And City-->
+<!--            </option>-->
+<!--        </select>-->
+<!--        <span><a th:href="@{/address/new/{id}(id=${shopsInfo.getId()})}">   Create New Address</a></span>-->
+<!--        <br>-->
+<!--        <hr>-->
+<!--        <br>-->
+<!--        <select th:field="*{shops.shopInfoId}" id="address-select">-->
+<!--            <option th:each="shopsInfo : ${shopsInfoList}"-->
+<!--                    th:value="${shopsInfo.getId()}"-->
+<!--                    th:text="${shopsInfo.getShopOwner()+' - '+shopsInfo.getHvhh()}"-->
+<!--                    th:selected="(${shopsInfo.getId()} == *{shops.shopInfoId})"-->
+<!--                    th:readonly="(${shopsInfo.getId()} == *{shops.shopInfoId})">Shop Owner And Hvhh-->
+<!--            </option>-->
+<!--        </select>-->
+
+<!--        <select th:field="*{addressId}" id="addressId">&ndash;&gt;-->
+<!--            <option th:each="address : ${addressList}"-->
+<!--                    th:value="${address.getId()}"-->
+<!--                    th:text="${address.getAddress()+' - '+address.getCity()}"-->
+<!--                    th:selected="(${address.getId()} == *{addressId})"-->
+<!--                    th:readonly="(${address.getId()} == *{addressId})">Shop Address And City-->
+<!--            </option>-->
+<!--        </select>-->
+<!--        <span><a th:href="@{/address/new/{id}(id=${shopsInfo.getId()})}">   Create New Address</a></span>-->
+<!--        <br>-->
+<!--        <hr>-->

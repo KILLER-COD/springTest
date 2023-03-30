@@ -64,7 +64,7 @@
                                         <hr>
                                     </div>
                                     <div id="contactInfoAdder" class="col-md-12 d-flex justify-content-center"
-                                         th:each="entry : ${testMap.getPersonPhoneTestMap()}">
+                                         th:each="entry,iterator : ${testMap.getPersonPhoneTestMap()}">
                                         <div class="col-md-3">
                                             <div class="form-group bmd-form-group mt-0">
                                                 <label class="label">Person Name </label>
@@ -80,20 +80,23 @@
                                                        th:value="${entry.key.personEmail}" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-3 d-flex justify-content-center flex-column">
+                                        <div class="col-md-3 d-flex justify-content-center flex-column"
+                                             id="maxPersonSize" name="" th:attrappend="name=${maxPerson}">
                                             <div class="col-md-12" id="contactPhoneAdder"
-                                                 th:each=" row : ${entry.value}">
+                                                 th:each=" row,iter : ${entry.value}">
                                                 <div class="form-group bmd-form-group mt-0">
                                                     <label class="label">Phone</label>
                                                     <input name="personPhone"
-                                                           th:attrappend="name=${'['+entry.key.id+']'}" type="tel"
+                                                           th:attrappend="name=${'['+iterator.index+']'}" type="tel"
                                                            th:value="${row.phone}" class="form-control" required>
+                                                    <input name="personData:personContact" type="text" hidden="hidden"
+                                                           value="" th:value="${iterator.index}+':'+${iter.index}">
                                                 </div>
                                             </div>
-                                            <p id="newAdderPhoneId-0"></p>
+                                            <p id="newAdderPhoneId-" th:attrappend="id=${maxPerson}-1"></p>
                                         </div>
                                     </div>
-                                    <p id="newAdderId-0"></p>
+                                    <p id="newAdderId-" th:attrappend="id=${maxPerson}-1"></p>
                                     <hr col-md-12>
                                     <div id="contactInfoAdderPhone-button"
                                          class="col-md-3 d-flex justify-content-center align-item-center">
@@ -126,26 +129,33 @@
     </div>
 </div>
 </div>
+
 <div th:replace="/footer :: footer"></div>
 <script>
-     var i = 1;
-     var j = 1;
+    var i = document.getElementById("maxPersonSize").getAttribute("name");
+     var j = document.getElementById("maxPersonSize").getAttribute("name");
+     var index = 0;
+
      function addNewContactPhone() {
      let newJ = j-1;
       let newI = i-1;
+      	index++;
       const h2e = document.getElementById(`newAdderPhoneId-${newJ}`);
-      let adderHtmlPhone = '<div class="col-md-12" id="contactPhoneAdder"> <div class="form-group bmd-form-group mt-0"> <label class="label">Phone</label> <input type="tel" class="form-control" id="personPhone" name="personPhone['+newI+']" value="" required></div></div><p id="newAdderPhoneId-'+j+'"></p>';
+      let adderHtmlPhone = '<div class="col-md-12" id="contactPhoneAdder"> <div class="form-group bmd-form-group mt-0"> <label class="label">Phone</label> <input type="tel" class="form-control" id="personPhone" name="personPhone['+newI+']" value="" required><input name="personData:personContact" type="text" hidden="hidden" value="'+newI+':'+index+'" ></div></div><p id="newAdderPhoneId-'+j+'"></p>';
        j++;
       h2e.insertAdjacentHTML("afterend", adderHtmlPhone);
     }
     function addNewContactInfo() {
         let newI = i-1;
+        let newJ = j-1;
+
       const h2 = document.getElementById(`newAdderId-${newI}`);
-      let adderHtml = '<div id="contactInfoAdder" class="col-md-12 d-flex justify-content-center">  <div class="col-md-3">  <div class="form-group bmd-form-group mt-0"> <label class="label">Person Name </label><input type="text" class="form-control" id="personName" name="personName" value="" required></div></div><div class="col-md-3"><div class="form-group bmd-form-group mt-0"><label class="label">Email</label><input type="email" class="form-control" id="personEmail" name="personEmail" value=""></div></div> <div class="col-md-3 d-flex justify-content-center flex-column"> <div class="col-md-12" id="contactPhoneAdder"> <div class="form-group bmd-form-group mt-0"> <label class="label">Phone</label> <input type="tel" class="form-control" id="personPhone" name="personPhone['+i+']" value="" required></div></div> <p id="newAdderPhoneId-'+j+'"></p></div></div> <p id="newAdderId-'+i+'" ></p>';
+      let adderHtml = '<div id="contactInfoAdder" class="col-md-12 d-flex justify-content-center">  <div class="col-md-3">  <div class="form-group bmd-form-group mt-0"> <label class="label">Person Name </label><input type="text" class="form-control" id="personName" name="personName" value="" required></div></div><div class="col-md-3"><div class="form-group bmd-form-group mt-0"><label class="label">Email</label><input type="email" class="form-control" id="personEmail" name="personEmail" value=""></div></div> <div class="col-md-3 d-flex justify-content-center flex-column"> <div class="col-md-12" id="contactPhoneAdder"> <div class="form-group bmd-form-group mt-0"> <label class="label">Phone</label> <input type="tel" class="form-control" id="personPhone" name="personPhone['+newI+']" value="" required><input name="personData:personContact" type="text" hidden="hidden" value="'+newI+':0" ></div></div> <p id="newAdderPhoneId-'+j+'"></p></div></div> <p id="newAdderId-'+i+'" ></p>';
        i++;
        j++;
       h2.insertAdjacentHTML("afterend", adderHtml);
     }
+
 
 </script>
 </body>

@@ -25,6 +25,7 @@ public class ShopAllData {
     private String[] personEmail;
     private List<String[]> personPhone;
     private Map<ShopPersonData, List<ShopPersonContact>> personPhoneTestMap;
+    private String[] personCorrectDataIter;
     private Date createDate;
     private Date modifyDate;
 

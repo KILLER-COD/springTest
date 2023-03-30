@@ -2,6 +2,8 @@ package com.mkyong.controllers;
 
 import com.mkyong.methods.JoinByQueryDAO;
 import com.mkyong.shops.model.ShopAllData;
+import com.mkyong.shops.model.ShopPersonContact;
+import com.mkyong.shops.model.ShopPersonData;
 import com.mkyong.shops.service.ShopsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("shops")
@@ -43,15 +48,36 @@ public class ShopsController {
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) throws SQLException {
-//        ShopAllData shopAllData = joinByQueryDAO.getSingleShopData(id);
-//        shopAllData.setPersonPhoneTestMap(shopsService.testPersonContactMap(id));
-//        model.addAttribute("allShopData", shopAllData);
+        Map<ShopPersonData, List<ShopPersonContact>> testMap = shopsService.testPersonContactAndDataMap(id);
+        ShopAllData shopAllData = joinByQueryDAO.getSingleShopData(id);
+        shopAllData.setPersonPhoneTestMap(testMap);
+        int maxPersonSize = testMap.size() + 1;
+        model.addAttribute("shopAllData", shopAllData);
+        model.addAttribute("maxPerson", maxPersonSize);
         return "shops/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("allShopData") ShopAllData shopAllData, @PathVariable("id") int id) throws SQLException {
-        shopsService.testGetPersonDataAndPhoneData(id);
+    public String update(@ModelAttribute("shopAllData") ShopAllData shopAllData, @PathVariable("id") int id) throws SQLException {
+        System.out.println(shopAllData);
+        System.out.println("-----------------------");
+        List<String[]> newPersonPhone = new ArrayList<>(shopAllData.getPersonPhone());
+        shopAllData.getPersonPhone().forEach(
+                phoneNull -> {
+                    if (phoneNull == null) {
+                        newPersonPhone.remove(phoneNull);
+                    }
+                }
+        );
+
+        newPersonPhone.forEach(
+                newPhone -> {
+                    for (int i = 0; i < newPhone.length; i++) {
+                        System.out.println("index-" + i + "= " + newPhone[i]);
+                    }
+                }
+        );
+//      /  shopsService.testGetPersonDataAndPhoneData(shopAllData,id);
 //        shopsService.changeShops(shopAllData, id, null);
         return "redirect:/shops";
     }

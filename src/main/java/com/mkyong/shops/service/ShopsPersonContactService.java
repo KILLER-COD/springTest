@@ -46,4 +46,8 @@ public class ShopsPersonContactService {
         personContactDAO.deleteHard(contactingInfoId);
     }
 
+
+    public void changeShopPersonContact(ShopPersonContact personContact, Connection conn) throws SQLException {
+        personContactDAO.update(personContact, conn);
+    }
 }

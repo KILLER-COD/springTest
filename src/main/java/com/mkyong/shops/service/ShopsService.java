@@ -135,7 +135,7 @@ public class ShopsService {
 
         shopsInfoService.changeShopsInfo(shopInfo, shop.getShopInfoId(), null);
 
-        testGetPersonDataAndPhoneData(shopId);
+        testGetPersonDataAndPhoneData(shopAllData, shopId);
 
         return shop;
     }
@@ -144,10 +144,17 @@ public class ShopsService {
         return shopsInfoService.getAllShopsInfo();
     }
 
-    public void testGetPersonDataAndPhoneData(int shopId) throws SQLException {
+    public void testGetPersonDataAndPhoneData(ShopAllData shopAllData, int shopId) throws SQLException {
         List<ShopPersonData> personDataList = personDataService.findAllByIdShopId(shopId);
         //Update and Create Person Checking
 
+        for (int j = 0; j <= shopAllData.getPersonPhone().size() - 1; j++) {
+            ShopPersonData personData = ShopPersonData.builder()
+                    .shopId(shopId)
+                    .personName(shopAllData.getPersonName()[j])
+                    .personEmail(shopAllData.getPersonEmail()[j])
+                    .build();
+        }
 
         //Test Post Person Data Request Start
         List<ShopPersonData> testPersonDataList = testPersonDataList();
