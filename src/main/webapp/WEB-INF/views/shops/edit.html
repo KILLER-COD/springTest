@@ -145,7 +145,7 @@
                                                     <div class="form-group bmd-form-group mt-0">
                                                         <label class="label">Phone</label>
                                                         <input name="personPhone"
-                                                               th:attrappend="name=${'['+iterator.index+']'}" type="tel"
+                                                               th:attrappend="name=${'{'+row.id+'}'}" type="tel"
                                                                th:value="${row.phone}" class="form-control" required>
                                                         <input name="personCorrectDataIter" type="text"
                                                                hidden="hidden"

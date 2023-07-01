@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -61,22 +60,23 @@ public class ShopsController {
     public String update(@ModelAttribute("shopAllData") ShopAllData shopAllData, @PathVariable("id") int id) throws SQLException {
         System.out.println(shopAllData);
         System.out.println("-----------------------");
-        List<String[]> newPersonPhone = new ArrayList<>(shopAllData.getPersonPhone());
-        shopAllData.getPersonPhone().forEach(
-                phoneNull -> {
-                    if (phoneNull == null) {
-                        newPersonPhone.remove(phoneNull);
-                    }
-                }
-        );
+        shopAllData.getPersonPhone().forEach(System.out::println);
+//        List<String[]> newPersonPhone = new ArrayList<>(shopAllData.getPersonPhone());
+//        shopAllData.getPersonPhone().forEach(
+//                phoneNull -> {
+//                    if (phoneNull == null) {
+//                        newPersonPhone.remove(phoneNull);
+//                    }
+//                }
+//        );
 
-        newPersonPhone.forEach(
-                newPhone -> {
-                    for (int i = 0; i < newPhone.length; i++) {
-                        System.out.println("index-" + i + "= " + newPhone[i]);
-                    }
-                }
-        );
+//        newPersonPhone.forEach(
+//                newPhone -> {
+//                    for (int i = 0; i < newPhone.length; i++) {
+//                        System.out.println("index-" + i + "= " + newPhone[i]);
+//                    }
+//                }
+//        );
 //      /  shopsService.testGetPersonDataAndPhoneData(shopAllData,id);
 //        shopsService.changeShops(shopAllData, id, null);
         return "redirect:/shops";

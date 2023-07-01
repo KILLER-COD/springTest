@@ -271,6 +271,36 @@ public class ShopsService {
         return singleMapResults;
     }
 
+//    public List<PersonInfoData> getPersonInfoData(int shopId) {
+//        List<ShopPersonData> personDataList = personDataService.findAllByIdShopId(shopId);
+//      List<PersonInfoData> personInfoData = new ArrayList<>();
+//
+//        personDataList.forEach(
+//                personData -> {
+//                    try {
+//                        personContactService.findByShopPersonDataId(personData.getId()).forEach(
+//                                personContact -> {
+//                                    personInfoData.add(
+//                                            PersonInfoData.builder()
+//                                                    .personDataId(personData.getId())
+//                                                    .personContactId(personContact.getId())
+//                                                    .personName(personData.getPersonName())
+//                                                    .personEmail(personData.getPersonEmail())
+//                                                    .personPhone(Collections.singletonList(personContact.getPhone()))
+//                                                    .build()
+//                                    );
+//                                }
+//                        );
+//
+//                    } catch (SQLException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//        );
+//
+//        return singleMapResults;
+//    }
+
     public Map<ShopPersonData, List<ShopPersonContact>> testPersonContactAndDataMap(int shopId) {
         List<ShopPersonData> personDataList = personDataService.findAllByIdShopId(shopId);
         Map<ShopPersonData, List<ShopPersonContact>> singleMapResults = new HashMap<>();

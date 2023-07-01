@@ -1,0 +1,48 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="formPerson">
+    <form th:method="PATCH" th:action="@{/personData/33}" th:object="${data}">
+        <div class="row justify-content-center">
+            <div class="col-md-12 mb-4 mt-5">
+                <h2>Shop Contacting Information</h2>
+                <hr>
+            </div>
+            <div id="contactInfoAdder" class="col-md-12 d-flex justify-content-center"
+                 th:each="entry,iterator : ${data}">
+                <div class="col-md-3">
+                    <div class="form-group bmd-form-group mt-0">
+                        <label class="label">Person Name </label>
+                        <input name="personInfoData.personName" type="text" th:value="${entry.key.personName}"
+                               class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group bmd-form-group mt-0">
+                        <label class="label">Email</label>
+                        <input type="email" name="personInfoData.personEmail" th:value="${entry.key.personEmail}"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex justify-content-center flex-column" id="maxPersonSize" name="">
+                    <div class="col-md-12" id="contactPhoneAdder" th:each=" row,iter : ${entry.value}">
+                        <div class="form-group bmd-form-group mt-0">
+                            <label class="label">Phone</label>
+                            <input name="personInfoData[].personPhone" type="tel" th:value="${row.phone}"
+                                   class="form-control" required>
+                            <input name="personData:personContact" type="text" hidden="hidden" value=""
+                                   th:value="${iterator.index}+':'+${iter.index}">
+                        </div>
+                    </div>
+                    <p id="newAdderPhoneId-"></p>
+                </div>
+            </div>
+            <p id="newAdderId-"></p>
+            <hr col-md-12>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mt-4">
+                <button type="submit" class="btn btn-warning">Edit Shop
+                    <div class="ripple-container"></div>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

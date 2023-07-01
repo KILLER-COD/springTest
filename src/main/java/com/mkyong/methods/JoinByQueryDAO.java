@@ -26,7 +26,7 @@ public class JoinByQueryDAO {
 
     public List<OrderShopInfo> allShopsInformation() {
         String sql = "SELECT s.id,shop_name,address,city,s.create_date as createDate" +
-                " FROM shop s " +
+                " FROM shops s " +
                 " join address a on s.shop_address_id = a.id " +
                 " WHERE s.delete_date IS NULL;";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderShopInfo.class));
@@ -34,8 +34,8 @@ public class JoinByQueryDAO {
 
     public ShopAllData getSingleShopData(int shopId) {
         String sql = "SELECT s.id ,s.shop_name,a.address as shopAddress,a.city as shopCity,s.shop_info_id as shopInfoId,sInfo.shop_owner,sInfo.hvhh,sia.address as shopInfoAddress,sia.city as shopInfoCity, s.create_date as createDate,s.modify_date as modifyDate" +
-                "               FROM shop s  " +
-                "               join shop_info sInfo on s.shop_info_id = sInfo.id " +
+                "               FROM shops s  " +
+                "               join shops_info sInfo on s.shop_info_id = sInfo.id " +
                 "               join address a on s.shop_address_id= a.id " +
                 "               join address sia on sInfo.address_id= sia.id " +
                 "               WHERE s.id = ? && s.delete_date IS NULL ;";
@@ -44,8 +44,8 @@ public class JoinByQueryDAO {
 
     public List<ShopAllData> getAllShopData() {
         String sql = "SELECT s.id ,s.shop_name,a.address as shopAddress,a.city as shopCity,sInfo.shop_owner,sInfo.hvhh,sia.address as shopInfoAddress,sia.city as shopInfoCity, s.create_date as createDate,s.modify_date as modifyDate" +
-                "               FROM shop s  " +
-                "               join shop_info sInfo on s.shop_info_id = sInfo.id " +
+                "               FROM shops s  " +
+                "               join shops_info sInfo on s.shop_info_id = sInfo.id " +
                 "               join address a on s.shop_address_id= a.id " +
                 "               join address sia on sInfo.address_id= sia.id " +
                 "               WHERE s.delete_date IS NULL ;";

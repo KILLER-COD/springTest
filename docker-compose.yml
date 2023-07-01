@@ -10,6 +10,9 @@ services:
       MYSQL_DATABASE: araqichDBNew
       MYSQL_USER: admin
       MYSQL_PASSWORD: root
+    networks:
+      - backend
+
   phpmyadmin:
     depends_on:
       - db
@@ -22,6 +25,8 @@ services:
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
       PMA_HOST: araqichDB
+    networks:
+      - backend
   web:
     depends_on:
       - db
@@ -34,3 +39,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
       MYSQL_USER: admin
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge

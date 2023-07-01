@@ -1,14 +1,14 @@
 package com.mkyong.address.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Date;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
     private int id;
     private String address;
@@ -17,26 +17,6 @@ public class Address {
     private Date modifyDate;
     private Date deleteDate;
 
-    public Address(int id, String address, String city, Date createDate, Date modifyDate, Date deleteDate) {
-        this.id = id;
-        this.address = address;
-        this.city = city;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
-        this.deleteDate = deleteDate;
-    }
-
-    public Address(String address, String city, Date createDate, Date modifyDate, Date deleteDate) {
-        this.address = address;
-        this.city = city;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
-        this.deleteDate = deleteDate;
-    }
-
-    public Address() {
-
-    }
 
     @Override
     public String toString() {
